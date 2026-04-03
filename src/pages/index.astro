@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IdeaCard from '../components/IdeaCard.astro';
+import { getCollection } from 'astro:content';
+
+// 获取所有 ideas
+const allIdeas = await getCollection('ideas');
+
+// 按日期排序，最新的在前
+const ideas = allIdeas
+  .map(idea => ({
+    ...idea.data,
+    slug: idea.slug,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const todayIdea = ideas[0];
+const pastIdeas = ideas.slice(1);
+---
+
+<Layout title="Daily Micro SaaS - 每天发现一个小而美的创业机会">
+  <!-- Hero Section -->
+  <section class="text-center py-12 mb-8">
+    <h1 class="text-4xl font-bold mb-4">
+      每天发现下一个 <span class="text-primary">Micro SaaS</span> 机会
+    </h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      小而美、技术简单、竞争不大、已有盈利验证的 Web 工具方向。
+      <br />不是灵感，是可执行的作业。
+    </p>
+  </section>
+
+  <!-- Today's Idea -->
+  {todayIdea && (
+    <section class="mb-12">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+        <h2 class="text-lg font-semibold text-gray-800">今日推荐</h2>
+      </div>
+      <IdeaCard
+        title={todayIdea.title}
+        slug={todayIdea.slug}
+        date={todayIdea.date}
+        category={todayIdea.category}
+        difficulty={todayIdea.difficulty}
+        description={todayIdea.description}
+        status="New"
+      />
+    </section>
+  )}
+
+  <!-- Past Ideas -->
+  <section>
+    <h2 class="text-lg font-semibold text-gray-800 mb-4">历史归档</h2>
+    <div class="grid gap-4">
+      {pastIdeas.map(idea => (
+        <IdeaCard
+          title={idea.title}
+          slug={idea.slug}
+          date={idea.date}
+          category={idea.category}
+          difficulty={idea.difficulty}
+          description={idea.description}
+        />
+      ))}
+    </div>
+    
+    {pastIdeas.length === 0 && (
+      <div class="text-center py-12 text-gray-500">
+        <p>暂无历史内容，敬请期待...</p>
+      </div>
+    )}
+  </section>
+</Layout>

@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// 获取所有 ideas 用于生成静态路径
+export async function getStaticPaths() {
+  const ideas = await getCollection('ideas');
+  
+  return ideas.map((idea: any) => {
+    const slug = idea.slug;
+    return {
+      params: { slug },
+      props: { idea },
+    };
+  });
+}
+
+const { idea } = Astro.props;
+const { Content } = await idea.render();
+const { data: frontmatter } = idea;
+
+const difficultyColors: Record<string, string> = {
+  'Easy': 'bg-green-100 text-green-800',
+  'Medium': 'bg-yellow-100 text-yellow-800',
+  'Hard': 'bg-red-100 text-red-800',
+};
+
+const categoryColors: Record<string, string> = {
+  'AI 工具': 'bg-purple-100 text-purple-800',
+  '文档处理': 'bg-blue-100 text-blue-800',
+  '图像处理': 'bg-pink-100 text-pink-800',
+  '视频处理': 'bg-orange-100 text-orange-800',
+  '效率工具': 'bg-teal-100 text-teal-800',
+  '开发者工具': 'bg-gray-100 text-gray-800',
+};
+---
+
+<Layout title={`${frontmatter.title} - Daily Micro SaaS`} description={frontmatter.description}>
+  <article class="bg-white rounded-lg shadow-sm border p-8">
+    <!-- Header -->
+    <div class="flex items-start justify-between gap-4 mb-6">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class={`text-sm px-3 py-1 rounded-full font-medium ${categoryColors[frontmatter.category] || 'bg-gray-100 text-gray-800'}`}>
+          {frontmatter.category}
+        </span>
+        <span class={`text-sm px-3 py-1 rounded-full font-medium ${difficultyColors[frontmatter.difficulty] || 'bg-gray-100 text-gray-800'}`}>
+          难度: {frontmatter.difficulty}
+        </span>
+        {frontmatter.status === 'New' && (
+          <span class="text-sm px-3 py-1 rounded-full font-medium bg-red-100 text-red-800">
+            New
+          </span>
+        )}
+      </div>
+      <time class="text-sm text-gray-500">{frontmatter.date}</time>
+    </div>
+    
+    <h1 class="text-3xl font-bold mb-4">{frontmatter.title}</h1>
+    
+    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+      {frontmatter.description}
+    </p>
+    
+    <!-- Content -->
+    <div class="prose prose-gray max-w-none">
+      <Content />
+    </div>
+    
+    <!-- Back Link -->
+    <div class="mt-12 pt-6 border-t">
+      <a href="/" class="text-primary hover:text-primary/80 font-medium">
+        ← 返回首页
+      </a>
+    </div>
+  </article>
+</Layout>

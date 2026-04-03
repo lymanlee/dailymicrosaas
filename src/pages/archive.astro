@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import IdeaCard from '../components/IdeaCard.astro';
+import { getCollection } from 'astro:content';
+
+// 获取所有 ideas
+const allIdeas = await getCollection('ideas');
+
+const ideas = allIdeas
+  .map(idea => ({
+    ...idea.data,
+    slug: idea.slug,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// 按分类分组
+const categories = [...new Set(ideas.map(i => i.category))];
+---
+
+<Layout title="历史归档 - Daily Micro SaaS">
+  <h1 class="text-2xl font-bold mb-6">历史归档</h1>
+  
+  <!-- Category Filter -->
+  <div class="flex flex-wrap gap-2 mb-8">
+    <a href="/archive" class="text-sm px-4 py-2 rounded-full bg-primary text-white font-medium">
+      全部
+    </a>
+    {categories.map(cat => (
+      <a 
+        href={`/archive?category=${encodeURIComponent(cat)}`}
+        class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium"
+      >
+        {cat}
+      </a>
+    ))}
+  </div>
+  
+  <!-- Ideas List -->
+  <div class="grid gap-4">
+    {ideas.map(idea => (
+      <IdeaCard
+        title={idea.title}
+        slug={idea.slug}
+        date={idea.date}
+        category={idea.category}
+        difficulty={idea.difficulty}
+        description={idea.description}
+      />
+    ))}
+  </div>
+  
+  {ideas.length === 0 && (
+    <div class="text-center py-12 text-gray-500">
+      <p>暂无内容，敬请期待...</p>
+    </div>
+  )}
+</Layout>
