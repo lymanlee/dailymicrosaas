@@ -3,11 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import IdeaCard from '../components/IdeaCard.astro';
 import { getCollection } from 'astro:content';
 
-// 获取所有 ideas
+// 获取所有 ideas，并过滤掉模板内容
 const allIdeas = await getCollection('ideas');
+const publishedIdeas = allIdeas.filter((idea) => idea.slug !== 'template');
 
 // 按日期排序，最新的在前
-const ideas = allIdeas
+const ideas = publishedIdeas
   .map(idea => ({
     ...idea.data,
     slug: idea.slug,

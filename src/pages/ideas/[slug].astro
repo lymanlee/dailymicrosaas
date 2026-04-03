@@ -2,11 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-// 获取所有 ideas 用于生成静态路径
+// 获取所有 ideas 用于生成静态路径，并过滤掉模板内容
 export async function getStaticPaths() {
   const ideas = await getCollection('ideas');
+  const publishedIdeas = ideas.filter((idea) => idea.slug !== 'template');
   
-  return ideas.map((idea: any) => {
+  return publishedIdeas.map((idea: any) => {
     const slug = idea.slug;
     return {
       params: { slug },
