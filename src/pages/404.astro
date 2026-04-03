@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - 页面不存在 - Daily Micro SaaS" description="你访问的页面不存在或已被移除。">
+  <section class="bg-white rounded-lg shadow-sm border p-10 text-center">
+    <p class="text-sm font-semibold uppercase tracking-wide text-primary mb-3">404</p>
+    <h1 class="text-3xl font-bold mb-4">页面不存在</h1>
+    <p class="text-gray-600 max-w-xl mx-auto mb-8">
+      你访问的链接不存在，或者这篇内容已经下线。返回首页继续看今天的 Micro SaaS 机会。
+    </p>
+    <div class="flex items-center justify-center gap-4">
+      <a href="/" class="inline-flex items-center px-5 py-3 rounded-lg bg-primary text-white font-medium hover:opacity-90 transition-opacity">
+        返回首页
+      </a>
+      <a href="/archive" class="inline-flex items-center px-5 py-3 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+        查看归档
+      </a>
+    </div>
+  </section>
+</Layout>
