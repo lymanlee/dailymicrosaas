@@ -7,58 +7,70 @@ interface Props {
   difficulty: string;
   description: string;
   status?: string;
+  featured?: boolean;
 }
 
-const { title, slug, date, category, difficulty, description, status } = Astro.props;
+const { title, slug, date, category, difficulty, description, status, featured = false } = Astro.props;
 
-const difficultyColors: Record<string, string> = {
-  'Easy': 'bg-green-100 text-green-800',
-  'Medium': 'bg-yellow-100 text-yellow-800',
-  'Hard': 'bg-red-100 text-red-800',
+const difficultyMeta: Record<string, { label: string; classes: string }> = {
+  Easy: { label: '适合快速验证', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
+  Medium: { label: '需要一定打磨', classes: 'bg-amber-50 text-amber-700 ring-amber-200' },
+  Hard: { label: '偏重执行能力', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
 const categoryColors: Record<string, string> = {
-  'AI 工具': 'bg-purple-100 text-purple-800',
-  '文档处理': 'bg-blue-100 text-blue-800',
-  '图像处理': 'bg-pink-100 text-pink-800',
-  '视频处理': 'bg-orange-100 text-orange-800',
-  '效率工具': 'bg-teal-100 text-teal-800',
-  '开发者工具': 'bg-gray-100 text-gray-800',
+  'AI 工具': 'bg-violet-50 text-violet-700 ring-violet-200',
+  '文档处理': 'bg-sky-50 text-sky-700 ring-sky-200',
+  '图像处理': 'bg-pink-50 text-pink-700 ring-pink-200',
+  '视频处理': 'bg-orange-50 text-orange-700 ring-orange-200',
+  '效率工具': 'bg-teal-50 text-teal-700 ring-teal-200',
+  '开发者工具': 'bg-slate-100 text-slate-700 ring-slate-200',
+};
+
+const href = `/ideas/${slug}`;
+const difficultyInfo = difficultyMeta[difficulty] || {
+  label: difficulty,
+  classes: 'bg-slate-100 text-slate-700 ring-slate-200',
 };
 ---
 
-<article class="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow">
-  <div class="flex items-start justify-between gap-4 mb-3">
-    <div class="flex items-center gap-2">
-      <span class={`text-xs px-2 py-1 rounded-full font-medium ${categoryColors[category] || 'bg-gray-100 text-gray-800'}`}>
+<article class={`group relative h-full overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-soft ${featured ? 'p-8 lg:p-10' : 'p-6'}`}>
+  <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-400 to-secondary"></div>
+  <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryColors[category] || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
         {category}
       </span>
-      <span class={`text-xs px-2 py-1 rounded-full font-medium ${difficultyColors[difficulty] || 'bg-gray-100 text-gray-800'}`}>
-        {difficulty}
+      <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
+        {difficultyInfo.label}
       </span>
       {status === 'New' && (
-        <span class="text-xs px-2 py-1 rounded-full font-medium bg-red-100 text-red-800">
-          New
+        <span class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
+          今日更新
         </span>
       )}
     </div>
-    <time class="text-sm text-gray-500">{date}</time>
+    <time class="text-sm font-medium text-slate-400">{date}</time>
   </div>
-  
-  <h2 class="text-xl font-bold mb-2">
-    <a href={`/ideas/${slug}`} class="hover:text-primary transition-colors">
-      {title}
+
+  <div class="space-y-4">
+    <h2 class={`font-bold tracking-tight text-slate-950 transition group-hover:text-primary ${featured ? 'text-3xl sm:text-4xl leading-tight' : 'text-2xl leading-snug'}`}>
+      <a href={href}>{title}</a>
+    </h2>
+
+    <p class={`leading-8 text-slate-600 ${featured ? 'max-w-3xl text-lg' : 'text-base'}`}>
+      {description}
+    </p>
+  </div>
+
+  <div class={`mt-8 flex items-center justify-between gap-4 ${featured ? 'flex-col items-start sm:flex-row sm:items-center' : ''}`}>
+    <p class="text-sm text-slate-500">从真实需求、竞争格局、变现方式到最短落地路径，已经帮你拆一遍。</p>
+    <a
+      href={href}
+      class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary"
+    >
+      进入完整拆解
+      <span aria-hidden="true">→</span>
     </a>
-  </h2>
-  
-  <p class="text-gray-600 text-sm leading-relaxed mb-4">
-    {description}
-  </p>
-  
-  <a 
-    href={`/ideas/${slug}`} 
-    class="inline-flex items-center text-sm text-primary hover:text-primary/80 font-medium"
-  >
-    查看详情 →
-  </a>
+  </div>
 </article>

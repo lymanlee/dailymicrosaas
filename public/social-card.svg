@@ -1,0 +1,27 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="40" fill="#0F172A"/>
+  <rect x="30" y="30" width="1140" height="570" rx="30" fill="url(#paint0_linear)"/>
+  <circle cx="982" cy="132" r="156" fill="#60A5FA" fill-opacity="0.18"/>
+  <circle cx="190" cy="520" r="220" fill="#10B981" fill-opacity="0.12"/>
+  <rect x="84" y="84" width="212" height="44" rx="22" fill="#DBEAFE"/>
+  <text x="190" y="112" fill="#1D4ED8" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">Daily Micro SaaS</text>
+  <text x="84" y="228" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800">每天发现一个</text>
+  <text x="84" y="308" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800">可落地的小 SaaS 机会</text>
+  <text x="84" y="378" fill="#CBD5E1" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="500">聚焦真实需求、可执行路径和最快验证方式</text>
+  <rect x="84" y="450" width="188" height="64" rx="20" fill="#FFFFFF" fill-opacity="0.12"/>
+  <text x="112" y="488" fill="#93C5FD" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">精选方向</text>
+  <text x="112" y="515" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">真实需求信号</text>
+  <rect x="294" y="450" width="188" height="64" rx="20" fill="#FFFFFF" fill-opacity="0.12"/>
+  <text x="322" y="488" fill="#86EFAC" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">最快落地</text>
+  <text x="322" y="515" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">技术门槛清晰</text>
+  <rect x="504" y="450" width="188" height="64" rx="20" fill="#FFFFFF" fill-opacity="0.12"/>
+  <text x="532" y="488" fill="#FDE68A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">适合推广</text>
+  <text x="532" y="515" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">SEO + 分享卡片</text>
+  <text x="84" y="572" fill="#94A3B8" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="500">dailymicrosaas.pages.dev</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="130" y1="86" x2="1090" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E3A8A"/>
+      <stop offset="1" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>

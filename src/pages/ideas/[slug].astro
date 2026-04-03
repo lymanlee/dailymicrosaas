@@ -1,77 +1,235 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { estimateReadingTime, extractLabeledValue, getSection, parseIdeaSections } from '../../lib/idea';
 
-// 获取所有 ideas 用于生成静态路径，并过滤掉模板内容
 export async function getStaticPaths() {
   const ideas = await getCollection('ideas');
   const publishedIdeas = ideas.filter((idea) => idea.slug !== 'template');
-  
-  return publishedIdeas.map((idea: any) => {
-    const slug = idea.slug;
-    return {
-      params: { slug },
-      props: { idea },
-    };
-  });
+
+  return publishedIdeas.map((idea: any) => ({
+    params: { slug: idea.slug },
+    props: { idea },
+  }));
 }
 
 const { idea } = Astro.props;
 const { Content } = await idea.render();
 const { data: frontmatter } = idea;
+const rawContent = idea.body ?? '';
+const sections = parseIdeaSections(rawContent);
+const readingTime = estimateReadingTime(rawContent);
+const demandSection = getSection(sections, ['真实需求来源']);
+const competitionSection = getSection(sections, ['竞争情况']);
+const monetizationSection = getSection(sections, ['变现方式']);
+const executionSection = getSection(sections, ['最快实现路径']);
+const keywordsSection = getSection(sections, ['SEO 关键词']);
+const whyNowSection = getSection(sections, ['为什么值得做']);
+const buildSection = getSection(sections, ['技术难度']);
 
-const difficultyColors: Record<string, string> = {
-  'Easy': 'bg-green-100 text-green-800',
-  'Medium': 'bg-yellow-100 text-yellow-800',
-  'Hard': 'bg-red-100 text-red-800',
+const sourceSignals = demandSection?.bullets.slice(0, 3) ?? [];
+const monetizationItems = monetizationSection?.bullets.slice(0, 3) ?? [];
+const executionSteps = executionSection?.numbered.slice(0, 3) ?? [];
+const keywordItems = keywordsSection?.bullets.slice(0, 5).map((item) => item.replace(/\s*\([^\)]*\)/g, '').trim()) ?? [];
+const convictionItems = (whyNowSection?.numbered.length ? whyNowSection.numbered : whyNowSection?.bullets ?? []).slice(0, 4);
+const buildWindow = extractLabeledValue(buildSection?.body ?? rawContent, '预估开发时间') ?? '可在短周期内验证';
+const searchSignal =
+  sourceSignals.find((item) => /Google Trends|搜索|增长|月均/.test(item)) ?? sourceSignals[0] ?? '已观察到稳定需求信号';
+const competitionSignal =
+  (competitionSection?.bullets.find((item) => /机会|竞争|巨头|长尾/.test(item)) ?? competitionSection?.paragraphs[0]) ||
+  '需要从体验、速度或定位切出差异化。';
+const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
+const articleUrl = new URL(Astro.url.pathname, `${siteUrl}/`).toString();
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: frontmatter.title,
+  description: frontmatter.description,
+  datePublished: frontmatter.date,
+  dateModified: frontmatter.date,
+  inLanguage: 'zh-CN',
+  articleSection: frontmatter.category,
+  mainEntityOfPage: articleUrl,
+  author: {
+    '@type': 'Organization',
+    name: 'Daily Micro SaaS',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Daily Micro SaaS',
+  },
+  image: [new URL('/social-card.svg', `${siteUrl}/`).toString()],
+  keywords: keywordItems.join(', '),
+};
+
+const difficultyMeta: Record<string, { label: string; classes: string }> = {
+  Easy: { label: '适合快速验证', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
+  Medium: { label: '需要一定打磨', classes: 'bg-amber-50 text-amber-700 ring-amber-200' },
+  Hard: { label: '偏重执行能力', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
 const categoryColors: Record<string, string> = {
-  'AI 工具': 'bg-purple-100 text-purple-800',
-  '文档处理': 'bg-blue-100 text-blue-800',
-  '图像处理': 'bg-pink-100 text-pink-800',
-  '视频处理': 'bg-orange-100 text-orange-800',
-  '效率工具': 'bg-teal-100 text-teal-800',
-  '开发者工具': 'bg-gray-100 text-gray-800',
+  'AI 工具': 'bg-violet-50 text-violet-700 ring-violet-200',
+  '文档处理': 'bg-sky-50 text-sky-700 ring-sky-200',
+  '图像处理': 'bg-pink-50 text-pink-700 ring-pink-200',
+  '视频处理': 'bg-orange-50 text-orange-700 ring-orange-200',
+  '效率工具': 'bg-teal-50 text-teal-700 ring-teal-200',
+  '开发者工具': 'bg-slate-100 text-slate-700 ring-slate-200',
 };
+
+const quickFacts = [
+  { label: '阅读时间', value: `${readingTime} 分钟` },
+  { label: '上手难度', value: difficultyMeta[frontmatter.difficulty]?.label ?? frontmatter.difficulty },
+  { label: '最快落地', value: buildWindow },
+  { label: '发布日期', value: frontmatter.date },
+];
 ---
 
-<Layout title={`${frontmatter.title} - Daily Micro SaaS`} description={frontmatter.description}>
-  <article class="bg-white rounded-lg shadow-sm border p-8">
-    <!-- Header -->
-    <div class="flex items-start justify-between gap-4 mb-6">
-      <div class="flex items-center gap-2 flex-wrap">
-        <span class={`text-sm px-3 py-1 rounded-full font-medium ${categoryColors[frontmatter.category] || 'bg-gray-100 text-gray-800'}`}>
-          {frontmatter.category}
-        </span>
-        <span class={`text-sm px-3 py-1 rounded-full font-medium ${difficultyColors[frontmatter.difficulty] || 'bg-gray-100 text-gray-800'}`}>
-          难度: {frontmatter.difficulty}
-        </span>
-        {frontmatter.status === 'New' && (
-          <span class="text-sm px-3 py-1 rounded-full font-medium bg-red-100 text-red-800">
-            New
+<Layout
+  title={`${frontmatter.title} - Daily Micro SaaS`}
+  description={frontmatter.description}
+  type="article"
+  structuredData={structuredData}
+>
+  <div class="mb-6">
+    <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-primary">
+      <span aria-hidden="true">←</span>
+      返回首页
+    </a>
+  </div>
+
+  <article class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
+    <div class="space-y-8">
+      <section class="overflow-hidden rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryColors[frontmatter.category] || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
+            {frontmatter.category}
           </span>
-        )}
-      </div>
-      <time class="text-sm text-gray-500">{frontmatter.date}</time>
+          <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyMeta[frontmatter.difficulty]?.classes || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
+            {difficultyMeta[frontmatter.difficulty]?.label || frontmatter.difficulty}
+          </span>
+          {frontmatter.status === 'New' && (
+            <span class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
+              今日更新
+            </span>
+          )}
+          <time class="text-sm font-medium text-slate-400">{frontmatter.date}</time>
+        </div>
+
+        <h1 class="mt-5 max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">{frontmatter.title}</h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{frontmatter.description}</p>
+
+        <div class="mt-8 grid gap-4 lg:grid-cols-3">
+          <div class="rounded-3xl bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-500">需求信号</p>
+            <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{searchSignal}</p>
+          </div>
+          <div class="rounded-3xl bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-500">竞争判断</p>
+            <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{competitionSignal}</p>
+          </div>
+          <div class="rounded-3xl bg-slate-50 p-5">
+            <p class="text-sm font-semibold text-slate-500">最快验证周期</p>
+            <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{buildWindow}</p>
+          </div>
+        </div>
+      </section>
+
+      {convictionItems.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+          <span class="section-kicker">为什么值得现在看</span>
+          <div class="mt-5 grid gap-4 md:grid-cols-2">
+            {convictionItems.map((item) => (
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p class="text-sm font-semibold leading-7 text-slate-700">{item}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {sourceSignals.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+          <span class="section-kicker">需求来源</span>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            {sourceSignals.map((item) => (
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-600">
+                {item}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+        <span class="section-kicker">完整拆解</span>
+        <div class="idea-prose prose prose-slate mt-6 max-w-none prose-headings:scroll-mt-24">
+          <Content />
+        </div>
+      </section>
     </div>
-    
-    <h1 class="text-3xl font-bold mb-4">{frontmatter.title}</h1>
-    
-    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-      {frontmatter.description}
-    </p>
-    
-    <!-- Content -->
-    <div class="prose prose-gray max-w-none">
-      <Content />
-    </div>
-    
-    <!-- Back Link -->
-    <div class="mt-12 pt-6 border-t">
-      <a href="/" class="text-primary hover:text-primary/80 font-medium">
-        ← 返回首页
-      </a>
-    </div>
+
+    <aside class="space-y-6 lg:sticky lg:top-24">
+      <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="text-lg font-bold text-slate-950">快速判断</h2>
+        <dl class="mt-5 space-y-4">
+          {quickFacts.map((fact) => (
+            <div class="rounded-2xl bg-slate-50 p-4">
+              <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{fact.label}</dt>
+              <dd class="mt-2 text-sm font-semibold leading-7 text-slate-900">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {monetizationItems.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-bold text-slate-950">变现路径</h2>
+          <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
+            {monetizationItems.map((item) => (
+              <li class="rounded-2xl bg-slate-50 px-4 py-3">{item}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {executionSteps.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-bold text-slate-950">最快落地路径</h2>
+          <ol class="mt-4 space-y-3">
+            {executionSteps.map((item, index) => (
+              <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
+                <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white">{index + 1}</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {keywordItems.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-bold text-slate-950">重点关键词</h2>
+          <div class="mt-4 flex flex-wrap gap-2">
+            {keywordItems.map((item) => (
+              <span class="rounded-full bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 ring-1 ring-inset ring-sky-200">{item}</span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <section class="rounded-[28px] border border-slate-200 bg-slate-950 p-6 text-white shadow-soft">
+        <p class="text-sm font-semibold text-blue-100">接下来做什么</p>
+        <p class="mt-3 text-lg font-semibold leading-8">如果这条方向跟你现在的能力匹配，先做最小版本，拿一个能收集反馈的页面或工具出来。</p>
+        <div class="mt-6 flex flex-col gap-3">
+          <a href="/archive" class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+            继续看其他方向
+          </a>
+          <a href="/about" class="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
+            了解项目筛选逻辑
+          </a>
+        </div>
+      </section>
+    </aside>
   </article>
 </Layout>

@@ -3,13 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import IdeaCard from '../components/IdeaCard.astro';
 import { getCollection } from 'astro:content';
 
-// 获取所有 ideas，并过滤掉模板内容
 const allIdeas = await getCollection('ideas');
 const publishedIdeas = allIdeas.filter((idea) => idea.slug !== 'template');
 
-// 按日期排序，最新的在前
 const ideas = publishedIdeas
-  .map(idea => ({
+  .map((idea) => ({
     ...idea.data,
     slug: idea.slug,
   }))
@@ -17,26 +15,93 @@ const ideas = publishedIdeas
 
 const todayIdea = ideas[0];
 const pastIdeas = ideas.slice(1);
+const categories = [...new Set(ideas.map((idea) => idea.category))];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Daily Micro SaaS',
+  description: '每天拆解一个真实可落地的 Micro SaaS 方向，包含需求信号、竞争格局与最快验证路径。',
+  url: 'https://dailymicrosaas.pages.dev/',
+};
 ---
 
-<Layout title="Daily Micro SaaS - 每天发现一个小而美的创业机会">
-  <!-- Hero Section -->
-  <section class="text-center py-12 mb-8">
-    <h1 class="text-4xl font-bold mb-4">
-      每天发现下一个 <span class="text-primary">Micro SaaS</span> 机会
-    </h1>
-    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-      小而美、技术简单、竞争不大、已有盈利验证的 Web 工具方向。
-      <br />不是灵感，是可执行的作业。
-    </p>
+<Layout
+  title="Daily Micro SaaS - 每天拆解一个可落地的小 SaaS 机会"
+  description="Daily Micro SaaS：每天拆解一个真实可落地的 Micro SaaS 方向，帮独立开发者更快找到值得验证的题目。"
+  structuredData={structuredData}
+>
+  <section class="relative overflow-hidden rounded-[32px] border border-slate-200 bg-slate-950 px-6 py-10 text-white shadow-soft sm:px-10 lg:px-12 lg:py-14">
+    <div class="absolute inset-0 bg-hero-glow opacity-100"></div>
+    <div class="absolute right-0 top-0 h-56 w-56 rounded-full bg-primary/20 blur-3xl"></div>
+    <div class="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+      <div>
+        <span class="section-kicker mb-5 border-white/10 bg-white/10 text-blue-100">适合独立开发者 / 副业创业者</span>
+        <h1 class="max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+          别再空想点子了。<br />这里直接给你已经过一轮筛选的题目。
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          每条内容都尽量回答四件事：需求到底真不真、竞争是不是还能打、最快多久能做出来、以及钱怎么收。
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          {todayIdea && (
+            <a href={`/ideas/${todayIdea.slug}`} class="inline-flex items-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+              先看今日推荐
+            </a>
+          )}
+          <a href="/archive" class="inline-flex items-center rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10">
+            浏览全部方向
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+        <div class="glass-panel rounded-3xl border border-white/10 p-5">
+          <p class="text-sm text-slate-300">当前收录</p>
+          <p class="mt-2 text-3xl font-black text-white">{ideas.length}</p>
+          <p class="mt-2 text-sm leading-6 text-slate-300">先保证少量但可读，不拿水文堆量。</p>
+        </div>
+        <div class="glass-panel rounded-3xl border border-white/10 p-5">
+          <p class="text-sm text-slate-300">覆盖分类</p>
+          <p class="mt-2 text-3xl font-black text-white">{categories.length}</p>
+          <p class="mt-2 text-sm leading-6 text-slate-300">优先关注 Web 工具、文档处理、AI 工具等高执行性赛道。</p>
+        </div>
+        <div class="glass-panel rounded-3xl border border-white/10 p-5">
+          <p class="text-sm text-slate-300">内容结构</p>
+          <p class="mt-2 text-3xl font-black text-white">4</p>
+          <p class="mt-2 text-sm leading-6 text-slate-300">真实需求、竞争判断、变现方式、最快落地路径都会尽量给全。</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Today's Idea -->
+  <section class="mt-10 grid gap-4 md:grid-cols-3">
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">筛选标准 01</p>
+      <h2 class="mt-3 text-xl font-bold text-slate-950">必须有真实需求信号</h2>
+      <p class="mt-3 leading-7 text-slate-600">不是拍脑袋想点子，优先看搜索趋势、社区吐槽、用户反复出现的具体问题。</p>
+    </div>
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">筛选标准 02</p>
+      <h2 class="mt-3 text-xl font-bold text-slate-950">优先可快速验证</h2>
+      <p class="mt-3 leading-7 text-slate-600">更偏向两周到一个月能做出 MVP 的方向，而不是需要长期重研发的故事。</p>
+    </div>
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">筛选标准 03</p>
+      <h2 class="mt-3 text-xl font-bold text-slate-950">强调清晰的变现可能</h2>
+      <p class="mt-3 leading-7 text-slate-600">只看流量没意义，内容会优先给出订阅、买断、企业 API 或升级项的具体路径。</p>
+    </div>
+  </section>
+
   {todayIdea && (
-    <section class="mb-12">
-      <div class="flex items-center gap-2 mb-4">
-        <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-        <h2 class="text-lg font-semibold text-gray-800">今日推荐</h2>
+    <section class="mt-14">
+      <div class="mb-5 flex items-center justify-between gap-4">
+        <div>
+          <span class="section-kicker">今日推荐</span>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">今天最值得先看的一个方向</h2>
+        </div>
+        <a href={`/ideas/${todayIdea.slug}`} class="hidden text-sm font-semibold text-primary transition hover:text-blue-700 md:inline-flex">
+          直接进入完整拆解 →
+        </a>
       </div>
       <IdeaCard
         title={todayIdea.title}
@@ -46,29 +111,39 @@ const pastIdeas = ideas.slice(1);
         difficulty={todayIdea.difficulty}
         description={todayIdea.description}
         status="New"
+        featured={true}
       />
     </section>
   )}
 
-  <!-- Past Ideas -->
-  <section>
-    <h2 class="text-lg font-semibold text-gray-800 mb-4">历史归档</h2>
-    <div class="grid gap-4">
-      {pastIdeas.map(idea => (
-        <IdeaCard
-          title={idea.title}
-          slug={idea.slug}
-          date={idea.date}
-          category={idea.category}
-          difficulty={idea.difficulty}
-          description={idea.description}
-        />
-      ))}
+  <section class="mt-14">
+    <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <span class="section-kicker">历史归档</span>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">已经整理过的其他方向</h2>
+        <p class="mt-2 max-w-2xl text-slate-600">适合按赛道翻找，也适合连续看几个方向后自己判断最想做哪一个。</p>
+      </div>
+      <a href="/archive" class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+        查看完整归档
+      </a>
     </div>
-    
-    {pastIdeas.length === 0 && (
-      <div class="text-center py-12 text-gray-500">
-        <p>暂无历史内容，敬请期待...</p>
+
+    {pastIdeas.length > 0 ? (
+      <div class="grid gap-5 lg:grid-cols-2">
+        {pastIdeas.map((idea) => (
+          <IdeaCard
+            title={idea.title}
+            slug={idea.slug}
+            date={idea.date}
+            category={idea.category}
+            difficulty={idea.difficulty}
+            description={idea.description}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+        暂无更多归档，后续会继续补充。
       </div>
     )}
   </section>

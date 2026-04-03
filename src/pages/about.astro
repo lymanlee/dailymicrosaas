@@ -1,46 +1,79 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: '关于 Daily Micro SaaS',
+  description: '了解 Daily Micro SaaS 的定位、筛选标准和内容方式。',
+  url: 'https://dailymicrosaas.pages.dev/about',
+};
 ---
 
-<Layout title="关于 - Daily Micro SaaS">
-  <div class="bg-white rounded-lg shadow-sm border p-8">
-    <h1 class="text-2xl font-bold mb-6">关于 Daily Micro SaaS</h1>
-    
-    <div class="prose prose-gray max-w-none">
-      <h2 class="text-lg font-semibold mt-6 mb-3">我们是谁</h2>
-      <p class="text-gray-600 leading-relaxed mb-4">
-        Daily Micro SaaS 是一个专注于发现小而美 Web 工具创业方向的平台。
-        我们面向独立开发者、副业创业者和想做小 SaaS 的新手，
-        每天挖掘「可复制、可落地、可赚钱」的产品机会。
-      </p>
-      
-      <h2 class="text-lg font-semibold mt-6 mb-3">我们的筛选标准</h2>
-      <ul class="list-disc list-inside text-gray-600 space-y-2 mb-4">
-        <li><strong>小而美</strong> - 功能聚焦，解决单一痛点</li>
-        <li><strong>技术简单</strong> - 纯前端或轻量后端即可实现</li>
-        <li><strong>竞争不大</strong> - SERP 未被巨头垄断</li>
-        <li><strong>已有验证</strong> - 有真实需求信号（搜索趋势、社区讨论）</li>
-      </ul>
-      
-      <h2 class="text-lg font-semibold mt-6 mb-3">内容来源</h2>
-      <p class="text-gray-600 leading-relaxed mb-4">
-        我们通过分析 Reddit、Hacker News、Twitter、Product Hunt 等平台的真实用户讨论，
-        结合 Google Trends 搜索趋势和 SERP 竞争分析，
-        筛选出最有潜力的 Micro SaaS 方向。
-      </p>
-      
-      <h2 class="text-lg font-semibold mt-6 mb-3">更新频率</h2>
-      <p class="text-gray-600 leading-relaxed mb-4">
-        每日更新，北京时间每天早上 9:00 发布新的创业方向。
-      </p>
-      
-      <h2 class="text-lg font-semibold mt-6 mb-3">联系我们</h2>
-      <p class="text-gray-600 leading-relaxed">
-        有任何建议或想法？欢迎通过邮件联系我们：
-        <a href="mailto:hello@dailymicrosaas.com" class="text-primary hover:underline">
-          hello@dailymicrosaas.com
-        </a>
-      </p>
+<Layout title="关于项目 - Daily Micro SaaS" description="了解 Daily Micro SaaS 的定位、筛选标准和内容方式。" structuredData={structuredData}>
+  <section class="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
+    <span class="section-kicker">关于项目</span>
+    <h1 class="mt-3 text-4xl font-black tracking-tight text-slate-950">这不是灵感库，而是给独立开发者的选题工作台</h1>
+    <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+      Daily Micro SaaS 想解决的问题很直接：好点子不缺，真正缺的是“哪些方向值得现在就开始做”的判断。这里会尽量把判断过程摊开给你看。
+    </p>
+  </section>
+
+  <section class="mt-8 grid gap-5 lg:grid-cols-3">
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">我们重点看什么</p>
+      <h2 class="mt-3 text-2xl font-bold text-slate-950">真实需求</h2>
+      <p class="mt-3 leading-7 text-slate-600">优先收录那些已经被用户明确抱怨、反复搜索、愿意找替代品的问题，而不是纯概念产品。</p>
     </div>
-  </div>
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">我们尽量给什么</p>
+      <h2 class="mt-3 text-2xl font-bold text-slate-950">执行判断</h2>
+      <p class="mt-3 leading-7 text-slate-600">每条方向都会尽量补上竞争情况、最快 MVP 路径和可能的变现方式，方便你判断要不要上手。</p>
+    </div>
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">我们暂时不做什么</p>
+      <h2 class="mt-3 text-2xl font-bold text-slate-950">不装成熟</h2>
+      <p class="mt-3 leading-7 text-slate-600">当前项目仍在 MVP 阶段，先把内容质量和浏览体验做扎实，再逐步补订阅、联系入口和更完整的推荐机制。</p>
+    </div>
+  </section>
+
+  <section class="mt-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+    <div class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+      <h2 class="text-2xl font-bold text-slate-950">筛选标准</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-2">
+        <div class="rounded-2xl bg-slate-50 p-5">
+          <p class="font-semibold text-slate-900">小而明确</p>
+          <p class="mt-2 text-sm leading-7 text-slate-600">聚焦单一痛点，而不是试图一口气做成平台型大产品。</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-5">
+          <p class="font-semibold text-slate-900">能快速做出 MVP</p>
+          <p class="mt-2 text-sm leading-7 text-slate-600">优先考虑两周到一个月能验证的方向，尽量减少过长的研发周期。</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-5">
+          <p class="font-semibold text-slate-900">竞争仍有切口</p>
+          <p class="mt-2 text-sm leading-7 text-slate-600">即便已有大站，也要有差异化切入点，例如体验、速度、定位或 AI 能力。</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-5">
+          <p class="font-semibold text-slate-900">变现路径说得通</p>
+          <p class="mt-2 text-sm leading-7 text-slate-600">最好能直接挂订阅、增值功能、企业接口或买断，不做只讲流量不讲收入的空壳内容。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-[28px] border border-slate-200 bg-slate-950 p-8 text-white shadow-soft">
+      <h2 class="text-2xl font-bold">当前阶段说明</h2>
+      <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+        <li>• 目前仍以 pages.dev 默认域名对外提供访问。</li>
+        <li>• 内容量不大，但页面已优先围绕“可读、可判断、可执行”做打磨。</li>
+        <li>• 正式域名、订阅机制和更多自动化能力会在 MVP 继续稳定后再补。</li>
+      </ul>
+      <div class="mt-8 rounded-3xl bg-white/10 p-5">
+        <p class="text-sm font-semibold text-blue-100">下一步最值得做</p>
+        <p class="mt-2 text-lg font-semibold">继续看最新方向，找到一个你愿意本周就开始做的题目。</p>
+        <a href="/" class="mt-4 inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+          返回首页看今日推荐
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>
