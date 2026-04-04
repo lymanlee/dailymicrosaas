@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
@@ -31,10 +31,10 @@ jobs:
 
       - name: Deploy to Cloudflare Pages
         if: github.ref == 'refs/heads/main'
-        uses: cloudflare/pages-action@v1
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
         with:
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          projectName: dailymicrosaas
-          directory: dist
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy dist --project-name=dailymicrosaas
