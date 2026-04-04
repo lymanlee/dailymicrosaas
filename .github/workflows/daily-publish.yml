@@ -61,6 +61,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    env:
+      PUBLISH_FAILURE_WEBHOOK_URL: ${{ secrets.PUBLISH_FAILURE_WEBHOOK_URL }}
 
     steps:
       - name: Checkout repository
@@ -183,10 +185,10 @@ jobs:
             pipeline/reports/opportunity_report_*.txt
 
       - name: Notify failure webhook
-        if: failure() && secrets.PUBLISH_FAILURE_WEBHOOK_URL != ''
+        if: failure() && env.PUBLISH_FAILURE_WEBHOOK_URL != ''
         continue-on-error: true
         env:
-          WEBHOOK_URL: ${{ secrets.PUBLISH_FAILURE_WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ env.PUBLISH_FAILURE_WEBHOOK_URL }}
           SUMMARY_JSON: ${{ env.SUMMARY_JSON }}
           REPOSITORY: ${{ github.repository }}
           RUN_ID: ${{ github.run_id }}
