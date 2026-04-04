@@ -19,3 +19,11 @@ pnpm-debug.log*
 
 # Astro
 .astro/
+
+# pipeline generated artifacts
+pipeline/data/community_signals_*.json
+pipeline/data/trend_data_*.json
+pipeline/data/serp_data_*.json
+pipeline/reports/opportunity_report_*.json
+pipeline/reports/opportunity_report_*.txt
+pipeline/logs/

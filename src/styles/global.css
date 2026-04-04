@@ -18,8 +18,9 @@ body {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.84);
-  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .section-kicker {

@@ -62,10 +62,10 @@ const structuredData = {
   keywords: keywordItems.join(', '),
 };
 
-const difficultyMeta: Record<string, { label: string; classes: string }> = {
-  Easy: { label: '适合快速验证', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
-  Medium: { label: '需要一定打磨', classes: 'bg-amber-50 text-amber-700 ring-amber-200' },
-  Hard: { label: '偏重执行能力', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
+const difficultyMeta: Record<string, { labelKey: string; label: string; classes: string }> = {
+  Easy: { labelKey: 'card.difficulty.easy', label: 'Quick to validate', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
+  Medium: { labelKey: 'card.difficulty.medium', label: 'Needs some polish', classes: 'bg-amber-50 text-amber-700 ring-amber-200' },
+  Hard: { labelKey: 'card.difficulty.hard', label: 'Execution-heavy', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
 const categoryColors: Record<string, string> = {
@@ -77,11 +77,13 @@ const categoryColors: Record<string, string> = {
   '开发者工具': 'bg-slate-100 text-slate-700 ring-slate-200',
 };
 
+const difficultyInfo = difficultyMeta[frontmatter.difficulty] ?? { labelKey: 'card.difficulty.easy', label: frontmatter.difficulty, classes: 'bg-slate-100 text-slate-700 ring-slate-200' };
+
 const quickFacts = [
-  { label: '阅读时间', value: `${readingTime} 分钟` },
-  { label: '上手难度', value: difficultyMeta[frontmatter.difficulty]?.label ?? frontmatter.difficulty },
-  { label: '最快落地', value: buildWindow },
-  { label: '发布日期', value: frontmatter.date },
+  { labelKey: 'detail.reading_time', label: 'Reading time', value: `${readingTime} min` },
+  { labelKey: 'detail.difficulty', label: 'Difficulty', value: difficultyInfo.label, valueKey: difficultyInfo.labelKey },
+  { labelKey: 'detail.timeline', label: 'Fastest timeline', value: buildWindow },
+  { labelKey: 'detail.published', label: 'Published', value: frontmatter.date },
 ];
 ---
 
@@ -92,9 +94,8 @@ const quickFacts = [
   structuredData={structuredData}
 >
   <div class="mb-6">
-    <a href="/" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-primary">
-      <span aria-hidden="true">←</span>
-      返回首页
+    <a href="/" data-i18n="detail.back" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-primary">
+      ← Home
     </a>
   </div>
 
@@ -105,12 +106,12 @@ const quickFacts = [
           <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryColors[frontmatter.category] || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
             {frontmatter.category}
           </span>
-          <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyMeta[frontmatter.difficulty]?.classes || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
-            {difficultyMeta[frontmatter.difficulty]?.label || frontmatter.difficulty}
+          <span data-i18n={difficultyInfo.labelKey} class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
+            {difficultyInfo.label}
           </span>
           {frontmatter.status === 'New' && (
-            <span class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
-              今日更新
+            <span data-i18n="detail.status.new" class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
+              New today
             </span>
           )}
           <time class="text-sm font-medium text-slate-400">{frontmatter.date}</time>
@@ -121,15 +122,15 @@ const quickFacts = [
 
         <div class="mt-8 grid gap-4 lg:grid-cols-3">
           <div class="rounded-3xl bg-slate-50 p-5">
-            <p class="text-sm font-semibold text-slate-500">需求信号</p>
+            <p data-i18n="detail.demand" class="text-sm font-semibold text-slate-500">Demand signal</p>
             <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{searchSignal}</p>
           </div>
           <div class="rounded-3xl bg-slate-50 p-5">
-            <p class="text-sm font-semibold text-slate-500">竞争判断</p>
+            <p data-i18n="detail.competition" class="text-sm font-semibold text-slate-500">Competition</p>
             <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{competitionSignal}</p>
           </div>
           <div class="rounded-3xl bg-slate-50 p-5">
-            <p class="text-sm font-semibold text-slate-500">最快验证周期</p>
+            <p data-i18n="detail.build_window" class="text-sm font-semibold text-slate-500">Fastest timeline</p>
             <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{buildWindow}</p>
           </div>
         </div>
@@ -137,7 +138,7 @@ const quickFacts = [
 
       {convictionItems.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span class="section-kicker">为什么值得现在看</span>
+          <span data-i18n="detail.why" class="section-kicker">Why build this now</span>
           <div class="mt-5 grid gap-4 md:grid-cols-2">
             {convictionItems.map((item) => (
               <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -150,7 +151,7 @@ const quickFacts = [
 
       {sourceSignals.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span class="section-kicker">需求来源</span>
+          <span data-i18n="detail.sources" class="section-kicker">Demand sources</span>
           <div class="mt-5 grid gap-4 md:grid-cols-3">
             {sourceSignals.map((item) => (
               <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-600">
@@ -162,7 +163,7 @@ const quickFacts = [
       )}
 
       <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-        <span class="section-kicker">完整拆解</span>
+        <span data-i18n="detail.full" class="section-kicker">Full breakdown</span>
         <div class="idea-prose prose prose-slate mt-6 max-w-none prose-headings:scroll-mt-24">
           <Content />
         </div>
@@ -171,12 +172,14 @@ const quickFacts = [
 
     <aside class="space-y-6 lg:sticky lg:top-24">
       <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="text-lg font-bold text-slate-950">快速判断</h2>
+        <h2 data-i18n="detail.quick" class="text-lg font-bold text-slate-950">Quick facts</h2>
         <dl class="mt-5 space-y-4">
           {quickFacts.map((fact) => (
             <div class="rounded-2xl bg-slate-50 p-4">
-              <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{fact.label}</dt>
-              <dd class="mt-2 text-sm font-semibold leading-7 text-slate-900">{fact.value}</dd>
+              <dt data-i18n={fact.labelKey} class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{fact.label}</dt>
+              <dd class="mt-2 text-sm font-semibold leading-7 text-slate-900">
+                {fact.valueKey ? <span data-i18n={fact.valueKey}>{fact.value}</span> : fact.value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -184,7 +187,7 @@ const quickFacts = [
 
       {monetizationItems.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-950">变现路径</h2>
+          <h2 data-i18n="detail.monetisation" class="text-lg font-bold text-slate-950">Revenue paths</h2>
           <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
             {monetizationItems.map((item) => (
               <li class="rounded-2xl bg-slate-50 px-4 py-3">{item}</li>
@@ -195,7 +198,7 @@ const quickFacts = [
 
       {executionSteps.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-950">最快落地路径</h2>
+          <h2 data-i18n="detail.execution" class="text-lg font-bold text-slate-950">Fastest path to launch</h2>
           <ol class="mt-4 space-y-3">
             {executionSteps.map((item, index) => (
               <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
@@ -209,7 +212,7 @@ const quickFacts = [
 
       {keywordItems.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-950">重点关键词</h2>
+          <h2 data-i18n="detail.keywords" class="text-lg font-bold text-slate-950">Key search terms</h2>
           <div class="mt-4 flex flex-wrap gap-2">
             {keywordItems.map((item) => (
               <span class="rounded-full bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 ring-1 ring-inset ring-sky-200">{item}</span>
@@ -219,14 +222,14 @@ const quickFacts = [
       )}
 
       <section class="rounded-[28px] border border-slate-200 bg-slate-950 p-6 text-white shadow-soft">
-        <p class="text-sm font-semibold text-blue-100">接下来做什么</p>
-        <p class="mt-3 text-lg font-semibold leading-8">如果这条方向跟你现在的能力匹配，先做最小版本，拿一个能收集反馈的页面或工具出来。</p>
+        <p data-i18n="detail.next_label" class="text-sm font-semibold text-blue-100">What's next</p>
+        <p data-i18n="detail.next_p" class="mt-3 text-lg font-semibold leading-8">If this direction fits your current skillset, start small. Get something people can actually try.</p>
         <div class="mt-6 flex flex-col gap-3">
-          <a href="/archive" class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
-            继续看其他方向
+          <a href="/archive" data-i18n="detail.next_btn1" class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+            Browse more ideas
           </a>
-          <a href="/about" class="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
-            了解项目筛选逻辑
+          <a href="/about" data-i18n="detail.next_btn2" class="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
+            How we pick ideas
           </a>
         </div>
       </section>

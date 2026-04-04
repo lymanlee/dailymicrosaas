@@ -7,7 +7,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "content:discover": "python3 scripts/run_discovery.py",
+    "content:generate": "python3 scripts/generate_idea.py",
+    "content:publish": "python3 scripts/run_daily_publish.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",

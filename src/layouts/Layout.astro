@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ui } from '../lib/i18n';
 
 interface Props {
   title: string;
@@ -8,40 +9,49 @@ interface Props {
   type?: 'website' | 'article';
   noindex?: boolean;
   structuredData?: Record<string, any> | Array<Record<string, any>>;
+  lang?: 'en' | 'zh';
 }
 
 const {
   title,
-  description = 'Daily Micro SaaS：每天拆解一个真实、有验证信号、可快速落地的 Micro SaaS 方向。',
+  description = 'One real, buildable Micro SaaS direction every day. Demand signals, competitive context, and the fastest path to a working MVP.',
   image = '/social-card.svg',
   type = 'website',
   noindex = false,
   structuredData,
+  lang: pageLang = 'en',
 } = Astro.props;
+
+// Server-side: derive lang from URL param (Astro SSG: always fallback to pageLang)
+const urlLang = (Astro.url.searchParams.get('lang') as 'en' | 'zh') ?? pageLang;
+const t = ui[urlLang] ?? ui['en'];
 
 const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
 const currentPath = Astro.url.pathname;
 const canonicalUrl = new URL(currentPath, `${siteUrl}/`).toString();
 const socialImage = image.startsWith('http') ? image : new URL(image, `${siteUrl}/`).toString();
 const robots = noindex ? 'noindex, nofollow' : 'index, follow';
+
 const navItems = [
-  { href: '/', label: '今日推荐' },
-  { href: '/archive', label: '历史归档' },
-  { href: '/about', label: '关于项目' },
+  { href: '/', labelKey: 'nav.today' as const },
+  { href: '/archive', labelKey: 'nav.archive' as const },
+  { href: '/about', labelKey: 'nav.about' as const },
 ];
+
 const defaultStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Daily Micro SaaS',
   url: siteUrl,
   description,
-  inLanguage: 'zh-CN',
+  inLanguage: urlLang === 'zh' ? 'zh-CN' : 'en',
 };
 const jsonLdPayload = JSON.stringify(structuredData ?? defaultStructuredData);
+const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -57,7 +67,7 @@ const jsonLdPayload = JSON.stringify(structuredData ?? defaultStructuredData);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale" content={urlLang === 'zh' ? 'zh_CN' : 'en_US'} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -76,7 +86,7 @@ const jsonLdPayload = JSON.stringify(structuredData ?? defaultStructuredData);
               <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-sm font-black text-white shadow-soft">DM</span>
               <div>
                 <p class="text-base font-semibold tracking-tight">Daily Micro SaaS</p>
-                <p class="text-xs text-slate-500">真实需求驱动的每日产品方向</p>
+                <p class="text-xs text-slate-500" data-i18n="nav.tagline">{t['nav.tagline']}</p>
               </div>
             </a>
           </div>
@@ -87,20 +97,34 @@ const jsonLdPayload = JSON.stringify(structuredData ?? defaultStructuredData);
               return (
                 <a
                   href={item.href}
+                  data-i18n={item.labelKey}
                   class={`rounded-full px-4 py-2 transition ${isActive ? 'bg-slate-950 text-white shadow-sm' : 'hover:bg-slate-100 hover:text-slate-900'}`}
                 >
-                  {item.label}
+                  {t[item.labelKey]}
                 </a>
               );
             })}
           </nav>
 
-          <a
-            href="/archive"
-            class="hidden rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary md:inline-flex"
-          >
-            去看全部点子
-          </a>
+          <div class="flex items-center gap-2">
+            <!-- Language switcher -->
+            <button
+              id="lang-toggle"
+              aria-label="Switch language"
+              class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50"
+            >
+              <span id="lang-icon" class="text-sm leading-none">🌐</span>
+              <span id="lang-label">{urlLang === 'zh' ? 'EN' : '中文'}</span>
+            </button>
+
+            <a
+              href="/archive"
+              data-i18n="nav.browse"
+              class="hidden rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary md:inline-flex"
+            >
+              {t['nav.browse']}
+            </a>
+          </div>
         </div>
       </header>
 
@@ -112,18 +136,290 @@ const jsonLdPayload = JSON.stringify(structuredData ?? defaultStructuredData);
         <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 text-sm text-slate-600 sm:px-6 lg:grid-cols-[1.4fr_1fr] lg:px-8">
           <div>
             <p class="mb-3 text-lg font-semibold text-slate-900">Daily Micro SaaS</p>
-            <p class="max-w-2xl leading-7">
-              不卖概念，直接给你已经过一轮筛选的方向：真实需求信号、竞争判断、最快落地路径、可行的变现方式。
+            <p class="max-w-2xl leading-7" data-i18n="footer.desc">
+              {t['footer.desc']}
             </p>
           </div>
           <div class="grid gap-3 text-slate-500">
-            <a href="/" class="transition hover:text-primary">今日推荐</a>
-            <a href="/archive" class="transition hover:text-primary">历史归档</a>
-            <a href="/about" class="transition hover:text-primary">关于项目</a>
-            <p class="pt-2 text-xs text-slate-400">当前为 MVP 阶段，默认使用 pages.dev 域名提供服务。</p>
+            <a href="/" data-i18n="nav.today" class="transition hover:text-primary">{t['nav.today']}</a>
+            <a href="/archive" data-i18n="nav.archive" class="transition hover:text-primary">{t['nav.archive']}</a>
+            <a href="/about" data-i18n="nav.about" class="transition hover:text-primary">{t['nav.about']}</a>
+            <p class="pt-2 text-xs text-slate-400" data-i18n="footer.mvp_notice">{t['footer.mvp_notice']}</p>
           </div>
         </div>
       </footer>
     </div>
+
+    <!-- i18n runtime: client-side language switch -->
+    <script is:inline>
+      (function () {
+        // All translations bundled inline so no extra fetch is needed
+        var UI = {
+          en: {
+            'nav.tagline': 'Real-demand product ideas, daily.',
+            'nav.today': "Today's Pick",
+            'nav.archive': 'Archive',
+            'nav.about': 'About',
+            'nav.browse': 'Browse all ideas',
+            'footer.desc': 'No fluff. Just pre-filtered directions with real demand signals, competitive context, the fastest path to an MVP, and a clear way to charge.',
+            'footer.mvp_notice': 'Currently in MVP — served via pages.dev.',
+            // index
+            'index.kicker': 'For indie developers & side-project founders',
+            'index.h1_line1': 'Stop brainstorming.',
+            'index.h1_line2': 'Start with ideas that already work.',
+            'index.subhead': 'Every entry answers four things: Is the demand real? Can you still compete? How fast can you ship an MVP? And where does the money come from?',
+            'index.cta_today': "See today's pick",
+            'index.cta_archive': 'Browse all ideas',
+            'card1.tag': 'What you get',
+            'card1.title': 'Real demand, not guesswork',
+            'card1.desc': 'Search trends, community signals, and proof that people are already looking for a solution.',
+            'card2.tag': 'Built to ship',
+            'card2.title': 'MVP in weeks, not months',
+            'card2.desc': 'Ideas you can validate in two to four weeks \u2014 not moonshots that need a year and a team.',
+            'card3.tag': 'Clear path to revenue',
+            'card3.title': "Know how you\u2019ll charge on day one",
+            'card3.desc': 'Subscription, one-time purchase, or API upsell \u2014 every breakdown includes a concrete angle.',
+            'criteria.label1': 'How we pick \u2014 01',
+            'criteria.h1': 'Evidence of real demand',
+            'criteria.p1': 'No gut-feel ideas. We look at search trends, community complaints, and the specific questions people keep asking.',
+            'criteria.label2': 'How we pick \u2014 02',
+            'criteria.h2': 'Fast to validate',
+            'criteria.p2': 'We favour ideas you can ship in two to four weeks \u2014 not multi-year platform plays that need a full team to even start.',
+            'criteria.label3': 'How we pick \u2014 03',
+            'criteria.h3': 'A clear way to charge',
+            'criteria.p3': "Traffic alone isn\u2019t enough. Every breakdown includes a specific revenue path \u2014 subscription, one-time purchase, or a paid API tier.",
+            'section.today': "Today's pick",
+            'section.today.h2': 'The one idea worth looking at today',
+            'section.today.link': 'Read the full breakdown \u2192',
+            'section.archive': 'Archive',
+            'section.archive.h2': "Everything we\u2019ve broken down so far",
+            'section.archive.desc': 'Browse by category, or read a few back-to-back to get a feel for which direction you actually want to build.',
+            'section.archive.link': 'View full archive',
+            'section.archive.empty': 'More ideas coming soon.',
+            'card.difficulty.easy': 'Quick to validate',
+            'card.difficulty.medium': 'Needs some polish',
+            'card.difficulty.hard': 'Execution-heavy',
+            'card.status.new': 'New today',
+            'card.teaser': 'Demand signals, competitive context, monetisation options, and the fastest path to launch \u2014 all broken down for you.',
+            'card.cta': 'Read breakdown',
+            'archive.kicker': 'Archive',
+            'archive.h1': "All the directions we\u2019ve broken down",
+            'archive.subhead': 'Compare opportunity density across categories, or read a few in a row to find the best fit for your current skillset.',
+            'archive.count.label': 'Total ideas',
+            'archive.cat.label': 'Categories',
+            'archive.filter.label': 'Filter by category:',
+            'archive.filter.all': 'All',
+            'archive.filter.hint': 'Showing all. Click a category to filter.',
+            'archive.filter.active': 'Showing',
+            'archive.empty': 'Nothing here yet. More coming soon.',
+            'about.kicker': 'About',
+            'about.h1': "This isn\u2019t an inspiration board. It\u2019s a decision-making tool.",
+            'about.subhead': "Daily Micro SaaS exists to answer one question: which directions are actually worth starting right now? We try to show our work.",
+            'about.focus.label': 'What we focus on',
+            'about.focus.h': 'Real demand',
+            'about.focus.p': 'We only cover ideas with clear user evidence \u2014 people complaining, searching, and looking for alternatives.',
+            'about.give.label': 'What we give you',
+            'about.give.h': 'Execution context',
+            'about.give.p': 'Every direction includes competitive signals, the fastest MVP path, and a viable monetisation angle so you can make a decision fast.',
+            'about.skip.label': "What we don\u2019t do",
+            'about.skip.h': "We\u2019re not pretending to be finished",
+            'about.skip.p': "Still in MVP. We\u2019re focusing on content quality and reading experience first. Subscriptions, contact forms, and smarter recommendations come later.",
+            'about.criteria.h': 'Selection criteria',
+            'about.criteria.c1.h': 'Small and specific',
+            'about.criteria.c1.p': 'Single pain point. Not a platform, not a suite \u2014 something you can describe in one sentence.',
+            'about.criteria.c2.h': 'Fast to build',
+            'about.criteria.c2.p': 'Two to four weeks to a working MVP. Longer research cycles are a hard filter.',
+            'about.criteria.c3.h': 'Still room to compete',
+            'about.criteria.c3.p': 'Even with existing players, there should be a clear angle \u2014 better UX, speed, positioning, or AI integration.',
+            'about.criteria.c4.h': 'A believable revenue model',
+            'about.criteria.c4.p': 'Subscription, one-time purchase, an enterprise API tier, or an upsell. Traffic without a revenue story is a skip.',
+            'about.status.h': 'Current status',
+            'about.status.cta_label': 'Next best step',
+            'about.status.cta_p': 'Keep reading until you find one idea you want to start this week.',
+            'about.status.cta_btn': "See today's pick",
+            'detail.back': '\u2190 Home',
+            'detail.reading_time': 'Reading time',
+            'detail.difficulty': 'Difficulty',
+            'detail.timeline': 'Fastest timeline',
+            'detail.published': 'Published',
+            'detail.demand': 'Demand signal',
+            'detail.competition': 'Competition',
+            'detail.build_window': 'Fastest timeline',
+            'detail.why': 'Why build this now',
+            'detail.sources': 'Demand sources',
+            'detail.full': 'Full breakdown',
+            'detail.quick': 'Quick facts',
+            'detail.monetisation': 'Revenue paths',
+            'detail.execution': 'Fastest path to launch',
+            'detail.keywords': 'Key search terms',
+            'detail.next_label': "What\u2019s next",
+            'detail.next_p': "If this direction fits your current skillset, start small. Get something people can actually try.",
+            'detail.next_btn1': 'Browse more ideas',
+            'detail.next_btn2': 'How we pick ideas',
+            'detail.status.new': 'New today',
+            '404.h1': 'Nothing here.',
+            '404.p': "The link is either gone or was never published. Head back and find something worth building.",
+            '404.btn_home': 'Go home',
+            '404.btn_archive': 'Browse ideas',
+          },
+          zh: {
+            'nav.tagline': '真实需求驱动的每日产品方向',
+            'nav.today': '今日推荐',
+            'nav.archive': '历史归档',
+            'nav.about': '关于项目',
+            'nav.browse': '去看全部点子',
+            'footer.desc': '不卖概念，直接给你已经过一轮筛选的方向：真实需求信号、竞争判断、最快落地路径、可行的变现方式。',
+            'footer.mvp_notice': '当前为 MVP 阶段，默认使用 pages.dev 域名提供服务。',
+            'index.kicker': '适合独立开发者 / 副业创业者',
+            'index.h1_line1': '别再空想点子了。',
+            'index.h1_line2': '这里直接给你已经过一轮筛选的题目。',
+            'index.subhead': '每条内容都尽量回答四件事：需求到底真不真、竞争是不是还能打、最快多久能做出来、以及钱怎么收。',
+            'index.cta_today': '先看今日推荐',
+            'index.cta_archive': '浏览全部方向',
+            'card1.tag': '你能得到什么',
+            'card1.title': '真实需求，不是拍脑袋',
+            'card1.desc': '搜索趋势、社区信号，以及已有人在找解决方案的证据。',
+            'card2.tag': '为了上线而设计',
+            'card2.title': '几周内完成 MVP，而不是几个月',
+            'card2.desc': '两到四周能验证的方向——不是需要一年和一个团队的大项目。',
+            'card3.tag': '清晰的变现路径',
+            'card3.title': '第一天就知道怎么收费',
+            'card3.desc': '订阅、买断还是 API 升级——每篇拆解都包含具体的变现方案。',
+            'criteria.label1': '筛选标准 01',
+            'criteria.h1': '必须有真实需求信号',
+            'criteria.p1': '不是拍脑袋想点子，优先看搜索趋势、社区吐槽、用户反复出现的具体问题。',
+            'criteria.label2': '筛选标准 02',
+            'criteria.h2': '优先可快速验证',
+            'criteria.p2': '更偏向两周到一个月能做出 MVP 的方向，而不是需要长期重研发的故事。',
+            'criteria.label3': '筛选标准 03',
+            'criteria.h3': '强调清晰的变现可能',
+            'criteria.p3': '只看流量没意义，内容会优先给出订阅、买断、企业 API 或升级项的具体路径。',
+            'section.today': '今日推荐',
+            'section.today.h2': '今天最值得先看的一个方向',
+            'section.today.link': '直接进入完整拆解 →',
+            'section.archive': '历史归档',
+            'section.archive.h2': '已经整理过的其他方向',
+            'section.archive.desc': '适合按赛道翻找，也适合连续看几个方向后自己判断最想做哪一个。',
+            'section.archive.link': '查看完整归档',
+            'section.archive.empty': '暂无更多归档，后续会继续补充。',
+            'card.difficulty.easy': '适合快速验证',
+            'card.difficulty.medium': '需要一定打磨',
+            'card.difficulty.hard': '偏重执行能力',
+            'card.status.new': '今日更新',
+            'card.teaser': '从真实需求、竞争格局、变现方式到最短落地路径，已经帮你拆一遍。',
+            'card.cta': '进入完整拆解',
+            'archive.kicker': '历史归档',
+            'archive.h1': '按赛道翻查已经拆过的方向',
+            'archive.subhead': '这里适合做两件事：一是对比不同赛道的机会密度，二是连续看几条后找出最适合你当前执行力的题目。',
+            'archive.count.label': '当前归档',
+            'archive.cat.label': '覆盖分类',
+            'archive.filter.label': '按分类筛选：',
+            'archive.filter.all': '全部',
+            'archive.filter.hint': '默认展示全部方向，可点击上方标签快速筛选。',
+            'archive.filter.active': '当前展示',
+            'archive.empty': '暂无内容，敬请期待。',
+            'about.kicker': '关于项目',
+            'about.h1': '这不是灵感库，而是给独立开发者的选题工作台',
+            'about.subhead': 'Daily Micro SaaS 想解决的问题很直接：好点子不缺，真正缺的是"哪些方向值得现在就开始做"的判断。这里会尽量把判断过程摊开给你看。',
+            'about.focus.label': '我们重点看什么',
+            'about.focus.h': '真实需求',
+            'about.focus.p': '优先收录那些已经被用户明确抱怨、反复搜索、愿意找替代品的问题，而不是纯概念产品。',
+            'about.give.label': '我们尽量给什么',
+            'about.give.h': '执行判断',
+            'about.give.p': '每条方向都会尽量补上竞争情况、最快 MVP 路径和可能的变现方式，方便你判断要不要上手。',
+            'about.skip.label': '我们暂时不做什么',
+            'about.skip.h': '不装成熟',
+            'about.skip.p': '当前项目仍在 MVP 阶段，先把内容质量和浏览体验做扎实，再逐步补订阅、联系入口和更完整的推荐机制。',
+            'about.criteria.h': '筛选标准',
+            'about.criteria.c1.h': '小而明确',
+            'about.criteria.c1.p': '聚焦单一痛点，而不是试图一口气做成平台型大产品。',
+            'about.criteria.c2.h': '能快速做出 MVP',
+            'about.criteria.c2.p': '优先考虑两周到一个月能验证的方向，尽量减少过长的研发周期。',
+            'about.criteria.c3.h': '竞争仍有切口',
+            'about.criteria.c3.p': '即便已有大站，也要有差异化切入点，例如体验、速度、定位或 AI 能力。',
+            'about.criteria.c4.h': '变现路径说得通',
+            'about.criteria.c4.p': '最好能直接挂订阅、增值功能、企业接口或买断，不做只讲流量不讲收入的空壳内容。',
+            'about.status.h': '当前阶段说明',
+            'about.status.cta_label': '下一步最值得做',
+            'about.status.cta_p': '继续看最新方向，找到一个你愿意本周就开始做的题目。',
+            'about.status.cta_btn': '返回首页看今日推荐',
+            'detail.back': '← 返回首页',
+            'detail.reading_time': '阅读时间',
+            'detail.difficulty': '上手难度',
+            'detail.timeline': '最快落地',
+            'detail.published': '发布日期',
+            'detail.demand': '需求信号',
+            'detail.competition': '竞争判断',
+            'detail.build_window': '最快验证周期',
+            'detail.why': '为什么值得现在看',
+            'detail.sources': '需求来源',
+            'detail.full': '完整拆解',
+            'detail.quick': '快速判断',
+            'detail.monetisation': '变现路径',
+            'detail.execution': '最快落地路径',
+            'detail.keywords': '重点关键词',
+            'detail.next_label': '接下来做什么',
+            'detail.next_p': '如果这条方向跟你现在的能力匹配，先做最小版本，拿一个能收集反馈的页面或工具出来。',
+            'detail.next_btn1': '继续看其他方向',
+            'detail.next_btn2': '了解项目筛选逻辑',
+            'detail.status.new': '今日更新',
+            '404.h1': '这个页面不存在',
+            '404.p': '你访问的链接要么已经下线，要么从来就没被发布。别浪费时间了，直接回首页继续看已经整理好的 Micro SaaS 方向。',
+            '404.btn_home': '返回首页',
+            '404.btn_archive': '去历史归档',
+          },
+        };
+
+        function getLang() {
+          try {
+            return localStorage.getItem('dms_lang') || 'en';
+          } catch (e) {
+            return 'en';
+          }
+        }
+
+        function setLang(lang) {
+          try {
+            localStorage.setItem('dms_lang', lang);
+          } catch (e) {}
+        }
+
+        function applyLang(lang) {
+          var t = UI[lang] || UI['en'];
+          document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+
+          // Update all data-i18n elements
+          document.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) {
+              el.textContent = t[key];
+            }
+          });
+
+          // Update lang toggle label
+          var label = document.getElementById('lang-label');
+          if (label) label.textContent = lang === 'zh' ? 'EN' : '中文';
+
+          // Emit event so page-level scripts can re-render dynamic parts
+          document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang, t: t } }));
+        }
+
+        // Init on load
+        document.addEventListener('DOMContentLoaded', function () {
+          var lang = getLang();
+          applyLang(lang);
+
+          var btn = document.getElementById('lang-toggle');
+          if (btn) {
+            btn.addEventListener('click', function () {
+              var current = getLang();
+              var next = current === 'zh' ? 'en' : 'zh';
+              setLang(next);
+              applyLang(next);
+            });
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

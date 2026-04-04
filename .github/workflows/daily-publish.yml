@@ -1,0 +1,232 @@
+name: Daily Content Publish
+
+on:
+  schedule:
+    # 北京时间 08:05
+    - cron: "5 0 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "指定运行日期 (YYYY-MM-DD)，默认今天"
+        required: false
+        default: ""
+      skip_trends:
+        description: "跳过 Google Trends，使用缓存"
+        required: false
+        type: boolean
+        default: false
+      skip_community:
+        description: "跳过社区扫描，使用缓存"
+        required: false
+        type: boolean
+        default: false
+      skip_serp:
+        description: "跳过 SERP 主动采集"
+        required: false
+        type: boolean
+        default: false
+      max_serp_keywords:
+        description: "主动采集 SERP 的最大关键词数"
+        required: false
+        default: "20"
+      fresh_data:
+        description: "忽略同日期已有 discovery 缓存，强制重新拉取真实数据"
+        required: false
+        type: boolean
+        default: true
+      dry_run:
+        description: "只跑预览，不提交推送"
+        required: false
+        type: boolean
+        default: false
+      fail_on_quality_warning:
+        description: "严格模式：内容质量 warning 也阻止发布"
+        required: false
+        type: boolean
+        default: false
+      fail_on_soft_discovery_warning:
+        description: "严格模式：普通 discovery 告警也阻止发布"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-content-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Prepare runtime paths
+        shell: bash
+        env:
+          INPUT_DATE: ${{ github.event.inputs.date || '' }}
+        run: |
+          set -euo pipefail
+          mkdir -p pipeline/logs pipeline/reports
+
+          RUN_DATE="${INPUT_DATE:-$(date -u +%F)}"
+          RUN_STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
+
+          echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+          echo "LOG_FILE=pipeline/logs/daily_publish_${RUN_DATE}_${RUN_STAMP}.log" >> "$GITHUB_ENV"
+          echo "SUMMARY_JSON=pipeline/logs/daily_publish_${RUN_DATE}_${RUN_STAMP}.summary.json" >> "$GITHUB_ENV"
+          echo "SUMMARY_MD=pipeline/logs/daily_publish_${RUN_DATE}_${RUN_STAMP}.summary.md" >> "$GITHUB_ENV"
+
+      - name: Run publish pipeline
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_DATE: ${{ github.event.inputs.date || '' }}
+          INPUT_SKIP_TRENDS: ${{ github.event.inputs.skip_trends || 'false' }}
+          INPUT_SKIP_COMMUNITY: ${{ github.event.inputs.skip_community || 'false' }}
+          INPUT_SKIP_SERP: ${{ github.event.inputs.skip_serp || 'false' }}
+          INPUT_MAX_SERP_KEYWORDS: ${{ github.event.inputs.max_serp_keywords || '20' }}
+          INPUT_FRESH_DATA: ${{ github.event.inputs.fresh_data || 'true' }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+          INPUT_FAIL_ON_QUALITY_WARNING: ${{ github.event.inputs.fail_on_quality_warning || 'false' }}
+          INPUT_FAIL_ON_SOFT_DISCOVERY_WARNING: ${{ github.event.inputs.fail_on_soft_discovery_warning || 'false' }}
+        run: |
+          set -euo pipefail
+
+          CMD=(python3 scripts/run_daily_publish.py --mode overwrite --branch main --summary-json "$SUMMARY_JSON" --summary-md "$SUMMARY_MD")
+
+          if [ -n "$INPUT_DATE" ]; then
+            CMD+=(--date "$INPUT_DATE")
+          fi
+
+          if [ "$INPUT_SKIP_TRENDS" = "true" ]; then
+            CMD+=(--skip-trends)
+          fi
+
+          if [ "$INPUT_SKIP_COMMUNITY" = "true" ]; then
+            CMD+=(--skip-community)
+          fi
+
+          if [ "$INPUT_SKIP_SERP" = "true" ]; then
+            CMD+=(--skip-serp)
+          fi
+
+          if [ -n "$INPUT_MAX_SERP_KEYWORDS" ]; then
+            CMD+=(--max-serp-keywords "$INPUT_MAX_SERP_KEYWORDS")
+          fi
+
+          if [ "$INPUT_FRESH_DATA" = "true" ]; then
+            CMD+=(--fresh-data)
+          fi
+
+          if [ "$INPUT_FAIL_ON_QUALITY_WARNING" = "true" ]; then
+            CMD+=(--fail-on-quality-warning)
+          fi
+
+          if [ "$INPUT_FAIL_ON_SOFT_DISCOVERY_WARNING" = "true" ]; then
+            CMD+=(--fail-on-soft-discovery-warning)
+          fi
+
+          if [ "$INPUT_DRY_RUN" = "true" ]; then
+            CMD+=(--dry-run --no-build)
+          else
+            CMD+=(--commit --push)
+          fi
+
+          printf 'Running:'
+          printf ' %q' "${CMD[@]}"
+          printf '\n'
+
+          "${CMD[@]}" 2>&1 | tee "$LOG_FILE"
+
+      - name: Upload pipeline artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-publish-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            ${{ env.LOG_FILE }}
+            ${{ env.SUMMARY_JSON }}
+            ${{ env.SUMMARY_MD }}
+            pipeline/reports/opportunity_report_*.json
+            pipeline/reports/opportunity_report_*.txt
+
+      - name: Notify failure webhook
+        if: failure() && secrets.PUBLISH_FAILURE_WEBHOOK_URL != ''
+        continue-on-error: true
+        env:
+          WEBHOOK_URL: ${{ secrets.PUBLISH_FAILURE_WEBHOOK_URL }}
+          SUMMARY_JSON: ${{ env.SUMMARY_JSON }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_NUMBER: ${{ github.run_number }}
+          BRANCH: ${{ github.ref_name }}
+          ACTOR: ${{ github.actor }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from urllib import request
+
+          summary = {}
+          summary_path = Path(os.environ["SUMMARY_JSON"])
+          if summary_path.exists():
+              summary = json.loads(summary_path.read_text(encoding="utf-8"))
+
+          payload = {
+              "event": "daily_publish_failed",
+              "repository": os.environ["REPOSITORY"],
+              "run_id": os.environ["RUN_ID"],
+              "run_number": os.environ["RUN_NUMBER"],
+              "branch": os.environ["BRANCH"],
+              "actor": os.environ["ACTOR"],
+              "run_url": f"https://github.com/{os.environ['REPOSITORY']}/actions/runs/{os.environ['RUN_ID']}",
+              "status": summary.get("status", "failed"),
+              "date": summary.get("date"),
+              "candidate": summary.get("candidate"),
+              "warnings": summary.get("warnings", []),
+              "errors": summary.get("errors", []),
+              "summary_json": os.environ["SUMMARY_JSON"],
+          }
+
+          req = request.Request(
+              os.environ["WEBHOOK_URL"],
+              data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+              headers={"Content-Type": "application/json"},
+              method="POST",
+          )
+          with request.urlopen(req, timeout=20) as response:
+              print(f"Webhook notified: {response.status}")
+          PY

@@ -12,10 +12,10 @@ interface Props {
 
 const { title, slug, date, category, difficulty, description, status, featured = false } = Astro.props;
 
-const difficultyMeta: Record<string, { label: string; classes: string }> = {
-  Easy: { label: '适合快速验证', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
-  Medium: { label: '需要一定打磨', classes: 'bg-amber-50 text-amber-700 ring-amber-200' },
-  Hard: { label: '偏重执行能力', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
+const difficultyMeta: Record<string, { labelKey: string; label: string; classes: string }> = {
+  Easy: { labelKey: 'card.difficulty.easy', label: 'Quick to validate', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
+  Medium: { labelKey: 'card.difficulty.medium', label: 'Needs some polish', classes: 'bg-amber-50 text-amber-700 ring-amber-200' },
+  Hard: { labelKey: 'card.difficulty.hard', label: 'Execution-heavy', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
 const categoryColors: Record<string, string> = {
@@ -25,10 +25,18 @@ const categoryColors: Record<string, string> = {
   '视频处理': 'bg-orange-50 text-orange-700 ring-orange-200',
   '效率工具': 'bg-teal-50 text-teal-700 ring-teal-200',
   '开发者工具': 'bg-slate-100 text-slate-700 ring-slate-200',
+  // English equivalents
+  'AI Tools': 'bg-violet-50 text-violet-700 ring-violet-200',
+  'Document Processing': 'bg-sky-50 text-sky-700 ring-sky-200',
+  'Image Processing': 'bg-pink-50 text-pink-700 ring-pink-200',
+  'Video Processing': 'bg-orange-50 text-orange-700 ring-orange-200',
+  'Productivity': 'bg-teal-50 text-teal-700 ring-teal-200',
+  'Dev Tools': 'bg-slate-100 text-slate-700 ring-slate-200',
 };
 
 const href = `/ideas/${slug}`;
 const difficultyInfo = difficultyMeta[difficulty] || {
+  labelKey: 'card.difficulty.easy',
   label: difficulty,
   classes: 'bg-slate-100 text-slate-700 ring-slate-200',
 };
@@ -41,12 +49,12 @@ const difficultyInfo = difficultyMeta[difficulty] || {
       <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryColors[category] || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
         {category}
       </span>
-      <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
+      <span data-i18n={difficultyInfo.labelKey} class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
         {difficultyInfo.label}
       </span>
       {status === 'New' && (
-        <span class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
-          今日更新
+        <span data-i18n="card.status.new" class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
+          New today
         </span>
       )}
     </div>
@@ -64,12 +72,13 @@ const difficultyInfo = difficultyMeta[difficulty] || {
   </div>
 
   <div class={`mt-8 flex items-center justify-between gap-4 ${featured ? 'flex-col items-start sm:flex-row sm:items-center' : ''}`}>
-    <p class="text-sm text-slate-500">从真实需求、竞争格局、变现方式到最短落地路径，已经帮你拆一遍。</p>
+    <p data-i18n="card.teaser" class="text-sm text-slate-500">Demand signals, competitive context, monetisation options, and the fastest path to launch — all broken down for you.</p>
     <a
       href={href}
+      data-i18n="card.cta"
       class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary"
     >
-      进入完整拆解
+      Read breakdown
       <span aria-hidden="true">→</span>
     </a>
   </div>

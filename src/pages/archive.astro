@@ -17,30 +17,30 @@ const categories = [...new Set(ideas.map((idea) => idea.category))];
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'Daily Micro SaaS 历史归档',
-  description: '按分类查看已整理的 Micro SaaS 方向归档。',
+  name: 'Daily Micro SaaS Archive',
+  description: 'Browse all Micro SaaS directions we have broken down, filtered by category.',
   url: 'https://dailymicrosaas.pages.dev/archive',
 };
 ---
 
-<Layout title="历史归档 - Daily Micro SaaS" description="按分类查看已整理过的 Micro SaaS 方向归档。" structuredData={structuredData}>
+<Layout title="Archive - Daily Micro SaaS" description="Browse all Micro SaaS directions we have broken down, filtered by category." structuredData={structuredData}>
   <section class="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <span class="section-kicker">历史归档</span>
-        <h1 class="mt-3 text-4xl font-black tracking-tight text-slate-950">按赛道翻查已经拆过的方向</h1>
-        <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-          这里适合做两件事：一是对比不同赛道的机会密度，二是连续看几条后找出最适合你当前执行力的题目。
+        <span data-i18n="archive.kicker" class="section-kicker">Archive</span>
+        <h1 data-i18n="archive.h1" class="mt-3 text-4xl font-black tracking-tight text-slate-950">All the directions we've broken down</h1>
+        <p data-i18n="archive.subhead" class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
+          Compare opportunity density across categories, or read a few in a row to find the best fit for your current skillset.
         </p>
       </div>
       <div class="grid gap-2 rounded-3xl bg-slate-50 p-4 text-sm text-slate-600 sm:grid-cols-2">
         <div>
-          <p class="font-semibold text-slate-900">当前归档</p>
-          <p>{ideas.length} 条</p>
+          <p data-i18n="archive.count.label" class="font-semibold text-slate-900">Total ideas</p>
+          <p>{ideas.length}</p>
         </div>
         <div>
-          <p class="font-semibold text-slate-900">覆盖分类</p>
-          <p>{categories.length} 类</p>
+          <p data-i18n="archive.cat.label" class="font-semibold text-slate-900">Categories</p>
+          <p>{categories.length}</p>
         </div>
       </div>
     </div>
@@ -48,8 +48,8 @@ const structuredData = {
 
   <section class="mt-8 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
     <div class="mb-4 flex flex-wrap items-center gap-3">
-      <span class="text-sm font-semibold text-slate-500">按分类筛选：</span>
-      <button type="button" data-filter-btn data-category="全部" class="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">全部</button>
+      <span data-i18n="archive.filter.label" class="text-sm font-semibold text-slate-500">Filter by category:</span>
+      <button type="button" data-filter-btn data-category="ALL" class="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white" data-i18n-content="archive.filter.all">All</button>
       {categories.map((cat) => (
         <button
           type="button"
@@ -61,7 +61,7 @@ const structuredData = {
         </button>
       ))}
     </div>
-    <p id="archive-filter-hint" class="text-sm text-slate-500">默认展示全部方向，可点击上方标签快速筛选。</p>
+    <p id="archive-filter-hint" data-i18n="archive.filter.hint" class="text-sm text-slate-500">Showing all. Click a category to filter.</p>
   </section>
 
   <section class="mt-8">
@@ -82,46 +82,73 @@ const structuredData = {
       </div>
     ) : (
       <div class="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
-        暂无内容，敬请期待。
+        <span data-i18n="archive.empty">Nothing here yet. More coming soon.</span>
       </div>
     )}
   </section>
 
   <script is:inline>
-    const buttons = Array.from(document.querySelectorAll('[data-filter-btn]'));
-    const cards = Array.from(document.querySelectorAll('[data-archive-item]'));
-    const hint = document.getElementById('archive-filter-hint');
-    const params = new URLSearchParams(window.location.search);
-    const initialCategory = params.get('category') || '全部';
+    var buttons = Array.from(document.querySelectorAll('[data-filter-btn]'));
+    var cards = Array.from(document.querySelectorAll('[data-archive-item]'));
+    var hint = document.getElementById('archive-filter-hint');
+    var params = new URLSearchParams(window.location.search);
+    // "ALL" sentinel replaces "全部" so it works in both languages
+    var initialCategory = params.get('category') || 'ALL';
 
-    const applyFilter = (category, syncUrl = true) => {
-      cards.forEach((card) => {
-        const visible = category === '全部' || card.dataset.category === category;
+    var filterActive = initialCategory;
+
+    function getT() {
+      try {
+        var lang = localStorage.getItem('dms_lang') || 'en';
+        // Use the global UI dict injected by Layout
+        return window.__DMS_UI__ ? window.__DMS_UI__[lang] : null;
+      } catch(e) { return null; }
+    }
+
+    var applyFilter = function(category, syncUrl) {
+      filterActive = category;
+      cards.forEach(function(card) {
+        var visible = category === 'ALL' || card.dataset.category === category;
         card.style.display = visible ? '' : 'none';
       });
 
-      buttons.forEach((button) => {
-        const active = button.dataset.category === category;
+      buttons.forEach(function(button) {
+        var active = button.dataset.category === category;
         button.className = active
           ? 'rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white'
           : 'rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200';
       });
 
       if (hint) {
-        hint.textContent = category === '全部' ? '默认展示全部方向，可点击上方标签快速筛选。' : `当前只展示「${category}」分类下的方向。`;
+        var t = getT();
+        if (category === 'ALL') {
+          hint.textContent = (t && t['archive.filter.hint']) || 'Showing all. Click a category to filter.';
+        } else {
+          var prefix = (t && t['archive.filter.active']) || 'Showing';
+          hint.textContent = prefix + ': ' + category;
+        }
       }
 
-      if (syncUrl) {
-        const nextUrl = category === '全部' ? '/archive' : `/archive?category=${encodeURIComponent(category)}`;
+      if (syncUrl !== false) {
+        var nextUrl = category === 'ALL' ? '/archive' : '/archive?category=' + encodeURIComponent(category);
         window.history.replaceState({}, '', nextUrl);
       }
     };
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => applyFilter(button.dataset.category || '全部'));
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        applyFilter(button.dataset.category || 'ALL');
+      });
     });
 
-    const availableCategories = new Set(buttons.map((button) => button.dataset.category));
-    applyFilter(availableCategories.has(initialCategory) ? initialCategory : '全部', false);
+    // Handle legacy ?category= params that may use Chinese category names
+    var availableCategories = new Set(buttons.map(function(b) { return b.dataset.category; }));
+    var startCat = availableCategories.has(initialCategory) ? initialCategory : 'ALL';
+    applyFilter(startCat, false);
+
+    // Re-apply hint text when language changes
+    document.addEventListener('langchange', function() {
+      applyFilter(filterActive, false);
+    });
   </script>
 </Layout>

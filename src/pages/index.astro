@@ -15,92 +15,100 @@ const ideas = publishedIdeas
 
 const todayIdea = ideas[0];
 const pastIdeas = ideas.slice(1);
-const categories = [...new Set(ideas.map((idea) => idea.category))];
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: 'Daily Micro SaaS',
-  description: '每天拆解一个真实可落地的 Micro SaaS 方向，包含需求信号、竞争格局与最快验证路径。',
+  description: 'One real, buildable Micro SaaS direction every day — with demand signals, competitive context, and the fastest path to a working MVP.',
   url: 'https://dailymicrosaas.pages.dev/',
 };
 ---
 
 <Layout
-  title="Daily Micro SaaS - 每天拆解一个可落地的小 SaaS 机会"
-  description="Daily Micro SaaS：每天拆解一个真实可落地的 Micro SaaS 方向，帮独立开发者更快找到值得验证的题目。"
+  title="Daily Micro SaaS — One buildable idea, every day"
+  description="One real, buildable Micro SaaS direction every day. Demand signals, competitive context, and the fastest path to a working MVP — for indie developers and side-project founders."
   structuredData={structuredData}
 >
+  <!-- HERO -->
   <section class="relative overflow-hidden rounded-[32px] border border-slate-200 bg-slate-950 px-6 py-10 text-white shadow-soft sm:px-10 lg:px-12 lg:py-14">
     <div class="absolute inset-0 bg-hero-glow opacity-100"></div>
     <div class="absolute right-0 top-0 h-56 w-56 rounded-full bg-primary/20 blur-3xl"></div>
-    <div class="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+    <div class="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
       <div>
-        <span class="section-kicker mb-5 border-white/10 bg-white/10 text-blue-100">适合独立开发者 / 副业创业者</span>
+        <span data-i18n="index.kicker" class="section-kicker mb-5 border-white/10 bg-white/10 text-blue-100">For indie developers &amp; side-project founders</span>
         <h1 class="max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
-          别再空想点子了。<br />这里直接给你已经过一轮筛选的题目。
+          <span data-i18n="index.h1_line1">Stop brainstorming.</span><br />
+          <span data-i18n="index.h1_line2">Start with ideas that already work.</span>
         </h1>
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-          每条内容都尽量回答四件事：需求到底真不真、竞争是不是还能打、最快多久能做出来、以及钱怎么收。
+        <p data-i18n="index.subhead" class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          Every entry answers four things: Is the demand real? Can you still compete? How fast can you ship an MVP? And where does the money come from?
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           {todayIdea && (
-            <a href={`/ideas/${todayIdea.slug}`} class="inline-flex items-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
-              先看今日推荐
+            <a href={`/ideas/${todayIdea.slug}`} data-i18n="index.cta_today" class="inline-flex items-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+              See today's pick
             </a>
           )}
-          <a href="/archive" class="inline-flex items-center rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10">
-            浏览全部方向
+          <a href="/archive" data-i18n="index.cta_archive" class="inline-flex items-center rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10">
+            Browse all ideas
           </a>
         </div>
       </div>
 
-      <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-        <div class="glass-panel rounded-3xl border border-white/10 p-5">
-          <p class="text-sm text-slate-300">当前收录</p>
-          <p class="mt-2 text-3xl font-black text-white">{ideas.length}</p>
-          <p class="mt-2 text-sm leading-6 text-slate-300">先保证少量但可读，不拿水文堆量。</p>
+      <!-- VALUE CARDS -->
+      <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-gradient-to-b from-blue-400 to-sky-300"></div>
+          <p data-i18n="card1.tag" class="text-xs font-bold uppercase tracking-widest text-blue-300">What you get</p>
+          <p data-i18n="card1.title" class="mt-2 text-sm font-bold leading-snug text-white">Real demand, not guesswork</p>
+          <p data-i18n="card1.desc" class="mt-2 text-xs leading-5 text-slate-400">Search trends, community signals, and proof that people are already looking for a solution.</p>
         </div>
-        <div class="glass-panel rounded-3xl border border-white/10 p-5">
-          <p class="text-sm text-slate-300">覆盖分类</p>
-          <p class="mt-2 text-3xl font-black text-white">{categories.length}</p>
-          <p class="mt-2 text-sm leading-6 text-slate-300">优先关注 Web 工具、文档处理、AI 工具等高执行性赛道。</p>
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-gradient-to-b from-violet-400 to-purple-300"></div>
+          <p data-i18n="card2.tag" class="text-xs font-bold uppercase tracking-widest text-violet-300">Built to ship</p>
+          <p data-i18n="card2.title" class="mt-2 text-sm font-bold leading-snug text-white">MVP in weeks, not months</p>
+          <p data-i18n="card2.desc" class="mt-2 text-xs leading-5 text-slate-400">Ideas you can validate in two to four weeks — not moonshots that need a year and a team.</p>
         </div>
-        <div class="glass-panel rounded-3xl border border-white/10 p-5">
-          <p class="text-sm text-slate-300">内容结构</p>
-          <p class="mt-2 text-3xl font-black text-white">4</p>
-          <p class="mt-2 text-sm leading-6 text-slate-300">真实需求、竞争判断、变现方式、最快落地路径都会尽量给全。</p>
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-gradient-to-b from-emerald-400 to-teal-300"></div>
+          <p data-i18n="card3.tag" class="text-xs font-bold uppercase tracking-widest text-emerald-300">Clear path to revenue</p>
+          <p data-i18n="card3.title" class="mt-2 text-sm font-bold leading-snug text-white">Know how you'll charge on day one</p>
+          <p data-i18n="card3.desc" class="mt-2 text-xs leading-5 text-slate-400">Subscription, one-time purchase, or API upsell — every breakdown includes a concrete angle.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CRITERIA -->
   <section class="mt-10 grid gap-4 md:grid-cols-3">
     <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-      <p class="text-sm font-semibold text-slate-500">筛选标准 01</p>
-      <h2 class="mt-3 text-xl font-bold text-slate-950">必须有真实需求信号</h2>
-      <p class="mt-3 leading-7 text-slate-600">不是拍脑袋想点子，优先看搜索趋势、社区吐槽、用户反复出现的具体问题。</p>
+      <p data-i18n="criteria.label1" class="text-sm font-semibold text-slate-500">How we pick — 01</p>
+      <h2 data-i18n="criteria.h1" class="mt-3 text-xl font-bold text-slate-950">Evidence of real demand</h2>
+      <p data-i18n="criteria.p1" class="mt-3 leading-7 text-slate-600">No gut-feel ideas. We look at search trends, community complaints, and the specific questions people keep asking.</p>
     </div>
     <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-      <p class="text-sm font-semibold text-slate-500">筛选标准 02</p>
-      <h2 class="mt-3 text-xl font-bold text-slate-950">优先可快速验证</h2>
-      <p class="mt-3 leading-7 text-slate-600">更偏向两周到一个月能做出 MVP 的方向，而不是需要长期重研发的故事。</p>
+      <p data-i18n="criteria.label2" class="text-sm font-semibold text-slate-500">How we pick — 02</p>
+      <h2 data-i18n="criteria.h2" class="mt-3 text-xl font-bold text-slate-950">Fast to validate</h2>
+      <p data-i18n="criteria.p2" class="mt-3 leading-7 text-slate-600">We favour ideas you can ship in two to four weeks — not multi-year platform plays that need a full team to even start.</p>
     </div>
     <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-      <p class="text-sm font-semibold text-slate-500">筛选标准 03</p>
-      <h2 class="mt-3 text-xl font-bold text-slate-950">强调清晰的变现可能</h2>
-      <p class="mt-3 leading-7 text-slate-600">只看流量没意义，内容会优先给出订阅、买断、企业 API 或升级项的具体路径。</p>
+      <p data-i18n="criteria.label3" class="text-sm font-semibold text-slate-500">How we pick — 03</p>
+      <h2 data-i18n="criteria.h3" class="mt-3 text-xl font-bold text-slate-950">A clear way to charge</h2>
+      <p data-i18n="criteria.p3" class="mt-3 leading-7 text-slate-600">Traffic alone isn't enough. Every breakdown includes a specific revenue path — subscription, one-time purchase, or a paid API tier.</p>
     </div>
   </section>
 
+  <!-- TODAY'S PICK -->
   {todayIdea && (
     <section class="mt-14">
       <div class="mb-5 flex items-center justify-between gap-4">
         <div>
-          <span class="section-kicker">今日推荐</span>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">今天最值得先看的一个方向</h2>
+          <span data-i18n="section.today" class="section-kicker">Today's pick</span>
+          <h2 data-i18n="section.today.h2" class="mt-3 text-3xl font-black tracking-tight text-slate-950">The one idea worth looking at today</h2>
         </div>
-        <a href={`/ideas/${todayIdea.slug}`} class="hidden text-sm font-semibold text-primary transition hover:text-blue-700 md:inline-flex">
-          直接进入完整拆解 →
+        <a href={`/ideas/${todayIdea.slug}`} data-i18n="section.today.link" class="hidden text-sm font-semibold text-primary transition hover:text-blue-700 md:inline-flex">
+          Read the full breakdown →
         </a>
       </div>
       <IdeaCard
@@ -116,15 +124,16 @@ const structuredData = {
     </section>
   )}
 
+  <!-- ARCHIVE PREVIEW -->
   <section class="mt-14">
     <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <span class="section-kicker">历史归档</span>
-        <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">已经整理过的其他方向</h2>
-        <p class="mt-2 max-w-2xl text-slate-600">适合按赛道翻找，也适合连续看几个方向后自己判断最想做哪一个。</p>
+        <span data-i18n="section.archive" class="section-kicker">Archive</span>
+        <h2 data-i18n="section.archive.h2" class="mt-3 text-3xl font-black tracking-tight text-slate-950">Everything we've broken down so far</h2>
+        <p data-i18n="section.archive.desc" class="mt-2 max-w-2xl text-slate-600">Browse by category, or read a few back-to-back to get a feel for which direction you actually want to build.</p>
       </div>
-      <a href="/archive" class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
-        查看完整归档
+      <a href="/archive" data-i18n="section.archive.link" class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+        View full archive
       </a>
     </div>
 
@@ -143,7 +152,7 @@ const structuredData = {
       </div>
     ) : (
       <div class="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
-        暂无更多归档，后续会继续补充。
+        <span data-i18n="section.archive.empty">More ideas coming soon.</span>
       </div>
     )}
   </section>

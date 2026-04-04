@@ -9,6 +9,9 @@ const ideasCollection = defineCollection({
     difficulty: z.enum(['Easy', 'Medium', 'Hard']),
     description: z.string(),
     status: z.string().optional(),
+    sourceKeyword: z.string().optional(),
+    sourceScore: z.number().optional(),
+    sourceGrade: z.enum(['worth_it', 'watch', 'skip']).optional(),
   }),
 });
 
