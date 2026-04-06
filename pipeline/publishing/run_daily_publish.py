@@ -37,11 +37,13 @@ from pipeline.publishing.generate_idea import (
 )
 from pipeline.publishing.validate_idea import audit_content_quality, validate_markdown
 
+# 这里仅放“即使用户没开严格模式，也足以阻断发布”的 discovery 告警。
+# 像 `--skip-serp` 这种显式开关触发的降级路径，只应保留为普通 warning，
+# 否则 dry run / 手动验证会因为用户主动跳过 SERP 而被误判失败。
 SEVERE_DISCOVERY_WARNING_MARKERS = [
     "超过 50% 被限流",
     "未获得任何信号",
     "所有 SERP 采集结果为空",
-    "SERP 分析被跳过",
 ]
 
 
