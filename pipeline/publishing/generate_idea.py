@@ -414,6 +414,15 @@ def build_description_en(keyword: str, category: str, idea: dict) -> str:
     trend_interest = idea.get("trend_interest", 0)
     community_signals = idea.get("community_signals", 0)
     niche_count = idea.get("serp_niche_count", 0)
+    category_label = {
+        "AI 工具": "AI tools",
+        "文档处理": "document tools",
+        "图像处理": "image tools",
+        "视频处理": "video tools",
+        "效率工具": "productivity tools",
+        "开发者工具": "developer tools",
+        "语言学习": "language learning",
+    }.get(category, "micro SaaS")
 
     signals = []
     if trend_interest > 5:
@@ -425,7 +434,7 @@ def build_description_en(keyword: str, category: str, idea: dict) -> str:
 
     signal_str = ", ".join(signals) if signals else f"an overall score of {score}/100"
     return (
-        f"A deep dive into the {keyword} {category.lower()} opportunity: {signal_str} — "
+        f"A deep dive into the {keyword} {category_label} opportunity: {signal_str} — "
         f"focused on real demand, competitive space, and the fastest validation path."
     )
 
@@ -573,6 +582,9 @@ def build_competition_section(idea: dict, difficulty: str, keyword: str, categor
     big_count = idea.get("serp_big_count", 0)
     tool_big_count = idea.get("serp_tool_big_count", 0)
     enterable = idea.get("serp_worth_entering", False)
+    community_signals = idea.get("community_signals", 0)
+    community_items = idea.get("community_top_items", [])
+    trend_slope = idea.get("trend_slope", 0)
 
     lines = []
 
@@ -601,7 +613,18 @@ def build_competition_section(idea: dict, difficulty: str, keyword: str, categor
                 f"这是相对友好的竞争环境——说明有人能活下来，但还没被大平台收割。"
             )
     else:
-        lines.append("当前批次未采集到 SERP 数据，以下竞争判断基于趋势和社区信号推断，建议手动搜索验证。")
+        sample_titles = [item.get("title", "").strip() for item in community_items[:2] if item.get("title")]
+        lines.append("这次竞争判断没有引用搜索结果页抽样，因此先用趋势和社区信号做一版保守估计。")
+        if sample_titles:
+            quoted_titles = "；".join(f"“{title}”" for title in sample_titles)
+            lines.append(
+                f"从已出现的 {community_signals} 条社区讨论看，市场上已经有人在做、也有人在持续评估同类方案（例如 {quoted_titles}），"
+                f"说明这不是空白赛道；更稳的打法是先锁定一个更窄的工作流或用户角色。"
+            )
+        elif trend_slope > 0.3:
+            lines.append("搜索需求处在上升通道，说明窗口期还在；但在没有搜索位样本前，先按“已有成熟方案、仍留细分空档”处理更稳妥。")
+        else:
+            lines.append("现有外部信号说明这个方向不是纯概念题，但要不要正面进入，还取决于你能否把场景切得足够窄。")
 
     lines.append("")
 
@@ -619,10 +642,25 @@ def build_competition_section(idea: dict, difficulty: str, keyword: str, categor
                 f"⚠️ **需要找更窄的切角。** 工具大站已有 {tool_big_count} 个，直接做通用版大概率拼不过。"
                 f"建议聚焦特定文件格式、行业或使用场景。"
             )
+        elif big_sites or niche_sites:
+            lines.append(
+                "⚠️ **先缩窄场景再进。** 现有样本已经能说明这个市场存在竞争，"
+                "但还没有强到必须立刻做通用版；先用单功能 MVP 拿到一批真实用户更稳。"
+            )
+        elif community_signals >= 5:
+            lines.append(
+                f"⚠️ **先缩窄场景再进。** 社区里已经出现 {community_signals} 条相关信号，"
+                "说明需求真实存在，但竞争边界还没摸透；更稳的做法是只盯住一个细分工作流。"
+            )
+        elif trend_slope > 0.3 or community_signals >= 2:
+            lines.append(
+                "🧪 **适合先做轻量验证。** 信号不算弱，但还不足以支持直接做通用版；"
+                "先用 landing page、手工服务或单功能 MVP 验证付费意愿。"
+            )
         else:
             lines.append(
-                f"⚠️ **数据不够充分，建议手动验证。** 当前 SERP 样本有限，"
-                f"实际竞争格局可能更复杂，建议先搜索几个长尾词再决定。"
+                "🤔 **先把问题定义得更窄。** 当前外部信号偏弱，直接开做容易落进“有点需求但不够强”的灰区；"
+                "先把目标人群和核心场景压到一个更小切口。"
             )
 
     lines.append("")
@@ -639,13 +677,30 @@ def build_competition_section(idea: dict, difficulty: str, keyword: str, categor
     lines.append("|------|------|")
     lines.append(f"| 难度 | {difficulty} |")
 
-    giants_cell = "、".join(big_sites[:3]) if big_sites else "暂无有效样本"
+    if big_sites:
+        giants_cell = "、".join(big_sites[:3])
+    elif community_signals >= 5:
+        giants_cell = "本轮未抽样搜索结果，先按已有成熟玩家处理"
+    else:
+        giants_cell = "本轮未抽样搜索结果，头部格局待下一轮确认"
     lines.append(f"| SERP 头部大站 | {giants_cell} |")
 
-    niche_cell = f"{niche_count} 个：{'、'.join(niche_sites[:3])}" if niche_sites else f"暂无（需手动验证）"
+    if niche_sites:
+        niche_cell = f"{niche_count} 个：{'、'.join(niche_sites[:3])}"
+    elif community_items:
+        niche_cell = "社区已出现同类项目，优先核查 1 个细分工作流"
+    else:
+        niche_cell = "先验证 1 个细分场景，再决定是否扩展"
     lines.append(f"| Niche 样本 | {niche_cell} |")
 
-    enter_cell = "✅ 可切入" if enterable else "⚠️ 需要找更窄切角"
+    if enterable:
+        enter_cell = "✅ 可切入"
+    elif big_sites or niche_sites or community_signals >= 5:
+        enter_cell = "⚠️ 先缩窄场景再进"
+    elif trend_slope > 0.3 or community_signals >= 2:
+        enter_cell = "🧪 先做轻量验证"
+    else:
+        enter_cell = "🤔 先收窄问题定义"
     lines.append(f"| 竞争可切入度 | {enter_cell} |")
 
     return "\n".join(lines)

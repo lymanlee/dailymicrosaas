@@ -17,21 +17,21 @@
 | `REDDIT_CLIENT_ID` | 必须 | Reddit OAuth client id | 社区扫描会回退公开 JSON 端点，稳定性差 |
 | `REDDIT_CLIENT_SECRET` | 必须 | Reddit OAuth client secret | 同上，无法稳定拿 token |
 | `REDDIT_USER_AGENT` | 强烈建议 | Reddit API 请求标识 | 不是硬阻塞，但不建议长期空着 |
-| `CLOUDFLARE_API_TOKEN` | 必须 | `deploy.yml` 上传到 Cloudflare Pages | push 后不会成功部署 |
-| `CLOUDFLARE_ACCOUNT_ID` | 必须 | 目标 Cloudflare 账户 ID | push 后不会成功部署 |
+| `CLOUDFLARE_API_TOKEN` | 仅手动兜底部署时必须 | `.github/workflows/deploy.yml` 手动上传到 Cloudflare Pages | 无法走 GitHub 手动 fallback |
+| `CLOUDFLARE_ACCOUNT_ID` | 仅手动兜底部署时必须 | 目标 Cloudflare 账户 ID | 无法走 GitHub 手动 fallback |
 | `PUBLISH_FAILURE_WEBHOOK_URL` | 可选 | 失败时发 webhook 告警 | 失败只能靠人盯 Actions |
 
 ### 1.2 GitHub Actions Variables（公开构建变量）
 
 | 名称 | 是否必须 | 用途 | 配置位置 |
 | --- | --- | --- | --- |
-| `PUBLIC_EMAIL_SUBSCRIBE_URL` | 可选 | 控制 `/subscribe` 页面和订阅 CTA 是否展示邮件入口 | GitHub 仓库 `Settings -> Secrets and variables -> Actions -> Variables` |
+| `PUBLIC_EMAIL_SUBSCRIBE_URL` | 可选 | 控制 `/subscribe` 页面和订阅 CTA 是否展示邮件入口 | Cloudflare Pages 项目环境变量（主路径）；GitHub Actions Variables 仅供手动 fallback 使用 |
 
 关键点：
 
 - 这个值是公开 URL，不该塞进 secret。
-- 当前站点是在 GitHub Actions 里先 `npm run build`，再把 `dist/` 部署到 Cloudflare Pages。
-- 所以你如果想让线上页面真的显示邮件订阅按钮，这个值必须在 **GitHub 构建阶段** 就可用，而不是只填在 Cloudflare 后台。
+- 当前正式线上构建默认发生在 Cloudflare Pages Git 集成，而不是 GitHub Actions。
+- 所以你如果想让线上页面真的显示邮件订阅按钮，主路径下必须把这个值配在 **Cloudflare Pages 环境变量**；只有在手动运行 `.github/workflows/deploy.yml` 兜底部署时，GitHub Actions Variables 才会生效。
 
 ### 1.3 本地 `.env`（可选但建议和线上保持一致）
 
@@ -70,17 +70,22 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 必须确认：
 
 - Cloudflare Pages 项目名就是 `dailymicrosaas`
+- 仓库已经通过 Cloudflare Git 集成连接到该 Pages 项目
+- 当前线上地址 `https://dailymicrosaas.pages.dev` 可正常打开
+- 如需邮件订阅入口，Cloudflare Pages 项目环境变量里已配置 `PUBLIC_EMAIL_SUBSCRIBE_URL`
+
+只有在你想保留 GitHub 手动兜底部署时，才额外确认：
+
 - `CLOUDFLARE_API_TOKEN` 有 Pages 部署权限
 - `CLOUDFLARE_ACCOUNT_ID` 对应的是实际部署账户
-- 当前线上地址 `https://dailymicrosaas.pages.dev` 可正常打开
 
 ### 2.3 GitHub Actions 权限
 
 必须确认：
 
 - `daily-publish.yml` 还保留 `contents: write`
-- `deploy.yml` 还保留 `deployments: write`
 - 仓库没有额外 branch protection 把 bot push 卡死
+- 如果你决定保留 GitHub 手动兜底部署，再确认 `deploy.yml` 仍保留 `deployments: write`
 
 ---
 
@@ -147,10 +152,9 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 
 1. `daily-publish` 的 `summary.json.status = success`
 2. `git_commit` 和 `git_push` 都是 `completed`
-3. `deploy.yml` 被 push 自动触发
-4. Cloudflare Pages 部署成功
-5. 线上首页 / 归档页 / 详情页能看到新内容
-6. 如果配置了 `PUBLIC_EMAIL_SUBSCRIBE_URL`，`/subscribe` 页面应显示邮件入口按钮
+3. 新提交在 GitHub 上出现 `Cloudflare Pages` 成功 check run，或在 Cloudflare Pages 后台看到对应 deployment 成功
+4. 线上首页 / 归档页 / 详情页能看到新内容
+5. 如果配置了 `PUBLIC_EMAIL_SUBSCRIBE_URL`，`/subscribe` 页面应显示邮件入口按钮
 
 ---
 
@@ -188,20 +192,22 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 
 优先检查：
 
-1. `deploy.yml` 有没有被触发
-2. `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` 是否存在
-3. 是否 push 到了 `main`
+1. 新提交在 GitHub 上有没有出现 `Cloudflare Pages` check run
+2. Cloudflare Pages 后台是否出现了对应 commit 的 deployment 记录
+3. 是否真的 push 到了 `main`
 4. Cloudflare Pages 项目名是否仍然是 `dailymicrosaas`
+5. 如果你走的是手动兜底部署，再检查 `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` 是否存在
 
 ### 6.3 `/subscribe` 没显示邮件入口
 
 优先检查：
 
-1. GitHub 仓库 Variables 里有没有 `PUBLIC_EMAIL_SUBSCRIBE_URL`
-2. 最近一次部署是不是在加这个变量之前构建的
-3. 变量值是不是空字符串或非法 URL
+1. Cloudflare Pages 项目环境变量里有没有 `PUBLIC_EMAIL_SUBSCRIBE_URL`
+2. 最近一次正式部署是不是在加这个变量之前构建的
+3. 如果你跑过 GitHub 手动兜底部署，再补查仓库 Variables 里是否也配置了同名值
+4. 变量值是不是空字符串或非法 URL
 
-这不是 Cloudflare 的锅。当前构建发生在 GitHub Actions。
+这不是页面组件的锅。问题通常出在你把变量配错了位置。
 
 ### 6.4 发布了错误内容，怎么回滚
 
@@ -212,7 +218,7 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 1. 找到本次自动发布产生的 commit
 2. 用 `git revert <commit_sha>` 生成回滚提交
 3. 推回 `main`
-4. 等 Cloudflare 自动重新部署
+4. 等 Cloudflare 对回滚后的新提交重新部署
 5. 再修生成逻辑或阈值，不要直接重跑碰运气
 
 ---
@@ -224,7 +230,7 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 - Reddit OAuth 已经在 Actions 中稳定生效
 - 第一次 dry run 跑通
 - 第一次真实发布跑通
-- Cloudflare 自动部署跑通
+- Cloudflare Git 集成自动部署跑通
 - 线上页面已人工验收
 - 可选告警（webhook）已接好，后续失败不会无声无息
 - 团队里任何人再接手时，只看这份清单 + `pipeline/DAILY_PUBLISH_SOP.md` 就能继续处理

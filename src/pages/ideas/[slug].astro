@@ -2,7 +2,21 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import { ui, type Lang, withLangPath } from '../../lib/i18n';
-import { estimateReadingTime, extractLabeledValue, getCategoryInfo, getLocalizedText, getSection, hasLocalizedText, parseIdeaSections } from '../../lib/idea';
+import {
+  buildLocalizedExecutionSteps,
+  buildLocalizedFullBreakdown,
+  buildLocalizedMonetizationItems,
+  buildLocalizedWhyNow,
+  buildSourceSignalCards,
+  estimateReadingTime,
+  extractLabeledValue,
+  getCategoryInfo,
+  getLocalizedPairText,
+  getLocalizedText,
+  getSection,
+  hasLocalizedText,
+  parseIdeaSections,
+} from '../../lib/idea';
 
 export async function getStaticPaths() {
   const ideas = await getCollection('ideas');
@@ -17,29 +31,31 @@ export async function getStaticPaths() {
 const { idea } = Astro.props;
 const pageLang: Lang = Astro.url.searchParams.get('lang') === 'zh' ? 'zh' : 'en';
 const t = ui[pageLang] ?? ui.en;
-const { Content } = await idea.render();
 const { data: frontmatter } = idea;
 const rawContent = idea.body ?? '';
 const sections = parseIdeaSections(rawContent);
 const readingTime = estimateReadingTime(rawContent);
 const demandSection = getSection(sections, ['真实需求来源']);
-const competitionSection = getSection(sections, ['竞争情况']);
-const monetizationSection = getSection(sections, ['变现方式']);
-const executionSection = getSection(sections, ['最快实现路径']);
 const keywordsSection = getSection(sections, ['SEO 关键词']);
-const whyNowSection = getSection(sections, ['为什么值得做']);
 const buildSection = getSection(sections, ['技术难度']);
 
-const sourceSignals = demandSection?.bullets.slice(0, 3) ?? [];
-const monetizationItems = monetizationSection?.bullets.slice(0, 3) ?? [];
-const executionSteps = executionSection?.numbered.slice(0, 3) ?? [];
 const keywordItems = keywordsSection?.bullets.slice(0, 5).map((item) => item.replace(/\s*\([^\)]*\)/g, '').trim()) ?? [];
-const convictionItems = (whyNowSection?.numbered.length ? whyNowSection.numbered : whyNowSection?.bullets ?? []).slice(0, 4);
+const evidenceLinks = frontmatter.evidenceLinks ?? [];
+const sourceSignalCards = buildSourceSignalCards(demandSection, evidenceLinks);
+const convictionItems = buildLocalizedWhyNow(frontmatter, demandSection);
+const monetizationItems = buildLocalizedMonetizationItems(frontmatter.category ?? '');
+const executionSteps = buildLocalizedExecutionSteps(frontmatter.sourceKeyword ?? '', frontmatter.difficulty ?? 'Medium');
+const fullBreakdownSections = buildLocalizedFullBreakdown(frontmatter, demandSection, keywordItems);
 const localizedTitleEn = getLocalizedText(frontmatter.title, 'en', 'Untitled');
 const localizedTitleZh = getLocalizedText(frontmatter.title, 'zh', localizedTitleEn);
 const localizedDescriptionEn = getLocalizedText(frontmatter.description, 'en', '');
 const localizedDescriptionZh = getLocalizedText(frontmatter.description, 'zh', localizedDescriptionEn);
-const buildWindow = extractLabeledValue(buildSection?.body ?? rawContent, '预估开发时间') ?? (pageLang === 'zh' ? '可在短周期内验证' : 'Can be validated in a short sprint');
+const buildWindowZh = extractLabeledValue(buildSection?.body ?? rawContent, '预估开发时间') ?? '可在短周期内验证';
+const buildWindowEn = ({
+  '1-2 周': '1-2 weeks',
+  '2-3 周': '2-3 weeks',
+  '3-5 周': '3-5 weeks',
+}[buildWindowZh] ?? 'Can be validated in a short sprint');
 const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
 const articleUrl = new URL(withLangPath(Astro.url.pathname, pageLang), `${siteUrl}/`).toString();
 const pageTitleMap = {
@@ -129,13 +145,12 @@ const scoreLabelZh = `评分 ${score.toFixed(1)} / 100`;
 const quickFacts = [
   { labelKey: 'detail.reading_time', en: `${readingTime} min`, zh: `${readingTime} 分钟` },
   { labelKey: 'detail.difficulty', en: difficultyInfo.label, zh: difficultyInfo.label, valueKey: difficultyInfo.labelKey },
-  { labelKey: 'detail.timeline', en: buildWindow, zh: buildWindow },
+  { labelKey: 'detail.timeline', en: buildWindowEn, zh: buildWindowZh },
   { labelKey: 'detail.published', en: frontmatter.date, zh: frontmatter.date },
 ];
 
 const painClusters = (frontmatter.painClusters ?? []).filter((item) => hasLocalizedText(item));
 const competitorGaps = (frontmatter.competitorGaps ?? []).filter((item) => hasLocalizedText(item));
-const evidenceLinks = frontmatter.evidenceLinks ?? [];
 const trendSeries = Array.isArray(frontmatter.trendSeries)
   ? frontmatter.trendSeries.filter((item) => typeof item?.date === 'string' && typeof item?.value === 'number')
   : [];
@@ -351,20 +366,46 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
           <div class="mt-5 grid gap-4 md:grid-cols-2">
             {convictionItems.map((item) => (
               <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <p class="text-sm font-semibold leading-7 text-slate-700">{item}</p>
+                <p
+                  data-l10n-en={item.en}
+                  data-l10n-zh={item.zh}
+                  class="text-sm font-semibold leading-7 text-slate-700"
+                >
+                  {getLocalizedPairText(item, pageLang)}
+                </p>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {sourceSignals.length > 0 && (
+      {sourceSignalCards.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
           <span data-i18n="detail.sources" class="section-kicker">{t['detail.sources']}</span>
           <div class="mt-5 grid gap-4 md:grid-cols-3">
-            {sourceSignals.map((item) => (
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-600">
-                {item}
+            {sourceSignalCards.map((item) => (
+              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p
+                  data-l10n-en={item.source.en}
+                  data-l10n-zh={item.source.zh}
+                  class="text-xs font-bold uppercase tracking-[0.14em] text-slate-400"
+                >
+                  {getLocalizedPairText(item.source, pageLang)}
+                </p>
+                <p
+                  data-l10n-en={item.title.en}
+                  data-l10n-zh={item.title.zh}
+                  class="mt-3 text-base font-semibold leading-7 text-slate-800"
+                >
+                  {getLocalizedPairText(item.title, pageLang)}
+                </p>
+                <p
+                  data-l10n-en={item.meta.en}
+                  data-l10n-zh={item.meta.zh}
+                  class="mt-2 text-sm leading-6 text-slate-500"
+                >
+                  {getLocalizedPairText(item.meta, pageLang)}
+                </p>
               </div>
             ))}
           </div>
@@ -391,8 +432,50 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
 
       <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
         <span data-i18n="detail.full" class="section-kicker">{t['detail.full']}</span>
-        <div class="idea-prose prose prose-slate mt-6 max-w-none prose-headings:scroll-mt-24">
-          <Content />
+        <div class="mt-6 space-y-8">
+          {fullBreakdownSections.map((section) => (
+            <section class="space-y-4 border-t border-slate-100 pt-6 first:border-t-0 first:pt-0">
+              <h3
+                data-l10n-en={section.title.en}
+                data-l10n-zh={section.title.zh}
+                class="text-2xl font-black tracking-tight text-slate-950"
+              >
+                {getLocalizedPairText(section.title, pageLang)}
+              </h3>
+
+              {section.paragraphs && section.paragraphs.length > 0 && (
+                <div class="space-y-3 text-base leading-8 text-slate-700">
+                  {section.paragraphs.map((paragraph) => (
+                    <p data-l10n-en={paragraph.en} data-l10n-zh={paragraph.zh}>
+                      {getLocalizedPairText(paragraph, pageLang)}
+                    </p>
+                  ))}
+                </div>
+              )}
+
+              {section.bullets && section.bullets.length > 0 && (
+                <ul class="space-y-3 text-base leading-8 text-slate-700">
+                  {section.bullets.map((bullet) => (
+                    <li class="flex gap-3">
+                      <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-slate-900"></span>
+                      <span data-l10n-en={bullet.en} data-l10n-zh={bullet.zh}>{getLocalizedPairText(bullet, pageLang)}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {section.numbered && section.numbered.length > 0 && (
+                <ol class="space-y-3">
+                  {section.numbered.map((item, index) => (
+                    <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-base leading-7 text-slate-700">
+                      <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white">{index + 1}</span>
+                      <span data-l10n-en={item.en} data-l10n-zh={item.zh}>{getLocalizedPairText(item, pageLang)}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </section>
+          ))}
         </div>
       </section>
     </div>
@@ -421,7 +504,9 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
           <h2 data-i18n="detail.monetisation" class="text-lg font-bold text-slate-950">{t['detail.monetisation']}</h2>
           <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
             {monetizationItems.map((item) => (
-              <li class="rounded-2xl bg-slate-50 px-4 py-3">{item}</li>
+              <li class="rounded-2xl bg-slate-50 px-4 py-3">
+                <span data-l10n-en={item.en} data-l10n-zh={item.zh}>{getLocalizedPairText(item, pageLang)}</span>
+              </li>
             ))}
           </ul>
         </section>
@@ -434,7 +519,7 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
             {executionSteps.map((item, index) => (
               <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
                 <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white">{index + 1}</span>
-                <span>{item}</span>
+                <span data-l10n-en={item.en} data-l10n-zh={item.zh}>{getLocalizedPairText(item, pageLang)}</span>
               </li>
             ))}
           </ol>

@@ -99,7 +99,7 @@ python3 scripts/run_daily_publish.py --mode overwrite --commit --push
 5. `git commit`
 6. `git push origin main`
 
-推送后由 Cloudflare Pages 自动部署。
+推送后默认由 Cloudflare Pages Git 集成自动部署。
 
 ## GitHub Actions
 
@@ -112,12 +112,13 @@ python3 scripts/run_daily_publish.py --mode overwrite --commit --push
 - 工作流会把运行摘要里的关键 warnings/errors 额外转成 GitHub Actions 注释，减少翻整份日志的成本
 - 若配置仓库 Secret `PUBLISH_FAILURE_WEBHOOK_URL`，失败时会向该 webhook 发送一份 JSON 告警负载
 - 若希望 Reddit 社区扫描稳定走 OAuth，需要在仓库 Secrets 中补齐 `REDDIT_CLIENT_ID`、`REDDIT_CLIENT_SECRET`，并建议同时配置 `REDDIT_USER_AGENT`
-- Cloudflare Pages 部署还依赖 `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`
-- 如需在线上打开邮件订阅入口，GitHub 仓库 Variables 中还需配置 `PUBLIC_EMAIL_SUBSCRIBE_URL`，因为当前构建发生在 GitHub Actions，而不是 Cloudflare 远端构建
+- Cloudflare Pages Git 集成是当前主部署路径；如果只看线上是否已更新，优先看 Cloudflare Pages 的 commit check / deployment 记录
+- `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID` 只在手动兜底部署工作流 `.github/workflows/deploy.yml` 中需要
+- 如需在线上打开邮件订阅入口，正常情况下应把 `PUBLIC_EMAIL_SUBSCRIBE_URL` 配在 Cloudflare Pages 项目环境变量；若走 GitHub 手动兜底部署，再额外配置同名仓库 Variable 给 workflow 构建使用
 - Reddit 凭据配置步骤见：`pipeline/REDDIT_OAUTH_SETUP.md`
 - 固定排障流程见：`pipeline/DAILY_PUBLISH_SOP.md`
 - 首次补齐生产配置并执行真实日跑，直接按：`pipeline/FIRST_PRODUCTION_RUN_CHECKLIST.md`
-- `main` 上的推送会继续走原有 Cloudflare Pages 部署流程
+- `.github/workflows/deploy.yml` 现在只保留为手动 fallback，不再跟随每次 `push` 自动触发
 
 ## 当前默认策略
 

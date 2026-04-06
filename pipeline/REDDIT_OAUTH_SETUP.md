@@ -167,8 +167,8 @@ REDDIT_USER_AGENT=DailyMicroSaaS/0.1 by your_reddit_username
 如果还没配，也建议一起检查：
 
 - `PUBLISH_FAILURE_WEBHOOK_URL`：失败告警 webhook
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN`：仅在需要运行 GitHub 手动兜底部署 `.github/workflows/deploy.yml` 时使用
+- `CLOUDFLARE_ACCOUNT_ID`：仅在需要运行 GitHub 手动兜底部署 `.github/workflows/deploy.yml` 时使用
 
 > `GITHUB_TOKEN` 不需要你手工创建同名仓库 Secret。
 > GitHub Actions 运行时会自动提供内置的 `secrets.GITHUB_TOKEN`。

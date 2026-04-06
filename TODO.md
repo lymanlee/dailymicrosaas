@@ -38,7 +38,7 @@
 - [x] 首页、归档页、关于页、404、详情页等核心页面
 - [x] Markdown 内容模型与 `src/content/ideas/` 发布链路
 - [x] discovery / generate / validate / daily publish Python pipeline
-- [x] Cloudflare Pages 基础部署与 GitHub Actions 部署流程
+- [x] Cloudflare Pages Git 集成主部署链路 + GitHub Actions 手动兜底部署流程
 - [x] 本地真实数据端到端日跑验证，并修复 DDG redirect / 空 SERP 缓存锁死问题
 - [x] 中英双语基础文案与站点展示
 

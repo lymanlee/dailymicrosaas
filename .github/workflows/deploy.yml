@@ -1,10 +1,12 @@
-name: Deploy to Cloudflare Pages
+name: Manual Deploy to Cloudflare Pages
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Why are you running the fallback deploy?"
+        required: false
+        default: "manual-fallback"
 
 permissions:
   contents: read
@@ -14,7 +16,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Optional public subscribe entry used at build time by Astro.
+      # Optional public subscribe entry used only for this manual fallback build.
       PUBLIC_EMAIL_SUBSCRIBE_URL: ${{ vars.PUBLIC_EMAIL_SUBSCRIBE_URL }}
     steps:
       - name: Checkout
@@ -32,8 +34,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Explain fallback path
+        run: |
+          echo "This workflow is a manual fallback deploy only." >> "$GITHUB_STEP_SUMMARY"
+          echo "Primary production deploys come from Cloudflare Pages Git integration." >> "$GITHUB_STEP_SUMMARY"
+          echo "Reason: ${{ github.event.inputs.reason || 'manual-fallback' }}" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Deploy to Cloudflare Pages
-        if: github.ref == 'refs/heads/main'
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:

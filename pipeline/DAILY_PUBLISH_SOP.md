@@ -269,6 +269,6 @@ npm run build
 1. Job Summary 里没有新的阻断错误
 2. `summary.json` 的 `status` 变成 `success` 或至少 `dry_run`
 3. 关键外部源（尤其 Reddit / GitHub）没有再回退到明显不稳定路径
-4. 如果是正式发布，`git_push` 已完成且 Cloudflare 部署继续成功
+4. 如果是正式发布，`git_push` 已完成，且新提交在 GitHub 上出现 `Cloudflare Pages` 成功 check run（或能在 Cloudflare Pages 后台看到对应 deployment 成功）
 
 如果只是“这次碰巧过了”，不算修好。

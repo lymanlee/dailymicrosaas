@@ -8,14 +8,14 @@
 
 - **展示层**：Astro + Tailwind，负责首页、归档页、详情页和 SEO
 - **生产层**：Python pipeline，负责发现机会、生成报告、转成站点内容、自动发布
-- **部署层**：GitHub + Cloudflare Pages，`main` 分支自动部署
+- **部署层**：Cloudflare Pages Git 集成为主部署链路；GitHub Actions 只负责内容生产与手动兜底部署
 
 ## 技术栈
 
 - **站点**: Astro 5 + Tailwind CSS
 - **内容**: Markdown + Astro Content Collections
 - **发现 pipeline**: Python
-- **部署**: GitHub Actions + Cloudflare Pages
+- **部署**: Cloudflare Pages（Git 集成主路径）+ GitHub Actions（手动兜底）
 
 ## 本地开发
 
@@ -75,14 +75,14 @@ python3 scripts/run_daily_publish.py --mode overwrite --commit --push
 5. 校验 Markdown 结构与内容质量
 6. 执行 `npm run build`
 7. 只有全部通过后才会自动 `git commit` + `git push`
-8. 由 Cloudflare Pages 自动部署上线
+8. 由 Cloudflare Pages Git 集成自动部署上线
 
 ## 自动发布工作流
 
 仓库内已包含：
 
 - `.github/workflows/daily-publish.yml`：每天北京时间 08:05 自动生成并发布内容；支持手动覆盖 `min_score`、`skip_*`、`dry_run` 等参数；失败时会保留日志、报告、运行摘要 artifact，并把关键 warnings/errors 直接转成 Actions 注释；如已配置 `PUBLISH_FAILURE_WEBHOOK_URL`，还会额外发送 webhook 告警
-- `.github/workflows/deploy.yml`：`main` 分支更新后自动部署到 Cloudflare Pages；如需在线上打开邮件订阅入口，需额外配置仓库 Variable `PUBLIC_EMAIL_SUBSCRIBE_URL`
+- `.github/workflows/deploy.yml`：现在只保留为手动兜底部署入口（`workflow_dispatch`）；正常线上发布默认由 Cloudflare Pages Git 集成直接监听 `main` 并构建上线
 - 固定排障文档见：`pipeline/DAILY_PUBLISH_SOP.md`
 - 首次生产配置与真实日跑 checklist 见：`pipeline/FIRST_PRODUCTION_RUN_CHECKLIST.md`
 
@@ -147,14 +147,18 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 - `REDDIT_CLIENT_SECRET`
 - `REDDIT_USER_AGENT`（建议配置）
 - `PUBLISH_FAILURE_WEBHOOK_URL`（可选，失败告警）
-- `CLOUDFLARE_API_TOKEN`（部署必需，由 `.github/workflows/deploy.yml` 使用）
-- `CLOUDFLARE_ACCOUNT_ID`（部署必需，由 `.github/workflows/deploy.yml` 使用）
 
-另外，部署工作流会在构建时读取仓库 Variable：
+手动兜底部署工作流 `.github/workflows/deploy.yml` 仍会读取以下仓库 Secrets：
 
-- `PUBLIC_EMAIL_SUBSCRIBE_URL`（可选，用于打开 `/subscribe` 页面和 CTA 组件中的邮件订阅入口）
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
 
-这样 Actions 里的社区扫描会优先使用 Reddit OAuth，而不是匿名公开接口；部署时如果配置了 `PUBLIC_EMAIL_SUBSCRIBE_URL`，线上构建也会带上邮件订阅入口。
+`PUBLIC_EMAIL_SUBSCRIBE_URL` 的使用分两种情况：
+
+- **正常线上部署（主路径）**：应配置在 Cloudflare Pages 项目环境变量里，因为当前正式构建发生在 Cloudflare Git 集成
+- **手动兜底部署（备用路径）**：可额外配置 GitHub 仓库 Variable `PUBLIC_EMAIL_SUBSCRIBE_URL`，供 `.github/workflows/deploy.yml` 在 GitHub Actions 构建时注入
+
+这样 Actions 里的社区扫描会优先使用 Reddit OAuth，而不是匿名公开接口；而线上是否显示邮件订阅入口，则取决于你走的是 Cloudflare 主部署还是 GitHub 手动兜底部署。
 
 更细的 Reddit app 创建与 GitHub Secrets 配置步骤见：`pipeline/REDDIT_OAUTH_SETUP.md`
 
