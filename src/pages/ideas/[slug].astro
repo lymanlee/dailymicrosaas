@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { estimateReadingTime, extractLabeledValue, getSection, parseIdeaSections } from '../../lib/idea';
+import { ui, type Lang, withLangPath } from '../../lib/i18n';
+import { estimateReadingTime, extractLabeledValue, getCategoryInfo, getLocalizedText, getSection, hasLocalizedText, parseIdeaSections } from '../../lib/idea';
 
 export async function getStaticPaths() {
   const ideas = await getCollection('ideas');
@@ -14,6 +15,8 @@ export async function getStaticPaths() {
 }
 
 const { idea } = Astro.props;
+const pageLang: Lang = Astro.url.searchParams.get('lang') === 'zh' ? 'zh' : 'en';
+const t = ui[pageLang] ?? ui.en;
 const { Content } = await idea.render();
 const { data: frontmatter } = idea;
 const rawContent = idea.body ?? '';
@@ -32,23 +35,30 @@ const monetizationItems = monetizationSection?.bullets.slice(0, 3) ?? [];
 const executionSteps = executionSection?.numbered.slice(0, 3) ?? [];
 const keywordItems = keywordsSection?.bullets.slice(0, 5).map((item) => item.replace(/\s*\([^\)]*\)/g, '').trim()) ?? [];
 const convictionItems = (whyNowSection?.numbered.length ? whyNowSection.numbered : whyNowSection?.bullets ?? []).slice(0, 4);
-const buildWindow = extractLabeledValue(buildSection?.body ?? rawContent, '预估开发时间') ?? '可在短周期内验证';
-const searchSignal =
-  sourceSignals.find((item) => /Google Trends|搜索|增长|月均/.test(item)) ?? sourceSignals[0] ?? '已观察到稳定需求信号';
-const competitionSignal =
-  (competitionSection?.bullets.find((item) => /机会|竞争|巨头|长尾/.test(item)) ?? competitionSection?.paragraphs[0]) ||
-  '需要从体验、速度或定位切出差异化。';
+const localizedTitleEn = getLocalizedText(frontmatter.title, 'en', 'Untitled');
+const localizedTitleZh = getLocalizedText(frontmatter.title, 'zh', localizedTitleEn);
+const localizedDescriptionEn = getLocalizedText(frontmatter.description, 'en', '');
+const localizedDescriptionZh = getLocalizedText(frontmatter.description, 'zh', localizedDescriptionEn);
+const buildWindow = extractLabeledValue(buildSection?.body ?? rawContent, '预估开发时间') ?? (pageLang === 'zh' ? '可在短周期内验证' : 'Can be validated in a short sprint');
 const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
-const articleUrl = new URL(Astro.url.pathname, `${siteUrl}/`).toString();
+const articleUrl = new URL(withLangPath(Astro.url.pathname, pageLang), `${siteUrl}/`).toString();
+const pageTitleMap = {
+  en: `${localizedTitleEn} - Daily Micro SaaS`,
+  zh: `${localizedTitleZh}｜Daily Micro SaaS 拆解`,
+};
+const pageDescriptionMap = {
+  en: localizedDescriptionEn,
+  zh: localizedDescriptionZh || `围绕 ${localizedTitleZh} 的 Micro SaaS 机会拆解：需求信号、竞争判断、变现方式和最快落地路径。`,
+};
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: frontmatter.title,
-  description: frontmatter.description,
+  headline: pageLang === 'zh' ? localizedTitleZh : localizedTitleEn,
+  description: pageDescriptionMap[pageLang],
   datePublished: frontmatter.date,
-  dateModified: frontmatter.date,
-  inLanguage: 'zh-CN',
-  articleSection: frontmatter.category,
+  dateModified: frontmatter.dataDate ?? frontmatter.date,
+  inLanguage: pageLang === 'zh' ? 'zh-CN' : 'en',
+  articleSection: pageLang === 'zh' ? getCategoryInfo(frontmatter.category).zh : getCategoryInfo(frontmatter.category).en,
   mainEntityOfPage: articleUrl,
   author: {
     '@type': 'Organization',
@@ -68,77 +78,276 @@ const difficultyMeta: Record<string, { labelKey: string; label: string; classes:
   Hard: { labelKey: 'card.difficulty.hard', label: 'Execution-heavy', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
-const categoryColors: Record<string, string> = {
-  'AI 工具': 'bg-violet-50 text-violet-700 ring-violet-200',
-  '文档处理': 'bg-sky-50 text-sky-700 ring-sky-200',
-  '图像处理': 'bg-pink-50 text-pink-700 ring-pink-200',
-  '视频处理': 'bg-orange-50 text-orange-700 ring-orange-200',
-  '效率工具': 'bg-teal-50 text-teal-700 ring-teal-200',
-  '开发者工具': 'bg-slate-100 text-slate-700 ring-slate-200',
-};
-
 const difficultyInfo = difficultyMeta[frontmatter.difficulty] ?? { labelKey: 'card.difficulty.easy', label: frontmatter.difficulty, classes: 'bg-slate-100 text-slate-700 ring-slate-200' };
+const categoryInfo = getCategoryInfo(frontmatter.category);
+
+const verdictConfig: Record<string, { labelKey: string; emoji: string; bg: string; text: string; ring: string; bar: string }> = {
+  'Worth Building': {
+    labelKey: 'detail.verdict.worth_building',
+    emoji: '✅',
+    bg: 'bg-emerald-50',
+    text: 'text-emerald-800',
+    ring: 'ring-emerald-200',
+    bar: 'bg-emerald-500',
+  },
+  'Watch': {
+    labelKey: 'detail.verdict.watch',
+    emoji: '👀',
+    bg: 'bg-amber-50',
+    text: 'text-amber-800',
+    ring: 'ring-amber-200',
+    bar: 'bg-amber-400',
+  },
+  'Skip': {
+    labelKey: 'detail.verdict.skip',
+    emoji: '⏭️',
+    bg: 'bg-slate-50',
+    text: 'text-slate-600',
+    ring: 'ring-slate-200',
+    bar: 'bg-slate-400',
+  },
+};
+const verdict = frontmatter.verdict ?? (
+  frontmatter.sourceGrade === 'worth_it' ? 'Worth Building' :
+  frontmatter.sourceGrade === 'watch' ? 'Watch' : 'Skip'
+);
+const verdictInfo = verdictConfig[verdict] ?? verdictConfig['Watch'];
+
+const confidenceConfig: Record<string, { labelKey: string; dots: number; color: string }> = {
+  'High': { labelKey: 'detail.confidence.high', dots: 3, color: 'bg-emerald-500' },
+  'Medium': { labelKey: 'detail.confidence.medium', dots: 2, color: 'bg-amber-400' },
+  'Low': { labelKey: 'detail.confidence.low', dots: 1, color: 'bg-slate-400' },
+};
+const confidence = frontmatter.confidence ?? 'Medium';
+const confidenceInfo = confidenceConfig[confidence] ?? confidenceConfig['Medium'];
+
+const score = frontmatter.sourceScore ?? 0;
+const scorePercent = Math.min(Math.round(score), 100);
+const scoreLabelEn = `${t['detail.summary.score']} ${score.toFixed(1)} / 100`;
+const scoreLabelZh = `评分 ${score.toFixed(1)} / 100`;
 
 const quickFacts = [
-  { labelKey: 'detail.reading_time', label: 'Reading time', value: `${readingTime} min` },
-  { labelKey: 'detail.difficulty', label: 'Difficulty', value: difficultyInfo.label, valueKey: difficultyInfo.labelKey },
-  { labelKey: 'detail.timeline', label: 'Fastest timeline', value: buildWindow },
-  { labelKey: 'detail.published', label: 'Published', value: frontmatter.date },
+  { labelKey: 'detail.reading_time', en: `${readingTime} min`, zh: `${readingTime} 分钟` },
+  { labelKey: 'detail.difficulty', en: difficultyInfo.label, zh: difficultyInfo.label, valueKey: difficultyInfo.labelKey },
+  { labelKey: 'detail.timeline', en: buildWindow, zh: buildWindow },
+  { labelKey: 'detail.published', en: frontmatter.date, zh: frontmatter.date },
 ];
+
+const painClusters = (frontmatter.painClusters ?? []).filter((item) => hasLocalizedText(item));
+const competitorGaps = (frontmatter.competitorGaps ?? []).filter((item) => hasLocalizedText(item));
+const evidenceLinks = frontmatter.evidenceLinks ?? [];
+const trendSeries = Array.isArray(frontmatter.trendSeries)
+  ? frontmatter.trendSeries.filter((item) => typeof item?.date === 'string' && typeof item?.value === 'number')
+  : [];
+const chartWidth = 100;
+const chartHeight = 44;
+const trendPeak = trendSeries.length ? Math.max(...trendSeries.map((item) => item.value), 0) : 0;
+const trendFloor = trendSeries.length ? Math.min(...trendSeries.map((item) => item.value), 0) : 0;
+const trendRange = Math.max(trendPeak - trendFloor, 10);
+const trendPolylinePoints = trendSeries.map((item, index) => {
+  const x = trendSeries.length === 1 ? chartWidth / 2 : (index / Math.max(trendSeries.length - 1, 1)) * chartWidth;
+  const y = chartHeight - ((item.value - trendFloor) / trendRange) * chartHeight;
+  return `${x.toFixed(2)},${y.toFixed(2)}`;
+}).join(' ');
+const trendAreaPoints = trendPolylinePoints ? `${trendPolylinePoints} ${chartWidth},${chartHeight} 0,${chartHeight}` : '';
+const trendRecentWindow = trendSeries.slice(-7);
+const trendRecentAvg = trendRecentWindow.length
+  ? Math.round((trendRecentWindow.reduce((sum, item) => sum + item.value, 0) / trendRecentWindow.length) * 10) / 10
+  : 0;
+const trendStartLabel = trendSeries[0]?.date ?? '';
+const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
 ---
 
 <Layout
-  title={`${frontmatter.title} - Daily Micro SaaS`}
-  description={frontmatter.description}
+  title={pageTitleMap[pageLang]}
+  description={pageDescriptionMap[pageLang]}
   type="article"
   structuredData={structuredData}
+  lang={pageLang}
+  i18nTitle={pageTitleMap}
+  i18nDescription={pageDescriptionMap}
 >
   <div class="mb-6">
-    <a href="/" data-i18n="detail.back" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-primary">
-      ← Home
+    <a href={withLangPath('/', pageLang)} data-lang-href="/" data-i18n="detail.back" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-primary">
+      {t['detail.back']}
     </a>
   </div>
 
   <article class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
     <div class="space-y-8">
-      <section class="overflow-hidden rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryColors[frontmatter.category] || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
-            {frontmatter.category}
+      <section class="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm">
+        <div class="flex flex-wrap items-center gap-3 border-b border-slate-100 px-8 py-5">
+          <span
+            data-l10n-en={categoryInfo.en}
+            data-l10n-zh={categoryInfo.zh}
+            class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryInfo.classes}`}
+          >
+            {pageLang === 'zh' ? categoryInfo.zh : categoryInfo.en}
           </span>
           <span data-i18n={difficultyInfo.labelKey} class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
-            {difficultyInfo.label}
+            {t[difficultyInfo.labelKey]}
           </span>
           {frontmatter.status === 'New' && (
             <span data-i18n="detail.status.new" class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
-              New today
+              {t['detail.status.new']}
             </span>
           )}
-          <time class="text-sm font-medium text-slate-400">{frontmatter.date}</time>
+          <time class="ml-auto text-sm font-medium text-slate-400">{frontmatter.date}</time>
         </div>
 
-        <h1 class="mt-5 max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">{frontmatter.title}</h1>
-        <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{frontmatter.description}</p>
+        <div class="px-8 pt-7 pb-6">
+          <h1
+            data-l10n-en={localizedTitleEn}
+            data-l10n-zh={localizedTitleZh}
+            class="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl"
+          >
+            {pageLang === 'zh' ? localizedTitleZh : localizedTitleEn}
+          </h1>
+          <p
+            data-l10n-en={localizedDescriptionEn}
+            data-l10n-zh={localizedDescriptionZh}
+            class="mt-4 max-w-3xl text-lg leading-8 text-slate-600"
+          >
+            {pageLang === 'zh' ? localizedDescriptionZh : localizedDescriptionEn}
+          </p>
+        </div>
 
-        <div class="mt-8 grid gap-4 lg:grid-cols-3">
-          <div class="rounded-3xl bg-slate-50 p-5">
-            <p data-i18n="detail.demand" class="text-sm font-semibold text-slate-500">Demand signal</p>
-            <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{searchSignal}</p>
+        <div class="grid gap-px bg-slate-100 lg:grid-cols-3">
+          <div class={`flex flex-col gap-3 bg-white px-8 py-6 ${verdictInfo.bg}`}>
+            <p data-i18n="detail.summary.verdict" class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.verdict']}</p>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl leading-none">{verdictInfo.emoji}</span>
+              <span data-i18n={verdictInfo.labelKey} class={`text-xl font-black ${verdictInfo.text}`}>{t[verdictInfo.labelKey]}</span>
+            </div>
+            <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
+              <div class={`h-full rounded-full ${verdictInfo.bar}`} style={`width: ${scorePercent}%`}></div>
+            </div>
+            <p data-l10n-en={scoreLabelEn} data-l10n-zh={scoreLabelZh} class="text-xs text-slate-500">{pageLang === 'zh' ? scoreLabelZh : scoreLabelEn}</p>
           </div>
-          <div class="rounded-3xl bg-slate-50 p-5">
-            <p data-i18n="detail.competition" class="text-sm font-semibold text-slate-500">Competition</p>
-            <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{competitionSignal}</p>
+
+          <div class="flex flex-col gap-3 bg-white px-8 py-6">
+            <p data-i18n="detail.summary.confidence" class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.confidence']}</p>
+            <div class="flex items-center gap-2">
+              <div class="flex gap-1">
+                {[1, 2, 3].map((dot) => (
+                  <span class={`inline-block h-4 w-4 rounded-full ${dot <= confidenceInfo.dots ? confidenceInfo.color : 'bg-slate-200'}`}></span>
+                ))}
+              </div>
+              <span data-i18n={confidenceInfo.labelKey} class="text-lg font-bold text-slate-800">{t[confidenceInfo.labelKey]}</span>
+            </div>
+            {frontmatter.dataWindow && (
+              <p class="text-xs text-slate-500">
+                <span data-i18n="detail.summary.data_window">{t['detail.summary.data_window']}</span>: <span data-l10n-en={getLocalizedText(frontmatter.dataWindow, 'en', '')} data-l10n-zh={getLocalizedText(frontmatter.dataWindow, 'zh', '')} class="font-semibold text-slate-700">{getLocalizedText(frontmatter.dataWindow, pageLang, '')}</span>
+                {frontmatter.dataDate && (
+                  <>
+                    <span class="mx-1">·</span>
+                    <span data-i18n="detail.summary.updated">{t['detail.summary.updated']}</span>
+                    <span class="font-semibold text-slate-700"> {frontmatter.dataDate}</span>
+                  </>
+                )}
+              </p>
+            )}
           </div>
-          <div class="rounded-3xl bg-slate-50 p-5">
-            <p data-i18n="detail.build_window" class="text-sm font-semibold text-slate-500">Fastest timeline</p>
-            <p class="mt-3 text-base font-semibold leading-7 text-slate-900">{buildWindow}</p>
+
+          <div class="flex flex-col gap-3 bg-white px-8 py-6">
+            <p data-i18n="detail.summary.best_wedge" class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.best_wedge']}</p>
+            <p data-l10n-en={getLocalizedText(frontmatter.bestWedge, 'en')} data-l10n-zh={getLocalizedText(frontmatter.bestWedge, 'zh')} class="text-base font-semibold leading-7 text-slate-900">
+              {getLocalizedText(frontmatter.bestWedge, pageLang)}
+            </p>
           </div>
         </div>
       </section>
 
+      {trendSeries.length > 1 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <span data-i18n="detail.trend.title" class="section-kicker">{t['detail.trend.title']}</span>
+              <p data-i18n="detail.trend.desc" class="mt-2 text-sm text-slate-500">{t['detail.trend.desc']}</p>
+            </div>
+            <div class="grid gap-2 text-right text-xs font-semibold text-slate-500 sm:grid-cols-2 sm:text-left">
+              <div class="rounded-2xl bg-slate-50 px-4 py-3">
+                <p data-i18n="detail.trend.peak" class="uppercase tracking-[0.12em] text-slate-400">{t['detail.trend.peak']}</p>
+                <p class="mt-1 text-lg font-black text-slate-900">{trendPeak}</p>
+              </div>
+              <div class="rounded-2xl bg-slate-50 px-4 py-3">
+                <p data-i18n="detail.trend.avg" class="uppercase tracking-[0.12em] text-slate-400">{t['detail.trend.avg']}</p>
+                <p class="mt-1 text-lg font-black text-slate-900">{trendRecentAvg}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 rounded-[28px] border border-sky-100 bg-sky-50/70 p-4 sm:p-5">
+            <svg viewBox={`0 0 ${chartWidth} ${chartHeight + 2}`} class="h-52 w-full overflow-visible" role="img" aria-label={t['detail.trend.title']}>
+              <defs>
+                <linearGradient id="trend-fill" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.28"></stop>
+                  <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+              {[0, 1, 2, 3].map((step) => (
+                <line
+                  x1="0"
+                  x2={chartWidth}
+                  y1={(chartHeight / 3) * step}
+                  y2={(chartHeight / 3) * step}
+                  stroke="#cbd5e1"
+                  stroke-dasharray="2 3"
+                  stroke-width="0.5"
+                />
+              ))}
+              {trendAreaPoints && <polygon points={trendAreaPoints} fill="url(#trend-fill)"></polygon>}
+              <polyline
+                points={trendPolylinePoints}
+                fill="none"
+                stroke="#0284c7"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></polyline>
+            </svg>
+            <div class="mt-4 flex items-center justify-between gap-3 text-xs font-semibold text-slate-500">
+              <span>{trendStartLabel}</span>
+              <span data-i18n="detail.trend.window">{t['detail.trend.window']}</span>
+              <span>{trendEndLabel}</span>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {painClusters.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+          <span data-i18n="detail.pain.title" class="section-kicker">{t['detail.pain.title']}</span>
+          <p data-i18n="detail.pain.desc" class="mt-2 text-sm text-slate-500">{t['detail.pain.desc']}</p>
+          <div class="mt-5 grid gap-3 md:grid-cols-2">
+            {painClusters.map((cluster) => (
+              <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-orange-50 p-4">
+                <span class="mt-0.5 text-base leading-none text-orange-500">⚡</span>
+                <p data-l10n-en={getLocalizedText(cluster, 'en', '')} data-l10n-zh={getLocalizedText(cluster, 'zh', '')} class="text-sm font-semibold leading-7 text-slate-800">{getLocalizedText(cluster, pageLang, '')}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {competitorGaps.length > 0 && (
+        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+          <span data-i18n="detail.gaps.title" class="section-kicker">{t['detail.gaps.title']}</span>
+          <p data-i18n="detail.gaps.desc" class="mt-2 text-sm text-slate-500">{t['detail.gaps.desc']}</p>
+          <div class="mt-5 space-y-3">
+            {competitorGaps.map((gap) => (
+              <div class="flex items-start gap-3 rounded-2xl border border-violet-100 bg-violet-50 p-4">
+                <span class="mt-0.5 text-base leading-none text-violet-500">🔍</span>
+                <p data-l10n-en={getLocalizedText(gap, 'en', '')} data-l10n-zh={getLocalizedText(gap, 'zh', '')} class="text-sm font-semibold leading-7 text-slate-800">{getLocalizedText(gap, pageLang, '')}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {convictionItems.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span data-i18n="detail.why" class="section-kicker">Why build this now</span>
+          <span data-i18n="detail.why" class="section-kicker">{t['detail.why']}</span>
           <div class="mt-5 grid gap-4 md:grid-cols-2">
             {convictionItems.map((item) => (
               <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -151,7 +360,7 @@ const quickFacts = [
 
       {sourceSignals.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span data-i18n="detail.sources" class="section-kicker">Demand sources</span>
+          <span data-i18n="detail.sources" class="section-kicker">{t['detail.sources']}</span>
           <div class="mt-5 grid gap-4 md:grid-cols-3">
             {sourceSignals.map((item) => (
               <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 text-sm leading-7 text-slate-600">
@@ -159,11 +368,29 @@ const quickFacts = [
               </div>
             ))}
           </div>
+
+          {evidenceLinks.length > 0 && (
+            <div class="mt-5 space-y-2">
+              <p data-i18n="detail.evidence.title" class="text-xs font-bold uppercase tracking-widest text-slate-400">{t['detail.evidence.title']}</p>
+              {evidenceLinks.map((link) => (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm transition hover:border-sky-200 hover:bg-sky-50"
+                >
+                  <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold uppercase text-slate-600">{link.source.slice(0, 2)}</span>
+                  <span class="flex-1 truncate font-medium text-slate-700">{link.title}</span>
+                  <span class="shrink-0 text-slate-400">↗</span>
+                </a>
+              ))}
+            </div>
+          )}
         </section>
       )}
 
       <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-        <span data-i18n="detail.full" class="section-kicker">Full breakdown</span>
+        <span data-i18n="detail.full" class="section-kicker">{t['detail.full']}</span>
         <div class="idea-prose prose prose-slate mt-6 max-w-none prose-headings:scroll-mt-24">
           <Content />
         </div>
@@ -172,13 +399,17 @@ const quickFacts = [
 
     <aside class="space-y-6 lg:sticky lg:top-24">
       <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 data-i18n="detail.quick" class="text-lg font-bold text-slate-950">Quick facts</h2>
+        <h2 data-i18n="detail.quick" class="text-lg font-bold text-slate-950">{t['detail.quick']}</h2>
         <dl class="mt-5 space-y-4">
           {quickFacts.map((fact) => (
             <div class="rounded-2xl bg-slate-50 p-4">
-              <dt data-i18n={fact.labelKey} class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{fact.label}</dt>
+              <dt data-i18n={fact.labelKey} class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t[fact.labelKey]}</dt>
               <dd class="mt-2 text-sm font-semibold leading-7 text-slate-900">
-                {fact.valueKey ? <span data-i18n={fact.valueKey}>{fact.value}</span> : fact.value}
+                {fact.valueKey ? (
+                  <span data-i18n={fact.valueKey}>{t[fact.valueKey]}</span>
+                ) : (
+                  <span data-l10n-en={fact.en} data-l10n-zh={fact.zh}>{pageLang === 'zh' ? fact.zh : fact.en}</span>
+                )}
               </dd>
             </div>
           ))}
@@ -187,7 +418,7 @@ const quickFacts = [
 
       {monetizationItems.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 data-i18n="detail.monetisation" class="text-lg font-bold text-slate-950">Revenue paths</h2>
+          <h2 data-i18n="detail.monetisation" class="text-lg font-bold text-slate-950">{t['detail.monetisation']}</h2>
           <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
             {monetizationItems.map((item) => (
               <li class="rounded-2xl bg-slate-50 px-4 py-3">{item}</li>
@@ -198,7 +429,7 @@ const quickFacts = [
 
       {executionSteps.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 data-i18n="detail.execution" class="text-lg font-bold text-slate-950">Fastest path to launch</h2>
+          <h2 data-i18n="detail.execution" class="text-lg font-bold text-slate-950">{t['detail.execution']}</h2>
           <ol class="mt-4 space-y-3">
             {executionSteps.map((item, index) => (
               <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
@@ -212,7 +443,7 @@ const quickFacts = [
 
       {keywordItems.length > 0 && (
         <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 data-i18n="detail.keywords" class="text-lg font-bold text-slate-950">Key search terms</h2>
+          <h2 data-i18n="detail.keywords" class="text-lg font-bold text-slate-950">{t['detail.keywords']}</h2>
           <div class="mt-4 flex flex-wrap gap-2">
             {keywordItems.map((item) => (
               <span class="rounded-full bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 ring-1 ring-inset ring-sky-200">{item}</span>
@@ -222,14 +453,14 @@ const quickFacts = [
       )}
 
       <section class="rounded-[28px] border border-slate-200 bg-slate-950 p-6 text-white shadow-soft">
-        <p data-i18n="detail.next_label" class="text-sm font-semibold text-blue-100">What's next</p>
-        <p data-i18n="detail.next_p" class="mt-3 text-lg font-semibold leading-8">If this direction fits your current skillset, start small. Get something people can actually try.</p>
+        <p data-i18n="detail.next_label" class="text-sm font-semibold text-blue-100">{t['detail.next_label']}</p>
+        <p data-i18n="detail.next_p" class="mt-3 text-lg font-semibold leading-8">{t['detail.next_p']}</p>
         <div class="mt-6 flex flex-col gap-3">
-          <a href="/archive" data-i18n="detail.next_btn1" class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
-            Browse more ideas
+          <a href={withLangPath('/archive', pageLang)} data-lang-href="/archive" data-i18n="detail.next_btn1" class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+            {t['detail.next_btn1']}
           </a>
-          <a href="/about" data-i18n="detail.next_btn2" class="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
-            How we pick ideas
+          <a href={withLangPath('/about', pageLang)} data-lang-href="/about" data-i18n="detail.next_btn2" class="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
+            {t['detail.next_btn2']}
           </a>
         </div>
       </section>

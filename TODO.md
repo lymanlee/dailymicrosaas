@@ -10,9 +10,9 @@
 
 ## P0 - 当前优先级
 
-- [ ] 在 GitHub Actions 上补齐生产环境 secrets，完成首次真实定时日跑
-- [ ] 收敛 `daily-publish` 工作流参数与失败告警，确保问题可追踪
-- [ ] 把 discovery / publish 运行摘要沉淀成固定排障 SOP
+- [ ] 在 GitHub Actions 上补齐生产环境 secrets / variables，并按 `pipeline/FIRST_PRODUCTION_RUN_CHECKLIST.md` 完成首次真实定时日跑
+- [x] 收敛 `daily-publish` 工作流参数与失败告警，确保问题可追踪
+- [x] 把 discovery / publish 运行摘要沉淀成固定排障 SOP
 - [ ] 检查首页、归档页、详情页在真实内容增多后的展示与可读性
 
 ## P1 - 近期迭代

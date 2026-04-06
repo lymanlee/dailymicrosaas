@@ -1,16 +1,25 @@
 ---
+import { ui, type Lang, withLangPath } from '../lib/i18n';
+import { getCategoryInfo, getLocalizedText, type LocalizedText } from '../lib/idea';
+
 interface Props {
-  title: string;
+  title: LocalizedText;
   slug: string;
   date: string;
   category: string;
   difficulty: string;
-  description: string;
+  description: LocalizedText;
   status?: string;
   featured?: boolean;
 }
 
 const { title, slug, date, category, difficulty, description, status, featured = false } = Astro.props;
+const pageLang: Lang = Astro.url.searchParams.get('lang') === 'zh' ? 'zh' : 'en';
+const t = ui[pageLang] ?? ui.en;
+const localizedTitleEn = getLocalizedText(title, 'en', 'Untitled');
+const localizedTitleZh = getLocalizedText(title, 'zh', localizedTitleEn);
+const localizedDescriptionEn = getLocalizedText(description, 'en', '');
+const localizedDescriptionZh = getLocalizedText(description, 'zh', localizedDescriptionEn);
 
 const difficultyMeta: Record<string, { labelKey: string; label: string; classes: string }> = {
   Easy: { labelKey: 'card.difficulty.easy', label: 'Quick to validate', classes: 'bg-emerald-50 text-emerald-700 ring-emerald-200' },
@@ -18,23 +27,8 @@ const difficultyMeta: Record<string, { labelKey: string; label: string; classes:
   Hard: { labelKey: 'card.difficulty.hard', label: 'Execution-heavy', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
-const categoryColors: Record<string, string> = {
-  'AI 工具': 'bg-violet-50 text-violet-700 ring-violet-200',
-  '文档处理': 'bg-sky-50 text-sky-700 ring-sky-200',
-  '图像处理': 'bg-pink-50 text-pink-700 ring-pink-200',
-  '视频处理': 'bg-orange-50 text-orange-700 ring-orange-200',
-  '效率工具': 'bg-teal-50 text-teal-700 ring-teal-200',
-  '开发者工具': 'bg-slate-100 text-slate-700 ring-slate-200',
-  // English equivalents
-  'AI Tools': 'bg-violet-50 text-violet-700 ring-violet-200',
-  'Document Processing': 'bg-sky-50 text-sky-700 ring-sky-200',
-  'Image Processing': 'bg-pink-50 text-pink-700 ring-pink-200',
-  'Video Processing': 'bg-orange-50 text-orange-700 ring-orange-200',
-  'Productivity': 'bg-teal-50 text-teal-700 ring-teal-200',
-  'Dev Tools': 'bg-slate-100 text-slate-700 ring-slate-200',
-};
-
-const href = `/ideas/${slug}`;
+const href = withLangPath(`/ideas/${slug}`, pageLang);
+const categoryInfo = getCategoryInfo(category);
 const difficultyInfo = difficultyMeta[difficulty] || {
   labelKey: 'card.difficulty.easy',
   label: difficulty,
@@ -46,15 +40,19 @@ const difficultyInfo = difficultyMeta[difficulty] || {
   <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary via-sky-400 to-secondary"></div>
   <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
     <div class="flex flex-wrap items-center gap-2">
-      <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryColors[category] || 'bg-slate-100 text-slate-700 ring-slate-200'}`}>
-        {category}
+      <span
+        data-l10n-en={categoryInfo.en}
+        data-l10n-zh={categoryInfo.zh}
+        class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryInfo.classes}`}
+      >
+        {pageLang === 'zh' ? categoryInfo.zh : categoryInfo.en}
       </span>
       <span data-i18n={difficultyInfo.labelKey} class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
-        {difficultyInfo.label}
+        {t[difficultyInfo.labelKey]}
       </span>
       {status === 'New' && (
         <span data-i18n="card.status.new" class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
-          New today
+          {t['card.status.new']}
         </span>
       )}
     </div>
@@ -63,22 +61,34 @@ const difficultyInfo = difficultyMeta[difficulty] || {
 
   <div class="space-y-4">
     <h2 class={`font-bold tracking-tight text-slate-950 transition group-hover:text-primary ${featured ? 'text-3xl sm:text-4xl leading-tight' : 'text-2xl leading-snug'}`}>
-      <a href={href}>{title}</a>
+      <a
+        href={href}
+        data-lang-href={`/ideas/${slug}`}
+        data-l10n-en={localizedTitleEn}
+        data-l10n-zh={localizedTitleZh}
+      >
+        {pageLang === 'zh' ? localizedTitleZh : localizedTitleEn}
+      </a>
     </h2>
 
-    <p class={`leading-8 text-slate-600 ${featured ? 'max-w-3xl text-lg' : 'text-base'}`}>
-      {description}
+    <p
+      data-l10n-en={localizedDescriptionEn}
+      data-l10n-zh={localizedDescriptionZh}
+      class={`leading-8 text-slate-600 ${featured ? 'max-w-3xl text-lg' : 'text-base'}`}
+    >
+      {pageLang === 'zh' ? localizedDescriptionZh : localizedDescriptionEn}
     </p>
   </div>
 
   <div class={`mt-8 flex items-center justify-between gap-4 ${featured ? 'flex-col items-start sm:flex-row sm:items-center' : ''}`}>
-    <p data-i18n="card.teaser" class="text-sm text-slate-500">Demand signals, competitive context, monetisation options, and the fastest path to launch — all broken down for you.</p>
+    <p data-i18n="card.teaser" class="text-sm text-slate-500">{t['card.teaser']}</p>
     <a
       href={href}
+      data-lang-href={`/ideas/${slug}`}
       data-i18n="card.cta"
       class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary"
     >
-      Read breakdown
+      {t['card.cta']}
       <span aria-hidden="true">→</span>
     </a>
   </div>

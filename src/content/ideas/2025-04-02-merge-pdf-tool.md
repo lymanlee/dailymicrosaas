@@ -1,10 +1,33 @@
 ---
-title: "Merge PDF Tool - 在线 PDF 合并工具"
+title:
+  en: "Merge PDF Tool - A lightweight online PDF merger"
+  zh: "Merge PDF Tool - 在线 PDF 合并工具"
 date: "2025-04-02"
 category: "文档处理"
 difficulty: "Easy"
-description: "极简的在线 PDF 合并工具，拖拽上传、一键合并、即时下载。"
+description:
+  en: "A minimal online PDF merger with drag-and-drop upload, one-click merge, and instant download."
+  zh: "极简的在线 PDF 合并工具，拖拽上传、一键合并、即时下载。"
 status: ""
+verdict: "Worth Building"
+confidence: "Medium"
+bestWedge:
+  en: "No-account, drag-and-drop merging with a generous free tier"
+  zh: "免登录拖拽合并 + 更慷慨的免费层"
+dataDate: "2025-04-02"
+dataWindow:
+  en: "Last 90 days"
+  zh: "近 90 天"
+painClusters:
+  - en: "Existing tools are ad-heavy or require account signup"
+    zh: "现有工具广告太重，或者一上来就要求注册"
+  - en: "Free tier limited — users can't merge more than 2 files without paying"
+    zh: "免费层限制太死，不付费就没法合并 2 个以上文件"
+competitorGaps:
+  - en: "ilovepdf.com and smallpdf.com require login for bulk operations"
+    zh: "ilovepdf.com 和 smallpdf.com 的批量操作通常要求登录"
+  - en: "Niche tools have poor mobile UX and slow processing"
+    zh: "小型工具的移动端体验差，而且处理速度慢"
 ---
 
 ## 一句话描述

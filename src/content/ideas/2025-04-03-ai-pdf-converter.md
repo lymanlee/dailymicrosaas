@@ -1,10 +1,33 @@
 ---
-title: "AI PDF Converter - 智能 PDF 转换工具"
+title:
+  en: "AI PDF Converter - An AI-first PDF conversion tool"
+  zh: "AI PDF Converter - 智能 PDF 转换工具"
 date: "2025-04-03"
 category: "AI 工具"
 difficulty: "Easy"
-description: "用 AI 自动识别 PDF 内容并转换为可编辑格式，解决传统转换器格式错乱问题。"
+description:
+  en: "Use AI to understand PDF structure and convert it into editable formats, fixing the layout-breaking issues traditional converters keep causing."
+  zh: "用 AI 自动识别 PDF 内容并转换为可编辑格式，解决传统转换器格式错乱问题。"
 status: "New"
+verdict: "Watch"
+confidence: "Medium"
+bestWedge:
+  en: "AI-powered layout preservation — solve the format-breaking problem incumbents ignore"
+  zh: "主打 AI 布局还原，解决传统转换器最常见的格式错乱"
+dataDate: "2025-04-03"
+dataWindow:
+  en: "Last 90 days"
+  zh: "近 90 天"
+painClusters:
+  - en: "Format fidelity problems — tables and columns break on conversion"
+    zh: "格式还原问题明显，表格和多栏内容一转换就容易乱"
+  - en: "Pricing frustration — users want free or cheaper options"
+    zh: "用户对定价不满，更想要免费或更便宜的方案"
+competitorGaps:
+  - en: "Traditional converters ignore document structure — AI can do better"
+    zh: "传统转换器忽略文档结构，AI 在这点上能做得更好"
+  - en: "Generalist AI tools are overpriced for single-use-case needs"
+    zh: "通用型 AI 工具对单一需求来说定价过高"
 ---
 
 ## 一句话描述

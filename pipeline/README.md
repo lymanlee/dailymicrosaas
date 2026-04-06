@@ -32,12 +32,28 @@ python3 -m pip install -r requirements.txt
 可选环境变量：
 
 - `GITHUB_TOKEN`: 提高 GitHub API 限额，也可供自动发布工作流提交/推送时复用。
+- `REDDIT_CLIENT_ID`: Reddit app 的 client id，社区扫描会用它换取 app-only OAuth token。
+- `REDDIT_CLIENT_SECRET`: Reddit app 的 client secret。
+- `REDDIT_USER_AGENT`: 建议显式配置，格式建议为 `<app_name>/<version> by <reddit_username>`。
+- `PUBLIC_EMAIL_SUBSCRIBE_URL`: 可选，供本地 Astro 构建/预览时打开邮件订阅入口。
 
-`.env` 放在仓库根目录即可，例如：
+`.env` 放在仓库根目录即可，建议直接从示例文件复制：
+
+```bash
+cp .env.example .env
+```
+
+例如：
 
 ```bash
 GITHUB_TOKEN=ghp_xxx
+REDDIT_CLIENT_ID=your_reddit_client_id
+REDDIT_CLIENT_SECRET=your_reddit_client_secret
+REDDIT_USER_AGENT=DailyMicroSaaS/0.1 by your_reddit_username
+PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 ```
+
+如果未配置 Reddit OAuth，Step 2 仍会回退到公开 JSON 搜索端点，但更容易被限流，只适合作为临时兜底。
 
 ## 常用命令
 
@@ -90,10 +106,17 @@ python3 scripts/run_daily_publish.py --mode overwrite --commit --push
 仓库内新增了 `.github/workflows/daily-publish.yml`：
 
 - 每天北京时间 **08:05** 自动运行（UTC `00:05`）
-- 也支持手动触发，可选择 `skip_trends / skip_community / skip_serp / dry_run`
+- 也支持手动触发，可选择 `skip_trends / skip_community / skip_serp / dry_run / min_score`
 - 工作流只有在 discovery 门槛、内容校验、构建校验全部通过后才会提交并推送到 `main`
 - 运行日志、报告文件、运行摘要（JSON/Markdown）会作为 artifact 保留，失败时便于直接排查
+- 工作流会把运行摘要里的关键 warnings/errors 额外转成 GitHub Actions 注释，减少翻整份日志的成本
 - 若配置仓库 Secret `PUBLISH_FAILURE_WEBHOOK_URL`，失败时会向该 webhook 发送一份 JSON 告警负载
+- 若希望 Reddit 社区扫描稳定走 OAuth，需要在仓库 Secrets 中补齐 `REDDIT_CLIENT_ID`、`REDDIT_CLIENT_SECRET`，并建议同时配置 `REDDIT_USER_AGENT`
+- Cloudflare Pages 部署还依赖 `CLOUDFLARE_API_TOKEN`、`CLOUDFLARE_ACCOUNT_ID`
+- 如需在线上打开邮件订阅入口，GitHub 仓库 Variables 中还需配置 `PUBLIC_EMAIL_SUBSCRIBE_URL`，因为当前构建发生在 GitHub Actions，而不是 Cloudflare 远端构建
+- Reddit 凭据配置步骤见：`pipeline/REDDIT_OAUTH_SETUP.md`
+- 固定排障流程见：`pipeline/DAILY_PUBLISH_SOP.md`
+- 首次补齐生产配置并执行真实日跑，直接按：`pipeline/FIRST_PRODUCTION_RUN_CHECKLIST.md`
 - `main` 上的推送会继续走原有 Cloudflare Pages 部署流程
 
 ## 当前默认策略

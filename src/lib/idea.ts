@@ -1,9 +1,63 @@
+import type { Lang } from './i18n';
+
+export interface LocalizedTextObject {
+  en?: string;
+  zh?: string;
+}
+
+export type LocalizedText = string | LocalizedTextObject;
+
 export interface IdeaSection {
   title: string;
   body: string;
   bullets: string[];
   numbered: string[];
   paragraphs: string[];
+}
+
+export interface CategoryInfo {
+  en: string;
+  zh: string;
+  classes: string;
+}
+
+export const categoryMeta: Record<string, CategoryInfo> = {
+  'AI 工具': { en: 'AI Tools', zh: 'AI 工具', classes: 'bg-violet-50 text-violet-700 ring-violet-200' },
+  '文档处理': { en: 'Document Tools', zh: '文档处理', classes: 'bg-sky-50 text-sky-700 ring-sky-200' },
+  '图像处理': { en: 'Image Tools', zh: '图像处理', classes: 'bg-pink-50 text-pink-700 ring-pink-200' },
+  '视频处理': { en: 'Video Tools', zh: '视频处理', classes: 'bg-orange-50 text-orange-700 ring-orange-200' },
+  '效率工具': { en: 'Productivity Tools', zh: '效率工具', classes: 'bg-teal-50 text-teal-700 ring-teal-200' },
+  '开发者工具': { en: 'Developer Tools', zh: '开发者工具', classes: 'bg-slate-100 text-slate-700 ring-slate-200' },
+  '语言学习': { en: 'Language Learning', zh: '语言学习', classes: 'bg-cyan-50 text-cyan-700 ring-cyan-200' },
+};
+
+export function getCategoryInfo(category: string): CategoryInfo {
+  return categoryMeta[category] ?? {
+    en: category,
+    zh: category,
+    classes: 'bg-slate-100 text-slate-700 ring-slate-200',
+  };
+}
+
+export function getCategoryLabel(category: string, lang: Lang): string {
+  const info = getCategoryInfo(category);
+  return lang === 'zh' ? info.zh : info.en;
+}
+
+export function getLocalizedText(value: LocalizedText | undefined, lang: Lang, fallback = '—'): string {
+  if (!value) {
+    return fallback;
+  }
+
+  if (typeof value === 'string') {
+    return value || fallback;
+  }
+
+  return value[lang] ?? value.en ?? value.zh ?? fallback;
+}
+
+export function hasLocalizedText(value: LocalizedText | undefined): boolean {
+  return Boolean(getLocalizedText(value, 'en', '').trim() || getLocalizedText(value, 'zh', '').trim());
 }
 
 export function parseIdeaSections(markdown: string): IdeaSection[] {

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { ui } from '../lib/i18n';
+import { ui, withLangPath } from '../lib/i18n';
 
 interface Props {
   title: string;
@@ -10,6 +10,8 @@ interface Props {
   noindex?: boolean;
   structuredData?: Record<string, any> | Array<Record<string, any>>;
   lang?: 'en' | 'zh';
+  i18nTitle?: Partial<Record<'en' | 'zh', string>>;
+  i18nDescription?: Partial<Record<'en' | 'zh', string>>;
 }
 
 const {
@@ -20,15 +22,29 @@ const {
   noindex = false,
   structuredData,
   lang: pageLang = 'en',
+  i18nTitle,
+  i18nDescription,
 } = Astro.props;
 
-// Server-side: derive lang from URL param (Astro SSG: always fallback to pageLang)
 const urlLang = (Astro.url.searchParams.get('lang') as 'en' | 'zh') ?? pageLang;
 const t = ui[urlLang] ?? ui['en'];
 
+const titleMap = {
+  en: i18nTitle?.en ?? title,
+  zh: i18nTitle?.zh ?? i18nTitle?.en ?? title,
+};
+const descriptionMap = {
+  en: i18nDescription?.en ?? description,
+  zh: i18nDescription?.zh ?? i18nDescription?.en ?? description,
+};
+const localizedTitle = titleMap[urlLang] ?? titleMap.en;
+const localizedDescription = descriptionMap[urlLang] ?? descriptionMap.en;
+
 const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
 const currentPath = Astro.url.pathname;
-const canonicalUrl = new URL(currentPath, `${siteUrl}/`).toString();
+const canonicalUrl = new URL(withLangPath(currentPath, urlLang), `${siteUrl}/`).toString();
+const alternateEnUrl = new URL(currentPath, `${siteUrl}/`).toString();
+const alternateZhUrl = new URL(withLangPath(currentPath, 'zh'), `${siteUrl}/`).toString();
 const socialImage = image.startsWith('http') ? image : new URL(image, `${siteUrl}/`).toString();
 const robots = noindex ? 'noindex, nofollow' : 'index, follow';
 
@@ -43,7 +59,7 @@ const defaultStructuredData = {
   '@type': 'WebSite',
   name: 'Daily Micro SaaS',
   url: siteUrl,
-  description,
+  description: localizedDescription,
   inLanguage: urlLang === 'zh' ? 'zh-CN' : 'en',
 };
 const jsonLdPayload = JSON.stringify(structuredData ?? defaultStructuredData);
@@ -55,26 +71,31 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={localizedDescription} />
+    <meta http-equiv="content-language" content={htmlLang} />
     <meta name="robots" content={robots} />
     <meta name="theme-color" content="#0f172a" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={alternateEnUrl} />
+    <link rel="alternate" hreflang="zh-CN" href={alternateZhUrl} />
+    <link rel="alternate" hreflang="x-default" href={alternateEnUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content="Daily Micro SaaS" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={localizedTitle} />
+    <meta property="og:description" content={localizedDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
     <meta property="og:locale" content={urlLang === 'zh' ? 'zh_CN' : 'en_US'} />
+    <meta property="og:locale:alternate" content={urlLang === 'zh' ? 'en_US' : 'zh_CN'} />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={localizedTitle} />
+    <meta name="twitter:description" content={localizedDescription} />
     <meta name="twitter:image" content={socialImage} />
 
-    <title>{title}</title>
+    <title>{localizedTitle}</title>
     <script type="application/ld+json" set:html={jsonLdPayload}></script>
   </head>
   <body class="min-h-screen text-slate-900 antialiased">
@@ -82,7 +103,7 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
       <header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur-md">
         <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <div class="flex items-center gap-3">
-            <a href="/" class="flex items-center gap-3 text-slate-950 transition hover:opacity-90">
+            <a href={withLangPath('/', urlLang)} data-lang-href="/" class="flex items-center gap-3 text-slate-950 transition hover:opacity-90">
               <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-sm font-black text-white shadow-soft">DM</span>
               <div>
                 <p class="text-base font-semibold tracking-tight">Daily Micro SaaS</p>
@@ -96,7 +117,8 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
               const isActive = item.href === '/' ? currentPath === '/' : currentPath.startsWith(item.href);
               return (
                 <a
-                  href={item.href}
+                  href={withLangPath(item.href, urlLang)}
+                  data-lang-href={item.href}
                   data-i18n={item.labelKey}
                   class={`rounded-full px-4 py-2 transition ${isActive ? 'bg-slate-950 text-white shadow-sm' : 'hover:bg-slate-100 hover:text-slate-900'}`}
                 >
@@ -118,7 +140,8 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             </button>
 
             <a
-              href="/archive"
+              href={withLangPath('/archive', urlLang)}
+              data-lang-href="/archive"
               data-i18n="nav.browse"
               class="hidden rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary md:inline-flex"
             >
@@ -141,9 +164,18 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             </p>
           </div>
           <div class="grid gap-3 text-slate-500">
-            <a href="/" data-i18n="nav.today" class="transition hover:text-primary">{t['nav.today']}</a>
-            <a href="/archive" data-i18n="nav.archive" class="transition hover:text-primary">{t['nav.archive']}</a>
-            <a href="/about" data-i18n="nav.about" class="transition hover:text-primary">{t['nav.about']}</a>
+            <a href={withLangPath('/', urlLang)} data-lang-href="/" data-i18n="nav.today" class="transition hover:text-primary">{t['nav.today']}</a>
+            <a href={withLangPath('/archive', urlLang)} data-lang-href="/archive" data-i18n="nav.archive" class="transition hover:text-primary">{t['nav.archive']}</a>
+            <a href={withLangPath('/about', urlLang)} data-lang-href="/about" data-i18n="nav.about" class="transition hover:text-primary">{t['nav.about']}</a>
+            <a
+              href={withLangPath('/subscribe', urlLang)}
+              data-lang-href="/subscribe"
+              data-l10n-en="Subscribe"
+              data-l10n-zh="订阅更新"
+              class="transition hover:text-primary"
+            >
+              {urlLang === 'zh' ? '订阅更新' : 'Subscribe'}
+            </a>
             <p class="pt-2 text-xs text-slate-400" data-i18n="footer.mvp_notice">{t['footer.mvp_notice']}</p>
           </div>
         </div>
@@ -151,7 +183,7 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
     </div>
 
     <!-- i18n runtime: client-side language switch -->
-    <script is:inline>
+    <script define:vars={{ titleMap, descriptionMap }}>
       (function () {
         // All translations bundled inline so no extra fetch is needed
         var UI = {
@@ -252,6 +284,23 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             'detail.monetisation': 'Revenue paths',
             'detail.execution': 'Fastest path to launch',
             'detail.keywords': 'Key search terms',
+            'detail.summary.verdict': 'Verdict',
+            'detail.summary.confidence': 'Data Confidence',
+            'detail.summary.best_wedge': 'Best Wedge',
+            'detail.summary.data_window': 'Data window',
+            'detail.summary.updated': 'Updated',
+            'detail.summary.score': 'Score',
+            'detail.verdict.worth_building': 'Worth Building',
+            'detail.verdict.watch': 'Watch',
+            'detail.verdict.skip': 'Skip',
+            'detail.confidence.high': 'High',
+            'detail.confidence.medium': 'Medium',
+            'detail.confidence.low': 'Low',
+            'detail.pain.title': 'Pain Clusters',
+            'detail.pain.desc': 'Recurring complaints found in community signals — these are the real jobs users want done.',
+            'detail.gaps.title': 'Competitor Gaps',
+            'detail.gaps.desc': 'Where incumbents fall short — your entry angles.',
+            'detail.evidence.title': 'Raw evidence',
             'detail.next_label': "What\u2019s next",
             'detail.next_p': "If this direction fits your current skillset, start small. Get something people can actually try.",
             'detail.next_btn1': 'Browse more ideas',
@@ -358,6 +407,23 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             'detail.monetisation': '变现路径',
             'detail.execution': '最快落地路径',
             'detail.keywords': '重点关键词',
+            'detail.summary.verdict': '结论判断',
+            'detail.summary.confidence': '数据置信度',
+            'detail.summary.best_wedge': '最佳切角',
+            'detail.summary.data_window': '数据窗口',
+            'detail.summary.updated': '更新时间',
+            'detail.summary.score': '评分',
+            'detail.verdict.worth_building': '值得做',
+            'detail.verdict.watch': '继续观察',
+            'detail.verdict.skip': '先跳过',
+            'detail.confidence.high': '高',
+            'detail.confidence.medium': '中',
+            'detail.confidence.low': '低',
+            'detail.pain.title': '痛点聚类',
+            'detail.pain.desc': '这些是社区信号里反复出现的抱怨，本质上就是用户真正想解决的任务。',
+            'detail.gaps.title': '竞品缺口',
+            'detail.gaps.desc': '头部产品没做好的地方，就是你的切入角度。',
+            'detail.evidence.title': '原始证据',
             'detail.next_label': '接下来做什么',
             'detail.next_p': '如果这条方向跟你现在的能力匹配，先做最小版本，拿一个能收集反馈的页面或工具出来。',
             'detail.next_btn1': '继续看其他方向',
@@ -369,26 +435,62 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             '404.btn_archive': '去历史归档',
           },
         };
+        var META = {
+          title: titleMap,
+          description: descriptionMap,
+        };
 
         function getLang() {
           try {
+            var urlLang = new URLSearchParams(window.location.search).get('lang');
+            if (urlLang === 'zh' || urlLang === 'en') return urlLang;
             return localStorage.getItem('dms_lang') || 'en';
           } catch (e) {
             return 'en';
           }
         }
 
+        function buildLocalizedHref(baseHref, lang) {
+          var url = new URL(baseHref, window.location.origin);
+          if (lang === 'zh') {
+            url.searchParams.set('lang', 'zh');
+          } else {
+            url.searchParams.delete('lang');
+          }
+          return url.pathname + url.search + url.hash;
+        }
+
+        function buildLocalizedAbsoluteUrl(baseHref, lang) {
+          return new URL(buildLocalizedHref(baseHref, lang), window.location.origin).toString();
+        }
+
+        function updateMetaTag(selector, value) {
+          if (!value) return;
+          var el = document.querySelector(selector);
+          if (el) el.setAttribute('content', value);
+        }
+
         function setLang(lang) {
           try {
             localStorage.setItem('dms_lang', lang);
+            var url = new URL(window.location.href);
+            if (lang === 'zh') {
+              url.searchParams.set('lang', 'zh');
+            } else {
+              url.searchParams.delete('lang');
+            }
+            window.history.replaceState({}, '', url.toString());
           } catch (e) {}
         }
 
         function applyLang(lang) {
           var t = UI[lang] || UI['en'];
+          var title = META.title[lang] || META.title.en;
+          var description = META.description[lang] || META.description.en;
+          var canonical = buildLocalizedAbsoluteUrl(window.location.pathname, lang);
+
           document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
 
-          // Update all data-i18n elements
           document.querySelectorAll('[data-i18n]').forEach(function (el) {
             var key = el.getAttribute('data-i18n');
             if (t[key] !== undefined) {
@@ -396,15 +498,38 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             }
           });
 
-          // Update lang toggle label
+          document.querySelectorAll('[data-l10n-en][data-l10n-zh]').forEach(function (el) {
+            var text = el.getAttribute(lang === 'zh' ? 'data-l10n-zh' : 'data-l10n-en');
+            if (text !== null) {
+              el.textContent = text;
+            }
+          });
+
+          document.querySelectorAll('[data-lang-href]').forEach(function (el) {
+            var baseHref = el.getAttribute('data-lang-href');
+            if (!baseHref) return;
+            el.setAttribute('href', buildLocalizedHref(baseHref, lang));
+          });
+
           var label = document.getElementById('lang-label');
           if (label) label.textContent = lang === 'zh' ? 'EN' : '中文';
 
-          // Emit event so page-level scripts can re-render dynamic parts
+          if (title) document.title = title;
+          updateMetaTag('meta[name="description"]', description);
+          updateMetaTag('meta[http-equiv="content-language"]', lang === 'zh' ? 'zh-CN' : 'en');
+          updateMetaTag('meta[property="og:title"]', title);
+          updateMetaTag('meta[property="og:description"]', description);
+          updateMetaTag('meta[property="og:url"]', canonical);
+          updateMetaTag('meta[property="og:locale"]', lang === 'zh' ? 'zh_CN' : 'en_US');
+          updateMetaTag('meta[name="twitter:title"]', title);
+          updateMetaTag('meta[name="twitter:description"]', description);
+
+          var canonicalLink = document.querySelector('link[rel="canonical"]');
+          if (canonicalLink) canonicalLink.setAttribute('href', canonical);
+
           document.dispatchEvent(new CustomEvent('langchange', { detail: { lang: lang, t: t } }));
         }
 
-        // Init on load
         document.addEventListener('DOMContentLoaded', function () {
           var lang = getLang();
           applyLang(lang);

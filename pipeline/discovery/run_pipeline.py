@@ -80,6 +80,7 @@ def build_keyword_profiles(trend_data: list[dict], community_data: dict, serp_da
             "trend_peak": trend_item.get("peak", 0),
             "trend_relative": trend_item.get("relative_to_benchmark", 0),
             "trend_data_points": trend_item.get("data_points", 0),
+            "trend_time_series": trend_item.get("time_series", []),
             "community_signals": community_item.get("total_signals", 0),
             "community_strength": community_item.get("total_strength", 0),
             "community_sources_count": len(community_item.get("sources", [])),
@@ -173,7 +174,7 @@ def format_report(run_date: str, profiles: list[dict]) -> str:
     lines.append("")
     lines.append("=" * 70)
     lines.append("💡 建议：优先挑 worth_it Top 3 做内容生产，再决定是否进入 MVP 验证。")
-    lines.append("   趋势数据来源：Google Trends | 社区：HN + GitHub | SERP：可选增强")
+    lines.append("   趋势数据来源：Google Trends | 社区：HN + GitHub + Reddit | SERP：可选增强")
 
     return "\n".join(lines)
 
@@ -264,12 +265,14 @@ def execute_pipeline(
     # 统计社区信号质量
     hn_count = community_data.get("summary", {}).get("hn_count", 0)
     gh_count = community_data.get("summary", {}).get("github_count", 0)
-    if hn_count == 0 and gh_count == 0:
-        msg = "社区扫描未获得任何信号（HN + GitHub 均为 0），社区评分维度将缺失"
+    reddit_count = community_data.get("summary", {}).get("reddit_count", 0)
+    total_community = hn_count + gh_count + reddit_count
+    if total_community == 0:
+        msg = "社区扫描未获得任何信号（HN + GitHub + Reddit 均为 0），社区评分维度将缺失"
         warnings.append(f"⚠️  [Step 2] {msg}")
         print(f"  ⚠️ {msg}")
-    elif hn_count + gh_count < 5:
-        msg = f"社区信号偏少（HN: {hn_count}, GitHub: {gh_count}），建议检查网络连通性"
+    elif total_community < 5:
+        msg = f"社区信号偏少（HN: {hn_count}, GitHub: {gh_count}, Reddit: {reddit_count}），建议检查网络连通性"
         warnings.append(f"⚠️  [Step 2] {msg}")
 
     # ─── Step 3: SERP 分析 ────────────────────────────────────────────────────────

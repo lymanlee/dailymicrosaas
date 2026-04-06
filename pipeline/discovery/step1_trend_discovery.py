@@ -106,12 +106,27 @@ def build_trend_payload(pytrends: TrendReq, keywords: list[str], retries: int = 
     return pd.DataFrame()
 
 
+def serialize_time_series(series: pd.Series) -> list[dict]:
+    """把 pytrends 的时间序列转成可写入 JSON/frontmatter 的结构。"""
+    points = []
+    for index, value in series.items():
+        if pd.isna(value):
+            continue
+        if hasattr(index, "strftime"):
+            label = index.strftime("%Y-%m-%d")
+        else:
+            label = str(index)[:10]
+        points.append({"date": label, "value": int(round(float(value)))})
+    return points
+
+
 def compute_trend_metrics(df: pd.DataFrame, keyword: str) -> dict:
     """从 Google Trends DataFrame 中提取趋势指标。"""
     if df.empty or keyword not in df.columns:
-        return {"interest": 0, "slope": 0.0, "recent_avg": 0, "peak": 0, "data_points": 0}
+        return {"interest": 0, "slope": 0.0, "recent_avg": 0, "peak": 0, "data_points": 0, "time_series": []}
 
     series = df[keyword].dropna()
+    time_series = serialize_time_series(series)
 
     if len(series) < 7:
         avg_val = round(series.mean(), 1) if len(series) > 0 else 0
@@ -121,6 +136,7 @@ def compute_trend_metrics(df: pd.DataFrame, keyword: str) -> dict:
             "recent_avg": avg_val,
             "peak": int(series.max()) if len(series) > 0 else 0,
             "data_points": len(series),
+            "time_series": time_series,
         }
 
     values = series.values.tolist()
@@ -143,6 +159,7 @@ def compute_trend_metrics(df: pd.DataFrame, keyword: str) -> dict:
         "recent_avg": round(recent_avg, 1),
         "peak": int(max(values)),
         "data_points": n,
+        "time_series": time_series,
     }
 
 
@@ -197,6 +214,7 @@ def discover_trending_keywords(run_date: str | None = None, force_refresh: bool 
                     "recent_avg": 0,
                     "peak": 0,
                     "data_points": 0,
+                    "time_series": [],
                     "relative_to_benchmark": 0,
                     "benchmark_keyword": benchmark,
                     "_status": "rate_limited",
@@ -218,6 +236,7 @@ def discover_trending_keywords(run_date: str | None = None, force_refresh: bool 
                     "recent_avg": 0,
                     "peak": 0,
                     "data_points": 0,
+                    "time_series": [],
                     "relative_to_benchmark": 0,
                     "benchmark_keyword": benchmark,
                     "_status": "rate_limited",

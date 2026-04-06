@@ -43,6 +43,19 @@ CONTENT_GIANTS = {
     "w3schools.com", "stackoverflow.com",
 }
 
+# 搜索引擎和导航类域名：这些是 DDG 搜索结果中可能出现的"自身域名"或通用导航站，
+# 不是真正的竞品工具，必须从 niche_sites 和 big_sites 中完全排除。
+SEARCH_AND_NAV_DOMAINS = {
+    "duckduckgo.com", "google.com", "bing.com", "yahoo.com",
+    "ask.com", "baidu.com", "yandex.com", "ecosia.org",
+    # 通用导航 / 目录
+    "producthunt.com", "alternativeto.net", "capterra.com",
+    "g2.com", "trustpilot.com", "sitejabber.com",
+    # 常见内容聚合
+    "github.com", "gitlab.com", "bitbucket.org",
+    "npmjs.com", "pypi.org",
+}
+
 SSL_CTX = ssl.create_default_context()
 SSL_CTX.check_hostname = False
 SSL_CTX.verify_mode = ssl.CERT_NONE
@@ -265,6 +278,10 @@ def analyze_serp_data(raw_serp_items, keywords: list[str]) -> dict:
                 url = result.get("url", "")
                 domain = _extract_domain(url)
             if not domain:
+                continue
+
+            # 排除搜索引擎、导航站等噪音域名
+            if any(noise in domain for noise in SEARCH_AND_NAV_DOMAINS):
                 continue
 
             if any(giant in domain for giant in all_tool_giants):

@@ -1,9 +1,13 @@
 ---
-title: "Idea 名称 - 简短描述"
+title:
+  en: "Idea name - Short value proposition"
+  zh: "Idea 名称 - 简短描述"
 date: "2025-04-03"
 category: "AI 工具"
 difficulty: "Easy"
-description: "一句话描述这个创业方向的核心价值。"
+description:
+  en: "One sentence that explains the core value of this startup direction."
+  zh: "一句话描述这个创业方向的核心价值。"
 status: "New"
 ---
 

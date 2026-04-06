@@ -93,7 +93,9 @@ def validate_markdown(file_path: Path) -> list[str]:
 
     # 2. 必要字段
     for field in REQUIRED_FIELDS:
-        if not re.search(rf"^{field}:\s*.+$", frontmatter, re.MULTILINE):
+        has_inline_value = re.search(rf"^{field}:\s*.+$", frontmatter, re.MULTILINE)
+        has_nested_value = re.search(rf"^{field}:\s*$", frontmatter, re.MULTILINE)
+        if not has_inline_value and not has_nested_value:
             errors.append(f"frontmatter 缺少字段: {field}")
 
     # 3. 必要章节

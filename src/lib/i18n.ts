@@ -1,5 +1,17 @@
 export type Lang = 'en' | 'zh';
 
+export function withLangPath(path: string, lang: Lang): string {
+  const url = new URL(path, 'https://dailymicrosaas.pages.dev');
+
+  if (lang === 'zh') {
+    url.searchParams.set('lang', 'zh');
+  } else {
+    url.searchParams.delete('lang');
+  }
+
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
 export const ui = {
   en: {
     'nav.today': "Today's Pick",
@@ -111,6 +123,28 @@ export const ui = {
     'detail.monetisation': 'Revenue paths',
     'detail.execution': 'Fastest path to launch',
     'detail.keywords': 'Key search terms',
+    'detail.summary.verdict': 'Verdict',
+    'detail.summary.confidence': 'Data Confidence',
+    'detail.summary.best_wedge': 'Best Wedge',
+    'detail.summary.data_window': 'Data window',
+    'detail.summary.updated': 'Updated',
+    'detail.summary.score': 'Score',
+    'detail.trend.title': 'Search trend curve',
+    'detail.trend.desc': 'Raw Google Trends interest-over-time points for the latest window — enough to see whether demand is flat, rising, or fading.',
+    'detail.trend.peak': 'Peak',
+    'detail.trend.avg': 'Recent avg',
+    'detail.trend.window': 'Last ~90 days',
+    'detail.verdict.worth_building': 'Worth Building',
+    'detail.verdict.watch': 'Watch',
+    'detail.verdict.skip': 'Skip',
+    'detail.confidence.high': 'High',
+    'detail.confidence.medium': 'Medium',
+    'detail.confidence.low': 'Low',
+    'detail.pain.title': 'Pain Clusters',
+    'detail.pain.desc': 'Recurring complaints found in community signals — these are the real jobs users want done.',
+    'detail.gaps.title': 'Competitor Gaps',
+    'detail.gaps.desc': 'Where incumbents fall short — your entry angles.',
+    'detail.evidence.title': 'Raw evidence',
     'detail.next_label': "What\u2019s next",
     'detail.next_p': "If this direction fits your current skillset, start small. Get something people can actually try.",
     'detail.next_btn1': 'Browse more ideas',
@@ -233,6 +267,28 @@ export const ui = {
     'detail.monetisation': '变现路径',
     'detail.execution': '最快落地路径',
     'detail.keywords': '重点关键词',
+    'detail.summary.verdict': '结论判断',
+    'detail.summary.confidence': '数据置信度',
+    'detail.summary.best_wedge': '最佳切角',
+    'detail.summary.data_window': '数据窗口',
+    'detail.summary.updated': '更新时间',
+    'detail.summary.score': '评分',
+    'detail.trend.title': '搜索趋势曲线',
+    'detail.trend.desc': '直接展示最近一个窗口内的 Google Trends 时间序列，方便判断需求是在横盘、上升还是回落。',
+    'detail.trend.peak': '峰值',
+    'detail.trend.avg': '近 7 日均值',
+    'detail.trend.window': '近约 90 天',
+    'detail.verdict.worth_building': '值得做',
+    'detail.verdict.watch': '继续观察',
+    'detail.verdict.skip': '先跳过',
+    'detail.confidence.high': '高',
+    'detail.confidence.medium': '中',
+    'detail.confidence.low': '低',
+    'detail.pain.title': '痛点聚类',
+    'detail.pain.desc': '这些是社区信号里反复出现的抱怨，本质上就是用户真正想解决的任务。',
+    'detail.gaps.title': '竞品缺口',
+    'detail.gaps.desc': '头部产品没做好的地方，就是你的切入角度。',
+    'detail.evidence.title': '原始证据',
     'detail.next_label': '接下来做什么',
     'detail.next_p': '如果这条方向跟你现在的能力匹配，先做最小版本，拿一个能收集反馈的页面或工具出来。',
     'detail.next_btn1': '继续看其他方向',

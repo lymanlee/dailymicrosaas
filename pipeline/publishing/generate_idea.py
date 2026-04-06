@@ -200,8 +200,15 @@ def collect_existing_keywords(output_dir: Path) -> list[str]:
             existing.append(normalize_keyword(source_keyword_match.group(1)))
 
         title_match = re.search(r'^title:\s*"?(.*?)"?$', frontmatter, re.MULTILINE)
-        if title_match:
-            title = title_match.group(1).split(" - ")[0].strip()
+        localized_title_match = re.search(r'^title:\s*\n\s+en:\s*"?(.*?)"?$', frontmatter, re.MULTILINE)
+        title_value = None
+        if localized_title_match:
+            title_value = localized_title_match.group(1)
+        elif title_match:
+            title_value = title_match.group(1)
+
+        if title_value:
+            title = title_value.split(" - ")[0].strip()
             if title:
                 existing.append(normalize_keyword(title))
 
@@ -308,8 +315,8 @@ def derive_difficulty(idea: dict) -> str:
 
 # ─── 标题与描述 ─────────────────────────────────────────────────────────────────
 
-def build_title(keyword: str, category: str, idea: dict) -> str:
-    """根据竞争环境和分数生成差异化标题，而不是固定后缀。"""
+def build_title_zh(keyword: str, category: str, idea: dict) -> str:
+    """根据竞争环境和分数生成差异化中文标题，而不是固定后缀。"""
     score = idea.get("score", 0)
     niche_count = idea.get("serp_niche_count", 0)
     big_count = idea.get("serp_big_count", 0)
@@ -343,7 +350,48 @@ def build_title(keyword: str, category: str, idea: dict) -> str:
         return f"{keyword_title} — {category_suffix.get(category, '这个方向值不值得做')}"
 
 
-def build_description(keyword: str, category: str, idea: dict) -> str:
+def build_title_en(keyword: str, category: str, idea: dict) -> str:
+    """Generate a concise English title from trend and competition signals."""
+    score = idea.get("score", 0)
+    niche_count = idea.get("serp_niche_count", 0)
+    big_count = idea.get("serp_big_count", 0)
+    enterable = idea.get("serp_worth_entering", False)
+    trend_slope = idea.get("trend_slope", 0)
+    keyword_title = keyword.title()
+
+    if trend_slope > 0.5:
+        if enterable and niche_count >= 4:
+            return f"{keyword_title} — Demand is rising and the niche is still open"
+        elif big_count >= 4:
+            return f"{keyword_title} — Rising demand, but giants already crowd the SERP"
+        return f"{keyword_title} — Search demand is climbing. Is now the time to enter?"
+    if enterable and niche_count >= 3:
+        return f"{keyword_title} — A proven niche with room for a sharper wedge"
+    if big_count >= 5:
+        return f"{keyword_title} — Crowded by big players, but not completely closed"
+    if score >= 50:
+        return f"{keyword_title} — Strong demand signals and a score of {score:.1f}"
+
+    category_suffix = {
+        "AI 工具": "Where an AI-first wedge still exists",
+        "文档处理": "Can a more focused version still win?",
+        "图像处理": "Is this small enough to validate fast?",
+        "视频处理": "Is this worth entering right now?",
+        "开发者工具": "Is there still a developer-focused wedge?",
+        "效率工具": "Could this become a tight, useful niche tool?",
+        "语言学习": "Is there still room in this sub-category?",
+    }
+    return f"{keyword_title} — {category_suffix.get(category, 'Is this direction worth building?')}"
+
+
+def build_title(keyword: str, category: str, idea: dict) -> dict[str, str]:
+    return localized_text(
+        build_title_en(keyword, category, idea),
+        build_title_zh(keyword, category, idea),
+    )
+
+
+def build_description_zh(keyword: str, category: str, idea: dict) -> str:
     score = idea.get("score", 0)
     trend_interest = idea.get("trend_interest", 0)
     community_signals = idea.get("community_signals", 0)
@@ -359,6 +407,34 @@ def build_description(keyword: str, category: str, idea: dict) -> str:
 
     signal_str = "、".join(signals) if signals else f"综合评分 {score}/100"
     return f"对 {keyword} 这个{category}方向的一次深度拆解。{signal_str}，聚焦需求真实性、竞争空间和最快验证路径。"
+
+
+def build_description_en(keyword: str, category: str, idea: dict) -> str:
+    score = idea.get("score", 0)
+    trend_interest = idea.get("trend_interest", 0)
+    community_signals = idea.get("community_signals", 0)
+    niche_count = idea.get("serp_niche_count", 0)
+
+    signals = []
+    if trend_interest > 5:
+        signals.append(f"search interest around {trend_interest}")
+    if community_signals > 0:
+        signals.append(f"{community_signals} community signals")
+    if niche_count > 0:
+        signals.append(f"{niche_count} niche SERP players")
+
+    signal_str = ", ".join(signals) if signals else f"an overall score of {score}/100"
+    return (
+        f"A deep dive into the {keyword} {category.lower()} opportunity: {signal_str} — "
+        f"focused on real demand, competitive space, and the fastest validation path."
+    )
+
+
+def build_description(keyword: str, category: str, idea: dict) -> dict[str, str]:
+    return localized_text(
+        build_description_en(keyword, category, idea),
+        build_description_zh(keyword, category, idea),
+    )
 
 
 # ─── 一句话描述（One Liner）──────────────────────────────────────────────────────
@@ -1057,6 +1133,229 @@ def build_why_worth_section(keyword: str, idea: dict, category: str) -> str:
     return "\n".join(lines)
 
 
+# ─── 决策摘要字段 ────────────────────────────────────────────────────────────────
+
+def localized_text(en: str, zh: str) -> dict[str, str]:
+    return {"en": en, "zh": zh}
+
+
+def yaml_localized_text(value: dict[str, str], indent: int = 2) -> str:
+    prefix = " " * indent
+    return f'{prefix}en: "{quote_yaml(value.get("en", ""))}"\n{prefix}zh: "{quote_yaml(value.get("zh", ""))}"'
+
+
+def yaml_localized_list_block(field_name: str, items: list[dict[str, str]]) -> str:
+    if not items:
+        return f"{field_name}: []"
+
+    lines = [f"{field_name}:"]
+    for item in items:
+        lines.append(f'  - en: "{quote_yaml(item.get("en", ""))}"')
+        lines.append(f'    zh: "{quote_yaml(item.get("zh", ""))}"')
+    return "\n".join(lines)
+
+
+def yaml_trend_series_block(field_name: str, items: list[dict]) -> str:
+    if not items:
+        return f"{field_name}: []"
+
+    lines = [f"{field_name}:"]
+    for item in items:
+        lines.append(f'  - date: "{quote_yaml(str(item.get("date", "")))}"')
+        lines.append(f'    value: {int(item.get("value", 0) or 0)}')
+    return "\n".join(lines)
+
+
+def derive_verdict(idea: dict) -> str:
+    """将 grade 映射为更清晰的决策结论。"""
+    grade = idea.get("grade", "watch")
+    if grade == "worth_it":
+        return "Worth Building"
+    elif grade == "watch":
+        return "Watch"
+    else:
+        return "Skip"
+
+
+def derive_confidence(idea: dict) -> str:
+    """
+    根据数据点数量、来源数量、SERP 覆盖率综合判断置信度。
+    High: 趋势/社区/SERP 三维都有数据
+    Medium: 有两维数据
+    Low: 只有一维或无数据
+    """
+    score = 0
+    if idea.get("trend_data_points", 0) >= 30:
+        score += 1
+    if idea.get("community_signals", 0) >= 2:
+        score += 1
+    if idea.get("serp_niche_count", 0) + idea.get("serp_big_count", 0) > 0:
+        score += 1
+    if score >= 3:
+        return "High"
+    elif score == 2:
+        return "Medium"
+    else:
+        return "Low"
+
+
+def derive_best_wedge(keyword: str, category: str, idea: dict) -> dict[str, str]:
+    """
+    提炼一句话「最佳切角」，优先基于竞争格局和社区信号判断。
+    返回中英双语对象。
+    """
+    niche_count = idea.get("serp_niche_count", 0)
+    tool_big_count = idea.get("serp_tool_big_count", 0)
+    enterable = idea.get("serp_worth_entering", False)
+    trend_slope = idea.get("trend_slope", 0)
+    community_items = idea.get("community_top_items", [])
+
+    pain_wedges: list[dict[str, str]] = []
+    for item in community_items[:5]:
+        title = item.get("title", "").lower()
+        if any(w in title for w in ["slow", "broken", "error", "failed", "can't", "doesn't work", "issue", "problem"]):
+            pain_wedges.append(localized_text("Fix reliability / error handling", "先打可靠性和报错处理"))
+        elif any(w in title for w in ["free", "cheaper", "cost", "pricing", "alternative"]):
+            pain_wedges.append(localized_text("Undercut pricing with a free-first tier", "用更友好的免费层压价格"))
+        elif any(w in title for w in ["batch", "bulk", "multiple", "many"]):
+            pain_wedges.append(localized_text("Unlock batch processing blocked by incumbents", "补上被老玩家卡住的批量处理能力"))
+        elif any(w in title for w in ["mobile", "ios", "android", "phone"]):
+            pain_wedges.append(localized_text("Mobile-first experience", "优先做移动端体验"))
+
+    if pain_wedges:
+        return pain_wedges[0]
+
+    if enterable and niche_count >= 3 and tool_big_count <= 2:
+        return localized_text(
+            "Undercut niche incumbents on speed + UX (no account required)",
+            "从速度和体验切入，压过细分老玩家（免登录）",
+        )
+    elif tool_big_count >= 4:
+        return localized_text(
+            "Narrow to one vertical/format the giants ignore",
+            "聚焦一个巨头没认真做的垂直场景或格式",
+        )
+    elif trend_slope > 0.3:
+        return localized_text(
+            "Ride the rising search trend — enter now before competition catches up",
+            "趁搜索趋势上升尽快入场，在竞争变挤之前先卡位",
+        )
+    elif category == "文档处理":
+        return localized_text("Format fidelity + batch processing free tier", "主打格式还原 + 批量处理免费层")
+    elif category == "图像处理":
+        return localized_text("Client-side processing (privacy) + instant download", "主打本地处理（隐私）+ 即时下载")
+    elif category == "AI 工具":
+        return localized_text(
+            "Cheaper & focused — do one thing, charge less than the generalists",
+            "更便宜、更聚焦：只做好一件事，价格打过通用型产品",
+        )
+    elif category == "开发者工具":
+        return localized_text("Accuracy + shareable permalinks + offline support", "主打准确性 + 可分享永久链接 + 离线支持")
+    else:
+        return localized_text("Zero-friction entry: no signup, instant result, one core job", "零摩擦切入：免注册、立刻出结果、只解决一个核心任务")
+
+
+def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
+    """
+    从社区信号标题里归纳痛点聚类（现阶段做关键词匹配，P2 接 LLM 归纳）。
+    返回最多 4 条中英双语痛点。
+    """
+    community_items = idea.get("community_top_items", [])
+    clusters: list[dict[str, str]] = []
+    seen_clusters: set[str] = set()
+
+    cluster_rules = [
+        (["slow", "speed", "fast", "performance", "loading"], localized_text("Speed & performance issues", "速度和性能问题反复出现")),
+        (["broken", "error", "failed", "bug", "doesn't work", "not working", "crash"], localized_text("Reliability / error-prone tools", "工具稳定性差，容易报错")),
+        (["free", "cheaper", "cost", "pricing", "expensive", "paid", "alternative"], localized_text("Pricing frustration — users want free or cheaper options", "定价让人不爽，用户想要免费或更便宜的方案")),
+        (["batch", "bulk", "multiple", "many", "all files"], localized_text("Batch processing not available in free tier", "免费层不支持批量处理")),
+        (["mobile", "ios", "android", "phone", "app"], localized_text("Mobile experience lacking", "移动端体验明显缺位")),
+        (["privacy", "data", "gdpr", "upload", "server"], localized_text("Privacy concerns — users don't want to upload files", "用户在意隐私，不想把文件上传到服务器")),
+        (["format", "quality", "fidelity", "layout", "broken format"], localized_text("Output quality / format fidelity problems", "输出质量和格式还原问题明显")),
+        (["show hn", "launch", "built", "made", "release", "new tool"], localized_text("Creators shipping in this space (proof of demand)", "这个方向持续有人发布产品，说明需求真实存在")),
+    ]
+
+    for item in community_items[:10]:
+        title_lower = item.get("title", "").lower()
+        for keywords, cluster_label in cluster_rules:
+            cluster_key = cluster_label["en"]
+            if cluster_key not in seen_clusters and any(kw in title_lower for kw in keywords):
+                clusters.append(cluster_label)
+                seen_clusters.add(cluster_key)
+                break
+
+        if len(clusters) >= 4:
+            break
+
+    return clusters
+
+
+def derive_competitor_gaps(idea: dict, category: str) -> list[dict[str, str]]:
+    """
+    从 SERP 大站情况推断竞品弱点（现阶段基于规则，P1 接真实竞品页面分析）。
+    返回最多 3 条中英双语竞品弱点。
+    """
+    big_sites = idea.get("serp_big_sites", [])
+    tool_big_count = idea.get("serp_tool_big_count", 0)
+    niche_sites = idea.get("serp_niche_sites", [])
+
+    gaps: list[dict[str, str]] = []
+
+    if tool_big_count >= 3:
+        sites_en = ", ".join(big_sites[:2])
+        sites_zh = "、".join(big_sites[:2])
+        gaps.append(localized_text(
+            f"Incumbents ({sites_en}) hide key features behind paid plans",
+            f"头部产品（{sites_zh}）把关键功能放在付费墙后",
+        ))
+    if tool_big_count >= 2:
+        gaps.append(localized_text(
+            "Big tools require account creation — most users abandon before converting",
+            "大站要求先注册账号，很多用户在转化前就流失了",
+        ))
+    if category == "文档处理":
+        gaps.append(localized_text(
+            "Free tier limited to 1-2 files/day; power users are underserved",
+            "免费层通常限制为每天 1-2 个文件，重度用户没人认真服务",
+        ))
+    elif category == "图像处理":
+        gaps.append(localized_text(
+            "Output watermarked or resolution-capped on free tier",
+            "免费层要么加水印，要么限制分辨率",
+        ))
+    elif category == "AI 工具":
+        gaps.append(localized_text(
+            "Generalist AI tools are overpriced for single-use-case needs",
+            "通用型 AI 工具对单一需求来说定价过高",
+        ))
+    elif category == "开发者工具":
+        gaps.append(localized_text(
+            "Results not shareable / no permalink support in most tools",
+            "多数工具结果不可分享，也没有永久链接支持",
+        ))
+
+    if niche_sites:
+        gaps.append(localized_text(
+            f"Existing niche tools ({niche_sites[0]}) have outdated UI and no mobile support",
+            f"现有细分工具（{niche_sites[0]}）界面老旧，也没做好移动端支持",
+        ))
+
+    return gaps[:3]
+
+
+def derive_data_window(idea: dict) -> dict[str, str]:
+    """数据窗口：趋势默认 3 个月，返回中英双语对象。"""
+    data_points = idea.get("trend_data_points", 0)
+    if data_points >= 90:
+        return localized_text("Last 90 days", "近 90 天")
+    elif data_points >= 30:
+        return localized_text("Last 30 days", "近 30 天")
+    elif data_points > 0:
+        return localized_text(f"Last {data_points} days", f"近 {data_points} 天")
+    else:
+        return localized_text("N/A", "暂无")
+
+
 # ─── 主构建函数 ──────────────────────────────────────────────────────────────────
 
 def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
@@ -1065,6 +1364,8 @@ def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
     difficulty = derive_difficulty(idea)
     title = build_title(keyword, category, idea)
     description = build_description(keyword, category, idea)
+    title_yaml = yaml_localized_text(title, indent=2)
+    description_yaml = yaml_localized_text(description, indent=2)
     slug = f"{date_str}-{slugify(keyword)}"
     tech_body, timeframe = build_tech_section(keyword, category, difficulty, idea)
 
@@ -1077,16 +1378,59 @@ def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
     seo_section = build_seo_section(keyword, idea)
     why_worth_section = build_why_worth_section(keyword, idea, category)
 
+    # 决策摘要字段
+    verdict = derive_verdict(idea)
+    confidence = derive_confidence(idea)
+    best_wedge = derive_best_wedge(keyword, category, idea)
+    pain_clusters = derive_pain_clusters(idea)
+    competitor_gaps = derive_competitor_gaps(idea, category)
+    data_window = derive_data_window(idea)
+
+    best_wedge_yaml = yaml_localized_text(best_wedge)
+    data_window_yaml = yaml_localized_text(data_window)
+    trend_series_yaml = yaml_trend_series_block("trendSeries", idea.get("trend_time_series", []))
+    pain_clusters_yaml = yaml_localized_list_block("painClusters", pain_clusters)
+    competitor_gaps_yaml = yaml_localized_list_block("competitorGaps", competitor_gaps)
+
+    evidence_links = []
+    for item in idea.get("community_top_items", [])[:3]:
+        url = item.get("url", "")
+        title_text = item.get("title", "")
+        source = item.get("source", "")
+        if url and title_text:
+            evidence_links.append({"url": url, "title": title_text, "source": source})
+
+    if evidence_links:
+        evidence_links_yaml = "evidenceLinks:\n" + "\n".join(
+            f'  - url: "{quote_yaml(e["url"])}"\n    title: "{quote_yaml(e["title"])}"\n    source: "{quote_yaml(e["source"])}"'
+            for e in evidence_links
+        )
+    else:
+        evidence_links_yaml = "evidenceLinks: []"
+
     markdown = f"""---
-title: "{quote_yaml(title)}"
+title:
+{title_yaml}
 date: "{date_str}"
 category: "{quote_yaml(category)}"
 difficulty: "{difficulty}"
-description: "{quote_yaml(description)}"
+description:
+{description_yaml}
 status: "New"
 sourceKeyword: "{quote_yaml(keyword)}"
 sourceScore: {idea.get('score', 0)}
 sourceGrade: "{idea.get('grade', 'watch')}"
+verdict: "{verdict}"
+confidence: "{confidence}"
+bestWedge:
+{best_wedge_yaml}
+dataDate: "{date_str}"
+dataWindow:
+{data_window_yaml}
+{trend_series_yaml}
+{pain_clusters_yaml}
+{competitor_gaps_yaml}
+{evidence_links_yaml}
 ---
 
 ## 一句话描述
@@ -1127,7 +1471,7 @@ sourceGrade: "{idea.get('grade', 'watch')}"
 
 {why_worth_section}
 """
-    return slug, title, markdown
+    return slug, title.get("zh", title.get("en", keyword.title())), markdown
 
 
 def write_idea_file(markdown: str, output_path: Path, mode: str, dry_run: bool) -> str:

@@ -2,6 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import IdeaCard from '../components/IdeaCard.astro';
 import { getCollection } from 'astro:content';
+import { ui, type Lang } from '../lib/i18n';
+import { getCategoryInfo } from '../lib/idea';
+
+const pageLang: Lang = Astro.url.searchParams.get('lang') === 'zh' ? 'zh' : 'en';
+const t = ui[pageLang] ?? ui.en;
 
 const allIdeas = await getCollection('ideas');
 const publishedIdeas = allIdeas.filter((idea) => idea.slug !== 'template');
@@ -14,32 +19,52 @@ const ideas = publishedIdeas
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 const categories = [...new Set(ideas.map((idea) => idea.category))];
+const pageTitleMap = {
+  en: 'Archive - Daily Micro SaaS',
+  zh: '历史归档｜Daily Micro SaaS',
+};
+const pageDescriptionMap = {
+  en: 'Browse all Micro SaaS directions we have broken down, filtered by category.',
+  zh: '按分类浏览已经拆解过的 Micro SaaS 方向，快速筛选更适合你当前能力和节奏的机会。',
+};
+const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
+const pageUrl = new URL(`/archive${pageLang === 'zh' ? '?lang=zh' : ''}`, `${siteUrl}/`).toString();
+const pageTitle = pageTitleMap[pageLang];
+const pageDescription = pageDescriptionMap[pageLang];
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
-  name: 'Daily Micro SaaS Archive',
-  description: 'Browse all Micro SaaS directions we have broken down, filtered by category.',
-  url: 'https://dailymicrosaas.pages.dev/archive',
+  name: pageLang === 'zh' ? 'Daily Micro SaaS 历史归档' : 'Daily Micro SaaS Archive',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: pageLang === 'zh' ? 'zh-CN' : 'en',
 };
 ---
 
-<Layout title="Archive - Daily Micro SaaS" description="Browse all Micro SaaS directions we have broken down, filtered by category." structuredData={structuredData}>
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  structuredData={structuredData}
+  lang={pageLang}
+  i18nTitle={pageTitleMap}
+  i18nDescription={pageDescriptionMap}
+>
   <section class="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
     <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
       <div>
-        <span data-i18n="archive.kicker" class="section-kicker">Archive</span>
-        <h1 data-i18n="archive.h1" class="mt-3 text-4xl font-black tracking-tight text-slate-950">All the directions we've broken down</h1>
+        <span data-i18n="archive.kicker" class="section-kicker">{t['archive.kicker']}</span>
+        <h1 data-i18n="archive.h1" class="mt-3 text-4xl font-black tracking-tight text-slate-950">{t['archive.h1']}</h1>
         <p data-i18n="archive.subhead" class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
-          Compare opportunity density across categories, or read a few in a row to find the best fit for your current skillset.
+          {t['archive.subhead']}
         </p>
       </div>
       <div class="grid gap-2 rounded-3xl bg-slate-50 p-4 text-sm text-slate-600 sm:grid-cols-2">
         <div>
-          <p data-i18n="archive.count.label" class="font-semibold text-slate-900">Total ideas</p>
+          <p data-i18n="archive.count.label" class="font-semibold text-slate-900">{t['archive.count.label']}</p>
           <p>{ideas.length}</p>
         </div>
         <div>
-          <p data-i18n="archive.cat.label" class="font-semibold text-slate-900">Categories</p>
+          <p data-i18n="archive.cat.label" class="font-semibold text-slate-900">{t['archive.cat.label']}</p>
           <p>{categories.length}</p>
         </div>
       </div>
@@ -48,20 +73,25 @@ const structuredData = {
 
   <section class="mt-8 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
     <div class="mb-4 flex flex-wrap items-center gap-3">
-      <span data-i18n="archive.filter.label" class="text-sm font-semibold text-slate-500">Filter by category:</span>
-      <button type="button" data-filter-btn data-category="ALL" class="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white" data-i18n-content="archive.filter.all">All</button>
-      {categories.map((cat) => (
-        <button
-          type="button"
-          data-filter-btn
-          data-category={cat}
-          class="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200"
-        >
-          {cat}
-        </button>
-      ))}
+      <span data-i18n="archive.filter.label" class="text-sm font-semibold text-slate-500">{t['archive.filter.label']}</span>
+      <button type="button" data-filter-btn data-category="ALL" class="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white" data-i18n-content="archive.filter.all">{t['archive.filter.all']}</button>
+      {categories.map((cat) => {
+        const categoryInfo = getCategoryInfo(cat);
+        return (
+          <button
+            type="button"
+            data-filter-btn
+            data-category={cat}
+            data-l10n-en={categoryInfo.en}
+            data-l10n-zh={categoryInfo.zh}
+            class="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200"
+          >
+            {pageLang === 'zh' ? categoryInfo.zh : categoryInfo.en}
+          </button>
+        );
+      })}
     </div>
-    <p id="archive-filter-hint" data-i18n="archive.filter.hint" class="text-sm text-slate-500">Showing all. Click a category to filter.</p>
+    <p id="archive-filter-hint" data-i18n="archive.filter.hint" class="text-sm text-slate-500">{t['archive.filter.hint']}</p>
   </section>
 
   <section class="mt-8">
@@ -82,7 +112,7 @@ const structuredData = {
       </div>
     ) : (
       <div class="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
-        <span data-i18n="archive.empty">Nothing here yet. More coming soon.</span>
+        <span data-i18n="archive.empty">{t['archive.empty']}</span>
       </div>
     )}
   </section>
@@ -92,17 +122,23 @@ const structuredData = {
     var cards = Array.from(document.querySelectorAll('[data-archive-item]'));
     var hint = document.getElementById('archive-filter-hint');
     var params = new URLSearchParams(window.location.search);
-    // "ALL" sentinel replaces "全部" so it works in both languages
     var initialCategory = params.get('category') || 'ALL';
-
     var filterActive = initialCategory;
 
     function getT() {
       try {
-        var lang = localStorage.getItem('dms_lang') || 'en';
-        // Use the global UI dict injected by Layout
+        var lang = new URLSearchParams(window.location.search).get('lang') || localStorage.getItem('dms_lang') || 'en';
         return window.__DMS_UI__ ? window.__DMS_UI__[lang] : null;
-      } catch(e) { return null; }
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function getCategoryLabel(category) {
+      var button = buttons.find(function (item) {
+        return item.dataset.category === category;
+      });
+      return button ? button.textContent.trim() : category;
     }
 
     var applyFilter = function(category, syncUrl) {
@@ -120,18 +156,23 @@ const structuredData = {
       });
 
       if (hint) {
-        var t = getT();
+        var text = getT();
         if (category === 'ALL') {
-          hint.textContent = (t && t['archive.filter.hint']) || 'Showing all. Click a category to filter.';
+          hint.textContent = (text && text['archive.filter.hint']) || 'Showing all. Click a category to filter.';
         } else {
-          var prefix = (t && t['archive.filter.active']) || 'Showing';
-          hint.textContent = prefix + ': ' + category;
+          var prefix = (text && text['archive.filter.active']) || 'Showing';
+          hint.textContent = prefix + ': ' + getCategoryLabel(category);
         }
       }
 
       if (syncUrl !== false) {
-        var nextUrl = category === 'ALL' ? '/archive' : '/archive?category=' + encodeURIComponent(category);
-        window.history.replaceState({}, '', nextUrl);
+        var nextUrl = new URL(window.location.href);
+        if (category === 'ALL') {
+          nextUrl.searchParams.delete('category');
+        } else {
+          nextUrl.searchParams.set('category', category);
+        }
+        window.history.replaceState({}, '', nextUrl.pathname + nextUrl.search + nextUrl.hash);
       }
     };
 
@@ -141,12 +182,10 @@ const structuredData = {
       });
     });
 
-    // Handle legacy ?category= params that may use Chinese category names
     var availableCategories = new Set(buttons.map(function(b) { return b.dataset.category; }));
     var startCat = availableCategories.has(initialCategory) ? initialCategory : 'ALL';
     applyFilter(startCat, false);
 
-    // Re-apply hint text when language changes
     document.addEventListener('langchange', function() {
       applyFilter(filterActive, false);
     });
