@@ -12,6 +12,29 @@ status: "New"
 sourceKeyword: "compress pdf"
 sourceScore: 38.6
 sourceGrade: "watch"
+verdict: "Watch"
+confidence: "Medium"
+bestWedge:
+  en: "No-account compression with stable output quality and batch upsell"
+  zh: "先做免登录压缩，再用更稳的质量和批量能力做升级"
+dataDate: "2026-04-06"
+dataWindow:
+  en: "Last 90 days"
+  zh: "近 90 天"
+buildWindow:
+  en: "2-3 weeks"
+  zh: "2-3 周"
+painClusters:
+  - en: "Output quality / format fidelity problems"
+    zh: "输出质量和格式还原问题明显"
+  - en: "Free tiers usually block batch compression or larger files"
+    zh: "免费层通常会卡住批量压缩或更大的文件"
+competitorGaps:
+  - en: "Most tools gate stronger compression or batch mode behind paid plans"
+    zh: "多数工具把更强压缩率或批量模式放进付费墙后"
+  - en: "Existing tools are slower and clumsier on mobile or large uploads"
+    zh: "现有工具在移动端和大文件上传场景里依然偏慢、偏笨重"
+evidenceLinks: []
 ---
 
 ## 一句话描述

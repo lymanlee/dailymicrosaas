@@ -170,11 +170,10 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             <a
               href={withLangPath('/subscribe', urlLang)}
               data-lang-href="/subscribe"
-              data-l10n-en="Subscribe"
-              data-l10n-zh="订阅更新"
+              data-i18n="footer.subscribe"
               class="transition hover:text-primary"
             >
-              {urlLang === 'zh' ? '订阅更新' : 'Subscribe'}
+              {t['footer.subscribe']}
             </a>
             <p class="pt-2 text-xs text-slate-400" data-i18n="footer.mvp_notice">{t['footer.mvp_notice']}</p>
           </div>
@@ -194,6 +193,7 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             'nav.about': 'About',
             'nav.browse': 'Browse all ideas',
             'footer.desc': 'No fluff. Just pre-filtered directions with real demand signals, competitive context, the fastest path to an MVP, and a clear way to charge.',
+            'footer.subscribe': 'Subscribe',
             'footer.mvp_notice': 'Currently in MVP — served via pages.dev.',
             // index
             'index.kicker': 'For indie developers & side-project founders',
@@ -290,6 +290,11 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             'detail.summary.data_window': 'Data window',
             'detail.summary.updated': 'Updated',
             'detail.summary.score': 'Score',
+            'detail.trend.title': 'Search trend curve',
+            'detail.trend.desc': 'Raw Google Trends interest-over-time points for the latest window — enough to see whether demand is flat, rising, or fading.',
+            'detail.trend.peak': 'Peak',
+            'detail.trend.avg': 'Recent avg',
+            'detail.trend.window': 'Last ~90 days',
             'detail.verdict.worth_building': 'Worth Building',
             'detail.verdict.watch': 'Watch',
             'detail.verdict.skip': 'Skip',
@@ -318,6 +323,7 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             'nav.about': '关于项目',
             'nav.browse': '去看全部点子',
             'footer.desc': '不卖概念，直接给你已经过一轮筛选的方向：真实需求信号、竞争判断、最快落地路径、可行的变现方式。',
+            'footer.subscribe': '订阅更新',
             'footer.mvp_notice': '当前为 MVP 阶段，默认使用 pages.dev 域名提供服务。',
             'index.kicker': '适合独立开发者 / 副业创业者',
             'index.h1_line1': '别再空想点子了。',
@@ -413,6 +419,11 @@ const htmlLang = urlLang === 'zh' ? 'zh-CN' : 'en';
             'detail.summary.data_window': '数据窗口',
             'detail.summary.updated': '更新时间',
             'detail.summary.score': '评分',
+            'detail.trend.title': '搜索趋势曲线',
+            'detail.trend.desc': '直接展示最近一个窗口内的 Google Trends 时间序列，方便判断需求是在横盘、上升还是回落。',
+            'detail.trend.peak': '峰值',
+            'detail.trend.avg': '近 7 日均值',
+            'detail.trend.window': '近约 90 天',
             'detail.verdict.worth_building': '值得做',
             'detail.verdict.watch': '继续观察',
             'detail.verdict.skip': '先跳过',

@@ -9,6 +9,32 @@ description:
   en: "One sentence that explains the core value of this startup direction."
   zh: "一句话描述这个创业方向的核心价值。"
 status: "New"
+sourceKeyword: "idea keyword"
+sourceScore: 0
+sourceGrade: "watch"
+verdict: "Watch"
+confidence: "Medium"
+bestWedge:
+  en: "A narrow workflow wedge you can validate first"
+  zh: "先验证一个更窄的工作流切角"
+dataDate: "2025-04-03"
+dataWindow:
+  en: "Last 90 days"
+  zh: "近 90 天"
+buildWindow:
+  en: "1-2 weeks"
+  zh: "1-2 周"
+painClusters:
+  - en: "Recurring complaint 1"
+    zh: "重复出现的痛点 1"
+  - en: "Recurring complaint 2"
+    zh: "重复出现的痛点 2"
+competitorGaps:
+  - en: "Incumbent gap 1"
+    zh: "头部产品缺口 1"
+  - en: "Incumbent gap 2"
+    zh: "头部产品缺口 2"
+evidenceLinks: []
 ---
 
 ## 一句话描述

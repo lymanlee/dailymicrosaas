@@ -21,6 +21,9 @@ dataDate: "2026-04-04"
 dataWindow:
   en: "Last 90 days"
   zh: "近 90 天"
+buildWindow:
+  en: "1-2 weeks"
+  zh: "1-2 周"
 painClusters:
   - en: "Creators shipping in this space (proof of demand)"
     zh: "这个方向持续有人发布产品，说明需求真实存在"

@@ -21,6 +21,9 @@ dataDate: "2026-04-06"
 dataWindow:
   en: "Last 90 days"
   zh: "近 90 天"
+buildWindow:
+  en: "3-5 weeks"
+  zh: "3-5 周"
 trendSeries:
   - date: "2026-01-06"
     value: 12
@@ -207,7 +210,13 @@ trendSeries:
 painClusters:
   - en: "Creators shipping in this space (proof of demand)"
     zh: "这个方向持续有人发布产品，说明需求真实存在"
-competitorGaps: []
+  - en: "Users want one fast workflow instead of a full editor learning curve"
+    zh: "用户想要的是一个高频流程快速完成，而不是再学一套完整编辑器"
+competitorGaps:
+  - en: "Current tools overload users with editor complexity"
+    zh: "现有工具经常把用户拖进过重的编辑器复杂度里"
+  - en: "Reliable fast exports are still inconsistent across products"
+    zh: "稳定而快速的导出体验在现有产品里依然不够一致"
 evidenceLinks:
   - url: "https://github.com/Hainrixz/editor-pro-max"
     title: "Hainrixz/editor-pro-max"

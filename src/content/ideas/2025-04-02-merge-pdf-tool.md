@@ -18,6 +18,9 @@ dataDate: "2025-04-02"
 dataWindow:
   en: "Last 90 days"
   zh: "近 90 天"
+buildWindow:
+  en: "3-5 days"
+  zh: "3-5 天"
 painClusters:
   - en: "Existing tools are ad-heavy or require account signup"
     zh: "现有工具广告太重，或者一上来就要求注册"

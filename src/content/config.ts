@@ -1,36 +1,36 @@
 import { defineCollection, z } from 'astro:content';
 
 const localizedTextSchema = z.object({
-  en: z.string(),
-  zh: z.string(),
+  en: z.string().trim().min(1, 'en translation must not be empty'),
+  zh: z.string().trim().min(1, 'zh translation must not be empty'),
 });
-
-const localizedTextField = z.union([z.string(), localizedTextSchema]);
 
 const ideasCollection = defineCollection({
   type: 'content',
   schema: z.object({
-    title: localizedTextField,
+    title: localizedTextSchema,
     date: z.string(),
     category: z.string(),
     difficulty: z.enum(['Easy', 'Medium', 'Hard']),
-    description: localizedTextField,
+    description: localizedTextSchema,
+
     status: z.string().optional(),
     sourceKeyword: z.string().optional(),
     sourceScore: z.number().optional(),
     sourceGrade: z.enum(['worth_it', 'watch', 'skip']).optional(),
-    // Decision summary fields (P0)
-    verdict: z.enum(['Worth Building', 'Watch', 'Skip']).optional(),
-    confidence: z.enum(['High', 'Medium', 'Low']).optional(),
-    bestWedge: localizedTextField.optional(),
+
+    verdict: z.enum(['Worth Building', 'Watch', 'Skip']),
+    confidence: z.enum(['High', 'Medium', 'Low']),
+    bestWedge: localizedTextSchema,
     dataDate: z.string().optional(),
-    dataWindow: localizedTextField.optional(),
+    dataWindow: localizedTextSchema,
+    buildWindow: localizedTextSchema,
     trendSeries: z.array(z.object({
       date: z.string(),
       value: z.number(),
     })).optional(),
-    painClusters: z.array(localizedTextField).optional(),
-    competitorGaps: z.array(localizedTextField).optional(),
+    painClusters: z.array(localizedTextSchema).min(1, 'painClusters must include at least one bilingual item'),
+    competitorGaps: z.array(localizedTextSchema).min(1, 'competitorGaps must include at least one bilingual item'),
     evidenceLinks: z.array(z.object({
       url: z.string(),
       title: z.string(),
@@ -40,5 +40,5 @@ const ideasCollection = defineCollection({
 });
 
 export const collections = {
-  'ideas': ideasCollection,
+  ideas: ideasCollection,
 };

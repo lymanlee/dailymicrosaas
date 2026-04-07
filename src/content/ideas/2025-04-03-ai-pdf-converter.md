@@ -18,6 +18,9 @@ dataDate: "2025-04-03"
 dataWindow:
   en: "Last 90 days"
   zh: "近 90 天"
+buildWindow:
+  en: "2-3 weeks"
+  zh: "2-3 周"
 painClusters:
   - en: "Format fidelity problems — tables and columns break on conversion"
     zh: "格式还原问题明显，表格和多栏内容一转换就容易乱"

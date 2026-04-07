@@ -21,6 +21,7 @@ export const ui = {
     'nav.tagline': 'Real-demand product ideas, daily.',
 
     'footer.desc': "No fluff. Just pre-filtered directions with real demand signals, competitive context, the fastest path to an MVP, and a clear way to charge.",
+    'footer.subscribe': 'Subscribe',
     'footer.mvp_notice': 'Currently in MVP — served via pages.dev.',
 
     'index.kicker': 'For indie developers & side-project founders',
@@ -165,6 +166,7 @@ export const ui = {
     'nav.tagline': '真实需求驱动的每日产品方向',
 
     'footer.desc': '不卖概念，直接给你已经过一轮筛选的方向：真实需求信号、竞争判断、最快落地路径、可行的变现方式。',
+    'footer.subscribe': '订阅更新',
     'footer.mvp_notice': '当前为 MVP 阶段，默认使用 pages.dev 域名提供服务。',
 
     'index.kicker': '适合独立开发者 / 副业创业者',

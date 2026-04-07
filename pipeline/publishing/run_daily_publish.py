@@ -494,6 +494,9 @@ def main() -> None:
             {"warnings": len(quality_warnings), "errors": len(quality_errors)},
         )
 
+        run_i18n_guard()
+        add_step(summary, "validate_i18n", "completed", {"file": target_file.name})
+
         if not args.no_build:
             build_site()
             add_step(summary, "build", "completed")

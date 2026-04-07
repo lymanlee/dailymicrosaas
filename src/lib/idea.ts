@@ -44,6 +44,9 @@ export function getCategoryLabel(category: string, lang: Lang): string {
   return lang === 'zh' ? info.zh : info.en;
 }
 
+/**
+ * 宽松取值（保持兼容）：找不到目标语言时静默 fallback，用于非关键区域。
+ */
 export function getLocalizedText(value: LocalizedText | undefined, lang: Lang, fallback = '—'): string {
   if (!value) {
     return fallback;
@@ -54,6 +57,27 @@ export function getLocalizedText(value: LocalizedText | undefined, lang: Lang, f
   }
 
   return value[lang] ?? value.en ?? value.zh ?? fallback;
+}
+
+/**
+ * 严格取值：目标语言必须存在且非空，否则在开发环境抛 Error、生产环境返回带警告前缀的占位符。
+ * 用于详情页的所有关键展示区域（标题、描述、bestWedge、painClusters、competitorGaps、dataWindow）。
+ */
+export function getLocalizedTextStrict(value: LocalizedText | undefined, lang: Lang, debugLabel = ''): string {
+  if (!value) {
+    throw new Error(`[i18n] Missing localized field${debugLabel ? ` (${debugLabel})` : ''}: value is undefined`);
+  }
+
+  if (typeof value === 'string') {
+    throw new Error(`[i18n] Strict localized field${debugLabel ? ` (${debugLabel})` : ''} must use { en, zh } object, plain string received`);
+  }
+
+  const result = value[lang]?.trim();
+  if (!result) {
+    throw new Error(`[i18n] Missing "${lang}" translation${debugLabel ? ` for ${debugLabel}` : ''}`);
+  }
+
+  return result;
 }
 
 export function hasLocalizedText(value: LocalizedText | undefined): boolean {
@@ -275,8 +299,8 @@ export function buildSourceSignalCards(demandSection: IdeaSection | undefined, e
 export function buildLocalizedWhyNow(frontmatter: Record<string, any>, demandSection: IdeaSection | undefined): LocalizedPair[] {
   const metrics = extractDemandMetrics(demandSection);
   const evidenceCount = Array.isArray(frontmatter.evidenceLinks) ? frontmatter.evidenceLinks.length : 0;
-  const bestWedgeEn = getLocalizedText(frontmatter.bestWedge, 'en', 'A narrow workflow wedge');
-  const bestWedgeZh = getLocalizedText(frontmatter.bestWedge, 'zh', '一个更窄的工作流切角');
+  const bestWedgeEn = getLocalizedTextStrict(frontmatter.bestWedge, 'en', 'bestWedge');
+  const bestWedgeZh = getLocalizedTextStrict(frontmatter.bestWedge, 'zh', 'bestWedge');
   const cards: LocalizedPair[] = [];
 
   if (metrics.communitySignals || evidenceCount) {
@@ -315,7 +339,7 @@ export function buildLocalizedWhyNow(frontmatter: Record<string, any>, demandSec
 
 export function buildLocalizedDemandOverview(frontmatter: Record<string, any>, demandSection: IdeaSection | undefined): LocalizedPair[] {
   const metrics = extractDemandMetrics(demandSection);
-  const keyword = frontmatter.sourceKeyword ?? metrics.keyword ?? getLocalizedText(frontmatter.title, 'en', 'this idea');
+  const keyword = frontmatter.sourceKeyword ?? metrics.keyword ?? getLocalizedTextStrict(frontmatter.title, 'en', 'title');
   const evidenceCount = Array.isArray(frontmatter.evidenceLinks) ? frontmatter.evidenceLinks.length : 0;
   const overview: LocalizedPair[] = [];
 
@@ -351,26 +375,38 @@ export function buildLocalizedDemandOverview(frontmatter: Record<string, any>, d
 }
 
 export function buildLocalizedCompetitionOverview(frontmatter: Record<string, any>): LocalizedPair[] {
-  const bestWedgeEn = getLocalizedText(frontmatter.bestWedge, 'en', 'Find a narrower workflow wedge');
-  const bestWedgeZh = getLocalizedText(frontmatter.bestWedge, 'zh', '先找一个更窄的工作流切角');
-  const competitorGaps = (frontmatter.competitorGaps ?? [])
-    .filter((item: LocalizedText | undefined) => hasLocalizedText(item))
-    .slice(0, 2);
+  const bestWedgeEn = getLocalizedTextStrict(frontmatter.bestWedge, 'en', 'bestWedge');
+  const bestWedgeZh = getLocalizedTextStrict(frontmatter.bestWedge, 'zh', 'bestWedge');
+  const competitorGaps = (frontmatter.competitorGaps ?? []).slice(0, 2);
   const verdict = frontmatter.verdict ?? 'Watch';
   const confidence = frontmatter.confidence ?? 'Medium';
 
+  // 用本地化标签，避免英文枚举值出现在中文段落里
+  const verdictLabelMap: Record<string, { en: string; zh: string }> = {
+    'Worth Building': { en: 'Worth Building', zh: '值得做' },
+    'Watch': { en: 'Watch', zh: '继续观察' },
+    'Skip': { en: 'Skip', zh: '先跳过' },
+  };
+  const confidenceLabelMap: Record<string, { en: string; zh: string }> = {
+    'High': { en: 'High', zh: '高' },
+    'Medium': { en: 'Medium', zh: '中' },
+    'Low': { en: 'Low', zh: '低' },
+  };
+  const verdictLabel = verdictLabelMap[verdict] ?? { en: verdict, zh: verdict };
+  const confidenceLabel = confidenceLabelMap[confidence] ?? { en: confidence, zh: confidence };
+
   const overview = [pair(
-    `Current verdict: ${verdict}. Confidence: ${confidence}. This is not a green light to build a broad product — it is a signal that a narrow wedge may work.`,
-    `当前结论：${verdict}。数据置信度：${confidence}。这不代表适合直接做大而全产品，只代表存在一个更窄切角可以先试。`
+    `Current verdict: ${verdictLabel.en}. Confidence: ${confidenceLabel.en}. This is not a green light to build a broad product — it is a signal that a narrow wedge may work.`,
+    `当前结论：${verdictLabel.zh}。数据置信度：${confidenceLabel.zh}。这不代表适合直接做大而全产品，只代表存在一个更窄切角可以先试。`
   ), pair(
     `Best wedge right now: ${bestWedgeEn}.`,
     `当前最该先打的切角：${bestWedgeZh}。`
   )];
 
-  competitorGaps.forEach((gap: LocalizedText) => {
+  competitorGaps.forEach((gap: LocalizedText, index: number) => {
     overview.push(pair(
-      `Competitor gap: ${getLocalizedText(gap, 'en', '')}`,
-      `竞品缺口：${getLocalizedText(gap, 'zh', '')}`
+      `Competitor gap: ${getLocalizedTextStrict(gap, 'en', `competitorGaps[${index}]`)}`,
+      `竞品缺口：${getLocalizedTextStrict(gap, 'zh', `competitorGaps[${index}]`)}`
     ));
   });
 
@@ -420,7 +456,7 @@ export function buildLocalizedExecutionSteps(sourceKeyword: string, difficulty: 
 }
 
 export function buildLocalizedFullBreakdown(frontmatter: Record<string, any>, demandSection: IdeaSection | undefined, keywordItems: string[]): LocalizedBreakdownSection[] {
-  const sourceKeyword = frontmatter.sourceKeyword ?? getLocalizedText(frontmatter.title, 'en', 'this idea').toLowerCase();
+  const sourceKeyword = frontmatter.sourceKeyword ?? getLocalizedTextStrict(frontmatter.title, 'en', 'title').toLowerCase();
   const oneLinerEn = `Build a focused ${sourceKeyword} product around one concrete workflow. Validate willingness to pay with a narrow MVP before expanding.`;
   const oneLinerZh = `把 ${sourceKeyword} 收窄到一个具体工作流，先用最小 MVP 验证是否有人愿意付费，再决定要不要扩展。`;
   const monetization = buildLocalizedMonetizationItems(frontmatter.category ?? '');

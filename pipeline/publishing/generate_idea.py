@@ -1482,6 +1482,8 @@ bestWedge:
 dataDate: "{date_str}"
 dataWindow:
 {data_window_yaml}
+buildWindow:
+{build_window_yaml}
 {trend_series_yaml}
 {pain_clusters_yaml}
 {competitor_gaps_yaml}

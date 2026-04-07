@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "check:i18n": "node scripts/check_i18n.mjs",
+    "build": "npm run check:i18n && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "content:discover": "python3 scripts/run_discovery.py",

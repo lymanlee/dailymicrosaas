@@ -12,6 +12,29 @@ status: "New"
 sourceKeyword: "ai humanizer"
 sourceScore: 42.2
 sourceGrade: "worth_it"
+verdict: "Worth Building"
+confidence: "Medium"
+bestWedge:
+  en: "Academic / anti-detector workflow first, not a generic all-purpose humanizer"
+  zh: "先打学术改写 / anti-detector 工作流，不要一上来做通用 humanizer"
+dataDate: "2026-04-05"
+dataWindow:
+  en: "Last 90 days"
+  zh: "近 90 天"
+buildWindow:
+  en: "2-3 weeks"
+  zh: "2-3 周"
+painClusters:
+  - en: "Users want better quality on academic or high-stakes writing"
+    zh: "用户尤其在学术和高风险写作场景里追求更稳的结果质量"
+  - en: "General AI writing tools feel too broad for one humanization workflow"
+    zh: "通用 AI 写作工具太泛，用户只想解决特定 humanizer 工作流"
+competitorGaps:
+  - en: "Generalist AI tools are overpriced for single-use-case needs"
+    zh: "通用型 AI 工具对单一需求来说定价过高"
+  - en: "Most current tools hide quality controls behind generic workflows"
+    zh: "多数现有工具把关键质量控制埋在泛化流程里，缺少针对场景的专门入口"
+evidenceLinks: []
 ---
 
 ## 一句话描述

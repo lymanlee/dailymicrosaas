@@ -9,12 +9,10 @@ import {
   buildLocalizedWhyNow,
   buildSourceSignalCards,
   estimateReadingTime,
-  extractLabeledValue,
   getCategoryInfo,
   getLocalizedPairText,
-  getLocalizedText,
+  getLocalizedTextStrict,
   getSection,
-  hasLocalizedText,
   parseIdeaSections,
 } from '../../lib/idea';
 
@@ -37,7 +35,6 @@ const sections = parseIdeaSections(rawContent);
 const readingTime = estimateReadingTime(rawContent);
 const demandSection = getSection(sections, ['真实需求来源']);
 const keywordsSection = getSection(sections, ['SEO 关键词']);
-const buildSection = getSection(sections, ['技术难度']);
 
 const keywordItems = keywordsSection?.bullets.slice(0, 5).map((item) => item.replace(/\s*\([^\)]*\)/g, '').trim()) ?? [];
 const evidenceLinks = frontmatter.evidenceLinks ?? [];
@@ -46,16 +43,24 @@ const convictionItems = buildLocalizedWhyNow(frontmatter, demandSection);
 const monetizationItems = buildLocalizedMonetizationItems(frontmatter.category ?? '');
 const executionSteps = buildLocalizedExecutionSteps(frontmatter.sourceKeyword ?? '', frontmatter.difficulty ?? 'Medium');
 const fullBreakdownSections = buildLocalizedFullBreakdown(frontmatter, demandSection, keywordItems);
-const localizedTitleEn = getLocalizedText(frontmatter.title, 'en', 'Untitled');
-const localizedTitleZh = getLocalizedText(frontmatter.title, 'zh', localizedTitleEn);
-const localizedDescriptionEn = getLocalizedText(frontmatter.description, 'en', '');
-const localizedDescriptionZh = getLocalizedText(frontmatter.description, 'zh', localizedDescriptionEn);
-const buildWindowZh = extractLabeledValue(buildSection?.body ?? rawContent, '预估开发时间') ?? '可在短周期内验证';
-const buildWindowEn = ({
-  '1-2 周': '1-2 weeks',
-  '2-3 周': '2-3 weeks',
-  '3-5 周': '3-5 weeks',
-}[buildWindowZh] ?? 'Can be validated in a short sprint');
+const localizedTitleEn = getLocalizedTextStrict(frontmatter.title, 'en', 'title');
+const localizedTitleZh = getLocalizedTextStrict(frontmatter.title, 'zh', 'title');
+const localizedDescriptionEn = getLocalizedTextStrict(frontmatter.description, 'en', 'description');
+const localizedDescriptionZh = getLocalizedTextStrict(frontmatter.description, 'zh', 'description');
+const bestWedgeEn = getLocalizedTextStrict(frontmatter.bestWedge, 'en', 'bestWedge');
+const bestWedgeZh = getLocalizedTextStrict(frontmatter.bestWedge, 'zh', 'bestWedge');
+const dataWindowEn = getLocalizedTextStrict(frontmatter.dataWindow, 'en', 'dataWindow');
+const dataWindowZh = getLocalizedTextStrict(frontmatter.dataWindow, 'zh', 'dataWindow');
+const buildWindowEn = getLocalizedTextStrict(frontmatter.buildWindow, 'en', 'buildWindow');
+const buildWindowZh = getLocalizedTextStrict(frontmatter.buildWindow, 'zh', 'buildWindow');
+const painClusters = (frontmatter.painClusters ?? []).map((item, index) => ({
+  en: getLocalizedTextStrict(item, 'en', `painClusters[${index}]`),
+  zh: getLocalizedTextStrict(item, 'zh', `painClusters[${index}]`),
+}));
+const competitorGaps = (frontmatter.competitorGaps ?? []).map((item, index) => ({
+  en: getLocalizedTextStrict(item, 'en', `competitorGaps[${index}]`),
+  zh: getLocalizedTextStrict(item, 'zh', `competitorGaps[${index}]`),
+}));
 const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
 const articleUrl = new URL(withLangPath(Astro.url.pathname, pageLang), `${siteUrl}/`).toString();
 const pageTitleMap = {
@@ -149,8 +154,6 @@ const quickFacts = [
   { labelKey: 'detail.published', en: frontmatter.date, zh: frontmatter.date },
 ];
 
-const painClusters = (frontmatter.painClusters ?? []).filter((item) => hasLocalizedText(item));
-const competitorGaps = (frontmatter.competitorGaps ?? []).filter((item) => hasLocalizedText(item));
 const trendSeries = Array.isArray(frontmatter.trendSeries)
   ? frontmatter.trendSeries.filter((item) => typeof item?.date === 'string' && typeof item?.value === 'number')
   : [];
@@ -252,7 +255,7 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
             </div>
             {frontmatter.dataWindow && (
               <p class="text-xs text-slate-500">
-                <span data-i18n="detail.summary.data_window">{t['detail.summary.data_window']}</span>: <span data-l10n-en={getLocalizedText(frontmatter.dataWindow, 'en', '')} data-l10n-zh={getLocalizedText(frontmatter.dataWindow, 'zh', '')} class="font-semibold text-slate-700">{getLocalizedText(frontmatter.dataWindow, pageLang, '')}</span>
+                <span data-i18n="detail.summary.data_window">{t['detail.summary.data_window']}</span>: <span data-l10n-en={dataWindowEn} data-l10n-zh={dataWindowZh} class="font-semibold text-slate-700">{pageLang === 'zh' ? dataWindowZh : dataWindowEn}</span>
                 {frontmatter.dataDate && (
                   <>
                     <span class="mx-1">·</span>
@@ -266,8 +269,8 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
 
           <div class="flex flex-col gap-3 bg-white px-8 py-6">
             <p data-i18n="detail.summary.best_wedge" class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.best_wedge']}</p>
-            <p data-l10n-en={getLocalizedText(frontmatter.bestWedge, 'en')} data-l10n-zh={getLocalizedText(frontmatter.bestWedge, 'zh')} class="text-base font-semibold leading-7 text-slate-900">
-              {getLocalizedText(frontmatter.bestWedge, pageLang)}
+            <p data-l10n-en={bestWedgeEn} data-l10n-zh={bestWedgeZh} class="text-base font-semibold leading-7 text-slate-900">
+              {pageLang === 'zh' ? bestWedgeZh : bestWedgeEn}
             </p>
           </div>
         </div>
@@ -338,7 +341,7 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
             {painClusters.map((cluster) => (
               <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-orange-50 p-4">
                 <span class="mt-0.5 text-base leading-none text-orange-500">⚡</span>
-                <p data-l10n-en={getLocalizedText(cluster, 'en', '')} data-l10n-zh={getLocalizedText(cluster, 'zh', '')} class="text-sm font-semibold leading-7 text-slate-800">{getLocalizedText(cluster, pageLang, '')}</p>
+                <p data-l10n-en={cluster.en} data-l10n-zh={cluster.zh} class="text-sm font-semibold leading-7 text-slate-800">{pageLang === 'zh' ? cluster.zh : cluster.en}</p>
               </div>
             ))}
           </div>
@@ -353,7 +356,7 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
             {competitorGaps.map((gap) => (
               <div class="flex items-start gap-3 rounded-2xl border border-violet-100 bg-violet-50 p-4">
                 <span class="mt-0.5 text-base leading-none text-violet-500">🔍</span>
-                <p data-l10n-en={getLocalizedText(gap, 'en', '')} data-l10n-zh={getLocalizedText(gap, 'zh', '')} class="text-sm font-semibold leading-7 text-slate-800">{getLocalizedText(gap, pageLang, '')}</p>
+                <p data-l10n-en={gap.en} data-l10n-zh={gap.zh} class="text-sm font-semibold leading-7 text-slate-800">{pageLang === 'zh' ? gap.zh : gap.en}</p>
               </div>
             ))}
           </div>

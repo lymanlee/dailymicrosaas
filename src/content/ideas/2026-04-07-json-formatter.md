@@ -21,10 +21,15 @@ dataDate: "2026-04-07"
 dataWindow:
   en: "Last 90 days"
   zh: "近 90 天"
+buildWindow:
+  en: "2-3 weeks"
+  zh: "2-3 周"
 trendSeries: []
 painClusters:
   - en: "Output quality / format fidelity problems"
     zh: "输出质量和格式还原问题明显"
+  - en: "Developers want shareable outputs and permalink workflows"
+    zh: "开发者希望结果能直接分享，也需要永久链接工作流"
 competitorGaps:
   - en: "Results not shareable / no permalink support in most tools"
     zh: "多数工具结果不可分享，也没有永久链接支持"
