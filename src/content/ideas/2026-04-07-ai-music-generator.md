@@ -21,6 +21,9 @@ dataDate: "2026-04-07"
 dataWindow:
   en: "Last 90 days"
   zh: "近 90 天"
+buildWindow:
+  en: "3-5 weeks"
+  zh: "3-5 周"
 trendSeries:
   - date: "2026-01-07"
     value: 4

@@ -27,3 +27,10 @@ pipeline/data/serp_data_*.json
 pipeline/reports/opportunity_report_*.json
 pipeline/reports/opportunity_report_*.txt
 pipeline/logs/
+pipeline/data/community_cache/
+
+# python caches
+__pycache__/
+
+# local WorkBuddy state
+.workbuddy/
