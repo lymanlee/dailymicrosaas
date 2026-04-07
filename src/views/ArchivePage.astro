@@ -1,0 +1,181 @@
+---
+import { getCollection } from 'astro:content';
+import IdeaCard from '../components/IdeaCard.astro';
+import Layout from '../layouts/Layout.astro';
+import { ui, type Lang, withLangPath } from '../lib/i18n';
+import { getCategoryInfo } from '../lib/idea';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang] ?? ui.en;
+
+const allIdeas = await getCollection('ideas');
+const publishedIdeas = allIdeas.filter((idea) => idea.slug !== 'template');
+
+const ideas = publishedIdeas
+  .map((idea) => ({
+    ...idea.data,
+    slug: idea.slug,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const categories = [...new Set(ideas.map((idea) => idea.category))];
+const pageTitleMap = {
+  en: 'Archive - Daily Micro SaaS',
+  zh: '历史归档｜Daily Micro SaaS',
+};
+const pageDescriptionMap = {
+  en: 'Browse all Micro SaaS directions we have broken down, filtered by category.',
+  zh: '按分类浏览已经拆解过的 Micro SaaS 方向，快速筛选更适合你当前能力和节奏的机会。',
+};
+const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
+const pageUrl = new URL(withLangPath('/archive', lang), `${siteUrl}/`).toString();
+const pageTitle = pageTitleMap[lang];
+const pageDescription = pageDescriptionMap[lang];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: lang === 'zh' ? 'Daily Micro SaaS 历史归档' : 'Daily Micro SaaS Archive',
+  description: pageDescription,
+  url: pageUrl,
+  inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  structuredData={structuredData}
+  lang={lang}
+  i18nTitle={pageTitleMap}
+  i18nDescription={pageDescriptionMap}
+>
+  <section class="rounded-[32px] border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <span class="section-kicker">{t['archive.kicker']}</span>
+        <h1 class="mt-3 text-4xl font-black tracking-tight text-slate-950">{t['archive.h1']}</h1>
+        <p class="mt-4 max-w-3xl text-lg leading-8 text-slate-600">
+          {t['archive.subhead']}
+        </p>
+      </div>
+      <div class="grid gap-2 rounded-3xl bg-slate-50 p-4 text-sm text-slate-600 sm:grid-cols-2">
+        <div>
+          <p class="font-semibold text-slate-900">{t['archive.count.label']}</p>
+          <p>{ideas.length}</p>
+        </div>
+        <div>
+          <p class="font-semibold text-slate-900">{t['archive.cat.label']}</p>
+          <p>{categories.length}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-8 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="mb-4 flex flex-wrap items-center gap-3">
+      <span class="text-sm font-semibold text-slate-500">{t['archive.filter.label']}</span>
+      <button type="button" data-filter-btn data-category="ALL" class="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">{t['archive.filter.all']}</button>
+      {categories.map((cat) => {
+        const categoryInfo = getCategoryInfo(cat);
+        return (
+          <button
+            type="button"
+            data-filter-btn
+            data-category={cat}
+            data-l10n-en={categoryInfo.en}
+            data-l10n-zh={categoryInfo.zh}
+            class="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200"
+          >
+            {lang === 'zh' ? categoryInfo.zh : categoryInfo.en}
+          </button>
+        );
+      })}
+    </div>
+    <p id="archive-filter-hint" class="text-sm text-slate-500">{t['archive.filter.hint']}</p>
+  </section>
+
+  <section class="mt-8">
+    {ideas.length > 0 ? (
+      <div id="archive-list" class="grid gap-5 lg:grid-cols-2">
+        {ideas.map((idea) => (
+          <div data-archive-item data-category={idea.category}>
+            <IdeaCard
+              title={idea.title}
+              slug={idea.slug}
+              date={idea.date}
+              category={idea.category}
+              difficulty={idea.difficulty}
+              description={idea.description}
+              lang={lang}
+            />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+        <span>{t['archive.empty']}</span>
+      </div>
+    )}
+  </section>
+
+  <script define:vars={{ allHint: t['archive.filter.hint'], activePrefix: t['archive.filter.active'] }}>
+    var buttons = Array.from(document.querySelectorAll('[data-filter-btn]'));
+    var cards = Array.from(document.querySelectorAll('[data-archive-item]'));
+    var hint = document.getElementById('archive-filter-hint');
+    var params = new URLSearchParams(window.location.search);
+    var initialCategory = params.get('category') || 'ALL';
+
+    function getCategoryLabel(category) {
+      var button = buttons.find(function (item) {
+        return item.dataset.category === category;
+      });
+      return button ? button.textContent.trim() : category;
+    }
+
+    function applyFilter(category, syncUrl) {
+      cards.forEach(function (card) {
+        var visible = category === 'ALL' || card.dataset.category === category;
+        card.style.display = visible ? '' : 'none';
+      });
+
+      buttons.forEach(function (button) {
+        var active = button.dataset.category === category;
+        button.className = active
+          ? 'rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white'
+          : 'rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-200';
+      });
+
+      if (hint) {
+        hint.textContent = category === 'ALL'
+          ? allHint
+          : activePrefix + ': ' + getCategoryLabel(category);
+      }
+
+      if (syncUrl !== false) {
+        var nextUrl = new URL(window.location.href);
+        if (category === 'ALL') {
+          nextUrl.searchParams.delete('category');
+        } else {
+          nextUrl.searchParams.set('category', category);
+        }
+        window.history.replaceState({}, '', nextUrl.pathname + nextUrl.search + nextUrl.hash);
+      }
+    }
+
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        applyFilter(button.dataset.category || 'ALL');
+      });
+    });
+
+    var availableCategories = new Set(buttons.map(function (button) {
+      return button.dataset.category;
+    }));
+    var startCat = availableCategories.has(initialCategory) ? initialCategory : 'ALL';
+    applyFilter(startCat, false);
+  </script>
+</Layout>

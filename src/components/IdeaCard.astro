@@ -11,11 +11,22 @@ interface Props {
   description: LocalizedText;
   status?: string;
   featured?: boolean;
+  lang?: Lang;
 }
 
-const { title, slug, date, category, difficulty, description, status, featured = false } = Astro.props;
-const pageLang: Lang = Astro.url.searchParams.get('lang') === 'zh' ? 'zh' : 'en';
-const t = ui[pageLang] ?? ui.en;
+const {
+  title,
+  slug,
+  date,
+  category,
+  difficulty,
+  description,
+  status,
+  featured = false,
+  lang = 'en',
+} = Astro.props;
+
+const t = ui[lang] ?? ui.en;
 const localizedTitleEn = getLocalizedText(title, 'en', 'Untitled');
 const localizedTitleZh = getLocalizedText(title, 'zh', localizedTitleEn);
 const localizedDescriptionEn = getLocalizedText(description, 'en', '');
@@ -27,7 +38,7 @@ const difficultyMeta: Record<string, { labelKey: string; label: string; classes:
   Hard: { labelKey: 'card.difficulty.hard', label: 'Execution-heavy', classes: 'bg-rose-50 text-rose-700 ring-rose-200' },
 };
 
-const href = withLangPath(`/ideas/${slug}`, pageLang);
+const href = withLangPath(`/ideas/${slug}`, lang);
 const categoryInfo = getCategoryInfo(category);
 const difficultyInfo = difficultyMeta[difficulty] || {
   labelKey: 'card.difficulty.easy',
@@ -45,13 +56,13 @@ const difficultyInfo = difficultyMeta[difficulty] || {
         data-l10n-zh={categoryInfo.zh}
         class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryInfo.classes}`}
       >
-        {pageLang === 'zh' ? categoryInfo.zh : categoryInfo.en}
+        {lang === 'zh' ? categoryInfo.zh : categoryInfo.en}
       </span>
-      <span data-i18n={difficultyInfo.labelKey} class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
+      <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
         {t[difficultyInfo.labelKey]}
       </span>
       {status === 'New' && (
-        <span data-i18n="card.status.new" class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
+        <span class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
           {t['card.status.new']}
         </span>
       )}
@@ -63,11 +74,10 @@ const difficultyInfo = difficultyMeta[difficulty] || {
     <h2 class={`font-bold tracking-tight text-slate-950 transition group-hover:text-primary ${featured ? 'text-3xl sm:text-4xl leading-tight' : 'text-2xl leading-snug'}`}>
       <a
         href={href}
-        data-lang-href={`/ideas/${slug}`}
         data-l10n-en={localizedTitleEn}
         data-l10n-zh={localizedTitleZh}
       >
-        {pageLang === 'zh' ? localizedTitleZh : localizedTitleEn}
+        {lang === 'zh' ? localizedTitleZh : localizedTitleEn}
       </a>
     </h2>
 
@@ -76,16 +86,14 @@ const difficultyInfo = difficultyMeta[difficulty] || {
       data-l10n-zh={localizedDescriptionZh}
       class={`leading-8 text-slate-600 ${featured ? 'max-w-3xl text-lg' : 'text-base'}`}
     >
-      {pageLang === 'zh' ? localizedDescriptionZh : localizedDescriptionEn}
+      {lang === 'zh' ? localizedDescriptionZh : localizedDescriptionEn}
     </p>
   </div>
 
   <div class={`mt-8 flex items-center justify-between gap-4 ${featured ? 'flex-col items-start sm:flex-row sm:items-center' : ''}`}>
-    <p data-i18n="card.teaser" class="text-sm text-slate-500">{t['card.teaser']}</p>
+    <p class="text-sm text-slate-500">{t['card.teaser']}</p>
     <a
       href={href}
-      data-lang-href={`/ideas/${slug}`}
-      data-i18n="card.cta"
       class="inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-primary"
     >
       {t['card.cta']}

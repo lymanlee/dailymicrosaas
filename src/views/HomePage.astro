@@ -1,0 +1,187 @@
+---
+import { getCollection } from 'astro:content';
+import IdeaCard from '../components/IdeaCard.astro';
+import SubscribeCta from '../components/SubscribeCta.astro';
+import Layout from '../layouts/Layout.astro';
+import { ui, type Lang, withLangPath } from '../lib/i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang] ?? ui.en;
+
+const allIdeas = await getCollection('ideas');
+const publishedIdeas = allIdeas.filter((idea) => idea.slug !== 'template');
+
+const ideas = publishedIdeas
+  .map((idea) => ({
+    ...idea.data,
+    slug: idea.slug,
+  }))
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+const todayIdea = ideas[0];
+const pastIdeas = ideas.slice(1);
+
+const pageTitleMap = {
+  en: 'Daily Micro SaaS — One buildable idea, every day',
+  zh: 'Daily Micro SaaS｜每天一个可落地的 Micro SaaS 方向',
+};
+const pageDescriptionMap = {
+  en: 'One real, buildable Micro SaaS direction every day. Demand signals, competitive context, and the fastest path to a working MVP — for indie developers and side-project founders.',
+  zh: '每天给你一个真实可做的 Micro SaaS 方向，附带需求信号、竞争上下文和最快可落地的 MVP 路径。',
+};
+const siteUrl = (Astro.site?.toString() || 'https://dailymicrosaas.pages.dev').replace(/\/$/, '');
+const pageUrl = new URL(withLangPath('/', lang), `${siteUrl}/`).toString();
+const pageTitle = pageTitleMap[lang];
+const pageDescription = pageDescriptionMap[lang];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: lang === 'zh' ? 'Daily Micro SaaS 首页' : 'Daily Micro SaaS',
+  description: lang === 'zh'
+    ? '每天一个真实可落地的 Micro SaaS 方向，帮助独立开发者更快判断要不要做。'
+    : 'One real, buildable Micro SaaS direction every day — with demand signals, competitive context, and the fastest path to a working MVP.',
+  url: pageUrl,
+  inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  structuredData={structuredData}
+  lang={lang}
+  i18nTitle={pageTitleMap}
+  i18nDescription={pageDescriptionMap}
+>
+  <section class="relative overflow-hidden rounded-[32px] border border-slate-200 bg-slate-950 px-6 py-10 text-white shadow-soft sm:px-10 lg:px-12 lg:py-14">
+    <div class="absolute inset-0 bg-hero-glow opacity-100"></div>
+    <div class="absolute right-0 top-0 h-56 w-56 rounded-full bg-primary/20 blur-3xl"></div>
+    <div class="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+      <div>
+        <span class="section-kicker mb-5 border-white/10 bg-white/10 text-blue-100">{t['index.kicker']}</span>
+        <h1 class="max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <span>{t['index.h1_line1']}</span><br />
+          <span>{t['index.h1_line2']}</span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+          {t['index.subhead']}
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          {todayIdea && (
+            <a href={withLangPath(`/ideas/${todayIdea.slug}`, lang)} class="inline-flex items-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
+              {t['index.cta_today']}
+            </a>
+          )}
+          <a href={withLangPath('/archive', lang)} class="inline-flex items-center rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/10">
+            {t['index.cta_archive']}
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-gradient-to-b from-blue-400 to-sky-300"></div>
+          <p class="text-xs font-bold uppercase tracking-widest text-blue-300">{t['card1.tag']}</p>
+          <p class="mt-2 text-sm font-bold leading-snug text-white">{t['card1.title']}</p>
+          <p class="mt-2 text-xs leading-5 text-slate-400">{t['card1.desc']}</p>
+        </div>
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-gradient-to-b from-violet-400 to-purple-300"></div>
+          <p class="text-xs font-bold uppercase tracking-widest text-violet-300">{t['card2.tag']}</p>
+          <p class="mt-2 text-sm font-bold leading-snug text-white">{t['card2.title']}</p>
+          <p class="mt-2 text-xs leading-5 text-slate-400">{t['card2.desc']}</p>
+        </div>
+        <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-md">
+          <div class="absolute inset-y-0 left-0 w-0.5 bg-gradient-to-b from-emerald-400 to-teal-300"></div>
+          <p class="text-xs font-bold uppercase tracking-widest text-emerald-300">{t['card3.tag']}</p>
+          <p class="mt-2 text-sm font-bold leading-snug text-white">{t['card3.title']}</p>
+          <p class="mt-2 text-xs leading-5 text-slate-400">{t['card3.desc']}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-10 grid gap-4 md:grid-cols-3">
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">{t['criteria.label1']}</p>
+      <h2 class="mt-3 text-xl font-bold text-slate-950">{t['criteria.h1']}</h2>
+      <p class="mt-3 leading-7 text-slate-600">{t['criteria.p1']}</p>
+    </div>
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">{t['criteria.label2']}</p>
+      <h2 class="mt-3 text-xl font-bold text-slate-950">{t['criteria.h2']}</h2>
+      <p class="mt-3 leading-7 text-slate-600">{t['criteria.p2']}</p>
+    </div>
+    <div class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
+      <p class="text-sm font-semibold text-slate-500">{t['criteria.label3']}</p>
+      <h2 class="mt-3 text-xl font-bold text-slate-950">{t['criteria.h3']}</h2>
+      <p class="mt-3 leading-7 text-slate-600">{t['criteria.p3']}</p>
+    </div>
+  </section>
+
+  {todayIdea && (
+    <section class="mt-14">
+      <div class="mb-5 flex items-center justify-between gap-4">
+        <div>
+          <span class="section-kicker">{t['section.today']}</span>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">{t['section.today.h2']}</h2>
+        </div>
+        <a href={withLangPath(`/ideas/${todayIdea.slug}`, lang)} class="hidden text-sm font-semibold text-primary transition hover:text-blue-700 md:inline-flex">
+          {t['section.today.link']}
+        </a>
+      </div>
+      <IdeaCard
+        title={todayIdea.title}
+        slug={todayIdea.slug}
+        date={todayIdea.date}
+        category={todayIdea.category}
+        difficulty={todayIdea.difficulty}
+        description={todayIdea.description}
+        status="New"
+        featured={true}
+        lang={lang}
+      />
+    </section>
+  )}
+
+  <section class="mt-14">
+    <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <span class="section-kicker">{t['section.archive']}</span>
+        <h2 class="mt-3 text-3xl font-black tracking-tight text-slate-950">{t['section.archive.h2']}</h2>
+        <p class="mt-2 max-w-2xl text-slate-600">{t['section.archive.desc']}</p>
+      </div>
+      <a href={withLangPath('/archive', lang)} class="inline-flex rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+        {t['section.archive.link']}
+      </a>
+    </div>
+
+    {pastIdeas.length > 0 ? (
+      <div class="grid gap-5 lg:grid-cols-2">
+        {pastIdeas.map((idea) => (
+          <IdeaCard
+            title={idea.title}
+            slug={idea.slug}
+            date={idea.date}
+            category={idea.category}
+            difficulty={idea.difficulty}
+            description={idea.description}
+            lang={lang}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="rounded-[28px] border border-dashed border-slate-300 bg-white p-10 text-center text-slate-500">
+        <span>{t['section.archive.empty']}</span>
+      </div>
+    )}
+  </section>
+
+  <section class="mt-14">
+    <SubscribeCta lang={lang} />
+  </section>
+</Layout>

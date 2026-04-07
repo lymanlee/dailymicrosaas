@@ -1,13 +1,34 @@
 export type Lang = 'en' | 'zh';
 
-export function withLangPath(path: string, lang: Lang): string {
-  const url = new URL(path, 'https://dailymicrosaas.pages.dev');
+const SITE_ORIGIN = 'https://dailymicrosaas.pages.dev';
 
-  if (lang === 'zh') {
-    url.searchParams.set('lang', 'zh');
-  } else {
-    url.searchParams.delete('lang');
+export function normalizeLang(value: string | null | undefined): Lang {
+  return value === 'zh' ? 'zh' : 'en';
+}
+
+export function getLangFromPath(pathname: string): Lang {
+  return pathname === '/zh' || pathname.startsWith('/zh/') ? 'zh' : 'en';
+}
+
+export function stripLangPrefix(path: string): string {
+  const url = new URL(path, SITE_ORIGIN);
+
+  if (url.pathname === '/zh') {
+    url.pathname = '/';
+  } else if (url.pathname.startsWith('/zh/')) {
+    url.pathname = url.pathname.slice(3) || '/';
   }
+
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+export function withLangPath(path: string, lang: Lang): string {
+  const url = new URL(stripLangPrefix(path), SITE_ORIGIN);
+  const pathname = url.pathname || '/';
+
+  url.pathname = lang === 'zh'
+    ? (pathname === '/' ? '/zh' : `/zh${pathname}`)
+    : pathname;
 
   return `${url.pathname}${url.search}${url.hash}`;
 }

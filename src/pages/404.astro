@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { ui, withLangPath, type Lang } from '../lib/i18n';
+import { ui, withLangPath } from '../lib/i18n';
 
-const pageLang: Lang = Astro.url.searchParams.get('lang') === 'zh' ? 'zh' : 'en';
-const t = ui[pageLang] ?? ui.en;
+const lang = 'en';
+const t = ui.en;
 const pageTitleMap = {
   en: '404 — Page not found - Daily Micro SaaS',
   zh: '404｜页面不存在 - Daily Micro SaaS',
@@ -15,24 +15,24 @@ const pageDescriptionMap = {
 ---
 
 <Layout
-  title={pageTitleMap[pageLang]}
-  description={pageDescriptionMap[pageLang]}
+  title={pageTitleMap.en}
+  description={pageDescriptionMap.en}
   noindex={true}
-  lang={pageLang}
+  lang={lang}
   i18nTitle={pageTitleMap}
   i18nDescription={pageDescriptionMap}
 >
   <section class="mx-auto max-w-3xl rounded-[32px] border border-slate-200 bg-white p-10 text-center shadow-sm lg:p-14">
     <p class="section-kicker mx-auto justify-center">404</p>
-    <h1 data-i18n="404.h1" class="mt-5 text-4xl font-black tracking-tight text-slate-950">{t['404.h1']}</h1>
-    <p data-i18n="404.p" class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
+    <h1 class="mt-5 text-4xl font-black tracking-tight text-slate-950">{t['404.h1']}</h1>
+    <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
       {t['404.p']}
     </p>
     <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-      <a href={withLangPath('/', pageLang)} data-lang-href="/" data-i18n="404.btn_home" class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary">
+      <a href={withLangPath('/', lang)} class="inline-flex items-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary">
         {t['404.btn_home']}
       </a>
-      <a href={withLangPath('/archive', pageLang)} data-lang-href="/archive" data-i18n="404.btn_archive" class="inline-flex items-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
+      <a href={withLangPath('/archive', lang)} class="inline-flex items-center rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-primary hover:text-primary">
         {t['404.btn_archive']}
       </a>
     </div>
