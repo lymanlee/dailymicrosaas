@@ -16,9 +16,9 @@ import json
 import os
 from pathlib import Path
 
-# LLM 调用（复用现有模块）
+# LLM 调用（复用共享模块）
 try:
-    from .llm import call_llm
+    from pipeline.utils.llm import call_llm
 except ImportError:
     # 兼容：直接从父级导入
     import sys
@@ -164,6 +164,46 @@ def extract_pain_from_community(
         })
 
     return pains
+
+
+def extract_community_pains(
+    idea_keyword: str,
+    community_items: List[Dict[str, Any]],
+    max_items: int = 10
+) -> List[Dict[str, Any]]:
+    """
+    从社区讨论中提取痛点（供 generate_idea.py 调用）。
+
+    Args:
+        idea_keyword: 核心关键词
+        community_items: 社区帖子列表
+        max_items: 最大处理数量
+
+    Returns:
+        [{
+            "text_en": "...",
+            "text_zh": "...",
+            "severity": "high|medium|low",
+            "source_url": "https://...",
+            "source_name": "hackernews|reddit",
+            "quote_en": "...",
+            "quote_zh": "..."
+        }]
+    """
+    raw = extract_pain_from_community(community_items, idea_keyword, max_items)
+    # 转换格式以匹配 generate_idea.py 的预期
+    result = []
+    for item in raw:
+        result.append({
+            "text_en": item.get("text", {}).get("en", ""),
+            "text_zh": item.get("text", {}).get("zh", ""),
+            "severity": item.get("severity", "medium"),
+            "source_url": item.get("evidence", [{}])[0].get("url", "") if item.get("evidence") else "",
+            "source_name": item.get("evidence", [{}])[0].get("source", "community") if item.get("evidence") else "community",
+            "quote_en": item.get("evidence", [{}])[0].get("quote", {}).get("en", "") if (item.get("evidence") and len(item.get("evidence", [])) > 0) else "",
+            "quote_zh": item.get("evidence", [{}])[0].get("quote", {}).get("zh", "") if (item.get("evidence") and len(item.get("evidence", [])) > 0) else "",
+        })
+    return result
 
 
 def derive_pain_clusters_enhanced(
