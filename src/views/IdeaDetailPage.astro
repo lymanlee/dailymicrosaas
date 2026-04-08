@@ -164,23 +164,20 @@ const viewBoxHeight = 100;
 const chartWidth = viewBoxWidth;
 const chartHeight = viewBoxHeight;
 
-const trendPeak = trendSeries.length ? Math.max(...trendSeries.map((item) => item.value), 0) : 0;
-const trendFloor = trendSeries.length ? Math.min(...trendSeries.map((item) => item.value), 0) : 0;
-const rawTrendRange = trendPeak - trendFloor;
+const trendPeak = trendSeries.length ? Math.max(...trendSeries.map((item) => item.value)) : 0;
+const trendFloor = trendSeries.length ? Math.min(...trendSeries.map((item) => item.value)) : 0;
 
-// Adaptive Y-axis scaling: amplify small changes for better visual clarity
-// Use a minimum virtual range to ensure small variations are visible
-const minVisualRange = Math.max(rawTrendRange * 2, 10); // At least 2x the actual range or 10
-const trendRangeCenter = (trendPeak + trendFloor) / 2;
-const visualFloor = Math.max(0, trendRangeCenter - minVisualRange / 2);
-const visualPeak = trendRangeCenter + minVisualRange / 2;
-const trendRange = visualPeak - visualFloor;
+// ECharts-style Y-axis: use exact min/max as bounds, fill entire chart height
+// Add small padding to avoid points touching edges
+const paddingY = 5; // 5% padding top and bottom
+const trendRange = trendPeak - trendFloor || 1; // avoid division by zero
 
-// Calculate points with amplified Y-axis scaling
+// Calculate points with full-range Y-axis scaling (ECharts style)
 const trendPoints = trendSeries.map((item, index) => {
   const x = dataCount <= 1 ? viewBoxWidth / 2 : index * pointSpacing + paddingX;
-  // Map value to Y coordinate with padding, using visual range for better amplitude
-  const y = viewBoxHeight - ((item.value - visualFloor) / trendRange) * 80 - 10; // 10px padding top/bottom
+  // Map value to Y coordinate: min value at bottom (near viewBoxHeight), max at top (near 0)
+  const normalizedValue = (item.value - trendFloor) / trendRange; // 0 to 1
+  const y = viewBoxHeight - paddingY - normalizedValue * (viewBoxHeight - paddingY * 2);
   return { x, y, value: item.value, date: item.date };
 });
 
