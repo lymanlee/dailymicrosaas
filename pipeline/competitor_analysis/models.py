@@ -50,7 +50,7 @@ class LocalizedPricingTier:
 class CompetitorProfile:
     """Full competitor profile with bilingual support."""
     domain: str
-    name: str
+    name: str  # Simple string name
     key_features: List[LocalizedPair] = field(default_factory=list)
     pricing_tiers: List[LocalizedPricingTier] = field(default_factory=list)
     weaknesses: List[LocalizedPair] = field(default_factory=list)
@@ -59,9 +59,13 @@ class CompetitorProfile:
     analyzed_at: str = field(default_factory=lambda: datetime.now().isoformat())
     
     def to_dict(self) -> Dict[str, Any]:
+        # Ensure name is always a simple string
+        name_value = self.name
+        if isinstance(name_value, dict):
+            name_value = name_value.get("en", str(name_value))
         return {
             "domain": self.domain,
-            "name": self.name,
+            "name": name_value,
             "keyFeatures": [f.to_dict() for f in self.key_features],
             "pricingTiers": [p.to_dict() for p in self.pricing_tiers],
             "weaknesses": [w.to_dict() for w in self.weaknesses],
@@ -72,9 +76,13 @@ class CompetitorProfile:
     
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "CompetitorProfile":
+        # Handle name that might be a dict (from older cached data)
+        name_value = data.get("name", "")
+        if isinstance(name_value, dict):
+            name_value = name_value.get("en", str(name_value))
         return cls(
             domain=data["domain"],
-            name=data["name"],
+            name=name_value,
             key_features=[LocalizedPair.from_dict(f) for f in data.get("keyFeatures", [])],
             pricing_tiers=[LocalizedPricingTier.from_dict(p) for p in data.get("pricingTiers", [])],
             weaknesses=[LocalizedPair.from_dict(w) for w in data.get("weaknesses", [])],
