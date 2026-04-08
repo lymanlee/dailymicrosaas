@@ -27,6 +27,26 @@ from .competitor_integration import (
     build_competitor_analysis_for_frontmatter,
 )
 
+# Import pain/gaps extraction modules (with graceful fallback)
+try:
+    from pipeline.discovery.extract_community_pains import extract_community_pains as extract_community_pains_impl
+    # 验证函数是否存在
+    if not callable(extract_community_pains_impl):
+        raise ImportError("extract_community_pains not callable")
+    COMMUNITY_PAIN_MODULE_AVAILABLE = True
+except (ImportError, Exception) as e:
+    COMMUNITY_PAIN_MODULE_AVAILABLE = False
+    extract_community_pains_impl = None
+
+try:
+    from pipeline.publishing.extract_competitor_gaps import extract_competitor_gaps as extract_competitor_gaps_impl
+    if not callable(extract_competitor_gaps_impl):
+        raise ImportError("extract_competitor_gaps not callable")
+    COMPETITOR_GAP_MODULE_AVAILABLE = True
+except (ImportError, Exception) as e:
+    COMPETITOR_GAP_MODULE_AVAILABLE = False
+    extract_competitor_gaps_impl = None
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "src" / "content" / "ideas"
 DEFAULT_REPORTS_DIR = PROJECT_ROOT / "pipeline" / "reports"
@@ -1428,32 +1448,64 @@ def derive_best_wedge(keyword: str, category: str, idea: dict) -> dict[str, str]
 
 def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
     """
-    从社区信号和竞品分析中归纳痛点聚类。
-    
+    从社区讨论和竞品分析中归纳痛点聚类。
+
     数据优先级：
-    1. 竞品分析的真实弱点（来自 LLM 深度分析）
-    2. 社区信号标题关键词匹配
-    3. 基于关键词/分类的默认痛点
-    
+    1. 新模块 extract_community_pains（LLM 分析 HN/Reddit，带原话引用）
+    2. 竞品分析的真实弱点（来自 LLM 深度分析）
+    3. 社区信号标题关键词匹配
+    4. 基于关键词/分类的默认痛点
+
+    返回格式: [{"text": {"en": "...", "zh": "..."}, "source": "community"|"competitor"|"keyword", ...}]
     返回最多 4 条中英双语痛点。
     """
-    category = derive_category(idea.get("keyword", ""))
-    
-    # 优先从竞品分析获取真实痛点
+    keyword = idea.get("keyword", "")
+    category = derive_category(keyword)
+
+    # 优先使用新模块从社区讨论提取痛点（带原话引用）
+    if COMMUNITY_PAIN_MODULE_AVAILABLE:
+        community_items = idea.get("community_top_items", [])
+        if community_items:
+            try:
+                extracted_pains = extract_community_pains_impl(keyword, community_items)
+                if extracted_pains and len(extracted_pains) > 0:
+                    # 转换格式
+                    clusters = []
+                    for pain in extracted_pains[:4]:
+                        clusters.append({
+                            "text": {
+                                "en": pain.get("text_en", ""),
+                                "zh": pain.get("text_zh", "")
+                            },
+                            "source": "community",
+                            "sourceUrl": pain.get("source_url", ""),
+                            "sourceName": pain.get("source_name", ""),
+                            "quote": {
+                                "en": pain.get("quote_en", ""),
+                                "zh": pain.get("quote_zh", "")
+                            },
+                            "severity": pain.get("severity", "medium")
+                        })
+                    if clusters:
+                        return clusters
+            except Exception as e:
+                print(f"[Pain Clusters] Community extraction failed: {e}")
+
+    # 回退到竞品分析获取真实痛点
     competitor_data = get_competitor_data_cached(idea, category)
-    
+
     if competitor_data.get("has_data"):
         # 使用竞品分析的真实弱点作为痛点
         pain_hints = competitor_data.get("pain_hints", [])
         if pain_hints:
             return pain_hints[:4]
-        
+
         # 如果有竞品弱点但格式不适合作痛点，也使用
         competitor_weaknesses = competitor_data.get("competitor_weaknesses", [])
         if competitor_weaknesses:
             return competitor_weaknesses[:4]
-    
-    # 回退到社区信号提取
+
+    # 回退到社区信号关键词匹配
     community_items = idea.get("community_top_items", [])
     clusters: list[dict[str, str]] = []
     seen_clusters: set[str] = set()
@@ -1474,7 +1526,10 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
         for keywords, cluster_label in cluster_rules:
             cluster_key = cluster_label["en"]
             if cluster_key not in seen_clusters and any(kw in title_lower for kw in keywords):
-                clusters.append(cluster_label)
+                clusters.append({
+                    "text": cluster_label,
+                    "source": "keyword"
+                })
                 seen_clusters.add(cluster_key)
                 break
 
@@ -1483,15 +1538,15 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
 
     # 如果没有从社区信号提取到痛点，使用基于关键词/分类的默认痛点
     if not clusters:
-        keyword = idea.get("keyword", "").lower()
-        
+        keyword_lower = keyword.lower()
+
         # 根据关键词类型返回默认痛点
         clusters.append(localized_text("Manual & time-consuming workflow", "操作繁琐，效率低"))
-        
-        if any(k in keyword for k in ["pdf", "word", "converter"]):
+
+        if any(k in keyword_lower for k in ["pdf", "word", "converter"]):
             clusters.append(localized_text("Output quality / format fidelity problems", "输出质量和格式还原问题明显"))
             clusters.append(localized_text("Batch processing not available in free tier", "免费层不支持批量处理"))
-        elif any(k in keyword for k in ["ai", "image", "video", "music"]):
+        elif any(k in keyword_lower for k in ["ai", "image", "video", "music"]):
             clusters.append(localized_text("Speed & performance issues", "速度和性能问题反复出现"))
             clusters.append(localized_text("Output quality inconsistency", "AI 生成结果质量不稳定"))
         else:
@@ -1502,23 +1557,45 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
 
 def derive_competitor_gaps(idea: dict, category: str) -> list[dict[str, str]]:
     """
-    从竞品分析和 SERP 数据推断竞品弱点。
-    
+    从竞品 Registry 纯粹提取竞品弱点作为 market gaps。
+
     数据优先级：
-    1. 竞品分析的 LLM 深度分析弱点（来自真实抓取的竞品页面）
-    2. SERP 数据推断
-    3. 基于分类的默认弱点
-    
-    返回最多 3 条中英双语竞品弱点。
+    1. 新模块 extract_competitor_gaps（纯粹从 Registry.weaknesses 提取，带域名标注）
+    2. 竞品分析的传统弱点回退
+    3. SERP 数据推断
+    4. 基于分类的默认弱点
+
+    返回格式: [{"domain": "xxx.com", "text": {"en": "...", "zh": "..."}}]
+    返回最多 3 条。
     """
-    # 优先从竞品分析获取真实弱点
+    # 优先使用新模块从 Registry 提取纯粹弱点
+    if COMPETITOR_GAP_MODULE_AVAILABLE:
+        niche_sites = idea.get("serp_niche_sites", [])
+        big_sites = idea.get("serp_big_sites", [])
+        all_domains = list(set(niche_sites + big_sites))
+
+        if all_domains:
+            profiles = load_competitor_profiles(all_domains)
+            if profiles:
+                extracted_gaps = extract_competitor_gaps_impl(profiles)
+                if extracted_gaps:
+                    # 转换格式以兼容现有逻辑
+                    result = []
+                    for gap in extracted_gaps[:3]:
+                        result.append({
+                            "domain": gap.get("domain", ""),
+                            "text": gap.get("text", {"en": "", "zh": ""})
+                        })
+                    return result
+
+    # 回退到竞品分析的传统弱点
     competitor_data = get_competitor_data_cached(idea, category)
-    
+
     if competitor_data.get("has_data"):
         competitor_weaknesses = competitor_data.get("competitor_weaknesses", [])
         if competitor_weaknesses:
             return competitor_weaknesses[:3]
-    
+
     # 回退到 SERP 数据推断
     big_sites = idea.get("serp_big_sites", [])
     tool_big_count = idea.get("serp_tool_big_count", 0)
