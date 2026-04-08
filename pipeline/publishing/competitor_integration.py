@@ -231,3 +231,95 @@ def clear_competitor_cache():
     """Clear the in-memory competitor cache."""
     global _competitor_cache
     _competitor_cache = {}
+
+
+def build_competitor_analysis_table(profiles: List[CompetitorProfile]) -> str:
+    """
+    Build a markdown table of competitor analysis.
+    
+    Args:
+        profiles: List of CompetitorProfile objects
+        
+    Returns:
+        Markdown formatted table with competitor details
+    """
+    if not profiles:
+        return ""
+    
+    lines = []
+    lines.append("### 竞品分析")
+    lines.append("")
+    
+    # Build table header
+    lines.append("| 竞品 | 定价 | 核心功能 | 弱点 |")
+    lines.append("|------|------|----------|------|")
+    
+    for profile in profiles:
+        competitor_name = profile.name.en if hasattr(profile.name, 'en') else str(profile.name)
+        
+        # Format pricing
+        if profile.pricing_tiers:
+            pricing_parts = []
+            for tier in profile.pricing_tiers[:2]:
+                tier_name = tier.name.zh if hasattr(tier.name, 'zh') else str(tier.name)
+                if tier.price == 0:
+                    pricing_parts.append(f"{tier_name}: 免费")
+                else:
+                    pricing_parts.append(f"{tier_name}: ${tier.price}")
+            pricing = "<br>".join(pricing_parts)
+        else:
+            pricing = "未知"
+        
+        # Format key features
+        if profile.key_features:
+            features = [f.zh if hasattr(f, 'zh') else str(f) for f in profile.key_features[:2]]
+            features_str = "<br>".join(features)
+        else:
+            features_str = "-"
+        
+        # Format weaknesses
+        if profile.weaknesses:
+            weaknesses = [w.zh if hasattr(w, 'zh') else str(w) for w in profile.weaknesses[:2]]
+            weaknesses_str = "<br>".join(weaknesses)
+        else:
+            weaknesses_str = "-"
+        
+        # Escape pipe characters in content
+        pricing = pricing.replace("|", "\\|")
+        features_str = features_str.replace("|", "\\|")
+        weaknesses_str = weaknesses_str.replace("|", "\\|")
+        
+        lines.append(f"| [{competitor_name}](https://{profile.domain}) | {pricing} | {features_str} | {weaknesses_str} |")
+    
+    lines.append("")
+    
+    return "\n".join(lines)
+
+
+def build_market_gaps_section(profiles: List[CompetitorProfile], gaps: List[Dict[str, str]]) -> str:
+    """
+    Build the market gaps section with competitor weaknesses.
+    
+    Args:
+        profiles: List of CompetitorProfile objects
+        gaps: List of competitor gap dictionaries
+        
+    Returns:
+        Markdown formatted market gaps section
+    """
+    if not profiles and not gaps:
+        return ""
+    
+    lines = []
+    lines.append("### 市场空白")
+    lines.append("")
+    
+    if gaps:
+        lines.append("从竞品弱点可以直接推导当前市场的未满足需求：")
+        lines.append("")
+        for i, gap in enumerate(gaps[:3], 1):
+            gap_zh = gap.get("zh", "")
+            lines.append(f"{i}. {gap_zh}")
+        lines.append("")
+    
+    return "\n".join(lines)

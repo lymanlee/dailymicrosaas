@@ -19,7 +19,12 @@ from pathlib import Path
 from typing import Iterable
 
 # Import competitor analysis integration
-from .competitor_integration import get_competitor_data_cached
+from .competitor_integration import (
+    get_competitor_data_cached,
+    load_competitor_profiles,
+    build_competitor_analysis_table,
+    build_market_gaps_section,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT_DIR = PROJECT_ROOT / "src" / "content" / "ideas"
@@ -628,6 +633,24 @@ def build_competition_section(idea: dict, difficulty: str, keyword: str, categor
             lines.append("搜索需求处在上升通道，说明窗口期还在；但在没有搜索位样本前，先按“已有成熟方案、仍留细分空档”处理更稳妥。")
         else:
             lines.append("现有外部信号说明这个方向不是纯概念题，但要不要正面进入，还取决于你能否把场景切得足够窄。")
+
+    lines.append("")
+
+    # --- 竞品分析表格（如果有关联的竞品分析数据）---
+    all_domains = list(set(niche_sites + big_sites))
+    if all_domains:
+        profiles = load_competitor_profiles(all_domains)
+        if profiles:
+            lines.append(build_competitor_analysis_table(profiles))
+            
+            # 获取 competitor gaps 用于市场空白板块
+            competitor_data = get_competitor_data_cached(idea, category)
+            competitor_gaps = competitor_data.get("competitor_weaknesses", [])
+            lines.append(build_market_gaps_section(profiles, competitor_gaps))
+        else:
+            # 如果没有竞品分析数据但有 SERP 数据，显示提示
+            lines.append("> 💡 已发现 {0} 个竞品，详细的定价和功能对比待下一轮补充。".format(len(all_domains)))
+            lines.append("")
 
     lines.append("")
 
