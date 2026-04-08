@@ -28,9 +28,25 @@ const url = getCompetitorUrl(competitor.domain);
       </h3>
       {competitor.pricingTiers.length > 0 && (
         <span class="text-sm text-slate-500">
-          {competitor.pricingTiers[0].price === 0 
-            ? (lang === 'zh' ? '免费' : 'Free')
-            : `$${competitor.pricingTiers[0].price}/mo`}
+          {(() => {
+            // Get all unique non-zero prices
+            const paidPrices = competitor.pricingTiers
+              .map(t => t.price)
+              .filter(p => p > 0);
+            
+            if (paidPrices.length === 0) {
+              // All free
+              return lang === 'zh' ? '免费' : 'Free';
+            }
+            
+            const minPaid = Math.min(...paidPrices);
+            const maxPaid = Math.max(...paidPrices);
+            
+            if (minPaid === maxPaid) {
+              return `$${minPaid}/mo`;
+            }
+            return `$${minPaid}–${maxPaid}/mo`;
+          })()}
         </span>
       )}
     </div>
