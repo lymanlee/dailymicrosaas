@@ -1290,19 +1290,33 @@ def yaml_competitor_analysis_block(data: dict) -> str:
                 lines.append("      pricingTiers:")
                 for tier in pricing_tiers:
                     lines.append(f'        - name:')
-                    lines.append(f'            en: "{quote_yaml(tier.get("name", {}).get("en", ""))}"')
-                    lines.append(f'            zh: "{quote_yaml(tier.get("name", {}).get("zh", ""))}"')
+                    lines.append(f'            en: "{quote_yaml(tier.get("name", {}).get("en", "Plan"))}"')
+                    lines.append(f'            zh: "{quote_yaml(tier.get("name", {}).get("zh", "套餐"))}"')
                     lines.append(f'          price: {tier.get("price", 0)}')
+                    
+                    # Description - use fallback if empty
+                    desc = tier.get("description", {})
+                    desc_en = desc.get("en", "") or "Basic features"
+                    desc_zh = desc.get("zh", "") or "基础功能"
                     lines.append(f'          description:')
-                    lines.append(f'            en: "{quote_yaml(tier.get("description", {}).get("en", ""))}"')
-                    lines.append(f'            zh: "{quote_yaml(tier.get("description", {}).get("zh", ""))}"')
+                    lines.append(f'            en: "{quote_yaml(desc_en)}"')
+                    lines.append(f'            zh: "{quote_yaml(desc_zh)}"')
+                    
+                    # Limits - use fallback if empty
+                    limits = tier.get("limits", {})
+                    mc = limits.get("monthlyCredits", {}) if isinstance(limits, dict) else {}
+                    cu = limits.get("commercialUse", {}) if isinstance(limits, dict) else {}
+                    mc_en = mc.get("en", "") or "Limited monthly credits" if isinstance(mc, dict) else "Limited monthly credits"
+                    mc_zh = mc.get("zh", "") or "每月积分有限" if isinstance(mc, dict) else "每月积分有限"
+                    cu_en = cu.get("en", "") or "Revenue sharing applies" if isinstance(cu, dict) else "Revenue sharing applies"
+                    cu_zh = cu.get("zh", "") or "需收入分成" if isinstance(cu, dict) else "需收入分成"
                     lines.append(f'          limits:')
                     lines.append(f'            monthlyCredits:')
-                    lines.append(f'              en: "{quote_yaml(tier.get("limits", {}).get("monthlyCredits", {}).get("en", ""))}"')
-                    lines.append(f'              zh: "{quote_yaml(tier.get("limits", {}).get("monthlyCredits", {}).get("zh", ""))}"')
+                    lines.append(f'              en: "{quote_yaml(mc_en)}"')
+                    lines.append(f'              zh: "{quote_yaml(mc_zh)}"')
                     lines.append(f'            commercialUse:')
-                    lines.append(f'              en: "{quote_yaml(tier.get("limits", {}).get("commercialUse", {}).get("en", ""))}"')
-                    lines.append(f'              zh: "{quote_yaml(tier.get("limits", {}).get("commercialUse", {}).get("zh", ""))}"')
+                    lines.append(f'              en: "{quote_yaml(cu_en)}"')
+                    lines.append(f'              zh: "{quote_yaml(cu_zh)}"')
             
             # Weaknesses
             weaknesses = comp.get("weaknesses", [])
