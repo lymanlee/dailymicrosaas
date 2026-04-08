@@ -26,21 +26,167 @@ buildWindow:
   zh: "3-5 周"
 trendSeries: []
 painClusters:
-  - en: "【Suno】Limited free tier"
-    zh: "【Suno】免费版限制较多"
   - en: "【Boomy】Limited control over AI-generated music quality and originality, which may result in generic-sounding tracks"
     zh: "【Boomy】对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通"
   - en: "【Boomy】Revenue sharing model on free tier reduces earnings for creators, potentially discouraging professional use"
     zh: "【Boomy】免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途"
   - en: "【Soundraw】Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs"
     zh: "【Soundraw】与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+  - en: "【Soundraw】Potential lack of originality in AI-generated tracks, leading to repetitive or generic outputs"
+    zh: "【Soundraw】AI生成的曲目可能缺乏原创性，导致输出重复或泛化"
 competitorGaps:
-  - en: "Limited free tier"
-    zh: "免费版限制较多"
   - en: "Limited control over AI-generated music quality and originality, which may result in generic-sounding tracks"
     zh: "对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通"
   - en: "Revenue sharing model on free tier reduces earnings for creators, potentially discouraging professional use"
     zh: "免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途"
+  - en: "Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs"
+    zh: "与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+competitorAnalysis:
+  topCompetitors:
+    - domain: "boomy.com"
+      name:
+        en: "Boomy"
+        zh: "Boomy"
+      keyFeatures:
+        - en: "AI-powered music creation that allows users to generate original songs in seconds by selecting a style and customizing elements"
+          zh: "AI驱动的音乐创作，用户可通过选择风格和自定义元素在几秒钟内生成原创歌曲"
+        - en: "Automated mastering and distribution to streaming platforms like Spotify and TikTok with one click"
+          zh: "一键自动母带处理和分发到Spotify、TikTok等流媒体平台"
+        - en: "Free tier with basic creation features and limited monthly credits for song generation"
+          zh: "免费套餐提供基本创作功能和有限的每月歌曲生成积分"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Basic song creation, limited monthly credits, access to free sounds and styles, distribution to streaming platforms with revenue sharing"
+            zh: "基本歌曲创作，有限的每月积分，免费音色和风格访问，可分发到流媒体平台但需收入分成"
+          limits:
+            monthlyCredits:
+              en: ""
+              zh: ""
+            commercialUse:
+              en: ""
+              zh: ""
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 9.99
+          description:
+            en: "Enhanced features including more monthly credits, priority support, higher revenue share, and advanced customization options"
+            zh: "增强功能包括更多每月积分、优先支持、更高收入分成和高级自定义选项"
+          limits:
+            monthlyCredits:
+              en: ""
+              zh: ""
+            commercialUse:
+              en: ""
+              zh: ""
+      weaknesses:
+        - en: "Limited control over AI-generated music quality and originality, which may result in generic-sounding tracks"
+          zh: "对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通"
+        - en: "Revenue sharing model on free tier reduces earnings for creators, potentially discouraging professional use"
+          zh: "免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途"
+    - domain: "soundraw.io"
+      name:
+        en: "Soundraw"
+        zh: "Soundraw"
+      keyFeatures:
+        - en: "AI-powered music generation with customizable parameters (e.g., mood, genre, length)"
+          zh: "AI驱动的音乐生成，可自定义参数（如情绪、流派、长度）"
+        - en: "Royalty-free music for commercial use without attribution requirements"
+          zh: "免版税音乐，可用于商业用途，无需署名"
+        - en: "Loop-based editing and seamless track exporting in multiple formats"
+          zh: "基于循环的编辑功能，支持多种格式的无缝音轨导出"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费版"
+          price: 0
+          description:
+            en: "Basic access with limited features for personal use"
+            zh: "基础功能访问，适用于个人用途，功能有限"
+          limits:
+            monthlyCredits:
+              en: ""
+              zh: ""
+            commercialUse:
+              en: ""
+              zh: ""
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 16.99
+          description:
+            en: "Full access to AI music generation, unlimited downloads, and commercial rights"
+            zh: "完全访问AI音乐生成功能，无限下载，拥有商业使用权"
+          limits:
+            monthlyCredits:
+              en: ""
+              zh: ""
+            commercialUse:
+              en: ""
+              zh: ""
+      weaknesses:
+        - en: "Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs"
+          zh: "与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+        - en: "Potential lack of originality in AI-generated tracks, leading to repetitive or generic outputs"
+          zh: "AI生成的曲目可能缺乏原创性，导致输出重复或泛化"
+        - en: "Dependence on internet connectivity for cloud-based generation and access"
+          zh: "依赖互联网连接进行基于云的生成和访问"
+    - domain: "suno.ai"
+      name:
+        en: "Suno"
+        zh: "Suno"
+      keyFeatures:
+        - en: "AI music generation"
+          zh: "AI音乐生成"
+        - en: "Multiple genres support"
+          zh: "支持多种风格"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费版"
+          price: 0
+          description:
+            en: "Basic features"
+            zh: "基础功能"
+          limits:
+            monthlyCredits:
+              en: ""
+              zh: ""
+            commercialUse:
+              en: ""
+              zh: ""
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 10
+          description:
+            en: "Full features"
+            zh: "完整功能"
+          limits:
+            monthlyCredits:
+              en: ""
+              zh: ""
+            commercialUse:
+              en: ""
+              zh: ""
+      weaknesses:
+        - en: "Limited free tier"
+          zh: "免费版限制较多"
+  marketGaps:
+    - en: "Limited control over AI-generated music quality and originality, which may result in generic-sounding tracks"
+      zh: "对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通"
+    - en: "Revenue sharing model on free tier reduces earnings for creators, potentially discouraging professional use"
+      zh: "免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途"
+    - en: "Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs"
+      zh: "与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+    - en: "Potential lack of originality in AI-generated tracks, leading to repetitive or generic outputs"
+      zh: "AI生成的曲目可能缺乏原创性，导致输出重复或泛化"
+    - en: "Dependence on internet connectivity for cloud-based generation and access"
+      zh: "依赖互联网连接进行基于云的生成和访问"
 evidenceLinks: []
 ---
 
@@ -70,17 +216,17 @@ SERP 前 10 大概是这样的格局：**2 个大站**（suno.ai 等）占据头
 
 | 竞品 | 定价 | 核心功能 | 弱点 |
 |------|------|----------|------|
-| [Suno](https://suno.ai) | 免费版: 免费<br>专业版: $10 | AI音乐生成<br>支持多种风格 | 免费版限制较多 |
 | [Boomy](https://boomy.com) | 免费: 免费<br>专业版: $9.99 | AI驱动的音乐创作，用户可通过选择风格和自定义元素在几秒钟内生成原创歌曲<br>一键自动母带处理和分发到Spotify、TikTok等流媒体平台 | 对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通<br>免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途 |
 | [Soundraw](https://soundraw.io) | 免费版: 免费<br>专业版: $16.99 | AI驱动的音乐生成，可自定义参数（如情绪、流派、长度）<br>免版税音乐，可用于商业用途，无需署名 | 与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限<br>AI生成的曲目可能缺乏原创性，导致输出重复或泛化 |
+| [Suno](https://suno.ai) | 免费版: 免费<br>专业版: $10 | AI音乐生成<br>支持多种风格 | 免费版限制较多 |
 
 ### 市场空白
 
 从竞品弱点可以直接推导当前市场的未满足需求：
 
-1. 免费版限制较多
-2. 对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通
-3. 免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途
+1. 对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通
+2. 免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途
+3. 与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限
 
 
 ### 可切入性

@@ -323,3 +323,108 @@ def build_market_gaps_section(profiles: List[CompetitorProfile], gaps: List[Dict
         lines.append("")
     
     return "\n".join(lines)
+
+
+def build_competitor_analysis_for_frontmatter(profiles: List[CompetitorProfile], gaps: List[Dict[str, str]]) -> Dict[str, Any]:
+    """
+    Build competitorAnalysis data structure for markdown frontmatter.
+    
+    This generates the structured data needed by the frontend component
+    CompetitorAnalysisSection in IdeaDetailPage.astro.
+    
+    Args:
+        profiles: List of CompetitorProfile objects
+        gaps: List of competitor gap dictionaries
+        
+    Returns:
+        Dict suitable for frontmatter competitorAnalysis field
+    """
+    if not profiles and not gaps:
+        return {}
+    
+    top_competitors = []
+    
+    for profile in profiles:
+        competitor_name = profile.name.en if hasattr(profile.name, 'en') else str(profile.name)
+        competitor_name_zh = getattr(profile.name, 'zh', competitor_name)
+        
+        # Format pricing tiers
+        pricing_tiers = []
+        for tier in profile.pricing_tiers[:2]:
+            tier_name_zh = tier.name.zh if hasattr(tier.name, 'zh') else str(tier.name)
+            tier_name_en = tier.name.en if hasattr(tier.name, 'en') else str(tier.name)
+            
+            # Handle description field (may be LocalizedPair or dict)
+            desc = tier.description
+            if hasattr(desc, 'en'):
+                desc_en, desc_zh = desc.en, desc.zh
+            elif isinstance(desc, dict):
+                desc_en, desc_zh = desc.get('en', ''), desc.get('zh', '')
+            else:
+                desc_en, desc_zh = '', ''
+            
+            # Handle limits field (may be object with attributes or dict)
+            limits = tier.limits if hasattr(tier, 'limits') else {}
+            if hasattr(limits, 'monthlyCredits'):
+                mc = limits.monthlyCredits
+                mc_en = mc.en if hasattr(mc, 'en') else ''
+                mc_zh = mc.zh if hasattr(mc, 'zh') else ''
+                cu = limits.commercialUse
+                cu_en = cu.en if hasattr(cu, 'en') else ''
+                cu_zh = cu.zh if hasattr(cu, 'zh') else ''
+            elif isinstance(limits, dict):
+                mc = limits.get('monthlyCredits', {})
+                mc_en = mc.get('en', '') if isinstance(mc, dict) else ''
+                mc_zh = mc.get('zh', '') if isinstance(mc, dict) else ''
+                cu = limits.get('commercialUse', {})
+                cu_en = cu.get('en', '') if isinstance(cu, dict) else ''
+                cu_zh = cu.get('zh', '') if isinstance(cu, dict) else ''
+            else:
+                mc_en, mc_zh, cu_en, cu_zh = '', '', '', ''
+            
+            pricing_tiers.append({
+                "name": {"en": tier_name_en, "zh": tier_name_zh},
+                "price": tier.price,
+                "description": {"en": desc_en, "zh": desc_zh},
+                "limits": {
+                    "monthlyCredits": {"en": mc_en, "zh": mc_zh},
+                    "commercialUse": {"en": cu_en, "zh": cu_zh},
+                },
+            })
+        
+        # Format key features
+        key_features = []
+        for feature in profile.key_features[:3]:
+            key_features.append({
+                "en": feature.en if hasattr(feature, 'en') else str(feature),
+                "zh": feature.zh if hasattr(feature, 'zh') else str(feature),
+            })
+        
+        # Format weaknesses
+        weaknesses = []
+        for weakness in profile.weaknesses[:3]:
+            weaknesses.append({
+                "en": weakness.en if hasattr(weakness, 'en') else str(weakness),
+                "zh": weakness.zh if hasattr(weakness, 'zh') else str(weakness),
+            })
+        
+        top_competitors.append({
+            "domain": profile.domain,
+            "name": {"en": competitor_name, "zh": competitor_name_zh},
+            "keyFeatures": key_features,
+            "pricingTiers": pricing_tiers,
+            "weaknesses": weaknesses,
+        })
+    
+    # Format market gaps
+    market_gaps = []
+    for gap in gaps[:5]:
+        market_gaps.append({
+            "en": gap.get("en", ""),
+            "zh": gap.get("zh", ""),
+        })
+    
+    return {
+        "topCompetitors": top_competitors,
+        "marketGaps": market_gaps,
+    }

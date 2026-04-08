@@ -24,6 +24,7 @@ from .competitor_integration import (
     load_competitor_profiles,
     build_competitor_analysis_table,
     build_market_gaps_section,
+    build_competitor_analysis_for_frontmatter,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -1247,6 +1248,81 @@ def yaml_trend_series_block(field_name: str, items: list[dict]) -> str:
     return "\n".join(lines)
 
 
+def yaml_competitor_analysis_block(data: dict) -> str:
+    """
+    Generate YAML block for competitorAnalysis frontmatter field.
+    
+    Args:
+        data: Dict with topCompetitors and marketGaps arrays
+        
+    Returns:
+        YAML formatted string for frontmatter
+    """
+    if not data:
+        return ""
+    
+    lines = ["competitorAnalysis:"]
+    
+    # Format topCompetitors
+    top_competitors = data.get("topCompetitors", [])
+    if top_competitors:
+        lines.append("  topCompetitors:")
+        for comp in top_competitors:
+            lines.append(f'    - domain: "{quote_yaml(comp.get("domain", ""))}"')
+            
+            # Name
+            name = comp.get("name", {})
+            lines.append(f'      name:')
+            lines.append(f'        en: "{quote_yaml(name.get("en", ""))}"')
+            lines.append(f'        zh: "{quote_yaml(name.get("zh", ""))}"')
+            
+            # Key features
+            key_features = comp.get("keyFeatures", [])
+            if key_features:
+                lines.append("      keyFeatures:")
+                for feature in key_features:
+                    lines.append(f'        - en: "{quote_yaml(feature.get("en", ""))}"')
+                    lines.append(f'          zh: "{quote_yaml(feature.get("zh", ""))}"')
+            
+            # Pricing tiers
+            pricing_tiers = comp.get("pricingTiers", [])
+            if pricing_tiers:
+                lines.append("      pricingTiers:")
+                for tier in pricing_tiers:
+                    lines.append(f'        - name:')
+                    lines.append(f'            en: "{quote_yaml(tier.get("name", {}).get("en", ""))}"')
+                    lines.append(f'            zh: "{quote_yaml(tier.get("name", {}).get("zh", ""))}"')
+                    lines.append(f'          price: {tier.get("price", 0)}')
+                    lines.append(f'          description:')
+                    lines.append(f'            en: "{quote_yaml(tier.get("description", {}).get("en", ""))}"')
+                    lines.append(f'            zh: "{quote_yaml(tier.get("description", {}).get("zh", ""))}"')
+                    lines.append(f'          limits:')
+                    lines.append(f'            monthlyCredits:')
+                    lines.append(f'              en: "{quote_yaml(tier.get("limits", {}).get("monthlyCredits", {}).get("en", ""))}"')
+                    lines.append(f'              zh: "{quote_yaml(tier.get("limits", {}).get("monthlyCredits", {}).get("zh", ""))}"')
+                    lines.append(f'            commercialUse:')
+                    lines.append(f'              en: "{quote_yaml(tier.get("limits", {}).get("commercialUse", {}).get("en", ""))}"')
+                    lines.append(f'              zh: "{quote_yaml(tier.get("limits", {}).get("commercialUse", {}).get("zh", ""))}"')
+            
+            # Weaknesses
+            weaknesses = comp.get("weaknesses", [])
+            if weaknesses:
+                lines.append("      weaknesses:")
+                for weakness in weaknesses:
+                    lines.append(f'        - en: "{quote_yaml(weakness.get("en", ""))}"')
+                    lines.append(f'          zh: "{quote_yaml(weakness.get("zh", ""))}"')
+    
+    # Format marketGaps
+    market_gaps = data.get("marketGaps", [])
+    if market_gaps:
+        lines.append("  marketGaps:")
+        for gap in market_gaps:
+            lines.append(f'    - en: "{quote_yaml(gap.get("en", ""))}"')
+            lines.append(f'      zh: "{quote_yaml(gap.get("zh", ""))}"')
+    
+    return "\n".join(lines)
+
+
 def derive_verdict(idea: dict) -> str:
     """将 grade 映射为更清晰的决策结论。"""
     grade = idea.get("grade", "watch")
@@ -1572,6 +1648,23 @@ def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
     pain_clusters_yaml = yaml_localized_list_block("painClusters", pain_clusters)
     competitor_gaps_yaml = yaml_localized_list_block("competitorGaps", competitor_gaps)
 
+    # Generate competitorAnalysis frontmatter for Market Landscape section
+    niche_sites = idea.get("serp_niche_sites", [])
+    big_sites = idea.get("serp_big_sites", [])
+    all_domains = list(set(niche_sites + big_sites))
+    competitor_analysis_yaml = ""
+    if all_domains:
+        profiles = load_competitor_profiles(all_domains)
+        if profiles:
+            competitor_data = get_competitor_data_cached(idea, category)
+            competitor_analysis = build_competitor_analysis_for_frontmatter(profiles, competitor_data.get("competitor_weaknesses", []))
+            if competitor_analysis:
+                competitor_analysis_yaml = yaml_competitor_analysis_block(competitor_analysis)
+    
+    # Ensure competitor_analysis_yaml is defined
+    if "competitor_analysis_yaml" not in dir():
+        competitor_analysis_yaml = ""
+
     evidence_links = []
     for item in idea.get("community_top_items", [])[:3]:
         url = item.get("url", "")
@@ -1612,6 +1705,7 @@ buildWindow:
 {trend_series_yaml}
 {pain_clusters_yaml}
 {competitor_gaps_yaml}
+{competitor_analysis_yaml}
 {evidence_links_yaml}
 ---
 
