@@ -34,6 +34,75 @@ competitorGaps:
     zh: "通用型 AI 工具对单一需求来说定价过高"
   - en: "Most current tools hide quality controls behind generic workflows"
     zh: "多数现有工具把关键质量控制埋在泛化流程里，缺少针对场景的专门入口"
+competitorAnalysis:
+  topCompetitors:
+    - domain: "undetectable.ai"
+      name:
+        en: "Undetectable.ai"
+        zh: "Undetectable.ai"
+      keyFeatures:
+        - en: "AI content humanization to bypass AI detection tools"
+          zh: "AI内容人性化，绕过AI检测工具"
+        - en: "Plagiarism-free rewriting while preserving original meaning"
+          zh: "无抄袭改写，同时保留原意"
+        - en: "Multi-language support for global users"
+          zh: "多语言支持，面向全球用户"
+      pricingTiers:
+        - name:
+            en: "Custom"
+            zh: "定制"
+          price: 0
+          description:
+            en: "Pricing not clearly stated on website"
+            zh: "网站上未明确显示定价"
+          limits:
+            monthlyCredits:
+              en: "Not stated"
+              zh: "未说明"
+            commercialUse:
+              en: "Not stated"
+              zh: "未说明"
+      weaknesses:
+        - en: "Lack of transparent pricing and plan details on website"
+          zh: "网站上缺乏透明的定价和计划详情"
+        - en: "No clear information on content quality guarantees or accuracy"
+          zh: "没有明确的内容质量保证或准确性信息"
+        - en: "Potential ethical concerns about bypassing AI detection"
+          zh: "绕过AI检测可能引发伦理问题"
+    - domain: "humbot.ai"
+      name:
+        en: "Humbot"
+        zh: "Humbot"
+      keyFeatures:
+        - en: "AI humanization for text content"
+          zh: "文本内容的AI人性化"
+      pricingTiers:
+        - name:
+            en: "Custom"
+            zh: "定制"
+          price: 0
+          description:
+            en: "Pricing not clearly stated on website"
+            zh: "网站上未明确显示定价"
+          limits:
+            monthlyCredits:
+              en: "Not stated"
+              zh: "未说明"
+            commercialUse:
+              en: "Not stated"
+              zh: "未说明"
+      weaknesses:
+        - en: "Lack of transparent pricing and feature details on website"
+          zh: "网站上缺乏透明的定价和功能详情"
+        - en: "No clear information about product capabilities or target audience"
+          zh: "没有明确的产品能力或目标用户信息"
+  marketGaps:
+    - en: "Transparent pricing and clear feature breakdowns for users seeking budget-friendly, predictable AI content solutions"
+      zh: "为寻求经济实惠、可预测的AI内容解决方案的用户提供透明的定价和清晰的功能细分"
+    - en: "Comprehensive quality guarantees and ethical guidelines to address concerns about content accuracy and responsible AI use"
+      zh: "全面的质量保证和道德准则，以解决用户对内容准确性和负责任AI使用的担忧"
+    - en: "Detailed product targeting and use-case documentation for niche professional or educational segments"
+      zh: "针对专业或教育细分市场的详细产品定位和使用案例文档"
 evidenceLinks: []
 ---
 

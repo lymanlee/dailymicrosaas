@@ -213,6 +213,108 @@ painClusters:
 competitorGaps:
   - en: "Generalist AI tools are overpriced for single-use-case needs"
     zh: "通用型 AI 工具对单一需求来说定价过高"
+competitorAnalysis:
+  topCompetitors:
+    - domain: "soundraw.io"
+      name:
+        en: "Soundraw"
+        zh: "Soundraw"
+      keyFeatures:
+        - en: "AI-powered music generation with customizable parameters (e.g., mood, genre, length)"
+          zh: "AI驱动的音乐生成，可自定义参数（如情绪、流派、长度）"
+        - en: "Royalty-free music for commercial use without attribution requirements"
+          zh: "免版税音乐，可用于商业用途，无需署名"
+        - en: "Loop-based editing and seamless track exporting in multiple formats"
+          zh: "基于循环的编辑功能，支持多种格式的无缝音轨导出"
+      pricingTiers:
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 16.99
+          description:
+            en: "Full access to AI music generation, unlimited downloads, and commercial rights"
+            zh: "完全访问AI音乐生成功能，无限下载，拥有商业使用权"
+          limits:
+            monthlyCredits:
+              en: "Unlimited generations"
+              zh: "无限生成次数"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+      weaknesses:
+        - en: "Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs"
+          zh: "与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+        - en: "Potential lack of originality in AI-generated tracks, leading to repetitive or generic outputs"
+          zh: "AI生成的曲目可能缺乏原创性，导致输出重复或泛化"
+    - domain: "boomy.com"
+      name:
+        en: "Boomy"
+        zh: "Boomy"
+      keyFeatures:
+        - en: "AI-powered music creation that allows users to generate original songs in seconds by selecting a style and customizing elements"
+          zh: "AI驱动的音乐创作，用户可通过选择风格和自定义元素在几秒钟内生成原创歌曲"
+        - en: "Automated mastering and distribution to streaming platforms like Spotify and TikTok with one click"
+          zh: "一键自动母带处理和分发到Spotify、TikTok等流媒体平台"
+        - en: "Free tier with basic creation features and limited monthly credits for song generation"
+          zh: "免费套餐提供基本创作功能和有限的每月歌曲生成积分"
+      pricingTiers:
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 9.99
+          description:
+            en: "Enhanced features including more monthly credits, priority support, higher revenue share, and advanced customization options"
+            zh: "增强功能包括更多每月积分、优先支持、更高收入分成和高级自定义选项"
+          limits:
+            monthlyCredits:
+              en: "Not clearly stated (increased compared to Free tier)"
+              zh: "未明确说明（相比免费套餐有所增加）"
+            commercialUse:
+              en: "Allowed with improved revenue terms"
+              zh: "允许，收入条款更优"
+      weaknesses:
+        - en: "Limited control over AI-generated music quality and originality, which may result in generic-sounding tracks"
+          zh: "对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通"
+        - en: "Revenue sharing model on free tier reduces earnings for creators, potentially discouraging professional use"
+          zh: "免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途"
+    - domain: "aiva.ai"
+      name:
+        en: "AIVA"
+        zh: "AIVA"
+      keyFeatures:
+        - en: "AI-powered music composition for various media projects"
+          zh: "为各类媒体项目提供AI驱动的音乐创作"
+        - en: "Generates original, royalty-free music tracks"
+          zh: "生成原创、免版税的音乐曲目"
+        - en: "User-friendly interface with customizable parameters"
+          zh: "用户友好的界面，支持可自定义参数"
+      pricingTiers:
+        - name:
+            en: "Not clearly stated"
+            zh: "未明确说明"
+          price: 0
+          description:
+            en: "Not clearly stated"
+            zh: "未明确说明"
+          limits:
+            monthlyCredits:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            commercialUse:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+      weaknesses:
+        - en: "Lack of transparent pricing and feature details on public pages"
+          zh: "公开页面缺乏透明的定价和功能详情"
+        - en: "Potential limitations in music genre diversity or customization depth"
+          zh: "音乐风格多样性或自定义深度可能存在限制"
+  marketGaps:
+    - en: "Offline functionality and advanced control for professional musicians who need detailed manipulation of musical elements without internet dependency"
+      zh: "面向专业音乐人的离线功能和高级控制，无需依赖互联网即可详细操作音乐元素"
+    - en: "Transparent pricing and high originality with revenue protection for creators, addressing concerns about generic outputs and unfair earnings"
+      zh: "透明的定价和高原创性，保护创作者收入，解决输出内容泛化和收益不公平的担忧"
+    - en: "Diverse genre support and deep customization options to cater to niche markets and specialized music production needs"
+      zh: "多样化的流派支持和深度定制选项，以满足小众市场和专业音乐制作需求"
 evidenceLinks:
   - url: "https://therecord.media/man-pleads-guilty-8-million-ai-music-scheme"
     title: "Man pleads guilty to $8M AI-generated music scheme"

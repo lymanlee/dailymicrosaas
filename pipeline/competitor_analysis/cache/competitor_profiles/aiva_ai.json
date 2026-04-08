@@ -1,0 +1,67 @@
+{
+  "domain": "aiva.ai",
+  "name": {
+    "en": "AIVA",
+    "zh": "AIVA"
+  },
+  "keyFeatures": [
+    {
+      "en": "AI-powered music composition for various media projects",
+      "zh": "为各类媒体项目提供AI驱动的音乐创作"
+    },
+    {
+      "en": "Generates original, royalty-free music tracks",
+      "zh": "生成原创、免版税的音乐曲目"
+    },
+    {
+      "en": "User-friendly interface with customizable parameters",
+      "zh": "用户友好的界面，支持可自定义参数"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Lack of transparent pricing and feature details on public pages",
+      "zh": "公开页面缺乏透明的定价和功能详情"
+    },
+    {
+      "en": "Potential limitations in music genre diversity or customization depth",
+      "zh": "音乐风格多样性或自定义深度可能存在限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators, filmmakers, game developers, and marketers needing original background music",
+    "zh": "需要原创背景音乐的内容创作者、电影制作人、游戏开发者和营销人员"
+  },
+  "positioning": {
+    "en": "An AI tool for accessible, efficient music composition without requiring musical expertise",
+    "zh": "一款无需音乐专业知识即可进行便捷高效音乐创作的AI工具"
+  },
+  "analyzedAt": "2026-04-07T23:54:34.458969"
+}

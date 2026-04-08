@@ -1,0 +1,56 @@
+{
+  "domain": "humbot.ai",
+  "name": "Humbot",
+  "keyFeatures": [
+    {
+      "en": "Not clearly stated",
+      "zh": "未明确说明"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Lack of transparent pricing and feature details on website",
+      "zh": "网站上缺乏透明的定价和功能详情"
+    },
+    {
+      "en": "No clear information about product capabilities or target audience",
+      "zh": "没有明确的产品能力或目标用户信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Not clearly stated",
+    "zh": "未明确说明"
+  },
+  "positioning": {
+    "en": "Not clearly stated",
+    "zh": "未明确说明"
+  },
+  "analyzedAt": "2026-04-08T01:09:12.655198"
+}

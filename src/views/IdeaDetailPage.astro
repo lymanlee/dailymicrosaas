@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import { ui, type Lang, withLangPath } from '../lib/i18n';
 import {
   buildLocalizedExecutionSteps,
-  buildLocalizedFullBreakdown,
   buildLocalizedMonetizationItems,
   buildLocalizedWhyNow,
   buildSourceSignalCards,
@@ -14,6 +13,8 @@ import {
   getSection,
   parseIdeaSections,
 } from '../lib/idea';
+import { parseCompetitorAnalysis } from '../lib/competitor';
+import CompetitorAnalysisSection from '../components/CompetitorAnalysisSection.astro';
 
 interface Props {
   idea: any;
@@ -35,7 +36,7 @@ const sourceSignalCards = buildSourceSignalCards(demandSection, evidenceLinks);
 const convictionItems = buildLocalizedWhyNow(frontmatter, demandSection);
 const monetizationItems = buildLocalizedMonetizationItems(frontmatter.category ?? '');
 const executionSteps = buildLocalizedExecutionSteps(frontmatter.sourceKeyword ?? '', frontmatter.difficulty ?? 'Medium');
-const fullBreakdownSections = buildLocalizedFullBreakdown(frontmatter, demandSection, keywordItems);
+const competitorAnalysis = parseCompetitorAnalysis(frontmatter);
 const localizedTitleEn = getLocalizedTextStrict(frontmatter.title, 'en', 'title');
 const localizedTitleZh = getLocalizedTextStrict(frontmatter.title, 'zh', 'title');
 const localizedDescriptionEn = getLocalizedTextStrict(frontmatter.description, 'en', 'description');
@@ -137,36 +138,58 @@ const confidenceInfo = confidenceConfig[confidence] ?? confidenceConfig['Medium'
 
 const score = frontmatter.sourceScore ?? 0;
 const scorePercent = Math.min(Math.round(score), 100);
-const scoreLabelEn = `${t['detail.summary.score']} ${score.toFixed(1)} / 100`;
-const scoreLabelZh = `评分 ${score.toFixed(1)} / 100`;
 
-const quickFacts = [
-  { labelKey: 'detail.reading_time', en: `${readingTime} min`, zh: `${readingTime} 分钟` },
-  { labelKey: 'detail.difficulty', en: difficultyInfo.label, zh: difficultyInfo.label, valueKey: difficultyInfo.labelKey },
-  { labelKey: 'detail.timeline', en: buildWindowEn, zh: buildWindowZh },
-  { labelKey: 'detail.published', en: frontmatter.date, zh: frontmatter.date },
-];
+// Opportunity Score with TAM
+const opportunityScore = {
+  demand: 4,
+  competition: 3,
+  barrier: 2,
+  monetization: 5,
+};
 
+// TAM from frontmatter (market size in absolute value, e.g., "$1.2B" or "12亿美元")
+const tamValue = frontmatter.tam ?? frontmatter.marketSize ?? null;
+
+// Key Metrics
 const trendSeries = Array.isArray(frontmatter.trendSeries)
   ? frontmatter.trendSeries.filter((item) => typeof item?.date === 'string' && typeof item?.value === 'number')
   : [];
-const chartWidth = 100;
-const chartHeight = 44;
+
+// Chart dimensions with fixed aspect ratio (similar to redesign)
+const dataCount = trendSeries.length;
+const pointSpacing = 20; // horizontal spacing between points
+const paddingX = 10;
+const viewBoxWidth = dataCount > 1 ? (dataCount - 1) * pointSpacing + paddingX * 2 : 100;
+const viewBoxHeight = 100;
+const chartWidth = viewBoxWidth;
+const chartHeight = viewBoxHeight;
+
 const trendPeak = trendSeries.length ? Math.max(...trendSeries.map((item) => item.value), 0) : 0;
 const trendFloor = trendSeries.length ? Math.min(...trendSeries.map((item) => item.value), 0) : 0;
 const trendRange = Math.max(trendPeak - trendFloor, 10);
-const trendPolylinePoints = trendSeries.map((item, index) => {
-  const x = trendSeries.length === 1 ? chartWidth / 2 : (index / Math.max(trendSeries.length - 1, 1)) * chartWidth;
-  const y = chartHeight - ((item.value - trendFloor) / trendRange) * chartHeight;
-  return `${x.toFixed(2)},${y.toFixed(2)}`;
-}).join(' ');
-const trendAreaPoints = trendPolylinePoints ? `${trendPolylinePoints} ${chartWidth},${chartHeight} 0,${chartHeight}` : '';
+
+// Calculate points with fixed aspect ratio
+const trendPoints = trendSeries.map((item, index) => {
+  const x = dataCount <= 1 ? viewBoxWidth / 2 : index * pointSpacing + paddingX;
+  const y = viewBoxHeight - ((item.value - trendFloor) / trendRange) * 70 - 15; // 15px padding top/bottom
+  return { x, y, value: item.value, date: item.date };
+});
+
+const trendPolylinePoints = trendPoints.map(p => `${p.x.toFixed(2)},${p.y.toFixed(2)}`).join(' ');
+const trendAreaPoints = trendPolylinePoints 
+  ? `${trendPolylinePoints} ${viewBoxWidth - paddingX},${viewBoxHeight} ${paddingX},${viewBoxHeight}` 
+  : '';
+
 const trendRecentWindow = trendSeries.slice(-7);
 const trendRecentAvg = trendRecentWindow.length
   ? Math.round((trendRecentWindow.reduce((sum, item) => sum + item.value, 0) / trendRecentWindow.length) * 10) / 10
   : 0;
-const trendStartLabel = trendSeries[0]?.date ?? '';
-const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
+const trendChange = trendSeries.length > 1 
+  ? Math.round(((trendSeries[trendSeries.length - 1].value - trendSeries[0].value) / trendSeries[0].value) * 100)
+  : 0;
+
+// Competitor count from analysis
+const competitorCount = competitorAnalysis?.topCompetitors?.length ?? competitorGaps.length;
 ---
 
 <Layout
@@ -184,189 +207,333 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
     </a>
   </div>
 
-  <article class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-start">
-    <div class="space-y-8">
-      <section class="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-sm">
-        <div class="flex flex-wrap items-center gap-3 border-b border-slate-100 px-8 py-5">
+  <article class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start">
+    <!-- Main Column -->
+    <div class="space-y-6">
+      <!-- Hero Section -->
+      <section class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div class="flex flex-wrap items-center gap-2 border-b border-slate-100 px-6 py-4">
           <span
             data-l10n-en={categoryInfo.en}
             data-l10n-zh={categoryInfo.zh}
-            class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${categoryInfo.classes}`}
+            class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${categoryInfo.classes}`}
           >
             {lang === 'zh' ? categoryInfo.zh : categoryInfo.en}
           </span>
-          <span class={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
+          <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${difficultyInfo.classes}`}>
             {t[difficultyInfo.labelKey]}
           </span>
           {frontmatter.status === 'New' && (
-            <span class="inline-flex rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
+            <span class="inline-flex rounded-full bg-rose-50 px-2.5 py-0.5 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-200">
               {t['detail.status.new']}
             </span>
           )}
-          <time class="ml-auto text-sm font-medium text-slate-400">{frontmatter.date}</time>
+          <time class="ml-auto text-xs font-medium text-slate-400">{frontmatter.date}</time>
         </div>
 
-        <div class="px-8 pt-7 pb-6">
+        <div class="px-6 pt-6 pb-5">
           <h1
             data-l10n-en={localizedTitleEn}
             data-l10n-zh={localizedTitleZh}
-            class="max-w-4xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl"
+            class="max-w-4xl text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl"
           >
             {lang === 'zh' ? localizedTitleZh : localizedTitleEn}
           </h1>
           <p
             data-l10n-en={localizedDescriptionEn}
             data-l10n-zh={localizedDescriptionZh}
-            class="mt-4 max-w-3xl text-lg leading-8 text-slate-600"
+            class="mt-3 max-w-3xl text-base leading-7 text-slate-600"
           >
             {lang === 'zh' ? localizedDescriptionZh : localizedDescriptionEn}
           </p>
-        </div>
 
-        <div class="grid gap-px bg-slate-100 lg:grid-cols-3">
-          <div class={`flex flex-col gap-3 bg-white px-8 py-6 ${verdictInfo.bg}`}>
-            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.verdict']}</p>
-            <div class="flex items-center gap-2">
-              <span class="text-2xl leading-none">{verdictInfo.emoji}</span>
-              <span class={`text-xl font-black ${verdictInfo.text}`}>{t[verdictInfo.labelKey]}</span>
-            </div>
-            <div class="h-1.5 w-full overflow-hidden rounded-full bg-slate-200">
-              <div class={`h-full rounded-full ${verdictInfo.bar}`} style={`width: ${scorePercent}%`}></div>
-            </div>
-            <p data-l10n-en={scoreLabelEn} data-l10n-zh={scoreLabelZh} class="text-xs text-slate-500">{lang === 'zh' ? scoreLabelZh : scoreLabelEn}</p>
-          </div>
-
-          <div class="flex flex-col gap-3 bg-white px-8 py-6">
-            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.confidence']}</p>
-            <div class="flex items-center gap-2">
-              <div class="flex gap-1">
-                {[1, 2, 3].map((dot) => (
-                  <span class={`inline-block h-4 w-4 rounded-full ${dot <= confidenceInfo.dots ? confidenceInfo.color : 'bg-slate-200'}`}></span>
-                ))}
+          <!-- Opportunity Score -->
+          <div class="mt-5 p-5 bg-slate-50 rounded-xl border border-slate-100">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 6v6l4 2"/>
+                </svg>
+                <h3 class="font-semibold text-slate-900">{t['detail.opportunity_score']}</h3>
               </div>
-              <span class="text-lg font-bold text-slate-800">{t[confidenceInfo.labelKey]}</span>
+              <div class="flex items-center gap-1.5">
+                <span class="text-xl font-bold text-slate-900">{score.toFixed(0)}</span>
+                <span class="text-xs text-slate-400">/100</span>
+              </div>
             </div>
-            {frontmatter.dataWindow && (
-              <p class="text-xs text-slate-500">
-                <span>{t['detail.summary.data_window']}</span>: <span data-l10n-en={dataWindowEn} data-l10n-zh={dataWindowZh} class="font-semibold text-slate-700">{lang === 'zh' ? dataWindowZh : dataWindowEn}</span>
-                {frontmatter.dataDate && (
-                  <>
-                    <span class="mx-1">·</span>
-                    <span>{t['detail.summary.updated']}</span>
-                    <span class="font-semibold text-slate-700"> {frontmatter.dataDate}</span>
-                  </>
-                )}
-              </p>
-            )}
-          </div>
+            
+            <!-- Verdict Badge -->
+            <div class="flex items-center gap-2 mb-4">
+              <span>{verdictInfo.emoji}</span>
+              <span class={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-bold ${verdictInfo.bg} ${verdictInfo.text} ring-1 ring-inset ${verdictInfo.ring}`}>
+                {t[verdictInfo.labelKey]}
+              </span>
+            </div>
 
-          <div class="flex flex-col gap-3 bg-white px-8 py-6">
-            <p class="text-xs font-bold uppercase tracking-widest text-slate-500">{t['detail.summary.best_wedge']}</p>
-            <p data-l10n-en={bestWedgeEn} data-l10n-zh={bestWedgeZh} class="text-base font-semibold leading-7 text-slate-900">
-              {lang === 'zh' ? bestWedgeZh : bestWedgeEn}
-            </p>
+            <!-- Score Bars -->
+            <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">{t['detail.opportunity_score.demand']}</span>
+                  <span class="font-medium text-slate-700">{opportunityScore.demand}/5</span>
+                </div>
+                <div class="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style={`width: ${(opportunityScore.demand / 5) * 100}%`}></div>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">{t['detail.opportunity_score.competition']}</span>
+                  <span class="font-medium text-slate-700">{opportunityScore.competition}/5</span>
+                </div>
+                <div class="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full" style={`width: ${(opportunityScore.competition / 5) * 100}%`}></div>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">{t['detail.opportunity_score.barrier']}</span>
+                  <span class="font-medium text-slate-700">{opportunityScore.barrier}/5</span>
+                </div>
+                <div class="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-sky-500 rounded-full" style={`width: ${(opportunityScore.barrier / 5) * 100}%`}></div>
+                </div>
+              </div>
+              <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                  <span class="text-slate-500">{t['detail.opportunity_score.monetization']}</span>
+                  <span class="font-medium text-slate-700">{opportunityScore.monetization}/5</span>
+                </div>
+                <div class="h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style={`width: ${(opportunityScore.monetization / 5) * 100}%`}></div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- Evidence Section -->
       {trendSeries.length > 1 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <div class="flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <span class="section-kicker">{t['detail.trend.title']}</span>
-              <p class="mt-2 text-sm text-slate-500">{t['detail.trend.desc']}</p>
-            </div>
-            <div class="grid gap-2 text-right text-xs font-semibold text-slate-500 sm:grid-cols-2 sm:text-left">
-              <div class="rounded-2xl bg-slate-50 px-4 py-3">
-                <p class="uppercase tracking-[0.12em] text-slate-400">{t['detail.trend.peak']}</p>
-                <p class="mt-1 text-lg font-black text-slate-900">{trendPeak}</p>
-              </div>
-              <div class="rounded-2xl bg-slate-50 px-4 py-3">
-                <p class="uppercase tracking-[0.12em] text-slate-400">{t['detail.trend.avg']}</p>
-                <p class="mt-1 text-lg font-black text-slate-900">{trendRecentAvg}</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-6 rounded-[28px] border border-sky-100 bg-sky-50/70 p-4 sm:p-5">
-            <svg viewBox={`0 0 ${chartWidth} ${chartHeight + 2}`} class="h-52 w-full overflow-visible" role="img" aria-label={t['detail.trend.title']}>
-              <defs>
-                <linearGradient id="trend-fill" x1="0" x2="0" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.28"></stop>
-                  <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0"></stop>
-                </linearGradient>
-              </defs>
-              {[0, 1, 2, 3].map((step) => (
-                <line
-                  x1="0"
-                  x2={chartWidth}
-                  y1={(chartHeight / 3) * step}
-                  y2={(chartHeight / 3) * step}
-                  stroke="#cbd5e1"
-                  stroke-dasharray="2 3"
-                  stroke-width="0.5"
-                />
-              ))}
-              {trendAreaPoints && <polygon points={trendAreaPoints} fill="url(#trend-fill)"></polygon>}
-              <polyline
-                points={trendPolylinePoints}
-                fill="none"
-                stroke="#0284c7"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              ></polyline>
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <svg class="w-4 h-4 text-sky-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3v18h18"/>
+              <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
             </svg>
-            <div class="mt-4 flex items-center justify-between gap-3 text-xs font-semibold text-slate-500">
-              <span>{trendStartLabel}</span>
-              <span>{t['detail.trend.window']}</span>
-              <span>{trendEndLabel}</span>
+            {t['detail.evidence.title']}
+          </h2>
+          
+          <!-- Signal Cards -->
+          <div class="grid grid-cols-3 gap-3 mt-4">
+            <div class="rounded-xl border border-sky-100 bg-sky-50/50 p-3">
+              <div class="flex items-center gap-1.5 text-sky-700">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                  <polyline points="17 6 23 6 23 12"/>
+                </svg>
+                <span class="text-xs font-medium">{t['detail.evidence.signal.search']}</span>
+              </div>
+              <p class="mt-1.5 text-lg font-bold text-slate-900">
+                {trendChange > 0 ? '+' : ''}{trendChange}%
+              </p>
+            </div>
+            <div class="rounded-xl border border-orange-100 bg-orange-50/50 p-3">
+              <div class="flex items-center gap-1.5 text-orange-700">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span class="text-xs font-medium">{t['detail.evidence.signal.community']}</span>
+              </div>
+              <p class="mt-1.5 text-lg font-bold text-slate-900">High</p>
+            </div>
+            <div class="rounded-xl border border-violet-100 bg-violet-50/50 p-3">
+              <div class="flex items-center gap-1.5 text-violet-700">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                </svg>
+                <span class="text-xs font-medium">{t['detail.evidence.signal.gap']}</span>
+              </div>
+              <p class="mt-1.5 text-lg font-bold text-slate-900">{competitorGaps.length || 3}</p>
+            </div>
+          </div>
+
+          <!-- Trend Chart -->
+          <div class="mt-4 rounded-xl border border-slate-200 bg-white p-4">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-medium text-slate-500">{t['detail.trend.title']}</span>
+              <span class={`text-xs font-semibold ${trendChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
+                {trendChange >= 0 ? '↑' : '↓'} {Math.abs(trendChange)}%
+              </span>
+            </div>
+            <div class="relative h-32">
+              {/* SVG Chart with fixed aspect ratio */}
+              <svg 
+                viewBox={`0 0 ${chartWidth} ${chartHeight}`} 
+                class="absolute inset-0 w-full h-full" 
+                preserveAspectRatio="xMidYMid meet" 
+                role="img" 
+                aria-label={t['detail.trend.title']}
+              >
+                {/* Area fill under line */}
+                <defs>
+                  <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.2" />
+                    <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                {trendAreaPoints && (
+                  <polygon points={trendAreaPoints} fill="url(#areaGradient)" />
+                )}
+                {/* Main trend line */}
+                <polyline
+                  points={trendPolylinePoints}
+                  fill="none"
+                  stroke="#0284c7"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                {/* Data point dots */}
+                {trendPoints.map((point, index) => (
+                  <circle
+                    cx={point.x}
+                    cy={point.y}
+                    r="3.5"
+                    fill={index === trendPoints.length - 1 ? '#0284c7' : 'white'}
+                    stroke="#0284c7"
+                    stroke-width="2"
+                  />
+                ))}
+              </svg>
+            </div>
+            {/* X-axis labels */}
+            <div class="flex justify-between mt-2 text-xs text-slate-400">
+              <span>{trendSeries[0]?.date?.slice(5) ?? ''}</span>
+              <span>{trendSeries[trendSeries.length - 1]?.date?.slice(5) ?? ''}</span>
             </div>
           </div>
         </section>
       )}
 
+      <!-- Pain Points -->
       {painClusters.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span class="section-kicker">{t['detail.pain.title']}</span>
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <svg class="w-4 h-4 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            {t['detail.pain.title']}
+          </h2>
           <p class="mt-2 text-sm text-slate-500">{t['detail.pain.desc']}</p>
-          <div class="mt-5 grid gap-3 md:grid-cols-2">
-            {painClusters.map((cluster) => (
-              <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-orange-50 p-4">
-                <span class="mt-0.5 text-base leading-none text-orange-500">⚡</span>
-                <p data-l10n-en={cluster.en} data-l10n-zh={cluster.zh} class="text-sm font-semibold leading-7 text-slate-800">{lang === 'zh' ? cluster.zh : cluster.en}</p>
+          <div class="mt-4 space-y-3">
+            {painClusters.map((cluster, index) => (
+              <div class="flex items-start gap-3 p-3 rounded-lg border border-slate-100 bg-slate-50/50">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500 text-white text-xs font-bold flex items-center justify-center">
+                  {index + 1}
+                </span>
+                <p data-l10n-en={cluster.en} data-l10n-zh={cluster.zh} class="text-sm text-slate-700 leading-relaxed">{lang === 'zh' ? cluster.zh : cluster.en}</p>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {competitorGaps.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span class="section-kicker">{t['detail.gaps.title']}</span>
-          <p class="mt-2 text-sm text-slate-500">{t['detail.gaps.desc']}</p>
-          <div class="mt-5 space-y-3">
-            {competitorGaps.map((gap) => (
-              <div class="flex items-start gap-3 rounded-2xl border border-violet-100 bg-violet-50 p-4">
-                <span class="mt-0.5 text-base leading-none text-violet-500">🔍</span>
-                <p data-l10n-en={gap.en} data-l10n-zh={gap.zh} class="text-sm font-semibold leading-7 text-slate-800">{lang === 'zh' ? gap.zh : gap.en}</p>
+      <!-- Market Landscape -->
+      {(competitorAnalysis || tamValue) && (
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <svg class="w-4 h-4 text-violet-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+              <path d="M2 12h20"/>
+            </svg>
+            {t['detail.market.title']}
+          </h2>
+
+          {/* TAM Display */}
+          {tamValue && (
+            <div class="mt-4 flex items-center gap-3 p-3 rounded-xl border border-violet-100 bg-violet-50/50">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-violet-100 text-violet-600">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M16 8h-6a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h6"/>
+                  <path d="M12 12h.01"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs text-slate-500">{lang === 'zh' ? '市场规模 (TAM)' : 'Market Size (TAM)'}</p>
+                <p class="text-lg font-bold text-slate-900">{tamValue}</p>
+              </div>
+            </div>
+          )}
+
+          {competitorAnalysis && (
+            <div class={tamValue ? "mt-6" : "mt-4"}>
+              <CompetitorAnalysisSection analysis={competitorAnalysis} lang={lang} />
+            </div>
+          )}
+
+
+        </section>
+      )}
+
+      <!-- Entry Strategy -->
+      {executionSteps.length > 0 && (
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <svg class="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            {t['detail.entry.title']}
+          </h2>
+          
+          <div class="mt-4 space-y-3">
+            {executionSteps.map((item, index) => (
+              <div class="flex gap-3">
+                <div class="flex flex-col items-center">
+                  <div class="w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">
+                    {index + 1}
+                  </div>
+                  {index < executionSteps.length - 1 && <div class="w-px flex-1 bg-slate-200 my-1" />}
+                </div>
+                <div class="flex-1 pb-2">
+                  <span class="text-xs font-medium text-sky-600">{t['detail.entry.phase']} {index + 1}</span>
+                  <p data-l10n-en={item.en} data-l10n-zh={item.zh} class="text-sm font-medium text-slate-900 mt-0.5">
+                    {getLocalizedPairText(item, lang)}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      {convictionItems.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span class="section-kicker">{t['detail.why']}</span>
-          <div class="mt-5 grid gap-4 md:grid-cols-2">
-            {convictionItems.map((item) => (
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <p
-                  data-l10n-en={item.en}
-                  data-l10n-zh={item.zh}
-                  class="text-sm font-semibold leading-7 text-slate-700"
-                >
+      <!-- Monetization -->
+      {monetizationItems.length > 0 && (
+        <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            {t['detail.monetization.title']}
+          </h2>
+          
+          <div class="mt-4 space-y-2">
+            {monetizationItems.map((item, index) => (
+              <div class="flex items-start gap-3 p-3 rounded-lg border border-slate-100">
+                <span class="flex-shrink-0 w-5 h-5 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center">
+                  {index + 1}
+                </span>
+                <p data-l10n-en={item.en} data-l10n-zh={item.zh} class="text-sm text-slate-700">
                   {getLocalizedPairText(item, lang)}
                 </p>
               </div>
@@ -375,175 +542,194 @@ const trendEndLabel = trendSeries[trendSeries.length - 1]?.date ?? '';
         </section>
       )}
 
-      {sourceSignalCards.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-          <span class="section-kicker">{t['detail.sources']}</span>
-          <div class="mt-5 grid gap-4 md:grid-cols-3">
-            {sourceSignalCards.map((item) => (
-              <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <p
-                  data-l10n-en={item.source.en}
-                  data-l10n-zh={item.source.zh}
-                  class="text-xs font-bold uppercase tracking-[0.14em] text-slate-400"
-                >
-                  {getLocalizedPairText(item.source, lang)}
-                </p>
-                <p
-                  data-l10n-en={item.title.en}
-                  data-l10n-zh={item.title.zh}
-                  class="mt-3 text-base font-semibold leading-7 text-slate-800"
-                >
-                  {getLocalizedPairText(item.title, lang)}
-                </p>
-                <p
-                  data-l10n-en={item.meta.en}
-                  data-l10n-zh={item.meta.zh}
-                  class="mt-2 text-sm leading-6 text-slate-500"
-                >
-                  {getLocalizedPairText(item.meta, lang)}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {evidenceLinks.length > 0 && (
-            <div class="mt-5 space-y-2">
-              <p class="text-xs font-bold uppercase tracking-widest text-slate-400">{t['detail.evidence.title']}</p>
-              {evidenceLinks.map((link) => (
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm transition hover:border-sky-200 hover:bg-sky-50"
-                >
-                  <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-200 text-[10px] font-bold uppercase text-slate-600">{link.source.slice(0, 2)}</span>
-                  <span class="flex-1 truncate font-medium text-slate-700">{link.title}</span>
-                  <span class="shrink-0 text-slate-400">↗</span>
-                </a>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-
-      <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
-        <span class="section-kicker">{t['detail.full']}</span>
-        <div class="mt-6 space-y-8">
-          {fullBreakdownSections.map((section) => (
-            <section class="space-y-4 border-t border-slate-100 pt-6 first:border-t-0 first:pt-0">
-              <h3
-                data-l10n-en={section.title.en}
-                data-l10n-zh={section.title.zh}
-                class="text-2xl font-black tracking-tight text-slate-950"
-              >
-                {getLocalizedPairText(section.title, lang)}
-              </h3>
-
-              {section.paragraphs && section.paragraphs.length > 0 && (
-                <div class="space-y-3 text-base leading-8 text-slate-700">
-                  {section.paragraphs.map((paragraph) => (
-                    <p data-l10n-en={paragraph.en} data-l10n-zh={paragraph.zh}>
-                      {getLocalizedPairText(paragraph, lang)}
-                    </p>
-                  ))}
+      <!-- Risks -->
+      <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+          <svg class="w-4 h-4 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          {t['detail.risks.title']}
+        </h2>
+        
+        <div class="mt-4 space-y-2">
+          {[
+            { risk: lang === 'zh' ? 'AI 生成音乐的版权问题' : 'Copyright concerns with AI-generated music', mitigation: lang === 'zh' ? '明确的 TOS、水印、人工审核' : 'Clear TOS, watermarking, human-in-the-loop review' },
+            { risk: lang === 'zh' ? '大厂（Adobe、Canva）可能入局' : 'Big players (Adobe, Canva) may enter', mitigation: lang === 'zh' ? '专注细分功能、社区建设' : 'Focus on niche features, community building' },
+            { risk: lang === 'zh' ? '与人工作曲的质量认知差距' : 'Quality perception vs human composers', mitigation: lang === 'zh' ? 'A/B 测试、用户教育、免费试用' : 'A/B testing, user education, free trials' }
+          ].map((item, index) => (
+            <div class="p-3 rounded-lg border border-amber-100 bg-amber-50/50">
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-slate-800">{item.risk}</p>
+                  <p class="text-xs text-slate-500 mt-0.5">
+                    {t['detail.risks.mitigation']}: {item.mitigation}
+                  </p>
                 </div>
-              )}
-
-              {section.bullets && section.bullets.length > 0 && (
-                <ul class="space-y-3 text-base leading-8 text-slate-700">
-                  {section.bullets.map((bullet) => (
-                    <li class="flex gap-3">
-                      <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-slate-900"></span>
-                      <span data-l10n-en={bullet.en} data-l10n-zh={bullet.zh}>{getLocalizedPairText(bullet, lang)}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {section.numbered && section.numbered.length > 0 && (
-                <ol class="space-y-3">
-                  {section.numbered.map((item, index) => (
-                    <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-base leading-7 text-slate-700">
-                      <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white">{index + 1}</span>
-                      <span data-l10n-en={item.en} data-l10n-zh={item.zh}>{getLocalizedPairText(item, lang)}</span>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </section>
+              </div>
+            </div>
           ))}
         </div>
+
+        <div class="mt-3 p-3 rounded-lg border border-slate-100 bg-slate-50">
+          <p class="text-xs text-slate-500">
+            <span class="font-medium text-slate-700">{t['detail.risks.not_for']}:</span> 
+            {lang === 'zh' ? '需要企业级合规的团队、古典音乐作曲家' : 'Teams needing enterprise-grade compliance, classical music composers'}
+          </p>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="bg-slate-900 rounded-2xl p-6 text-white">
+        <div class="flex items-center gap-2 text-blue-300">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span class="text-sm font-medium">{t['detail.sidebar.subscribe']}</span>
+        </div>
+        <h2 class="text-xl font-bold mt-2">{t['detail.sidebar.weekly']}</h2>
+        <p class="text-slate-400 text-sm mt-1">
+          {lang === 'zh' ? '加入 ' : 'Join '}{t['detail.sidebar.subscribers']}{lang === 'zh' ? '，每周获取经过验证的机会。' : ' getting verified opportunities every week.'}
+        </p>
+        
+        <form class="mt-4 flex gap-2" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+          <input 
+            type="email"
+            placeholder={lang === 'zh' ? 'your@email.com' : 'your@email.com'}
+            class="flex-1 bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-white/30"
+          />
+          <button 
+            type="submit"
+            class="bg-white text-slate-900 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-slate-100 transition-colors"
+          >
+            {t['detail.sidebar.subscribe']}
+          </button>
+        </form>
       </section>
     </div>
 
-    <aside class="space-y-6 lg:sticky lg:top-24">
-      <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="text-lg font-bold text-slate-950">{t['detail.quick']}</h2>
-        <dl class="mt-5 space-y-4">
-          {quickFacts.map((fact) => (
-            <div class="rounded-2xl bg-slate-50 p-4">
-              <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{t[fact.labelKey]}</dt>
-              <dd class="mt-2 text-sm font-semibold leading-7 text-slate-900">
-                {fact.valueKey ? (
-                  <span>{t[fact.valueKey]}</span>
-                ) : (
-                  <span data-l10n-en={fact.en} data-l10n-zh={fact.zh}>{lang === 'zh' ? fact.zh : fact.en}</span>
-                )}
-              </dd>
+    <!-- Sidebar -->
+    <aside class="space-y-4 lg:sticky lg:top-24">
+      <!-- Opportunity Overview -->
+      <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold text-slate-900 flex items-center gap-2">
+          <svg class="w-4 h-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          {t['detail.opportunity_score']}
+        </h2>
+        <div class="mt-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">{t['detail.opportunity_score.demand']}</span>
+            <div class="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg class={`w-3.5 h-3.5 ${i < opportunityScore.demand ? 'text-amber-400 fill-amber-400' : 'text-slate-300'}`} viewBox="0 0 24 24" fill={i < opportunityScore.demand ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
             </div>
-          ))}
-        </dl>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">{t['detail.opportunity_score.competition']}</span>
+            <span class="inline-flex rounded-full px-2 py-0.5 text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200">
+              {lang === 'zh' ? '适中' : 'Moderate'}
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">{t['detail.opportunity_score.barrier']}</span>
+            <span class="inline-flex rounded-full px-2 py-0.5 text-xs font-medium text-emerald-700 bg-emerald-50 border border-emerald-200">
+              {lang === 'zh' ? '低' : 'Low'}
+            </span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs text-slate-500">{t['detail.opportunity_score.monetization']}</span>
+            <div class="flex gap-0.5">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <svg class={`w-3.5 h-3.5 ${i < opportunityScore.monetization ? 'text-amber-400 fill-amber-400' : 'text-slate-300'}`} viewBox="0 0 24 24" fill={i < opportunityScore.monetization ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+          </div>
+          <div class="h-px bg-slate-100" />
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-slate-500">{t['detail.summary.confidence']}</span>
+            <span class="font-medium text-emerald-600 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              {t[confidenceInfo.labelKey]}
+            </span>
+          </div>
+          <div class="text-xs text-slate-400">
+            {lang === 'zh' ? '更新于' : 'Updated'}: {frontmatter.dataDate ?? frontmatter.date}
+          </div>
+        </div>
       </section>
 
-      {monetizationItems.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-950">{t['detail.monetisation']}</h2>
-          <ul class="mt-4 space-y-3 text-sm leading-7 text-slate-600">
-            {monetizationItems.map((item) => (
-              <li class="rounded-2xl bg-slate-50 px-4 py-3">
-                <span data-l10n-en={item.en} data-l10n-zh={item.zh}>{getLocalizedPairText(item, lang)}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {executionSteps.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-950">{t['detail.execution']}</h2>
-          <ol class="mt-4 space-y-3">
-            {executionSteps.map((item, index) => (
-              <li class="flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm leading-7 text-slate-600">
-                <span class="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white">{index + 1}</span>
-                <span data-l10n-en={item.en} data-l10n-zh={item.zh}>{getLocalizedPairText(item, lang)}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-
-      {keywordItems.length > 0 && (
-        <section class="rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 class="text-lg font-bold text-slate-950">{t['detail.keywords']}</h2>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {keywordItems.map((item) => (
-              <span class="rounded-full bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 ring-1 ring-inset ring-sky-200">{item}</span>
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section class="rounded-[28px] border border-slate-200 bg-slate-950 p-6 text-white shadow-soft">
-        <p class="text-sm font-semibold text-blue-100">{t['detail.next_label']}</p>
-        <p class="mt-3 text-lg font-semibold leading-8">{t['detail.next_p']}</p>
-        <div class="mt-6 flex flex-col gap-3">
-          <a href={withLangPath('/archive', lang)} class="inline-flex items-center justify-center rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-100">
-            {t['detail.next_btn1']}
-          </a>
-          <a href={withLangPath('/about', lang)} class="inline-flex items-center justify-center rounded-full border border-white/15 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
-            {t['detail.next_btn2']}
-          </a>
+      <!-- Quick Actions -->
+      <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+        <h2 class="text-sm font-semibold text-slate-900">{t['detail.sidebar.actions']}</h2>
+        <div class="mt-3 space-y-2">
+          <button class="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            {lang === 'zh' ? '复制关键词' : 'Copy Keywords'}
+          </button>
+          <button class="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            {lang === 'zh' ? '下载报告' : 'Download Report'}
+          </button>
+          <button class="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+            {lang === 'zh' ? '分享' : 'Share'}
+          </button>
         </div>
+      </section>
+
+      <!-- Subscribe Card -->
+      <section class="rounded-2xl bg-slate-900 p-5 text-white shadow-sm">
+        <svg class="w-6 h-6 text-blue-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <h3 class="font-semibold text-sm">{t['detail.sidebar.subscribe']}</h3>
+        <p class="text-xs text-slate-400 mt-1">{t['detail.sidebar.weekly']}</p>
+        <form class="mt-3 space-y-2" onsubmit="event.preventDefault();">
+          <input 
+            type="email"
+            placeholder={lang === 'zh' ? 'your@email.com' : 'your@email.com'}
+            class="w-full bg-white/10 border border-white/20 rounded-lg px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-white/30"
+          />
+          <button 
+            type="submit"
+            class="w-full bg-white text-slate-900 py-2 rounded-lg text-xs font-semibold hover:bg-slate-100 transition-colors"
+          >
+            {t['detail.sidebar.subscribe']}
+          </button>
+        </form>
+        <p class="text-xs text-slate-500 mt-2 text-center">
+          1,200+ {t['detail.sidebar.subscribers']}
+        </p>
       </section>
     </aside>
   </article>

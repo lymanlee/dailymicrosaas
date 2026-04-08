@@ -1,0 +1,121 @@
+{
+  "domain": "remini.ai",
+  "name": {
+    "en": "Remini",
+    "zh": "Remini"
+  },
+  "keyFeatures": [
+    {
+      "en": "AI-powered photo and video enhancement",
+      "zh": "AI驱动的照片和视频增强"
+    },
+    {
+      "en": "Restores old or low-quality images with high resolution",
+      "zh": "以高分辨率修复旧照片或低质量图像"
+    },
+    {
+      "en": "Real-time enhancement for videos and live photos",
+      "zh": "视频和实况照片的实时增强"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free Trial",
+        "zh": "免费试用"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic enhancement features",
+        "zh": "有限使用基本增强功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Unlimited enhancements, priority processing, no ads",
+        "zh": "无限增强、优先处理、无广告"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Custom solutions for businesses, bulk processing, API access",
+        "zh": "企业定制解决方案、批量处理、API访问"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Custom",
+          "zh": "定制"
+        },
+        "maxFileSize": {
+          "en": "Custom",
+          "zh": "定制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Watermarks on free tier outputs",
+      "zh": "免费套餐输出带有水印"
+    },
+    {
+      "en": "Limited control over enhancement parameters",
+      "zh": "对增强参数的控制有限"
+    },
+    {
+      "en": "Subscription required for full features, no one-time purchase option",
+      "zh": "需要订阅才能使用完整功能，无一次性购买选项"
+    }
+  ],
+  "targetAudience": {
+    "en": "Photography enthusiasts, social media users, professionals restoring old photos, content creators",
+    "zh": "摄影爱好者、社交媒体用户、修复旧照片的专业人士、内容创作者"
+  },
+  "positioning": {
+    "en": "AI-powered photo and video enhancement tool for personal and professional use",
+    "zh": "面向个人和专业用途的AI驱动照片和视频增强工具"
+  },
+  "analyzedAt": "2026-04-08T00:31:53.651561"
+}

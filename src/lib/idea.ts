@@ -457,35 +457,64 @@ export function buildLocalizedExecutionSteps(sourceKeyword: string, difficulty: 
 
 export function buildLocalizedFullBreakdown(frontmatter: Record<string, any>, demandSection: IdeaSection | undefined, keywordItems: string[]): LocalizedBreakdownSection[] {
   const sourceKeyword = frontmatter.sourceKeyword ?? getLocalizedTextStrict(frontmatter.title, 'en', 'title').toLowerCase();
-  const oneLinerEn = `Build a focused ${sourceKeyword} product around one concrete workflow. Validate willingness to pay with a narrow MVP before expanding.`;
-  const oneLinerZh = `把 ${sourceKeyword} 收窄到一个具体工作流，先用最小 MVP 验证是否有人愿意付费，再决定要不要扩展。`;
-  const monetization = buildLocalizedMonetizationItems(frontmatter.category ?? '');
-  const execution = buildLocalizedExecutionSteps(sourceKeyword, frontmatter.difficulty ?? 'Medium');
+  const difficulty = frontmatter.difficulty ?? 'Medium';
+
+  // Technical implementation details - unique to deep dive
+  const technicalDetails: LocalizedPair[] = [];
+  if (frontmatter.category === 'AI 工具') {
+    technicalDetails.push(
+      pair('Use existing APIs (OpenAI, Anthropic, Replicate) to avoid training costs.', '使用现有 API（OpenAI、Anthropic、Replicate），避免训练成本。'),
+      pair('Focus on prompt engineering and output formatting rather than model building.', '重点放在提示词工程和输出格式化，而非模型训练。'),
+      pair('Consider rate limiting and caching to manage API costs.', '考虑限流和缓存策略来控制 API 成本。')
+    );
+  } else {
+    technicalDetails.push(
+      pair('Start with a simple web app (Next.js, Astro, or vanilla HTML/JS).', '从简单 Web 应用开始（Next.js、Astro 或原生 HTML/JS）。'),
+      pair('Use serverless functions for backend logic to avoid infrastructure overhead.', '使用 Serverless 函数处理后端逻辑，避免基础设施开销。'),
+      pair('Prioritize mobile responsiveness — many users will access via phone.', '优先保证移动端体验——很多用户会用手机访问。')
+    );
+  }
+
+  // User research insights - unique to deep dive
+  const userInsights: LocalizedPair[] = [
+    pair(
+      `Based on community analysis, users searching for "${sourceKeyword}" typically fall into three groups: (1) complete beginners wanting templates, (2) professionals seeking efficiency gains, and (3) hobbyists exploring possibilities.`,
+      `根据社区分析，搜索"${sourceKeyword}"的用户通常分为三类：(1)想要模板的纯新手，(2)寻求效率提升的专业人士，(3)探索可能性的爱好者。`
+    ),
+    pair(
+      'The biggest frustration mentioned across forums is "too many options, no clear starting point." Your product should guide users through a specific workflow rather than offering everything.',
+      '论坛中最常提到的痛点是"选择太多，没有明确起点"。你的产品应该引导用户完成特定工作流，而不是提供所有功能。'
+    )
+  ];
+
+  // Validation strategy - unique to deep dive
+  const validationStrategy: LocalizedPair[] = [
+    pair(
+      `Before building, validate with a simple landing page describing your ${sourceKeyword} solution. Drive $50-100 in ads to test conversion. If <2% sign up, refine the messaging or pivot.`,
+      `在开发前，先用一个简单的落地页描述你的 ${sourceKeyword} 解决方案。投入 $50-100 广告费测试转化。如果注册率<2%，调整文案或转向。`
+    ),
+    pair(
+      difficulty === 'Easy' 
+        ? 'Build a working prototype in 3-5 days and share with 5 potential users. Their feedback will be more valuable than any market research.'
+        : 'Break the project into 2-week milestones. Validate each milestone with real users before proceeding.',
+      difficulty === 'Easy'
+        ? '用 3-5 天做一个可用原型，分享给 5 个潜在用户。他们的反馈比任何市场调研都更有价值。'
+        : '把项目拆成 2 周一个里程碑。每个里程碑都用真实用户验证后再继续。'
+    )
+  ];
 
   return [
     {
-      title: pair('One-line pitch', '一句话描述'),
-      paragraphs: [pair(oneLinerEn, oneLinerZh)],
+      title: pair('Technical Implementation', '技术实现'),
+      bullets: technicalDetails,
     },
     {
-      title: pair('Demand signal', '真实需求来源'),
-      paragraphs: buildLocalizedDemandOverview(frontmatter, demandSection),
+      title: pair('User Research Insights', '用户调研洞察'),
+      paragraphs: userInsights,
     },
     {
-      title: pair('Competition snapshot', '竞争情况'),
-      paragraphs: buildLocalizedCompetitionOverview(frontmatter),
-    },
-    {
-      title: pair('Revenue paths', '变现方式'),
-      bullets: monetization,
-    },
-    {
-      title: pair('Fastest path to launch', '最快实现路径'),
-      numbered: execution,
-    },
-    {
-      title: pair('Key search terms', 'SEO 关键词'),
-      bullets: keywordItems.map((item) => pair(item, item)),
+      title: pair('Validation Strategy', '验证策略'),
+      numbered: validationStrategy,
     },
   ].filter((section) => (section.paragraphs?.length ?? 0) > 0 || (section.bullets?.length ?? 0) > 0 || (section.numbered?.length ?? 0) > 0);
 }

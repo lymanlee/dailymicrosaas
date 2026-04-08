@@ -1,0 +1,50 @@
+---
+import type { Lang } from '../lib/i18n';
+import type { CompetitorAnalysis } from '../lib/competitor';
+import CompetitorCard from './CompetitorCard.astro';
+import MarketGaps from './MarketGaps.astro';
+
+interface Props {
+  analysis: CompetitorAnalysis;
+  lang: Lang;
+}
+
+const { analysis, lang } = Astro.props;
+const hasCompetitors = analysis.topCompetitors.length > 0;
+const hasGaps = analysis.marketGaps.length > 0;
+---
+
+{hasCompetitors && (
+  <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <span class="section-kicker">{lang === 'zh' ? '竞品分析' : 'Competitor Analysis'}</span>
+        <p class="mt-2 text-sm text-slate-500">
+          {lang === 'zh'
+            ? `我们分析了 ${analysis.topCompetitors.length} 个主要竞品，找出市场空白和你的切入点。`
+            : `We analyzed ${analysis.topCompetitors.length} key competitors to identify gaps and your entry point.`}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-6 space-y-4">
+      {analysis.topCompetitors.map((competitor) => (
+        <CompetitorCard competitor={competitor} lang={lang} />
+      ))}
+    </div>
+  </section>
+)}
+
+{hasGaps && (
+  <section class="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm">
+    <span class="section-kicker">{lang === 'zh' ? '市场空白' : 'Market Gaps'}</span>
+    <p class="mt-2 text-sm text-slate-500">
+      {lang === 'zh'
+        ? '这些是被现有竞品忽视的机会，可能是你的切入点。'
+        : 'These are opportunities ignored by existing competitors — potential entry points for you.'}
+    </p>
+    <div class="mt-5">
+      <MarketGaps gaps={analysis.marketGaps} lang={lang} />
+    </div>
+  </section>
+)}

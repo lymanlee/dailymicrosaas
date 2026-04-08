@@ -1,0 +1,299 @@
+{
+  "topCompetitors": [
+    {
+      "domain": "soundraw.io",
+      "name": {
+        "en": "Soundraw",
+        "zh": "Soundraw"
+      },
+      "keyFeatures": [
+        {
+          "en": "AI-powered music generation with customizable parameters (e.g., mood, genre, length)",
+          "zh": "AI驱动的音乐生成，可自定义参数（如情绪、流派、长度）"
+        },
+        {
+          "en": "Royalty-free music for commercial use without attribution requirements",
+          "zh": "免版税音乐，可用于商业用途，无需署名"
+        },
+        {
+          "en": "Loop-based editing and seamless track exporting in multiple formats",
+          "zh": "基于循环的编辑功能，支持多种格式的无缝音轨导出"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Free",
+            "zh": "免费版"
+          },
+          "price": 0,
+          "description": {
+            "en": "Basic access with limited features for personal use",
+            "zh": "基础功能访问，适用于个人用途，功能有限"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not allowed",
+              "zh": "不允许"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Pro",
+            "zh": "专业版"
+          },
+          "price": 16.99,
+          "description": {
+            "en": "Full access to AI music generation, unlimited downloads, and commercial rights",
+            "zh": "完全访问AI音乐生成功能，无限下载，拥有商业使用权"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Unlimited generations",
+              "zh": "无限生成次数"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Allowed",
+              "zh": "允许"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Enterprise",
+            "zh": "企业版"
+          },
+          "price": 0,
+          "description": {
+            "en": "Custom solutions for teams and organizations with advanced needs",
+            "zh": "为团队和组织提供定制解决方案，满足高级需求"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Custom based on needs",
+              "zh": "根据需求定制"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Allowed",
+              "zh": "允许"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs",
+          "zh": "与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+        },
+        {
+          "en": "Potential lack of originality in AI-generated tracks, leading to repetitive or generic outputs",
+          "zh": "AI生成的曲目可能缺乏原创性，导致输出重复或泛化"
+        },
+        {
+          "en": "Dependence on internet connectivity for cloud-based generation and access",
+          "zh": "依赖互联网连接进行基于云的生成和访问"
+        }
+      ],
+      "targetAudience": {
+        "en": "Content creators (e.g., YouTubers, podcasters, streamers), small businesses, and indie developers needing affordable, royalty-free background music",
+        "zh": "内容创作者（如YouTuber、播客主播、直播主）、小型企业和独立开发者，需要经济实惠、免版税的背景音乐"
+      },
+      "positioning": {
+        "en": "An accessible, AI-driven platform for generating custom, royalty-free music quickly and affordably, targeting non-musicians and budget-conscious creators",
+        "zh": "一个易于使用的AI驱动平台，快速且经济地生成定制化免版税音乐，面向非音乐专业人士和预算有限的创作者"
+      },
+      "analyzedAt": "2026-04-07T23:53:11.295723"
+    },
+    {
+      "domain": "boomy.com",
+      "name": {
+        "en": "Boomy",
+        "zh": "Boomy"
+      },
+      "keyFeatures": [
+        {
+          "en": "AI-powered music creation that allows users to generate original songs in seconds by selecting a style and customizing elements",
+          "zh": "AI驱动的音乐创作，用户可通过选择风格和自定义元素在几秒钟内生成原创歌曲"
+        },
+        {
+          "en": "Automated mastering and distribution to streaming platforms like Spotify and TikTok with one click",
+          "zh": "一键自动母带处理和分发到Spotify、TikTok等流媒体平台"
+        },
+        {
+          "en": "Free tier with basic creation features and limited monthly credits for song generation",
+          "zh": "免费套餐提供基本创作功能和有限的每月歌曲生成积分"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Free",
+            "zh": "免费"
+          },
+          "price": 0,
+          "description": {
+            "en": "Basic song creation, limited monthly credits, access to free sounds and styles, distribution to streaming platforms with revenue sharing",
+            "zh": "基本歌曲创作，有限的每月积分，免费音色和风格访问，可分发到流媒体平台但需收入分成"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated (typically limited credits for song generation)",
+              "zh": "未明确说明（通常为有限的歌曲生成积分）"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Allowed with revenue sharing on distributed tracks",
+              "zh": "允许，但对分发的曲目需收入分成"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Pro",
+            "zh": "专业版"
+          },
+          "price": 9.99,
+          "description": {
+            "en": "Enhanced features including more monthly credits, priority support, higher revenue share, and advanced customization options",
+            "zh": "增强功能包括更多每月积分、优先支持、更高收入分成和高级自定义选项"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated (increased compared to Free tier)",
+              "zh": "未明确说明（相比免费套餐有所增加）"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Allowed with improved revenue terms",
+              "zh": "允许，收入条款更优"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Limited control over AI-generated music quality and originality, which may result in generic-sounding tracks",
+          "zh": "对AI生成的音乐质量和原创性控制有限，可能导致曲目听起来较为普通"
+        },
+        {
+          "en": "Revenue sharing model on free tier reduces earnings for creators, potentially discouraging professional use",
+          "zh": "免费套餐的收入分成模式减少了创作者收益，可能阻碍专业用途"
+        }
+      ],
+      "targetAudience": {
+        "en": "Beginners and hobbyists looking to create music easily without technical skills, as well as content creators needing background tracks for videos",
+        "zh": "无需技术技能、希望轻松创作音乐的初学者和爱好者，以及需要视频背景曲目的内容创作者"
+      },
+      "positioning": {
+        "en": "Democratizing music creation by making it accessible and simple through AI, targeting non-musicians and casual creators",
+        "zh": "通过AI使音乐创作变得可访问和简单，从而民主化音乐创作，面向非音乐家和休闲创作者"
+      },
+      "analyzedAt": "2026-04-07T23:54:02.481546"
+    },
+    {
+      "domain": "aiva.ai",
+      "name": {
+        "en": "AIVA",
+        "zh": "AIVA"
+      },
+      "keyFeatures": [
+        {
+          "en": "AI-powered music composition for various media projects",
+          "zh": "为各类媒体项目提供AI驱动的音乐创作"
+        },
+        {
+          "en": "Generates original, royalty-free music tracks",
+          "zh": "生成原创、免版税的音乐曲目"
+        },
+        {
+          "en": "User-friendly interface with customizable parameters",
+          "zh": "用户友好的界面，支持可自定义参数"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "price": 0,
+          "description": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Lack of transparent pricing and feature details on public pages",
+          "zh": "公开页面缺乏透明的定价和功能详情"
+        },
+        {
+          "en": "Potential limitations in music genre diversity or customization depth",
+          "zh": "音乐风格多样性或自定义深度可能存在限制"
+        }
+      ],
+      "targetAudience": {
+        "en": "Content creators, filmmakers, game developers, and marketers needing original background music",
+        "zh": "需要原创背景音乐的内容创作者、电影制作人、游戏开发者和营销人员"
+      },
+      "positioning": {
+        "en": "An AI tool for accessible, efficient music composition without requiring musical expertise",
+        "zh": "一款无需音乐专业知识即可进行便捷高效音乐创作的AI工具"
+      },
+      "analyzedAt": "2026-04-07T23:54:34.458969"
+    }
+  ],
+  "marketGaps": [
+    {
+      "en": "Offline functionality and advanced control for professional musicians who need detailed manipulation of musical elements without internet dependency",
+      "zh": "面向专业音乐人的离线功能和高级控制，无需依赖互联网即可详细操作音乐元素"
+    },
+    {
+      "en": "Transparent pricing and high originality with revenue protection for creators, addressing concerns about generic outputs and unfair earnings",
+      "zh": "透明的定价和高原创性，保护创作者收入，解决输出内容泛化和收益不公平的担忧"
+    },
+    {
+      "en": "Diverse genre support and deep customization options to cater to niche markets and specialized music production needs",
+      "zh": "多样化的流派支持和深度定制选项，以满足小众市场和专业音乐制作需求"
+    }
+  ],
+  "analyzedAt": "2026-04-07T23:55:20.406049"
+}

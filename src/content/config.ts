@@ -5,6 +5,29 @@ const localizedTextSchema = z.object({
   zh: z.string().trim().min(1, 'zh translation must not be empty'),
 });
 
+const pricingTierSchema = z.object({
+  name: localizedTextSchema,
+  price: z.number(),
+  description: localizedTextSchema,
+  limits: z.object({
+    monthlyCredits: localizedTextSchema,
+    commercialUse: localizedTextSchema,
+  }),
+});
+
+const competitorProfileSchema = z.object({
+  domain: z.string(),
+  name: localizedTextSchema,
+  keyFeatures: z.array(localizedTextSchema),
+  pricingTiers: z.array(pricingTierSchema),
+  weaknesses: z.array(localizedTextSchema),
+});
+
+const competitorAnalysisSchema = z.object({
+  topCompetitors: z.array(competitorProfileSchema),
+  marketGaps: z.array(localizedTextSchema),
+});
+
 const ideasCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -31,6 +54,7 @@ const ideasCollection = defineCollection({
     })).optional(),
     painClusters: z.array(localizedTextSchema).min(1, 'painClusters must include at least one bilingual item'),
     competitorGaps: z.array(localizedTextSchema).min(1, 'competitorGaps must include at least one bilingual item'),
+    competitorAnalysis: competitorAnalysisSchema.optional(),
     evidenceLinks: z.array(z.object({
       url: z.string(),
       title: z.string(),

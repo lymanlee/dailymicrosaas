@@ -1,0 +1,65 @@
+{
+  "domain": "suno.ai",
+  "name": "Suno",
+  "keyFeatures": [
+    {
+      "en": "AI music generation",
+      "zh": "AI音乐生成"
+    },
+    {
+      "en": "Multiple genres support",
+      "zh": "支持多种风格"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features",
+        "zh": "基础功能"
+      },
+      "limits": {
+        "credits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 10,
+      "description": {
+        "en": "Full features",
+        "zh": "完整功能"
+      },
+      "limits": {
+        "credits": {
+          "en": "2000 credits/month",
+          "zh": "每月2000积分"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier",
+      "zh": "免费版限制较多"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators",
+    "zh": "内容创作者"
+  },
+  "positioning": {
+    "en": "AI music creation tool",
+    "zh": "AI音乐创作工具"
+  },
+  "analyzedAt": "2026-04-07T23:50:07.239528"
+}

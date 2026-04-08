@@ -1,0 +1,29 @@
+---
+import type { Lang } from '../lib/i18n';
+import type { LocalizedPair } from '../lib/competitor';
+import { getLocalizedPairText } from '../lib/competitor';
+
+interface Props {
+  gaps: LocalizedPair[];
+  lang: Lang;
+}
+
+const { gaps, lang } = Astro.props;
+---
+
+<div class="space-y-3">
+  {gaps.map((gap, index) => (
+    <div class="flex items-start gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 p-4">
+      <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-white">
+        {index + 1}
+      </span>
+      <p
+        data-l10n-en={gap.en}
+        data-l10n-zh={gap.zh}
+        class="text-sm font-semibold leading-7 text-emerald-900"
+      >
+        {getLocalizedPairText(gap, lang)}
+      </p>
+    </div>
+  ))}
+</div>

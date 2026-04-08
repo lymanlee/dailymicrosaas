@@ -1,0 +1,211 @@
+{
+  "topCompetitors": [
+    {
+      "domain": "remini.ai",
+      "name": {
+        "en": "Remini",
+        "zh": "Remini"
+      },
+      "keyFeatures": [
+        {
+          "en": "AI-powered photo and video enhancement",
+          "zh": "AI驱动的照片和视频增强"
+        },
+        {
+          "en": "Restores old or low-quality images with high resolution",
+          "zh": "以高分辨率修复旧照片或低质量图像"
+        },
+        {
+          "en": "Real-time enhancement for videos and live photos",
+          "zh": "视频和实况照片的实时增强"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Free Trial",
+            "zh": "免费试用"
+          },
+          "price": 0,
+          "description": {
+            "en": "Limited access to basic enhancement features",
+            "zh": "有限使用基本增强功能"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Pro",
+            "zh": "专业版"
+          },
+          "price": 9.99,
+          "description": {
+            "en": "Unlimited enhancements, priority processing, no ads",
+            "zh": "无限增强、优先处理、无广告"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Unlimited",
+              "zh": "无限制"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Enterprise",
+            "zh": "企业版"
+          },
+          "price": 0,
+          "description": {
+            "en": "Custom solutions for businesses, bulk processing, API access",
+            "zh": "企业定制解决方案、批量处理、API访问"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Custom",
+              "zh": "定制"
+            },
+            "maxFileSize": {
+              "en": "Custom",
+              "zh": "定制"
+            },
+            "commercialUse": {
+              "en": "Allowed",
+              "zh": "允许"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Watermarks on free tier outputs",
+          "zh": "免费套餐输出带有水印"
+        },
+        {
+          "en": "Limited control over enhancement parameters",
+          "zh": "对增强参数的控制有限"
+        },
+        {
+          "en": "Subscription required for full features, no one-time purchase option",
+          "zh": "需要订阅才能使用完整功能，无一次性购买选项"
+        }
+      ],
+      "targetAudience": {
+        "en": "Photography enthusiasts, social media users, professionals restoring old photos, content creators",
+        "zh": "摄影爱好者、社交媒体用户、修复旧照片的专业人士、内容创作者"
+      },
+      "positioning": {
+        "en": "AI-powered photo and video enhancement tool for personal and professional use",
+        "zh": "面向个人和专业用途的AI驱动照片和视频增强工具"
+      },
+      "analyzedAt": "2026-04-08T00:31:53.651561"
+    },
+    {
+      "domain": "restorephotos.io",
+      "name": {
+        "en": "RestorePhotos.io",
+        "zh": "RestorePhotos.io"
+      },
+      "keyFeatures": [
+        {
+          "en": "AI-powered photo restoration to fix old, blurry, or damaged photos",
+          "zh": "AI驱动的照片修复，修复老旧、模糊或损坏的照片"
+        },
+        {
+          "en": "Colorization of black and white photos using advanced algorithms",
+          "zh": "使用先进算法为黑白照片上色"
+        },
+        {
+          "en": "User-friendly interface with quick processing and download options",
+          "zh": "用户友好的界面，提供快速处理和下载选项"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "price": 0,
+          "description": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Lack of transparent pricing and detailed feature information on the website",
+          "zh": "网站上缺乏透明的定价和详细的功能信息"
+        },
+        {
+          "en": "No clear information on processing limits, file size restrictions, or commercial use policies",
+          "zh": "没有明确说明处理限制、文件大小限制或商业使用政策"
+        },
+        {
+          "en": "Potential lack of advanced editing tools or customization options compared to competitors",
+          "zh": "与竞争对手相比，可能缺乏高级编辑工具或自定义选项"
+        }
+      ],
+      "targetAudience": {
+        "en": "Individuals looking to restore and enhance old family photos, personal memories, or historical images",
+        "zh": "希望修复和增强旧家庭照片、个人回忆或历史图像的个人用户"
+      },
+      "positioning": {
+        "en": "A specialized AI photo restoration service focusing on simplicity and accessibility for personal photo enhancement",
+        "zh": "专注于个人照片增强的简化与可访问性的专业AI照片修复服务"
+      },
+      "analyzedAt": "2026-04-08T00:32:30.696005"
+    }
+  ],
+  "marketGaps": [
+    {
+      "en": "A one-time purchase option for users who prefer not to commit to a subscription, addressing the lack of flexible pricing models among competitors.",
+      "zh": "为不愿订阅的用户提供一次性购买选项，解决竞争对手缺乏灵活定价模式的问题。"
+    },
+    {
+      "en": "Transparent and detailed feature, pricing, and policy information on the website to build trust and clarity, which is missing in some competitors.",
+      "zh": "在网站上提供透明详细的功能、定价和政策信息，以建立信任和清晰度，这是某些竞争对手所缺乏的。"
+    },
+    {
+      "en": "Advanced editing tools and customization options for users seeking greater control over enhancement parameters, an area where competitors may be limited.",
+      "zh": "为寻求对增强参数更大控制权的用户提供高级编辑工具和自定义选项，这是竞争对手可能受限的领域。"
+    }
+  ],
+  "analyzedAt": "2026-04-08T00:32:41.549903"
+}

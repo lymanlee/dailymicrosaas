@@ -1,0 +1,314 @@
+{
+  "topCompetitors": [
+    {
+      "domain": "resumeworded.com",
+      "name": "Resume Worded",
+      "keyFeatures": [
+        {
+          "en": "AI-powered resume and LinkedIn profile optimization",
+          "zh": "AI驱动的简历和LinkedIn个人资料优化"
+        },
+        {
+          "en": "Instant feedback on resume strength and keyword matching",
+          "zh": "即时反馈简历强度和关键词匹配"
+        },
+        {
+          "en": "Industry-specific suggestions for improving job application materials",
+          "zh": "针对特定行业的求职材料改进建议"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Free",
+            "zh": "免费套餐"
+          },
+          "price": 0,
+          "description": {
+            "en": "Basic resume scoring and limited feedback",
+            "zh": "基本简历评分和有限反馈"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Limited number of scans per month",
+              "zh": "每月有限次数的扫描"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not allowed",
+              "zh": "不允许"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Pro",
+            "zh": "专业套餐"
+          },
+          "price": 29,
+          "description": {
+            "en": "Unlimited resume scans, detailed feedback, and LinkedIn optimization",
+            "zh": "无限次简历扫描、详细反馈和LinkedIn优化"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Unlimited",
+              "zh": "无限制"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Allowed for personal use only",
+              "zh": "仅允许个人使用"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Enterprise",
+            "zh": "企业套餐"
+          },
+          "price": 99,
+          "description": {
+            "en": "Custom solutions for teams and organizations with advanced analytics",
+            "zh": "为团队和组织提供定制解决方案和高级分析"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Custom based on needs",
+              "zh": "根据需求定制"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Allowed for commercial use within organization",
+              "zh": "允许组织内部商业使用"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Limited free tier with restricted features, may not be sufficient for serious job seekers",
+          "zh": "免费套餐功能有限，对于认真求职者可能不足"
+        },
+        {
+          "en": "Pricing can be high for individuals compared to some competitors",
+          "zh": "与一些竞争对手相比，个人用户定价可能较高"
+        },
+        {
+          "en": "Relies heavily on AI suggestions which may not always capture nuanced industry requirements",
+          "zh": "严重依赖AI建议，可能无法总是捕捉细微的行业要求"
+        }
+      ],
+      "targetAudience": {
+        "en": "Job seekers, professionals looking to improve their resumes and LinkedIn profiles, and HR teams seeking to optimize hiring processes",
+        "zh": "求职者、希望改进简历和LinkedIn个人资料的专业人士，以及寻求优化招聘流程的HR团队"
+      },
+      "positioning": {
+        "en": "A specialized AI tool focused on resume and LinkedIn profile optimization to help users land more interviews and job offers",
+        "zh": "专注于简历和LinkedIn个人资料优化的专业AI工具，帮助用户获得更多面试和工作机会"
+      },
+      "analyzedAt": "2026-04-08T00:33:56.609549"
+    },
+    {
+      "domain": "tealhq.com",
+      "name": "Teal",
+      "keyFeatures": [
+        {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "price": 0,
+          "description": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Lack of transparent pricing and feature details on the website",
+          "zh": "网站上缺乏透明的定价和功能详情"
+        },
+        {
+          "en": "No accessible landing or pricing page content to evaluate the product",
+          "zh": "无法访问着陆页或定价页面内容以评估产品"
+        }
+      ],
+      "targetAudience": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "positioning": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "analyzedAt": "2026-04-08T00:34:19.843462"
+    },
+    {
+      "domain": "kickresume.com",
+      "name": {
+        "en": "Kickresume",
+        "zh": "Kickresume"
+      },
+      "keyFeatures": [
+        {
+          "en": "AI-powered resume builder with customizable templates",
+          "zh": "AI驱动的简历生成器，提供可自定义模板"
+        },
+        {
+          "en": "Cover letter generator and job application tracking",
+          "zh": "求职信生成器和职位申请跟踪"
+        },
+        {
+          "en": "Professional resume review and optimization suggestions",
+          "zh": "专业简历审查和优化建议"
+        }
+      ],
+      "pricingTiers": [
+        {
+          "name": {
+            "en": "Free",
+            "zh": "免费版"
+          },
+          "price": 0,
+          "description": {
+            "en": "Basic resume creation with limited templates and AI features",
+            "zh": "基础简历创建，模板和AI功能有限"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Pro",
+            "zh": "专业版"
+          },
+          "price": 0,
+          "description": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        },
+        {
+          "name": {
+            "en": "Enterprise",
+            "zh": "企业版"
+          },
+          "price": 0,
+          "description": {
+            "en": "Not clearly stated",
+            "zh": "未明确说明"
+          },
+          "limits": {
+            "monthlyCredits": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "maxFileSize": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            },
+            "commercialUse": {
+              "en": "Not clearly stated",
+              "zh": "未明确说明"
+            }
+          }
+        }
+      ],
+      "weaknesses": [
+        {
+          "en": "Limited pricing and feature details available without account creation",
+          "zh": "未创建账户时，定价和功能详情有限"
+        },
+        {
+          "en": "Potential restrictions on advanced AI features in free tier",
+          "zh": "免费版可能限制高级AI功能"
+        },
+        {
+          "en": "Lack of transparent information on commercial use and file size limits",
+          "zh": "商业使用和文件大小限制信息不透明"
+        }
+      ],
+      "targetAudience": {
+        "en": "Job seekers, professionals, and students looking to create or improve resumes and cover letters",
+        "zh": "求职者、专业人士和学生，希望创建或改进简历和求职信"
+      },
+      "positioning": {
+        "en": "AI-driven platform for modern resume building and job application enhancement",
+        "zh": "AI驱动的现代简历构建和求职申请增强平台"
+      },
+      "analyzedAt": "2026-04-08T00:35:16.995923"
+    }
+  ],
+  "marketGaps": [
+    {
+      "en": "Transparent and accessible pricing and feature information without mandatory account creation, addressing users frustrated by hidden costs or unclear product details.",
+      "zh": "提供透明且易于获取的定价和功能信息，无需强制创建账户，解决用户对隐藏成本或产品细节不明确的困扰。"
+    },
+    {
+      "en": "A robust free tier with sufficient features for serious job seekers, avoiding heavy restrictions that limit usability for non-paying users.",
+      "zh": "为认真求职者提供功能充足的免费层级，避免对非付费用户施加过多限制，影响使用体验。"
+    },
+    {
+      "en": "Clear guidelines on commercial use, file handling, and AI feature limitations, catering to users needing certainty for professional or business applications.",
+      "zh": "明确商业使用、文件处理和AI功能限制的指南，满足用户在专业或商业应用中需要确定性的需求。"
+    }
+  ],
+  "analyzedAt": "2026-04-08T00:35:32.576435"
+}
