@@ -29,18 +29,23 @@ const url = getCompetitorUrl(competitor.domain);
       {competitor.pricingTiers.length > 0 && (
         <span class="text-sm text-slate-500">
           {(() => {
-            // Get all unique non-zero prices
-            const paidPrices = competitor.pricingTiers
-              .map(t => t.price)
-              .filter(p => p > 0);
+            const tiers = competitor.pricingTiers;
+            const hasFree = tiers.some(t => t.price === 0);
+            const paidPrices = tiers.map(t => t.price).filter(p => p > 0);
             
             if (paidPrices.length === 0) {
-              // All free
               return lang === 'zh' ? '免费' : 'Free';
             }
             
             const minPaid = Math.min(...paidPrices);
             const maxPaid = Math.max(...paidPrices);
+            
+            if (hasFree) {
+              if (minPaid === maxPaid) {
+                return `Free – $${minPaid}/mo`;
+              }
+              return `Free – $${maxPaid}/mo`;
+            }
             
             if (minPaid === maxPaid) {
               return `$${minPaid}/mo`;
