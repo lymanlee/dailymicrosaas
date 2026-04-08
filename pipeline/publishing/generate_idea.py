@@ -1342,6 +1342,27 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
         if len(clusters) >= 4:
             break
 
+    # 如果没有从社区信号提取到痛点，使用基于关键词/分类的默认痛点
+    if not clusters:
+        keyword = idea.get("keyword", "").lower()
+        default_pain_texts = [
+            ("pdf", "conversion", "merge", "compress"), 
+            ("ai", "image", "video", "music", "voice"),
+            ("json", "formatter", "validator", "editor"),
+        ]
+        
+        # 根据关键词类型返回默认痛点
+        clusters.append(localized_text("Manual & time-consuming workflow", "操作繁琐，效率低"))
+        
+        if any(k in keyword for k in ["pdf", "word", "converter"]):
+            clusters.append(localized_text("Output quality / format fidelity problems", "输出质量和格式还原问题明显"))
+            clusters.append(localized_text("Batch processing not available in free tier", "免费层不支持批量处理"))
+        elif any(k in keyword for k in ["ai", "image", "video", "music"]):
+            clusters.append(localized_text("Speed & performance issues", "速度和性能问题反复出现"))
+            clusters.append(localized_text("Output quality inconsistency", "AI 生成结果质量不稳定"))
+        else:
+            clusters.append(localized_text("Pricing frustration — users want free or cheaper options", "定价让人不爽，用户想要免费或更便宜的方案"))
+
     return clusters
 
 
@@ -1395,6 +1416,38 @@ def derive_competitor_gaps(idea: dict, category: str) -> list[dict[str, str]]:
             f"现有细分工具（{niche_sites[0]}）界面老旧，也没做好移动端支持",
         ))
 
+    # 如果没有从 SERP 数据提取到竞品弱点，使用基于分类的默认弱点
+    if not gaps:
+        if category == "文档处理":
+            gaps.append(localized_text(
+                "Free tier limited to 1-2 files/day; power users are underserved",
+                "免费层通常限制为每天 1-2 个文件，重度用户没人认真服务",
+            ))
+            gaps.append(localized_text(
+                "Big tools require account creation — most users abandon before converting",
+                "大站要求先注册账号，很多用户在转化前就流失了",
+            ))
+        elif category == "图像处理":
+            gaps.append(localized_text(
+                "Output watermarked or resolution-capped on free tier",
+                "免费层要么加水印，要么限制分辨率",
+            ))
+        elif category == "AI 工具":
+            gaps.append(localized_text(
+                "Generalist AI tools are overpriced for single-use-case needs",
+                "通用型 AI 工具对单一需求来说定价过高",
+            ))
+        elif category == "开发者工具":
+            gaps.append(localized_text(
+                "Results not shareable / no permalink support in most tools",
+                "多数工具结果不可分享，也没有永久链接支持",
+            ))
+        else:
+            gaps.append(localized_text(
+                "Big tools require account creation — most users abandon before converting",
+                "大站要求先注册账号，很多用户在转化前就流失了",
+            ))
+
     return gaps[:3]
 
 
@@ -1409,6 +1462,17 @@ def derive_data_window(idea: dict) -> dict[str, str]:
         return localized_text(f"Last {data_points} days", f"近 {data_points} 天")
     else:
         return localized_text("N/A", "暂无")
+
+
+def derive_build_window(keyword: str, category: str, idea: dict) -> dict[str, str]:
+    """开发周期：根据分类和关键词难度估算，返回中英双语对象。"""
+    difficulty = derive_difficulty(idea)
+    difficulty_map = {
+        "Easy": localized_text("3-5 days", "3-5 天"),
+        "Medium": localized_text("1-2 weeks", "1-2 周"),
+        "Hard": localized_text("3-5 weeks", "3-5 周"),
+    }
+    return difficulty_map.get(difficulty, localized_text("1-2 weeks", "1-2 周"))
 
 
 # ─── 主构建函数 ──────────────────────────────────────────────────────────────────
@@ -1440,9 +1504,11 @@ def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
     pain_clusters = derive_pain_clusters(idea)
     competitor_gaps = derive_competitor_gaps(idea, category)
     data_window = derive_data_window(idea)
+    build_window = derive_build_window(keyword, category, idea)
 
     best_wedge_yaml = yaml_localized_text(best_wedge)
     data_window_yaml = yaml_localized_text(data_window)
+    build_window_yaml = yaml_localized_text(build_window)
     trend_series_yaml = yaml_trend_series_block("trendSeries", idea.get("trend_time_series", []))
     pain_clusters_yaml = yaml_localized_list_block("painClusters", pain_clusters)
     competitor_gaps_yaml = yaml_localized_list_block("competitorGaps", competitor_gaps)
