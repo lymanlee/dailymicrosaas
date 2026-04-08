@@ -1,0 +1,122 @@
+{
+  "domain": "runwayml.com",
+  "name": {
+    "en": "Runway ML",
+    "zh": "Runway ML"
+  },
+  "keyFeatures": [
+    {
+      "en": "AI-powered video and image generation with intuitive no-code interface",
+      "zh": "AI驱动的视频和图像生成，具有直观的无代码界面"
+    },
+    {
+      "en": "Real-time collaboration tools for creative teams",
+      "zh": "面向创意团队的实时协作工具"
+    },
+    {
+      "en": "Extensive library of pre-trained AI models for various creative tasks",
+      "zh": "针对各种创意任务的广泛预训练AI模型库"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic access to AI tools with limited credits",
+        "zh": "有限积分的基本AI工具访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Pricing and credit system not transparent without account creation",
+      "zh": "定价和积分系统不透明，需要创建账户才能查看"
+    },
+    {
+      "en": "Limited information about specific technical limitations and output quality",
+      "zh": "关于具体技术限制和输出质量的信息有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Creative professionals, designers, filmmakers, and artists looking to integrate AI into their workflow",
+    "zh": "寻求将AI集成到工作流程中的创意专业人士、设计师、电影制作人和艺术家"
+  },
+  "positioning": {
+    "en": "Democratizing AI-powered creativity through accessible, no-code tools for visual content creation",
+    "zh": "通过易于使用的无代码工具，普及AI驱动的视觉内容创作"
+  },
+  "dataStatus": "stale",
+  "lastChecked": "2026-04-08T00:37:08.100297",
+  "dataSources": {
+    "landingPage": "https://runwayml.com",
+    "pricingPage": "https://runwayml.com/pricing"
+  }
+}

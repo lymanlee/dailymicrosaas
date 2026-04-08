@@ -1,0 +1,76 @@
+{
+  "domain": "restorephotos.io",
+  "name": {
+    "en": "RestorePhotos.io",
+    "zh": "RestorePhotos.io"
+  },
+  "keyFeatures": [
+    {
+      "en": "AI-powered photo restoration to fix old, blurry, or damaged photos",
+      "zh": "AI驱动的照片修复，修复老旧、模糊或损坏的照片"
+    },
+    {
+      "en": "Colorization of black and white photos using advanced algorithms",
+      "zh": "使用先进算法为黑白照片上色"
+    },
+    {
+      "en": "User-friendly interface with quick processing and download options",
+      "zh": "用户友好的界面，提供快速处理和下载选项"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Lack of transparent pricing and detailed feature information on the website",
+      "zh": "网站上缺乏透明的定价和详细的功能信息"
+    },
+    {
+      "en": "No clear information on processing limits, file size restrictions, or commercial use policies",
+      "zh": "没有明确说明处理限制、文件大小限制或商业使用政策"
+    },
+    {
+      "en": "Potential lack of advanced editing tools or customization options compared to competitors",
+      "zh": "与竞争对手相比，可能缺乏高级编辑工具或自定义选项"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals looking to restore and enhance old family photos, personal memories, or historical images",
+    "zh": "希望修复和增强旧家庭照片、个人回忆或历史图像的个人用户"
+  },
+  "positioning": {
+    "en": "A specialized AI photo restoration service focusing on simplicity and accessibility for personal photo enhancement",
+    "zh": "专注于个人照片增强的简化与可访问性的专业AI照片修复服务"
+  },
+  "dataStatus": "stale",
+  "lastChecked": "2026-04-08T00:32:30.696005",
+  "dataSources": {
+    "landingPage": "https://restorephotos.io",
+    "pricingPage": "https://restorephotos.io/pricing"
+  }
+}

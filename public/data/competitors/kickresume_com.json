@@ -1,0 +1,126 @@
+{
+  "domain": "kickresume.com",
+  "name": {
+    "en": "Kickresume",
+    "zh": "Kickresume"
+  },
+  "keyFeatures": [
+    {
+      "en": "AI-powered resume builder with customizable templates",
+      "zh": "AI驱动的简历生成器，提供可自定义模板"
+    },
+    {
+      "en": "Cover letter generator and job application tracking",
+      "zh": "求职信生成器和职位申请跟踪"
+    },
+    {
+      "en": "Professional resume review and optimization suggestions",
+      "zh": "专业简历审查和优化建议"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic resume creation with limited templates and AI features",
+        "zh": "基础简历创建，模板和AI功能有限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited pricing and feature details available without account creation",
+      "zh": "未创建账户时，定价和功能详情有限"
+    },
+    {
+      "en": "Potential restrictions on advanced AI features in free tier",
+      "zh": "免费版可能限制高级AI功能"
+    },
+    {
+      "en": "Lack of transparent information on commercial use and file size limits",
+      "zh": "商业使用和文件大小限制信息不透明"
+    }
+  ],
+  "targetAudience": {
+    "en": "Job seekers, professionals, and students looking to create or improve resumes and cover letters",
+    "zh": "求职者、专业人士和学生，希望创建或改进简历和求职信"
+  },
+  "positioning": {
+    "en": "AI-driven platform for modern resume building and job application enhancement",
+    "zh": "AI驱动的现代简历构建和求职申请增强平台"
+  },
+  "dataStatus": "stale",
+  "lastChecked": "2026-04-08T00:35:16.995923",
+  "dataSources": {
+    "landingPage": "https://kickresume.com",
+    "pricingPage": "https://kickresume.com/pricing"
+  }
+}

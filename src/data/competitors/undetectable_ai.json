@@ -1,0 +1,73 @@
+{
+  "domain": "undetectable.ai",
+  "name": "Undetectable.ai",
+  "keyFeatures": [
+    {
+      "en": "AI content humanization to bypass AI detection tools",
+      "zh": "AI内容人性化，绕过AI检测工具"
+    },
+    {
+      "en": "Plagiarism-free rewriting while preserving original meaning",
+      "zh": "无抄袭改写，同时保留原意"
+    },
+    {
+      "en": "Multi-language support for global users",
+      "zh": "多语言支持，面向全球用户"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Lack of transparent pricing and plan details on website",
+      "zh": "网站上缺乏透明的定价和计划详情"
+    },
+    {
+      "en": "No clear information on content quality guarantees or accuracy",
+      "zh": "没有明确的内容质量保证或准确性信息"
+    },
+    {
+      "en": "Potential ethical concerns about bypassing AI detection",
+      "zh": "绕过AI检测可能引发伦理问题"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators, marketers, students, and professionals needing to humanize AI-generated text",
+    "zh": "内容创作者、营销人员、学生和需要将AI生成文本人性化的专业人士"
+  },
+  "positioning": {
+    "en": "AI-powered tool for making AI-generated content undetectable by detection systems",
+    "zh": "AI驱动的工具，使AI生成的内容无法被检测系统识别"
+  },
+  "dataStatus": "stale",
+  "lastChecked": "2026-04-08T01:08:47.851544",
+  "dataSources": {
+    "landingPage": "https://undetectable.ai",
+    "pricingPage": "https://undetectable.ai/pricing"
+  }
+}

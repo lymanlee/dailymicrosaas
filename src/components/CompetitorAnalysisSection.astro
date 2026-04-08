@@ -1,17 +1,59 @@
 ---
 import type { Lang } from '../lib/i18n';
-import type { CompetitorAnalysis } from '../lib/competitor';
+import type { CompetitorAnalysis, CompetitorProfile } from '../lib/competitor';
+import { getCompetitorRegistry, extractFallbackCompetitors } from '../lib/competitor-registry';
 import CompetitorCard from './CompetitorCard.astro';
 import MarketGaps from './MarketGaps.astro';
 
 interface Props {
-  analysis: CompetitorAnalysis;
+  analysis: CompetitorAnalysis | { domains?: string[]; _registry?: boolean; topCompetitors?: CompetitorProfile[]; marketGaps?: any[] };
   lang: Lang;
 }
 
 const { analysis, lang } = Astro.props;
-const hasCompetitors = analysis.topCompetitors.length > 0;
-const hasGaps = analysis.marketGaps.length > 0;
+
+// 检查是否为新格式（基于 Registry）
+const isNewFormat = analysis && 'domains' in analysis && analysis._registry;
+const isOldFormat = analysis && 'topCompetitors' in analysis && Array.isArray((analysis as any).topCompetitors);
+
+// 获取竞品列表
+let competitors: CompetitorProfile[] = [];
+let marketGaps: any[] = [];
+let registryInfo: { loaded: number; total: number } | null = null;
+
+if (isNewFormat && analysis.domains) {
+  // 新格式：从 Registry 动态加载
+  const newAnalysis = analysis as { domains: string[]; _registry: boolean; topCompetitors?: any[]; marketGaps?: any[] };
+
+  // 提取降级数据（如果有）
+  const fallbackData = newAnalysis.topCompetitors
+    ? extractFallbackCompetitors({ competitorAnalysis: newAnalysis })
+    : undefined;
+
+  // 动态加载
+  const results = await getCompetitorRegistry(newAnalysis.domains, fallbackData);
+
+  competitors = [];
+  results.forEach((result) => {
+    competitors.push(result.competitor);
+  });
+
+  registryInfo = {
+    loaded: results.size,
+    total: newAnalysis.domains.length,
+  };
+
+  // marketGaps 从 frontmatter 获取（暂不动态加载）
+  marketGaps = newAnalysis.marketGaps || [];
+} else if (isOldFormat) {
+  // 旧格式：直接使用内嵌数据
+  const oldAnalysis = analysis as CompetitorAnalysis;
+  competitors = oldAnalysis.topCompetitors || [];
+  marketGaps = oldAnalysis.marketGaps || [];
+}
+
+const hasCompetitors = competitors.length > 0;
+const hasGaps = marketGaps.length > 0;
 ---
 
 {hasCompetitors && (
@@ -21,14 +63,24 @@ const hasGaps = analysis.marketGaps.length > 0;
         <span class="section-kicker">{lang === 'zh' ? '竞品分析' : 'Competitor Analysis'}</span>
         <p class="mt-2 text-sm text-slate-500">
           {lang === 'zh'
-            ? `我们分析了 ${analysis.topCompetitors.length} 个主要竞品，找出市场空白和你的切入点。`
-            : `We analyzed ${analysis.topCompetitors.length} key competitors to identify gaps and your entry point.`}
+            ? `我们分析了 ${competitors.length} 个主要竞品，找出市场空白和你的切入点。`
+            : `We analyzed ${competitors.length} key competitors to identify gaps and your entry point.`}
+          {registryInfo && registryInfo.loaded < registryInfo.total && (
+            <span class="ml-2 text-amber-600">
+              ({lang === 'zh' ? '部分数据来自缓存' : 'Some data from cache'})
+            </span>
+          )}
         </p>
       </div>
+      {registryInfo && (
+        <div class="text-xs text-slate-400">
+          {lang === 'zh' ? '数据来源: 竞品 Registry' : 'Data: Competitor Registry'}
+        </div>
+      )}
     </div>
 
     <div class="mt-6 space-y-4">
-      {analysis.topCompetitors.map((competitor) => (
+      {competitors.map((competitor) => (
         <CompetitorCard competitor={competitor} lang={lang} />
       ))}
     </div>
@@ -44,7 +96,7 @@ const hasGaps = analysis.marketGaps.length > 0;
         : 'These are opportunities ignored by existing competitors — potential entry points for you.'}
     </p>
     <div class="mt-5">
-      <MarketGaps gaps={analysis.marketGaps} lang={lang} />
+      <MarketGaps gaps={marketGaps} lang={lang} />
     </div>
   </section>
 )}

@@ -206,6 +206,86 @@ def serialize_report(run_date: str, profiles: list[dict], report_text: str, elap
     }
 
 
+def trigger_competitor_crawl(profiles: list[dict], min_score: int = 20) -> dict:
+    """
+    发现新域名后自动触发爬取
+
+    1. 收集所有 SERP 域名
+    2. 对比已有 Registry，找出新增域名
+    3. 计算优先级并加入队列
+    """
+    try:
+        from pipeline.competitor_analysis.queue import CompetitorCrawlQueue, calculate_competitor_priority
+        import json
+        from pathlib import Path
+
+        # 获取已有域名
+        project_root = Path(__file__).resolve().parents[2]
+        registry_dir = project_root / "src/data/competitors"
+
+        existing_domains = set()
+        if registry_dir.exists():
+            for f in registry_dir.glob("*.json"):
+                domain = f.stem.replace("_", ".")
+                existing_domains.add(domain)
+
+        # 收集所有 SERP 域名及其分数
+        all_domains = {}  # {domain: {"priority": int, "keyword": str, "score": int}}
+
+        for item in profiles:
+            if item.get("score", 0) < min_score:
+                continue
+
+            keyword = item.get("keyword", "")
+            score = item.get("score", 0)
+
+            # niche sites
+            for domain in item.get("serp_niche_sites", []):
+                if domain not in existing_domains:
+                    priority = calculate_competitor_priority(domain, profiles)
+                    if domain not in all_domains or priority > all_domains[domain]["priority"]:
+                        all_domains[domain] = {
+                            "priority": priority,
+                            "keyword": keyword,
+                            "score": score
+                        }
+
+            # big sites
+            for domain in item.get("serp_big_sites", []):
+                if domain not in existing_domains:
+                    priority = calculate_competitor_priority(domain, profiles)
+                    if domain not in all_domains or priority > all_domains[domain]["priority"]:
+                        all_domains[domain] = {
+                            "priority": priority,
+                            "keyword": keyword,
+                            "score": score
+                        }
+
+        if not all_domains:
+            return {"triggered": 0, "new_domains": []}
+
+        # 加入队列
+        queue = CompetitorCrawlQueue()
+        queued_domains = []
+
+        for domain, info in all_domains.items():
+            if queue.add(domain, priority=info["priority"], source_keyword=info["keyword"]):
+                queued_domains.append(domain)
+
+        return {
+            "triggered": len(queued_domains),
+            "new_domains": queued_domains,
+            "total_discovered": len(all_domains)
+        }
+
+    except ImportError as e:
+        print(f"[竞品触发] 队列模块导入失败: {e}")
+        return {"triggered": 0, "new_domains": [], "error": str(e)}
+    except Exception as e:
+        print(f"[竞品触发] 触发失败: {e}")
+        return {"triggered": 0, "new_domains": [], "error": str(e)}
+
+
 def execute_pipeline(
     run_date: str | None = None,
     skip_trends: bool = False,
@@ -214,6 +294,7 @@ def execute_pipeline(
     skip_serp: bool = False,
     max_serp_keywords: int = 20,
     fresh_data: bool = False,
+    trigger_competitor: bool = True,
 ) -> dict:
     """执行完整 pipeline，并返回报告与输出路径。
 
@@ -333,6 +414,17 @@ def execute_pipeline(
     report_text = format_report(resolved_date, profiles)
     elapsed = time.time() - start_time
 
+    # ─── 竞品自动发现触发 ────────────────────────────────────────────────────────
+    competitor_result = {"triggered": 0, "new_domains": []}
+    if trigger_competitor:
+        competitor_result = trigger_competitor_crawl(profiles, min_score=20)
+        if competitor_result.get("triggered", 0) > 0:
+            print(f"\n[竞品] 自动发现 {competitor_result['triggered']} 个新域名并加入爬取队列")
+            print(f"       新域名: {', '.join(competitor_result['new_domains'][:5])}")
+            if competitor_result.get("triggered") > 5:
+                print(f"       ... 等 {competitor_result['triggered']} 个")
+    report_payload["competitor_discovery"] = competitor_result
+
     # 输出告警摘要
     if warnings:
         print("\n" + "─" * 70)
@@ -387,6 +479,7 @@ def main() -> None:
     parser.add_argument("--skip-serp", action="store_true", help="完全跳过 SERP 采集（网络受限时使用）")
     parser.add_argument("--max-serp-keywords", type=int, default=20, help="主动采集 SERP 的最大关键词数量（默认 20）")
     parser.add_argument("--fresh-data", action="store_true", help="忽略同日期已有缓存，强制重新拉取趋势与 SERP 数据")
+    parser.add_argument("--no-competitor-trigger", action="store_true", help="跳过竞品自动发现触发")
     args = parser.parse_args()
 
     execute_pipeline(
@@ -397,6 +490,7 @@ def main() -> None:
         skip_serp=args.skip_serp,
         max_serp_keywords=args.max_serp_keywords,
         fresh_data=args.fresh_data,
+        trigger_competitor=not args.no_competitor_trigger,
     )
 
 

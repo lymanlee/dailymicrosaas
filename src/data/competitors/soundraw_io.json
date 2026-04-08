@@ -1,0 +1,126 @@
+{
+  "domain": "soundraw.io",
+  "name": {
+    "en": "Soundraw",
+    "zh": "Soundraw"
+  },
+  "keyFeatures": [
+    {
+      "en": "AI-powered music generation with customizable parameters (e.g., mood, genre, length)",
+      "zh": "AI驱动的音乐生成，可自定义参数（如情绪、流派、长度）"
+    },
+    {
+      "en": "Royalty-free music for commercial use without attribution requirements",
+      "zh": "免版税音乐，可用于商业用途，无需署名"
+    },
+    {
+      "en": "Loop-based editing and seamless track exporting in multiple formats",
+      "zh": "基于循环的编辑功能，支持多种格式的无缝音轨导出"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic access with limited features for personal use",
+        "zh": "基础功能访问，适用于个人用途，功能有限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 12.99,
+      "description": {
+        "en": "Full access to AI music generation, unlimited downloads, and commercial rights",
+        "zh": "完全访问AI音乐生成功能，无限下载，拥有商业使用权"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited generations",
+          "zh": "无限生成次数"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Custom solutions for teams and organizations with advanced needs",
+        "zh": "为团队和组织提供定制解决方案，满足高级需求"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Custom based on needs",
+          "zh": "根据需求定制"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited control over specific musical elements (e.g., instrument selection, chord progressions) compared to professional DAWs",
+      "zh": "与专业数字音频工作站相比，对特定音乐元素（如乐器选择、和弦进行）的控制有限"
+    },
+    {
+      "en": "Potential lack of originality in AI-generated tracks, leading to repetitive or generic outputs",
+      "zh": "AI生成的曲目可能缺乏原创性，导致输出重复或泛化"
+    },
+    {
+      "en": "Dependence on internet connectivity for cloud-based generation and access",
+      "zh": "依赖互联网连接进行基于云的生成和访问"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators (e.g., YouTubers, podcasters, streamers), small businesses, and indie developers needing affordable, royalty-free background music",
+    "zh": "内容创作者（如YouTuber、播客主播、直播主）、小型企业和独立开发者，需要经济实惠、免版税的背景音乐"
+  },
+  "positioning": {
+    "en": "An accessible, AI-driven platform for generating custom, royalty-free music quickly and affordably, targeting non-musicians and budget-conscious creators",
+    "zh": "一个易于使用的AI驱动平台，快速且经济地生成定制化免版税音乐，面向非音乐专业人士和预算有限的创作者"
+  },
+  "dataStatus": "stale",
+  "lastChecked": "2026-04-07T23:53:11.295723",
+  "dataSources": {
+    "landingPage": "https://soundraw.io",
+    "pricingPage": "https://soundraw.io/pricing"
+  }
+}
