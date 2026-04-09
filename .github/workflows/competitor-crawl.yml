@@ -124,11 +124,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
+          # 先 add 再检查（git diff --porcelain 检测 untracked + modified）
+          git add pipeline/competitor_analysis/cache/competitor_profiles/
+          git add data/competitor_crawl_queue.json 2>/dev/null || true
+          if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git add pipeline/competitor_analysis/cache/competitor_profiles/
-          git add data/competitor_crawl_queue.json 2>/dev/null || true
           git commit -m "chore: 更新竞品分析缓存"
           git push
