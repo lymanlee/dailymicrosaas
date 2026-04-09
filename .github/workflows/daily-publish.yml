@@ -275,6 +275,9 @@ jobs:
             exit 0
           fi
 
+          # 安装 dotenv（runner Python 默认不带）
+          pip install python-dotenv -q
+
           cat > .env << 'EOF'
           SILICONFLOW_API_KEY=${{ secrets.SILICONFLOW_API_KEY }}
           EOF

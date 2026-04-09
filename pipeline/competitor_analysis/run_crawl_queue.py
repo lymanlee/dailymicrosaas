@@ -20,11 +20,12 @@ from pathlib import Path
 # Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv(Path(__file__).parent.parent / ".env")
-except ImportError:
-    pass  # CI environments set env vars directly
+from dotenv import load_dotenv
+
+# Load .env if present (local dev); in CI env vars are set directly
+_dotenv_path = Path(__file__).parent.parent / ".env"
+if _dotenv_path.exists():
+    load_dotenv(_dotenv_path)
 
 from competitor_analysis import (
     CompetitorFetcher,
