@@ -423,8 +423,6 @@ def execute_pipeline(
             print(f"       新域名: {', '.join(competitor_result['new_domains'][:5])}")
             if competitor_result.get("triggered") > 5:
                 print(f"       ... 等 {competitor_result['triggered']} 个")
-    report_payload["competitor_discovery"] = competitor_result
-
     # 输出告警摘要
     if warnings:
         print("\n" + "─" * 70)
@@ -434,6 +432,7 @@ def execute_pipeline(
 
     report_payload = serialize_report(resolved_date, profiles, report_text, elapsed)
     report_payload["warnings"] = warnings  # 告警也写入报告
+    report_payload["competitor_discovery"] = competitor_result  # 竞品发现结果（serialize 之后写入）
 
     json_path = REPORTS_DIR / f"opportunity_report_{resolved_date}.json"
     txt_path = REPORTS_DIR / f"opportunity_report_{resolved_date}.txt"
