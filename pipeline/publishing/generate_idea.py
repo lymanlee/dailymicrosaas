@@ -1681,6 +1681,388 @@ def derive_competitor_gaps(idea: dict, category: str) -> list[dict[str, str]]:
     return gaps[:3]
 
 
+# ─── 风险与注意事项 ────────────────────────────────────────────────────────────
+
+RISKS_BY_CATEGORY = {
+    "图像处理": [
+        (
+            "Output quality — edge cases (hair, transparency, complex backgrounds)",
+            "边缘处理质量 — 头发、透明背景，复杂边缘最容易翻车",
+        ),
+        (
+            "Big players (Adobe, Canva) may enter with bundled solutions",
+            "大厂（Adobe、Canva）可能挟成熟产品入局",
+        ),
+        (
+            "Mobile performance — Canvas/WASM on low-end devices can OOM",
+            "移动端性能 — 低端设备跑 Canvas/WASM 容易 OOM",
+        ),
+    ],
+    "视频处理": [
+        (
+            "Processing speed — large files need server-side GPU, cost scales fast",
+            "处理速度 — 大文件需要服务端 GPU，成本随用量快速上涨",
+        ),
+        (
+            "Big players (Adobe, TikTok) may bundle this feature for free",
+            "大厂（Adobe、TikTok）可能把这个功能打包进现有产品免费提供",
+        ),
+        (
+            "Content moderation — user-uploaded video needs review pipeline",
+            "内容审核 — 用户上传视频需要审核流程",
+        ),
+    ],
+    "文档处理": [
+        (
+            "Format fidelity — edge cases (complex layouts, fonts, tables) break conversions",
+            "格式还原 — 复杂版式、特殊字体、表格结构容易转换失败",
+        ),
+        (
+            "Free tier abuse — conversion-heavy users max out server resources",
+            "免费层滥用 — 有人反复大量转换薅走服务器资源",
+        ),
+        (
+            "Big players (Google, Microsoft) offer this for free in their ecosystems",
+            "大厂（Google、Microsoft）在自家生态里免费提供",
+        ),
+    ],
+    "AI 工具": [
+        (
+            "Output quality inconsistency — AI results vary, user trust is fragile",
+            "输出质量不稳定 — AI 结果时好时坏，用户信任脆弱",
+        ),
+        (
+            "Big players (OpenAI, Google) may enter with better models at lower cost",
+            "大厂（OpenAI、Google）可能携更优模型更低成本入场",
+        ),
+        (
+            "Users compare results to the best they've seen, not the average",
+            "用户对标的是最好的产品，不是平均水平",
+        ),
+    ],
+    "开发者工具": [
+        (
+            "Accuracy — wrong output erodes trust immediately, especially for code",
+            "准确性 — 错误输出立刻失去信任，尤其是代码类工具",
+        ),
+        (
+            "GitHub / Stack Overflow already solve most developer pain points for free",
+            "GitHub / Stack Overflow 已经免费覆盖了多数开发者痛点",
+        ),
+        (
+            "Open-source alternatives can replicate features overnight",
+            "开源替代品可以一夜之间复刻功能",
+        ),
+    ],
+    "效率工具": [
+        (
+            "Switching cost is low — users leave if the result is slightly off",
+            "切换成本低 — 结果稍有偏差用户就跑",
+        ),
+        (
+            "Similar tools are a Google Search away — differentiation is hard",
+            "同类工具一个搜索就到 — 差异化很难",
+        ),
+        (
+            "Feature creep — users expect one more thing for free",
+            "功能蔓延 — 用户永远觉得再加一个功能才值",
+        ),
+    ],
+    "语言学习": [
+        (
+            "Content quality — inaccurate translations or examples break trust fast",
+            "内容质量 — 翻译或例句错误很快失去信任",
+        ),
+        (
+            "Big platforms (Duolingo, Babbel) have deep moats in curriculum",
+            "大平台（Duolingo、Babbel）在课程体系上有很深的护城河",
+        ),
+        (
+            "Users expect native-quality audio — TTS quality is a direct trust signal",
+            "用户期待母语级音频 — TTS 质量直接影响信任",
+        ),
+    ],
+}
+
+# Structure: [(risk_tuple, mitigation_tuple), ...]
+# risk_tuple = (en_risk, zh_risk), mitigation_tuple = (en_mit, zh_mit)
+_RISKS_CORE = {
+    "图像处理": [
+        (
+            ("Output quality — edge cases (hair, transparency, complex backgrounds)",
+             "边缘处理质量 — 头发、透明背景、复杂边缘最容易翻车"),
+            ("Iterate on quality before launch; collect user feedback and fix iteratively",
+             "先调通再开放，收集用户反馈快速迭代"),
+        ),
+        (
+            ("Big players (Adobe, Canva) may enter with bundled solutions",
+             "大厂（Adobe、Canva）可能挟成熟产品入局"),
+            ("Focus on niche features and community building; avoid direct competition",
+             "专注细分功能、社区建设，不要正面竞争"),
+        ),
+        (
+            ("Mobile performance — Canvas/WASM on low-end devices can OOM",
+             "移动端性能 — 低端设备跑 Canvas/WASM 容易 OOM"),
+            ("Set resolution caps; graceful degradation for low-end devices",
+             "设置分辨率上限，低端设备降级处理"),
+        ),
+    ],
+    "视频处理": [
+        (
+            ("Processing speed — large files need server-side GPU, cost scales fast",
+             "处理速度 — 大文件需要服务端 GPU，成本随用量快速上涨"),
+            ("Start with client-side options; charge per-transaction as volume grows",
+             "早期优先客户端方案，按处理量收费控制成本"),
+        ),
+        (
+            ("Big players (Adobe, TikTok) may bundle this feature for free",
+             "大厂（Adobe、TikTok）可能挟成熟产品入局"),
+            ("Focus on a narrow vertical or use case that big players ignore",
+             "聚焦大厂忽略的垂直细分场景"),
+        ),
+        (
+            ("Content moderation — user-uploaded video needs a review pipeline",
+             "内容审核 — 用户上传视频需要审核流程"),
+            ("Clear TOS, watermarking, random human-in-the-loop sampling",
+             "明确 TOS、加水印、人工抽检"),
+        ),
+    ],
+    "文档处理": [
+        (
+            ("Format fidelity — complex layouts, fonts, and tables break conversions",
+             "格式还原 — 复杂版式、特殊字体、表格结构容易转换失败"),
+            ("Prioritize top 3 formats first; add more based on demand, not coverage",
+             "优先覆盖主流 3 种格式，按需扩展，不追求全覆盖"),
+        ),
+        (
+            ("Free tier abuse — conversion-heavy users max out server resources",
+             "免费层滥用 — 有人反复大量转换薅走服务器资源"),
+            ("Rate limit per IP and account; add CAPTCHA for heavy usage",
+             "限制单 IP/账号频率，加人机验证"),
+        ),
+        (
+            ("Big players (Google, Microsoft) offer this for free in their ecosystems",
+             "大厂（Google、Microsoft）在自家生态里免费提供"),
+            ("Focus on independent, standalone use cases; emphasize speed and privacy",
+             "聚焦独立、免注册的切入场景，突出速度和隐私"),
+        ),
+    ],
+    "AI 工具": [
+        (
+            ("Output quality inconsistency — AI results vary, user trust is fragile",
+             "输出质量不稳定 — AI 结果时好时坏，用户信任脆弱"),
+            ("Show real comparison cases; be transparent about model limitations",
+             "展示真实对比案例，透明说明模型局限"),
+        ),
+        (
+            ("Big players (OpenAI, Google) may enter with better models at lower cost",
+             "大厂（OpenAI、Google）可能携更优模型更低成本入场"),
+            ("Build community and brand loyalty early; focus on underserved niches",
+             "早期建立社区和品牌认知，聚焦大厂不认真做的细分"),
+        ),
+        (
+            ("Users compare results to the best they've seen, not the average",
+             "用户对标的是最好的产品，不是平均水平"),
+            ("A/B test against competitors; offer free trials so users can judge directly",
+             "与竞品对比 A/B 测试，提供免费试用让用户直接判断"),
+        ),
+    ],
+    "开发者工具": [
+        (
+            ("Accuracy — wrong output erodes trust immediately, especially for code",
+             "准确性 — 错误输出立刻失去信任，尤其是代码类工具"),
+            ("Run regression tests on real inputs; show clear error messages for bad input",
+             "用真实输入跑回归测试，对错误输入给出清晰报错"),
+        ),
+        (
+            ("GitHub / Stack Overflow already solve most developer pain points for free",
+             "GitHub / Stack Overflow 已经免费覆盖了多数开发者痛点"),
+            ("Target developers who need a quick, shareable result without setup",
+             "瞄准需要快速获取可分享结果的开发者场景"),
+        ),
+        (
+            ("Open-source alternatives can replicate features overnight",
+             "开源替代品可以一夜之间复刻功能"),
+            ("Build a community and first-mover SEO advantage; features alone aren't a moat",
+             "靠速度和社区建立先发优势，不要只靠功能护城河"),
+        ),
+    ],
+    "效率工具": [
+        (
+            ("Switching cost is low — users leave if the result is slightly off",
+             "切换成本低 — 结果稍有偏差用户就跑"),
+            ("Nail one细分场景; build word-of-mouth before expanding",
+             "先把一个细分场景做透，形成口碑再扩展"),
+        ),
+        (
+            ("Similar tools are a Google Search away — differentiation is hard",
+             "同类工具一个搜索就到 — 差异化很难"),
+            ("Emphasize the one thing that is noticeably better: speed, UX, or output",
+             "突出那一个明显更好的点：速度、体验或结果"),
+        ),
+        (
+            ("Feature creep — users expect one more thing for free",
+             "功能蔓延 — 用户永远觉得再加一个功能才值"),
+            ("Hold the MVP scope; charge for premium features, don't give them away",
+             "严守 MVP 边界；高级功能收费，不要免费送"),
+        ),
+    ],
+    "语言学习": [
+        (
+            ("Content quality — inaccurate translations or examples break trust fast",
+             "内容质量 — 翻译或例句错误很快失去信任"),
+            ("Curate examples manually at launch; use human review for AI-generated content",
+             "上线前人工整理例句，AI 生成内容加人工审核"),
+        ),
+        (
+            ("Big platforms (Duolingo, Babbel) have deep moats in curriculum",
+             "大平台（Duolingo、Babbel）在课程体系上有很深的护城河"),
+            ("Avoid curriculum battles; focus on one specific skill gap they ignore",
+             "不打课程战，聚焦大平台忽略的一个具体技能缺口"),
+        ),
+        (
+            ("Users expect native-quality audio — TTS quality is a direct trust signal",
+             "用户期待母语级音频 — TTS 质量直接影响信任"),
+            ("Either invest in high-quality voice or clearly set expectations on audio quality",
+             "要么投入做高质量语音，要么提前说清楚音频质量限制"),
+        ),
+    ],
+}
+
+# Legacy flat format used by derive_risks lookup — kept for backward compat
+RISKS_BY_CATEGORY = {k: [((r[0][0], r[0][1]), (r[1][0], r[1][1])) for r in v] for k, v in _RISKS_CORE.items()}
+
+UNSUITABLE_BY_CATEGORY = {
+    "图像处理": [
+        ("Teams needing enterprise-grade SLA and compliance", "需要企业级 SLA 和合规的团队"),
+        ("Users who need bulk processing at scale", "需要大规模批量处理的团队"),
+    ],
+    "视频处理": [
+        ("Teams needing real-time processing", "需要实时处理的场景"),
+        ("Users with long-form professional video (10+ minutes)", "需要处理 10 分钟以上专业长视频的用户"),
+    ],
+    "文档处理": [
+        ("Teams with complex multi-format document workflows", "有复杂多格式文档流转需求的企业"),
+        ("Users needing 100% format fidelity for print/publishing", "对印刷/出版有 100% 格式还原要求的用户"),
+    ],
+    "AI 工具": [
+        ("Users with strict accuracy requirements (legal, medical)", "对准确性有严格要求的场景（法律、医疗）"),
+        ("Teams needing full data residency compliance", "需要完整数据主权合规的企业"),
+    ],
+    "开发者工具": [
+        ("Enterprise teams with strict security requirements", "有严格安全要求的企业团队"),
+        ("Users who prefer GUI over CLI integration", "更偏好 GUI 而非 CLI 集成的用户"),
+    ],
+    "效率工具": [
+        ("Enterprise teams needing SSO and admin controls", "需要 SSO 和后台管理的企业团队"),
+        ("Users with very niche, one-off needs", "只有偶发零散需求的用户"),
+    ],
+    "语言学习": [
+        ("Serious learners expecting accredited certification", "期望获得认证证书的严肃学习者"),
+        ("Professional translators needing CAT tool integration", "需要 CAT 工具集成的专业译者"),
+    ],
+}
+
+
+def derive_risks(keyword: str, category: str) -> list[dict[str, dict[str, str]]]:
+    """
+    根据分类生成风险与注意事项。
+
+    每个风险包含 risk (localizedText) 和 mitigation (localizedText)。
+
+    返回格式: [{"risk": {"en": "...", "zh": "..."}, "mitigation": {"en": "...", "zh": "..."}}]
+    返回最多 3 条。
+    """
+    keyword_lower = keyword.lower()
+
+    # 优先精确匹配分类
+    for kw_pattern, risks_list in RISKS_BY_CATEGORY.items():
+        if kw_pattern in category:
+            return [
+                {"risk": localized_text(en_risk, zh_risk), "mitigation": localized_text(en_mit, zh_mit)}
+                for (en_risk, zh_risk), (en_mit, zh_mit) in risks_list
+            ]
+
+    # 回退：按关键词 token 匹配
+    for kw_pattern, risks_list in RISKS_BY_CATEGORY.items():
+        if any(t in keyword_lower for t in kw_pattern.split()):
+            return [
+                {"risk": localized_text(en_risk, zh_risk), "mitigation": localized_text(en_mit, zh_mit)}
+                for (en_risk, zh_risk), (en_mit, zh_mit) in risks_list
+            ]
+
+    # 最终回退：使用效率工具的通用风险
+    default = RISKS_BY_CATEGORY["效率工具"]
+    return [
+        {"risk": localized_text(en_risk, zh_risk), "mitigation": localized_text(en_mit, zh_mit)}
+        for (en_risk, zh_risk), (en_mit, zh_mit) in default
+    ]
+
+
+def _mitigation_zh(risk_zh: str) -> str:
+    """根据中文风险文本生成通用的缓解策略。"""
+    if "边缘处理" in risk_zh or "质量" in risk_zh:
+        return "先调通再开放，收集用户反馈快速迭代"
+    if "大厂" in risk_zh:
+        return "专注细分功能、社区建设，不要正面竞争"
+    if "移动端" in risk_zh or "低端" in risk_zh:
+        return "设置分辨率上限，低端设备降级处理"
+    if "成本" in risk_zh or "价格" in risk_zh:
+        return "早期用免费配额获客，后续按量收费"
+    if "滥用" in risk_zh:
+        return "限制单 IP / 单账号频率，加人机验证"
+    if "准确" in risk_zh:
+        return "A/B 测试、用户教育、免费试用兜底"
+    if "开源" in risk_zh or "复制" in risk_zh:
+        return "靠速度和社区建立先发优势，不要只靠功能"
+    if "切换" in risk_zh or "差异化" in risk_zh:
+        return "从一到两个细分场景切入，形成口碑后再扩"
+    if "内容" in risk_zh or "审核" in risk_zh:
+        return "明确的 TOS、水印、人工抽检"
+    if "信任" in risk_zh or "比较" in risk_zh:
+        return "展示真实对比案例，透明说明模型局限"
+    return "小步迭代，持续收集用户反馈"
+
+
+def derive_unsuitable_for(keyword: str, category: str) -> list[dict[str, str]]:
+    """根据分类生成不适合的用户群体。"""
+    for kw_pattern, items in UNSUITABLE_BY_CATEGORY.items():
+        if kw_pattern in category:
+            return [localized_text(e, m) for e, m in items]
+    return [
+        localized_text("Teams with enterprise-grade compliance requirements", "需要企业级合规的团队"),
+        localized_text("Users with very specialized edge cases", "有非常专业化边缘需求的用户"),
+    ]
+
+
+def yaml_risks_block(risks: list[dict[str, dict[str, str]]]) -> str:
+    """Generate YAML block for risks frontmatter field."""
+    if not risks:
+        return ""
+    lines = ["risks:"]
+    for item in risks:
+        risk = item.get("risk", {})
+        mitigation = item.get("mitigation", {})
+        en_risk = risk.get("en", "") if isinstance(risk, dict) else ""
+        zh_risk = risk.get("zh", "") if isinstance(risk, dict) else ""
+        en_mit = mitigation.get("en", "") if isinstance(mitigation, dict) else ""
+        zh_mit = mitigation.get("zh", "") if isinstance(mitigation, dict) else ""
+        lines.append(f'  - risk:')
+        lines.append(f'      en: "{quote_yaml(en_risk)}"')
+        lines.append(f'      zh: "{quote_yaml(zh_risk)}"')
+        lines.append(f'    mitigation:')
+        lines.append(f'      en: "{quote_yaml(en_mit)}"')
+        lines.append(f'      zh: "{quote_yaml(zh_mit)}"')
+    return "\n".join(lines)
+
+
+def yaml_unsuitable_for_block(items: list[dict[str, str]]) -> str:
+    """Generate YAML block for unsuitableFor frontmatter field."""
+    if not items:
+        return ""
+    return yaml_localized_list_block("unsuitableFor", items)
+
+
 def derive_data_window(idea: dict) -> dict[str, str]:
     """数据窗口：趋势默认 3 个月，返回中英双语对象。"""
     data_points = idea.get("trend_data_points", 0)
@@ -1735,6 +2117,8 @@ def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
     competitor_gaps = derive_competitor_gaps(idea, category)
     data_window = derive_data_window(idea)
     build_window = derive_build_window(keyword, category, idea)
+    risks = derive_risks(keyword, category)
+    unsuitable_for = derive_unsuitable_for(keyword, category)
 
     best_wedge_yaml = yaml_localized_text(best_wedge)
     data_window_yaml = yaml_localized_text(data_window)
@@ -1742,6 +2126,8 @@ def build_markdown(idea: dict, date_str: str) -> tuple[str, str, str]:
     trend_series_yaml = yaml_trend_series_block("trendSeries", idea.get("trend_time_series", []))
     pain_clusters_yaml = yaml_localized_list_block("painClusters", pain_clusters)
     competitor_gaps_yaml = yaml_localized_list_block("competitorGaps", competitor_gaps)
+    risks_yaml = yaml_risks_block(risks)
+    unsuitable_for_yaml = yaml_unsuitable_for_block(unsuitable_for)
 
     # Generate competitorAnalysis frontmatter for Market Landscape section
     niche_sites = idea.get("serp_niche_sites", [])
@@ -1801,6 +2187,8 @@ buildWindow:
 {pain_clusters_yaml}
 {competitor_gaps_yaml}
 {competitor_analysis_yaml}
+{risks_yaml}
+{unsuitable_for_yaml}
 {evidence_links_yaml}
 ---
 

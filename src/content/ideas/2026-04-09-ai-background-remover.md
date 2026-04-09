@@ -433,6 +433,30 @@ competitorGaps:
     zh: "有限的客户支持选项"
   - en: "No mobile app available"
     zh: "没有移动应用程序"
+risks:
+  - risk:
+      en: "Output quality — edge cases (hair, transparency, complex backgrounds)"
+      zh: "边缘处理质量 — 头发、透明背景、复杂边缘最容易翻车"
+    mitigation:
+      en: "Iterate on quality before launch; collect user feedback and fix iteratively"
+      zh: "先调通再开放，收集用户反馈快速迭代"
+  - risk:
+      en: "Big players (Adobe, Canva) may enter with bundled solutions"
+      zh: "大厂（Adobe、Canva）可能挟成熟产品入局"
+    mitigation:
+      en: "Focus on niche features and community building; avoid direct competition"
+      zh: "专注细分功能、社区建设，不要正面竞争"
+  - risk:
+      en: "Mobile performance — Canvas/WASM on low-end devices can OOM"
+      zh: "移动端性能 — 低端设备跑 Canvas/WASM 容易 OOM"
+    mitigation:
+      en: "Set resolution caps; graceful degradation for low-end devices"
+      zh: "设置分辨率上限，低端设备降级处理"
+unsuitableFor:
+  - en: "Teams needing enterprise-grade SLA and compliance"
+    zh: "需要企业级 SLA 和合规的团队"
+  - en: "Users who need bulk processing at scale"
+    zh: "需要大规模批量处理的团队"
 
 evidenceLinks:
   - url: "https://github.com/thevoxer/ai-background-remover"

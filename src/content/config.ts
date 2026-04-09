@@ -60,6 +60,11 @@ const ideasCollection = defineCollection({
       title: z.string(),
       source: z.string(),
     })).optional(),
+    risks: z.array(z.object({
+      risk: localizedTextSchema,
+      mitigation: localizedTextSchema,
+    })).optional(),
+    unsuitableFor: z.array(localizedTextSchema).optional(),
   }),
 });
 
