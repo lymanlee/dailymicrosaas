@@ -72,6 +72,14 @@ SERP_DELAY_MIN = 5.0   # 调高：至少 5s，降低被封概率
 SERP_DELAY_MAX = 10.0  # 调高：最多 10s
 SERP_MAX_KEYWORDS = 20  # 每次 pipeline 最多主动采集的关键词数量
 
+# 熔断配置
+SERP_CIRCUIT_BREAKER_THRESHOLD = 3   # 全局连续失败 3 个关键词 → 暂停
+SERP_CIRCUIT_BREAKER_PAUSE = 60      # 暂停 60 秒后恢复
+SERP_MAX_RETRIES_PER_KEYWORD = 1     # 每个关键词最多尝试次数（快速失败）
+
+# 模块级全局状态（跨调用持久）
+_consecutive_fails: int = 0
+
 
 def _extract_domain(url: str) -> str:
     """从 URL 中提取域名。"""
@@ -150,38 +158,22 @@ def _parse_ddg_results(html: str, max_results: int = 10) -> list[dict]:
     return results
 
 
-def fetch_serp_for_keyword(keyword: str, max_retries: int = 3) -> list[dict]:
-    """为单个关键词采集 SERP 数据，带重试与被封检测。"""
-    last_error: Exception | None = None
-    for attempt in range(max_retries):
-        try:
-            html = _fetch_ddg_html(keyword)
-            results = _parse_ddg_results(html)
-            if results:
-                return results
-            # 结果为空：可能是被封或真的无数据；最终尝试后仍为空则记录
-            is_final_attempt = attempt == max_retries - 1
-            if is_final_attempt:
-                # 最终尝试仍为空，不当作错误（可能真的无 SERP），但仍打印提示
-                print(f"    ⚠️ SERP 结果为空（{max_retries} 次尝试后），关键词可能无搜索结果或被封: {keyword}")
-            else:
-                wait = _random.uniform(5, 12)
-                print(f"    ⚠️ SERP 结果为空（第 {attempt + 1}/{max_retries} 次），等待 {wait:.0f}s 后重试...")
-                time.sleep(wait)
-        except Exception as error:
-            last_error = error
-            is_final_attempt = attempt == max_retries - 1
-            if is_final_attempt:
-                print(f"    ❌ SERP 采集最终失败 ({max_retries} 次尝试): {error}")
-            else:
-                wait = _random.uniform(5, 12)
-                print(f"    ⚠️ SERP 采集失败（第 {attempt + 1}/{max_retries} 次）: {error}，等待 {wait:.0f}s...")
-                time.sleep(wait)
-
-    # max_retries=1 时走到这里（永不进入循环体）
-    if last_error:
-        print(f"    ❌ SERP 采集最终失败: {last_error}")
-    return []
+def fetch_serp_for_keyword(keyword: str) -> tuple[list[dict], bool]:
+    """
+    为单个关键词采集 SERP 数据（快速失败，不内部重试）。
+    返回 (results, is_error)：results 为解析结果，is_error 为 True 表示发生了异常。
+    重试和熔断由调用侧 run_serp_collection 统一处理。
+    """
+    try:
+        html = _fetch_ddg_html(keyword)
+        results = _parse_ddg_results(html)
+        if results:
+            return results, False
+        print(f"    ⚠️ SERP 结果为空: {keyword}")
+        return [], False
+    except Exception as error:
+        print(f"    ❌ SERP 采集失败: {error}")
+        return [], True
 
 
 def run_serp_collection(
@@ -228,23 +220,43 @@ def run_serp_collection(
 
     success_count = 0
     fail_count = 0
+    consecutive_fails = 0   # 全局连续失败计数
 
     for index, keyword in enumerate(target_keywords):
+        # 全局熔断：连续失败达到阈值则暂停
+        if consecutive_fails >= SERP_CIRCUIT_BREAKER_THRESHOLD:
+            print(f"  [SERP] 🟡 连续失败 {consecutive_fails} 个关键词，熔断暂停 {SERP_CIRCUIT_BREAKER_PAUSE}s...")
+            time.sleep(SERP_CIRCUIT_BREAKER_PAUSE)
+            consecutive_fails = 0
+            print(f"  [SERP] 🟢 熔断恢复，继续采集")
+
         print(f"  [SERP] [{index + 1}/{len(target_keywords)}] 采集: {keyword}")
-        results = fetch_serp_for_keyword(keyword)
+
+        # 尝试采集（每个关键词最多尝试 SERP_MAX_RETRIES_PER_KEYWORD 次）
+        results, is_error = [], False
+        for retry_idx in range(SERP_MAX_RETRIES_PER_KEYWORD):
+            results, is_error = fetch_serp_for_keyword(keyword)
+            if results:
+                break
+            if retry_idx < SERP_MAX_RETRIES_PER_KEYWORD - 1:
+                wait = _random.uniform(5, 12)
+                print(f"    ⏳ 第 {retry_idx + 1} 次失败，等待 {wait:.0f}s 后重试...")
+                time.sleep(wait)
 
         if results:
             cached[keyword] = results
             success_count += 1
+            consecutive_fails = 0   # 成功 → 重置全局失败计数
         else:
             # 记录失败，避免下次重复尝试
             cached[keyword] = []
             fail_count += 1
+            consecutive_fails += 1
 
         # 保存中间缓存（避免中断后全部重来）
         save_json(cached, cache_path)
 
-        # 限速：每次请求间随机等待（已大幅提高下限）
+        # 限速：每次请求间随机等待
         if index < len(target_keywords) - 1:
             delay = _random.uniform(SERP_DELAY_MIN, SERP_DELAY_MAX)
             time.sleep(delay)

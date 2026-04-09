@@ -60,6 +60,13 @@ REDDIT_PUBLIC_ENDPOINTS = [
     "https://old.reddit.com/search.json",
 ]
 
+# 熔断配置
+CIRCUIT_BREAKER_THRESHOLD = 3    # 连续失败 3 次后禁用该端点
+CIRCUIT_BREAKER_COOLDOWN = 120   # 禁用 120 秒后重新尝试
+
+# 端点熔断状态：{ endpoint_label: { consecutive_fails, disabled, disabled_until } }
+_endpoint_status: dict[str, dict] = {}
+
 
 class RequestError(Exception):
     """携带状态码/响应头的请求异常，便于上层做限流和 fallback 判断。"""
@@ -665,11 +672,52 @@ def _random_ua() -> str:
     return random.choice(REDDIT_USER_AGENTS)
 
 
+def _is_endpoint_circuit_broken(endpoint_label: str) -> bool:
+    """检查端点是否已被熔断（超过阈值且仍在冷却期内）。"""
+    status = _endpoint_status.get(endpoint_label)
+    if not status:
+        return False
+    if not status.get("disabled"):
+        return False
+    if time.time() < status.get("disabled_until", 0):
+        return False
+    # 冷却期结束，重置状态
+    status["disabled"] = False
+    status["consecutive_fails"] = 0
+    return False
+
+
+def _record_endpoint_success(endpoint_label: str) -> None:
+    """成功时重置该端点的失败计数。"""
+    if endpoint_label in _endpoint_status:
+        _endpoint_status[endpoint_label]["consecutive_fails"] = 0
+
+
+def _record_endpoint_failure(endpoint_label: str) -> bool:
+    """
+    失败时累加计数，超过阈值则熔断。
+    返回 True 表示端点已被禁用（刚触发熔断）。
+    """
+    status = _endpoint_status.setdefault(endpoint_label, {"consecutive_fails": 0, "disabled": False})
+    status["consecutive_fails"] += 1
+    if status["consecutive_fails"] >= CIRCUIT_BREAKER_THRESHOLD and not status["disabled"]:
+        status["disabled"] = True
+        status["disabled_until"] = time.time() + CIRCUIT_BREAKER_COOLDOWN
+        print(f"    [Reddit] 🔴 端点 {endpoint_label} 连续 {CIRCUIT_BREAKER_THRESHOLD} 次失败，熔断 {CIRCUIT_BREAKER_COOLDOWN}s")
+        return True
+    return False
+
+
 def _fetch_reddit_public(keyword: str, time_filter: str, endpoint_label: str, endpoint_url: str) -> list[dict]:
     """
     通过公开 JSON 端点抓 Reddit 搜索（带随机 UA + 更长延迟）。
     2025 年初起 Reddit 对 bot UA 返回 403，此方法作为最终兜底。
+    熔断机制：连续失败超过阈值后自动暂停该端点。
     """
+    # 熔断检查
+    if _is_endpoint_circuit_broken(endpoint_label):
+        raise RequestError(f"端点 {endpoint_label} 已熔断，跳过", status=403)
+
     query = (
         f"?q={urllib.parse.quote_plus(keyword)}"
         f"&sort=relevance&t={time_filter}&limit=5&type=link&raw_json=1"
@@ -682,6 +730,7 @@ def _fetch_reddit_public(keyword: str, time_filter: str, endpoint_label: str, en
         "Accept-Language": "en-US,en;q=0.9",
     }
     data = safe_request(url, timeout=18, max_retries=1, headers=headers)
+    _record_endpoint_success(endpoint_label)
     return extract_reddit_posts(data)
 
 
@@ -749,18 +798,24 @@ def scan_reddit(keywords: list[str], days: int = 30) -> list[dict]:
                     reddit_token = None
                     print(f"  [Reddit] ⚠️ OAuth token 失效 (HTTP {error.status})，降级到公开端点")
 
-        # 策略 2：公开 JSON 端点（随机 UA）
+        # 策略 2：公开 JSON 端点（随机 UA，带熔断保护）
         if posts is None and not reddit_token:
             for endpoint_label, endpoint_url in [
                 ("old.reddit.com", "https://old.reddit.com/search.json"),
             ]:
+                # 熔断检查
+                if _is_endpoint_circuit_broken(endpoint_label):
+                    errors.append(f"{endpoint_label}: 已熔断，跳过")
+                    continue
                 try:
                     posts = _fetch_reddit_public(keyword, time_filter, endpoint_label, endpoint_url)
                     if posts:
                         save_cached_query_items(cache, REDDIT_CACHE_PATH, cache_key, posts)
                         break
                 except Exception as error:
-                    errors.append(f"{endpoint_label}: {error}")
+                    triggered = _record_endpoint_failure(endpoint_label)
+                    if not triggered:
+                        errors.append(f"{endpoint_label}: {error}")
                     continue
 
         # 兜底：stale 缓存
