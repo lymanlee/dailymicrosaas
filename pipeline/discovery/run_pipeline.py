@@ -311,7 +311,7 @@ def execute_pipeline(
     print(f"🚀 需求挖掘流水线 - {get_timestamp()}")
     print("=" * 70 + "\n")
     if fresh_data:
-        print("[Cache] 已启用 fresh_data：本次会忽略同日期已有趋势/SERP 缓存并重新采集")
+        print("[Cache] 已启用 fresh_data：本次忽略同日期已有趋势/社区/SERP 缓存并重新采集")
 
     # ─── Step 1: 趋势发现 ────────────────────────────────────────────────────────
     if skip_trends:
@@ -339,9 +339,9 @@ def execute_pipeline(
         community_data = load_community_data(resolved_date)
         if not community_data:
             print("  ⚠️ 无缓存数据，将执行社区扫描...")
-            community_data = run_community_scan(resolved_date)
+            community_data = run_community_scan(resolved_date, force_refresh=True)
     else:
-        community_data = run_community_scan(resolved_date)
+        community_data = run_community_scan(resolved_date, force_refresh=fresh_data)
 
     # 统计社区信号质量
     hn_count = community_data.get("summary", {}).get("hn_count", 0)

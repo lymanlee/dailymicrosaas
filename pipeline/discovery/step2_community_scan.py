@@ -840,10 +840,23 @@ def scan_reddit(keywords: list[str], days: int = 30) -> list[dict]:
     return results
 
 
-def run_community_scan(run_date: str | None = None) -> dict:
-    """执行完整社区信号扫描。"""
+def run_community_scan(run_date: str | None = None, force_refresh: bool = False) -> dict:
+    """执行完整社区信号扫描。
+
+    Args:
+        run_date: 运行日期（用于 seed_roots 加载）
+        force_refresh: 为 True 时清空所有社区缓存，强制重新采集（用于验证熔断逻辑）
+    """
     resolved_date = resolve_run_date(run_date)
     print(f"[Step 2] 开始社区信号扫描 - {resolved_date}...")
+
+    # fresh_data: 清空缓存文件，强制真实请求
+    if force_refresh:
+        for cache_file in [GITHUB_CACHE_PATH, REDDIT_CACHE_PATH]:
+            if cache_file.exists():
+                cache_file.unlink()
+                print(f"  [Cache] 已删除 {cache_file.name}，本次强制重新采集")
+
     config = load_seed_roots()
     seeds = config["seed_roots"]
 
