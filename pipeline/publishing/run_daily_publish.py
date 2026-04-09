@@ -61,6 +61,13 @@ def build_site() -> None:
     print("[Build] ✅ 构建通过")
 
 
+def run_i18n_guard() -> None:
+    """运行双语完整性校验（check_i18n.mjs），失败时抛出 RuntimeError 阻断发布。"""
+    print("\n[i18n Guard] 运行双语完整性校验...")
+    run_command(["node", "scripts/check_i18n.mjs"])
+    print("[i18n Guard] ✅ 双语校验通过")
+
+
 def commit_generated_content(target_file: Path, date_str: str) -> bool:
     run_command(["git", "add", str(target_file.relative_to(PROJECT_ROOT))])
     status_after_add = run_command(["git", "status", "--porcelain"])
