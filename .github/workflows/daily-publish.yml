@@ -264,6 +264,25 @@ jobs:
               print(f"::error::{escape_annotation(error)}")
           PY
 
+      - name: Run competitor crawl from queue
+        continue-on-error: true
+        env:
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+        run: |
+          # 只在没有SILICONFLOW_API_KEY时跳过，避免阻塞主流程
+          if [ -z "$SILICONFLOW_API_KEY" ]; then
+            echo "SILICONFLOW_API_KEY 未配置，跳过竞品爬取"
+            exit 0
+          fi
+
+          cat > .env << 'EOF'
+          SILICONFLOW_API_KEY=${{ secrets.SILICONFLOW_API_KEY }}
+          EOF
+
+          echo "--- 竞品爬取 ---"
+          python3 pipeline/competitor_analysis/run_crawl_queue.py --limit 10 --force-refresh 2>&1 || true
+          echo "--- 竞品爬取完成 ---"
+
       - name: Notify failure webhook
         if: failure() && env.PUBLISH_FAILURE_WEBHOOK_URL != ''
         continue-on-error: true

@@ -1,0 +1,121 @@
+name: Competitor Crawl
+
+on:
+  # 定时触发：每 4 小时跑一次，确保队列不会积压太久
+  schedule:
+    - cron: "15 */4 * * *"
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "本次最多处理域名数（默认 20）"
+        required: false
+        default: "20"
+      domains:
+        description: "直接指定域名（逗号分隔，绕过队列）"
+        required: false
+        default: ""
+      force_refresh:
+        description: "强制重新爬取已缓存域名"
+        required: false
+        type: boolean
+        default: false
+      dry_run:
+        description: "只查看队列状态，不执行爬取"
+        required: false
+        type: boolean
+        default: false
+  # 被 daily-publish.yml 在 discovery 完成后触发
+  workflow_call:
+    inputs:
+      limit:
+        description: "本次最多处理域名数"
+        required: false
+        default: "20"
+        type: string
+      domains:
+        description: "直接指定域名"
+        required: false
+        default: ""
+        type: string
+      force_refresh:
+        description: "强制重新爬取"
+        required: false
+        default: false
+        type: boolean
+    secrets:
+      SILICONFLOW_API_KEY:
+        description: "SiliconFlow API Key"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: competitor-crawl
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install -r requirements.txt
+
+      - name: Prepare environment file
+        run: |
+          cat > .env << 'EOF'
+          SILICONFLOW_API_KEY=${{ secrets.SILICONFLOW_API_KEY }}
+          EOF
+
+      - name: Check queue status (dry-run)
+        if: github.event.inputs.dry_run == 'true'
+        run: |
+          python3 pipeline/competitor_analysis/run_crawl_queue.py --dry-run
+
+      - name: Run competitor crawl (queue mode)
+        if: github.event.inputs.dry_run != 'true' && github.event.inputs.domains == ''
+        env:
+          INPUT_LIMIT: ${{ github.event.inputs.limit || '20' }}
+          INPUT_FORCE_REFRESH: ${{ github.event.inputs.force_refresh || 'false' }}
+        run: |
+          CMD=(python3 pipeline/competitor_analysis/run_crawl_queue.py)
+
+          if [ -n "$INPUT_LIMIT" ]; then
+            CMD+=(--limit "$INPUT_LIMIT")
+          fi
+
+          if [ "$INPUT_FORCE_REFRESH" = "true" ]; then
+            CMD+=(--force-refresh)
+          fi
+
+          printf 'Running:'
+          printf ' %q' "${CMD[@]}"
+          printf '\n'
+
+          "${CMD[@]}" 2>&1 || true
+
+      - name: Run competitor crawl (direct domains)
+        if: github.event.inputs.dry_run != 'true' && github.event.inputs.domains != ''
+        env:
+          INPUT_DOMAINS: ${{ github.event.inputs.domains }}
+          INPUT_FORCE_REFRESH: ${{ github.event.inputs.force_refresh || 'false' }}
+        run: |
+          python3 pipeline/competitor_analysis/run_crawl_queue.py \
+            --domains "$INPUT_DOMAINS" \
+            $([ "$INPUT_FORCE_REFRESH" = "true" ] && echo "--force-refresh")
