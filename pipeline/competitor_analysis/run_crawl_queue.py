@@ -20,7 +20,11 @@ from pathlib import Path
 # Add parent to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent.parent / ".env")
+except ImportError:
+    pass  # CI environments set env vars directly
 
 from competitor_analysis import (
     CompetitorFetcher,
@@ -163,9 +167,6 @@ def main():
         help="详细输出",
     )
     args = parser.parse_args()
-
-    # Load env
-    load_dotenv(Path(__file__).parent.parent / ".env")
 
     # 指定域名模式
     if args.domains:
