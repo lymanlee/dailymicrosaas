@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import html
 import json
-import random
+import random as _random
 import re
 import sys
 import time
@@ -60,8 +60,16 @@ SSL_CTX = ssl.create_default_context()
 SSL_CTX.check_hostname = False
 SSL_CTX.verify_mode = ssl.CERT_NONE
 
-SERP_DELAY_MIN = 2.0
-SERP_DELAY_MAX = 4.0
+# 轮换 User-Agent，避免 DDG 识别为爬虫
+DDG_USER_AGENTS = [
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+]
+
+SERP_DELAY_MIN = 5.0   # 调高：至少 5s，降低被封概率
+SERP_DELAY_MAX = 10.0  # 调高：最多 10s
 SERP_MAX_KEYWORDS = 20  # 每次 pipeline 最多主动采集的关键词数量
 
 
@@ -74,14 +82,12 @@ def _extract_domain(url: str) -> str:
 
 
 def _fetch_ddg_html(keyword: str, timeout: int = 12) -> str:
-    """通过 DuckDuckGo HTML 搜索获取 SERP 结果（无 JS 版本）。"""
+    """通过 DuckDuckGo HTML 搜索获取 SERP 结果（无 JS 版本），每次请求轮换 User-Agent。"""
     query = urllib.parse.quote_plus(keyword)
     url = f"https://html.duckduckgo.com/html/?q={query}"
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                      "AppleWebKit/537.36 (KHTML, like Gecko) "
-                      "Chrome/120.0.0.0 Safari/537.36",
+        "User-Agent": _random.choice(DDG_USER_AGENTS),
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "en-US,en;q=0.9",
     }
@@ -155,13 +161,13 @@ def fetch_serp_for_keyword(keyword: str, max_retries: int = 2) -> list[dict]:
                 return results
             # 结果为空可能是被封，稍作等待
             if attempt < max_retries - 1:
-                wait = random.uniform(5, 10)
+                wait = _random.uniform(5, 10)
                 print(f"    ⚠️ SERP 结果为空（第 {attempt + 1} 次），等待 {wait:.0f}s...")
                 time.sleep(wait)
         except Exception as error:
             last_error = error
             if attempt < max_retries - 1:
-                wait = random.uniform(3, 6)
+                wait = _random.uniform(3, 6)
                 print(f"    ⚠️ SERP 采集失败（第 {attempt + 1} 次）: {error}，等待 {wait:.0f}s...")
                 time.sleep(wait)
 
@@ -230,9 +236,9 @@ def run_serp_collection(
         # 保存中间缓存（避免中断后全部重来）
         save_json(cached, cache_path)
 
-        # 限速
+        # 限速：每次请求间随机等待（已大幅提高下限）
         if index < len(target_keywords) - 1:
-            delay = random.uniform(SERP_DELAY_MIN, SERP_DELAY_MAX)
+            delay = _random.uniform(SERP_DELAY_MIN, SERP_DELAY_MAX)
             time.sleep(delay)
 
     print(f"  [SERP] ✅ 采集完成：成功 {success_count} 个，失败 {fail_count} 个")

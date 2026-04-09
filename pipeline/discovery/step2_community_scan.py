@@ -9,6 +9,7 @@ import base64
 import json
 import math
 import os
+import random
 import re
 import ssl
 import sys
@@ -35,7 +36,16 @@ for env_file in ENV_FILES:
 SSL_CTX = ssl.create_default_context()
 SSL_CTX.check_hostname = False
 SSL_CTX.verify_mode = ssl.CERT_NONE
+
+# 轮换 User-Agent，模拟真实浏览器
 DEFAULT_USER_AGENT = os.environ.get("REDDIT_USER_AGENT", "DailyMicroSaaS/0.1 by dailymicrosaas")
+REDDIT_USER_AGENTS = [
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+]
+
 REDDIT_TOKEN_CACHE = {"token": "", "expires_at": 0.0}
 COMMUNITY_CACHE_DIR = DATA_DIR / "community_cache"
 COMMUNITY_CACHE_DIR.mkdir(parents=True, exist_ok=True)
@@ -650,8 +660,33 @@ def append_reddit_posts(results: list[dict], seen_posts: set[str], keyword: str,
 
 
 
+def _random_ua() -> str:
+    """返回一个随机 User-Agent，模拟多浏览器。"""
+    return random.choice(REDDIT_USER_AGENTS)
+
+
+def _fetch_reddit_public(keyword: str, time_filter: str, endpoint_label: str, endpoint_url: str) -> list[dict]:
+    """
+    通过公开 JSON 端点抓 Reddit 搜索（带随机 UA + 更长延迟）。
+    2025 年初起 Reddit 对 bot UA 返回 403，此方法作为最终兜底。
+    """
+    query = (
+        f"?q={urllib.parse.quote_plus(keyword)}"
+        f"&sort=relevance&t={time_filter}&limit=5&type=link&raw_json=1"
+    )
+    url = f"{endpoint_url}{query}"
+    # 每次请求用随机 UA，避免被识别为固定 bot
+    headers = {
+        "User-Agent": _random_ua(),
+        "Accept": "application/json",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    data = safe_request(url, timeout=18, max_retries=1, headers=headers)
+    return extract_reddit_posts(data)
+
+
 def scan_reddit(keywords: list[str], days: int = 30) -> list[dict]:
-    """扫描 Reddit 搜索结果，优先 OAuth，缺凭据时回退到公开 JSON 端点。"""
+    """扫描 Reddit 搜索结果，优先 OAuth，缺凭据时回退到公开 JSON 端点（带随机 UA + 延迟）。"""
     print("  [Reddit] 扫描 Reddit 搜索...")
     results = []
     seen_posts = set()
@@ -661,17 +696,23 @@ def scan_reddit(keywords: list[str], days: int = 30) -> list[dict]:
     time_filter = "week" if days <= 7 else "month" if days <= 30 else "year" if days <= 365 else "all"
 
     reddit_token = None
+    oauth_tried_and_failed = False
     try:
         reddit_token = get_reddit_access_token()
     except Exception as error:
-        print(f"  [Reddit] ⚠️ OAuth 取 token 失败，改用公开 JSON 端点: {error}")
+        oauth_tried_and_failed = True
+        print(f"  [Reddit] ⚠️ OAuth 取 token 失败，将改用公开 JSON 端点: {error}")
 
     if reddit_token:
-        print("  [Reddit] ✅ 使用 OAuth token")
+        print("  [Reddit] ✅ 使用 Reddit OAuth token")
     else:
-        print("  [Reddit] ⚠️ 未配置 Reddit OAuth，回退到公开 JSON 端点（自动切换 www / old + 缓存）")
+        if oauth_tried_and_failed:
+            print("  [Reddit] ⚠️ 未配置 Reddit OAuth (REDDIT_CLIENT_ID / REDDIT_CLIENT_SECRET)，改用公开 JSON 端点")
+            print("  [Reddit] 💡 提示：Reddit 公开端点已大量返回 403，建议配置 OAuth 获得稳定结果")
+        else:
+            print("  [Reddit] ⚠️ 未配置 Reddit OAuth，回退到公开 JSON 端点")
 
-    for keyword in search_terms:
+    for idx, keyword in enumerate(search_terms):
         cache_key = build_query_cache_key("reddit", keyword, time_filter)
         cached_posts = get_cached_query_items(cache, cache_key, REDDIT_CACHE_TTL_SECONDS)
         if cached_posts is not None:
@@ -680,26 +721,49 @@ def scan_reddit(keywords: list[str], days: int = 30) -> list[dict]:
 
         posts: list[dict] | None = None
         errors: list[str] = []
-        candidates = build_reddit_search_candidates(keyword, time_filter, reddit_token)
 
-        for candidate in candidates:
+        # 策略 1：OAuth
+        if reddit_token:
             try:
+                query = (
+                    f"?q={urllib.parse.quote_plus(keyword)}"
+                    f"&sort=relevance&t={time_filter}&limit=5&type=link&raw_json=1"
+                )
                 data = safe_request(
-                    str(candidate["url"]),
+                    f"https://oauth.reddit.com/search{query}",
                     timeout=15,
-                    max_retries=2,
-                    headers=dict(candidate["headers"]),
+                    max_retries=1,
+                    headers={
+                        "Authorization": f"Bearer {reddit_token}",
+                        "User-Agent": _random_ua(),
+                        "Accept": "application/json",
+                    },
                 )
                 posts = extract_reddit_posts(data)
                 save_cached_query_items(cache, REDDIT_CACHE_PATH, cache_key, posts)
-                break
             except Exception as error:
-                label = str(candidate["label"])
+                label = "oauth"
                 errors.append(f"{label}: {error}")
-                if label == "oauth" and isinstance(error, RequestError) and error.status in {401, 403}:
+                if isinstance(error, RequestError) and error.status in {401, 403}:
+                    # token 失效，清空并降级到公开端点
                     reddit_token = None
-                continue
+                    print(f"  [Reddit] ⚠️ OAuth token 失效 (HTTP {error.status})，降级到公开端点")
 
+        # 策略 2：公开 JSON 端点（随机 UA）
+        if posts is None and not reddit_token:
+            for endpoint_label, endpoint_url in [
+                ("old.reddit.com", "https://old.reddit.com/search.json"),
+            ]:
+                try:
+                    posts = _fetch_reddit_public(keyword, time_filter, endpoint_label, endpoint_url)
+                    if posts:
+                        save_cached_query_items(cache, REDDIT_CACHE_PATH, cache_key, posts)
+                        break
+                except Exception as error:
+                    errors.append(f"{endpoint_label}: {error}")
+                    continue
+
+        # 兜底：stale 缓存
         if posts is None:
             stale_posts = get_cached_query_items(cache, cache_key, REDDIT_CACHE_TTL_SECONDS, allow_stale=True)
             if stale_posts is not None:
@@ -708,11 +772,13 @@ def scan_reddit(keywords: list[str], days: int = 30) -> list[dict]:
 
             if errors:
                 print(f"  [Reddit] ⚠️ '{keyword}' 出错: {' | '.join(errors)}")
-            time.sleep(1.5)
+            time.sleep(2)
             continue
 
         append_reddit_posts(results, seen_posts, keyword, posts)
-        time.sleep(0.8)
+        # 每次请求间至少等待 1.5s，降低被封概率
+        if idx < len(search_terms) - 1:
+            time.sleep(1.5 + random.uniform(0, 0.8))
 
     results.sort(key=lambda item: item["signal_strength"], reverse=True)
     print(f"  [Reddit] ✅ 找到 {len(results)} 条信号")
