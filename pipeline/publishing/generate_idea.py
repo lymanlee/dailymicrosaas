@@ -1469,20 +1469,21 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
             try:
                 extracted_pains = extract_community_pains_impl(keyword, community_items)
                 if extracted_pains and len(extracted_pains) > 0:
-                    # 转换格式
+                    # 转换格式，只保留有效双语数据（过滤空值）
                     clusters = []
                     for pain in extracted_pains[:4]:
+                        en_text = (pain.get("text_en") or "").strip()
+                        zh_text = (pain.get("text_zh") or "").strip()
+                        if not en_text or not zh_text:
+                            continue  # 跳过空值，继续尝试 fallback
                         clusters.append({
-                            "text": {
-                                "en": pain.get("text_en", ""),
-                                "zh": pain.get("text_zh", "")
-                            },
+                            "text": {"en": en_text, "zh": zh_text},
                             "source": "community",
                             "sourceUrl": pain.get("source_url", ""),
                             "sourceName": pain.get("source_name", ""),
                             "quote": {
-                                "en": pain.get("quote_en", ""),
-                                "zh": pain.get("quote_zh", "")
+                                "en": (pain.get("quote_en") or "").strip(),
+                                "zh": (pain.get("quote_zh") or "").strip()
                             },
                             "severity": pain.get("severity", "medium")
                         })
