@@ -89,7 +89,6 @@ GitHub Actions 手动触发建议：
 
 - `dry_run = true`
 - `skip_serp = true`
-- `fresh_data = true`
 - `min_score = 25`
 
 目的：
@@ -101,7 +100,7 @@ GitHub Actions 手动触发建议：
 本地等价命令：
 
 ```bash
-python3 scripts/run_daily_publish.py --date YYYY-MM-DD --dry-run --no-build --skip-serp --fresh-data --min-score 25
+python3 scripts/run_daily_publish.py --date YYYY-MM-DD --dry-run --no-build --skip-serp --min-score 25
 ```
 
 ### 场景 2：怀疑是生成内容或站点构建炸了
@@ -112,7 +111,6 @@ GitHub Actions 手动触发建议：
 - `skip_trends = true`
 - `skip_community = true`
 - `skip_serp = true`
-- `fresh_data = false`
 
 目的：
 
@@ -256,7 +254,6 @@ npm run build
 如果只是做健康检查，优先：
 
 - `dry_run = true`
-- `fresh_data = true`
 - `skip_serp = true`
 - `min_score = 25`
 

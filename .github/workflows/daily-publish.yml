@@ -33,11 +33,6 @@ on:
         description: "最低发布分数阈值"
         required: false
         default: "25"
-      fresh_data:
-        description: "忽略同日期已有 discovery 缓存，强制重新拉取真实数据"
-        required: false
-        type: boolean
-        default: true
       dry_run:
         description: "只跑预览，不提交推送"
         required: false
@@ -128,7 +123,6 @@ jobs:
           INPUT_SKIP_SERP: ${{ github.event.inputs.skip_serp || 'false' }}
           INPUT_MAX_SERP_KEYWORDS: ${{ github.event.inputs.max_serp_keywords || '20' }}
           INPUT_MIN_SCORE: ${{ github.event.inputs.min_score || '25' }}
-          INPUT_FRESH_DATA: ${{ github.event.inputs.fresh_data || 'true' }}
           INPUT_DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
           INPUT_FAIL_ON_QUALITY_WARNING: ${{ github.event.inputs.fail_on_quality_warning || 'false' }}
           INPUT_FAIL_ON_SOFT_DISCOVERY_WARNING: ${{ github.event.inputs.fail_on_soft_discovery_warning || 'false' }}
@@ -159,10 +153,6 @@ jobs:
 
           if [ -n "$INPUT_MIN_SCORE" ]; then
             CMD+=(--min-score "$INPUT_MIN_SCORE")
-          fi
-
-          if [ "$INPUT_FRESH_DATA" = "true" ]; then
-            CMD+=(--fresh-data)
           fi
 
           if [ "$INPUT_FAIL_ON_QUALITY_WARNING" = "true" ]; then

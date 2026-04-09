@@ -74,7 +74,6 @@ def run_discovery_pipeline(date: str, retry_count: int = 0) -> tuple[bool, str]:
                 str(ROOT_DIR / "pipeline" / "discovery" / "run_pipeline.py"),
                 "--date", date,
                 "--skip-serp",  # 跳过 SERP 以加快速度
-                "--fresh-data"
             ],
             capture_output=True,
             text=True,

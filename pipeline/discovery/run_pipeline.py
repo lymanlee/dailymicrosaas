@@ -293,15 +293,15 @@ def execute_pipeline(
     serp_data_path: str | None = None,
     skip_serp: bool = False,
     max_serp_keywords: int = 20,
-    fresh_data: bool = False,
     trigger_competitor: bool = True,
 ) -> dict:
     """执行完整 pipeline，并返回报告与输出路径。
 
-    新增参数：
+    语义说明：
+        - 任何 step 不跳过 → 强制刷新数据（忽略同日期缓存）
+        - 跳过 → 读缓存；无缓存则强制拉取（pipeline 断掉前必须兜底）
         skip_serp: 完全跳过 SERP 采集（GitHub Actions 中网络受限时使用）
         max_serp_keywords: 最多主动采集的 SERP 关键词数量（默认 20）
-        fresh_data: 强制忽略同日期已有缓存，重新拉取趋势与 SERP 数据
     """
     resolved_date = resolve_run_date(run_date)
     start_time = time.time()
@@ -310,8 +310,6 @@ def execute_pipeline(
     print("\n" + "=" * 70)
     print(f"🚀 需求挖掘流水线 - {get_timestamp()}")
     print("=" * 70 + "\n")
-    if fresh_data:
-        print("[Cache] 已启用 fresh_data：本次忽略同日期已有趋势/社区/SERP 缓存并重新采集")
 
     # ─── Step 1: 趋势发现 ────────────────────────────────────────────────────────
     if skip_trends:
@@ -319,9 +317,9 @@ def execute_pipeline(
         trend_data = load_trend_data(resolved_date)
         if not trend_data:
             print("  ⚠️ 无缓存数据，将执行趋势发现...")
-            trend_data = discover_trending_keywords(resolved_date, force_refresh=fresh_data)
+            trend_data = discover_trending_keywords(resolved_date, force_refresh=True)
     else:
-        trend_data = discover_trending_keywords(resolved_date, force_refresh=fresh_data)
+        trend_data = discover_trending_keywords(resolved_date, force_refresh=True)
 
     if not trend_data:
         raise RuntimeError("趋势数据为空，无法继续执行内容发现流水线。")
@@ -341,7 +339,7 @@ def execute_pipeline(
             print("  ⚠️ 无缓存数据，将执行社区扫描...")
             community_data = run_community_scan(resolved_date, force_refresh=True)
     else:
-        community_data = run_community_scan(resolved_date, force_refresh=fresh_data)
+        community_data = run_community_scan(resolved_date, force_refresh=True)
 
     # 统计社区信号质量
     hn_count = community_data.get("summary", {}).get("hn_count", 0)
@@ -394,7 +392,7 @@ def execute_pipeline(
             sorted_trend_keywords,
             resolved_date,
             max_keywords=max_serp_keywords,
-            force_refresh=fresh_data,
+            force_refresh=True,
         )
         serp_data = analyze_serp_data(raw_serp, sorted_trend_keywords)
 
@@ -477,7 +475,6 @@ def main() -> None:
     parser.add_argument("--serp-data", type=str, default=None, help="外部 SERP 数据文件路径（向下兼容）")
     parser.add_argument("--skip-serp", action="store_true", help="完全跳过 SERP 采集（网络受限时使用）")
     parser.add_argument("--max-serp-keywords", type=int, default=20, help="主动采集 SERP 的最大关键词数量（默认 20）")
-    parser.add_argument("--fresh-data", action="store_true", help="忽略同日期已有缓存，强制重新拉取趋势与 SERP 数据")
     parser.add_argument("--no-competitor-trigger", action="store_true", help="跳过竞品自动发现触发")
     args = parser.parse_args()
 
@@ -488,7 +485,6 @@ def main() -> None:
         serp_data_path=args.serp_data,
         skip_serp=args.skip_serp,
         max_serp_keywords=args.max_serp_keywords,
-        fresh_data=args.fresh_data,
         trigger_competitor=not args.no_competitor_trigger,
     )
 

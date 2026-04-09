@@ -103,7 +103,6 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 - `skip_trends = false`
 - `skip_community = false`
 - `skip_serp = true`
-- `fresh_data = true`
 - `min_score = 25`
 
 为什么这样配：
@@ -111,7 +110,7 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 - 不提交、不推送，不会污染站点
 - 还能真实验证 Google Trends + 社区扫描
 - 跳过 SERP，先降低一个外部不稳定源
-- `fresh_data = true`，确保不是吃旧缓存假装成功
+- 不跳过即为强制刷新，不需要单独控制缓存参数
 
 ### 阶段 A 的通过标准
 
@@ -137,7 +136,6 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 - `skip_trends = true`
 - `skip_community = true`
 - `skip_serp = true`
-- `fresh_data = false`
 - `min_score = 25`
 
 为什么这么做：

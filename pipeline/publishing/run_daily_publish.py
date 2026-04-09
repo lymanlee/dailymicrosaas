@@ -188,7 +188,6 @@ def create_run_summary(args: argparse.Namespace, resolved_date: str) -> dict[str
             "skip_community": args.skip_community,
             "skip_serp": args.skip_serp,
             "max_serp_keywords": args.max_serp_keywords,
-            "fresh_data": args.fresh_data,
             "min_score": args.min_score,
             "allow_repeat": args.allow_repeat,
             "mode": args.mode,
@@ -345,7 +344,6 @@ def main() -> None:
     parser.add_argument("--serp-data", default=None, help="可选的外部 SERP 数据文件路径（向下兼容）")
     parser.add_argument("--skip-serp", action="store_true", help="完全跳过 SERP 采集（网络受限时使用）")
     parser.add_argument("--max-serp-keywords", type=int, default=20, help="主动采集 SERP 的最大关键词数量")
-    parser.add_argument("--fresh-data", action="store_true", help="忽略同日期已有 discovery 缓存，强制重新拉取真实数据")
     parser.add_argument("--output", default=None, help="内容输出目录，默认 src/content/ideas")
     parser.add_argument("--min-score", type=float, default=25, help="最低发布分数阈值")
     parser.add_argument("--allow-repeat", action="store_true", help="允许重复选中已发布过的 source keyword")
@@ -394,7 +392,6 @@ def main() -> None:
                 serp_data_path=args.serp_data,
                 skip_serp=args.skip_serp,
                 max_serp_keywords=args.max_serp_keywords,
-                fresh_data=args.fresh_data,
             )
             report_path = Path(pipeline_result["json_path"])
             summary["paths"]["report_txt"] = pipeline_result.get("txt_path")
