@@ -214,13 +214,225 @@ painClusters:
     zh: "速度和性能问题反复出现"
   - en: "Output quality inconsistency"
     zh: "AI 生成结果质量不稳定"
+
+competitorAnalysis:
+  topCompetitors:
+    - domain: "remove.bg"
+      name:
+        en: "remove.bg"
+        zh: "remove.bg"
+      keyFeatures:
+        - en: "Automatically remove image backgrounds in 5 seconds with one click."
+          zh: "一键自动移除图片背景，5秒内完成。"
+        - en: "Supports JPG, PNG, and WebP image formats."
+          zh: "支持JPG、PNG和WebP格式的图片。"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Remove image backgrounds for free with up to 0.25 megapixels and 22 MB file size limit."
+            zh: "免费移除图片背景，支持0.25兆像素以下的图片，文件大小限制为22MB。"
+          limits:
+            monthlyCredits:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            maxFileSize:
+              en: "Up to 22 MB"
+              zh: "最大22MB"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+      weaknesses:
+        - en: "Limited to 0.25 megapixels for free tier, which may not be suitable for high-resolution images."
+          zh: "免费套餐仅支持0.25兆像素，对于高分辨率图片可能不适用。"
+        - en: "Limited to 22 MB file size, which may not be sufficient for larger images."
+          zh: "文件大小限制为22MB，对于较大的图片可能不够。"
+    - domain: "photoroom.com"
+      name:
+        en: "PhotoRoom"
+        zh: "PhotoRoom"
+      keyFeatures:
+        - en: "Upload and store unlimited photos"
+          zh: "上传和无限存储照片"
+        - en: "Advanced photo editing tools"
+          zh: "高级照片编辑工具"
+        - en: "Collaboration and sharing features"
+          zh: "协作和分享功能"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Unlimited photo storage, basic editing tools, and sharing options."
+            zh: "无限照片存储，基本编辑工具和分享选项。"
+          limits:
+            monthlyCredits:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            maxFileSize:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            commercialUse:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 9.99
+          description:
+            en: "Unlimited photo storage, advanced editing tools, and additional sharing options."
+            zh: "无限照片存储，高级编辑工具和额外的分享选项。"
+          limits:
+            monthlyCredits:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            maxFileSize:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+      weaknesses:
+        - en: "Limited customer support options"
+          zh: "有限的客户支持选项"
+        - en: "No mobile app available"
+          zh: "没有移动应用程序"
+    - domain: "clipdrop.co"
+      name:
+        en: "Clipdrop"
+        zh: "Clipdrop"
+      keyFeatures:
+        - en: "Generate images from text descriptions"
+          zh: "从文本描述生成图像"
+        - en: "Collaboration tools for teams"
+          zh: "团队协作工具"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Basic features, no limitations on usage"
+            zh: "基本功能，无使用限制"
+          limits:
+            monthlyCredits:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            maxFileSize:
+              en: "Not clearly stated"
+              zh: "未明确说明"
+            commercialUse:
+              en: "Not allowed"
+              zh: "不允许"
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 9.99
+          description:
+            en: "Advanced features, higher file size limits"
+            zh: "高级功能，更高的文件大小限制"
+          limits:
+            monthlyCredits:
+              en: "100 credits/month"
+              zh: "每月100积分"
+            maxFileSize:
+              en: "Up to 50MB"
+              zh: "最大50MB"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+      weaknesses:
+        - en: "Limited free tier with no commercial use allowed"
+          zh: "免费版有限制，不允许商业使用"
+    - domain: "cleanup.pictures"
+      name:
+        en: "cleanup.pictures"
+        zh: "cleanup.pictures"
+      keyFeatures:
+        - en: "Image cleanup and restoration"
+          zh: "图像清理和修复"
+        - en: "AI-powered image enhancement"
+          zh: "AI驱动的图像增强"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Limited features, up to 10 images per month"
+            zh: "有限的功能，每月最多10张图片"
+          limits:
+            monthlyCredits:
+              en: "10 credits/month"
+              zh: "每月10积分"
+            maxFileSize:
+              en: "Up to 5MB"
+              zh: "最大5MB"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 10
+          description:
+            en: "Unlimited features, up to 100 images per month"
+            zh: "无限功能，每月最多100张图片"
+          limits:
+            monthlyCredits:
+              en: "Unlimited credits/month"
+              zh: "无限积分"
+            maxFileSize:
+              en: "Up to 20MB"
+              zh: "最大20MB"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+        - name:
+            en: "Enterprise"
+            zh: "企业版"
+          price: 50
+          description:
+            en: "Unlimited features, up to 1000 images per month"
+            zh: "无限功能，每月最多1000张图片"
+          limits:
+            monthlyCredits:
+              en: "Unlimited credits/month"
+              zh: "无限积分"
+            maxFileSize:
+              en: "Up to 50MB"
+              zh: "最大50MB"
+            commercialUse:
+              en: "Allowed"
+              zh: "允许"
+      weaknesses:
+        - en: "Limited features in the free tier"
+          zh: "免费版功能有限"
+        - en: "No specific mention of customer support"
+          zh: "未提及客户支持"
+
+  marketGaps:
+    - en: "Limited to 0.25 megapixels for free tier, which may not be suitable for high-resolution images."
+      zh: "免费套餐仅支持0.25兆像素，对于高分辨率图片可能不适用。"
+    - en: "Limited to 22 MB file size, which may not be sufficient for larger images."
+      zh: "文件大小限制为22MB，对于较大的图片可能不够。"
+    - en: "Limited customer support options"
+      zh: "有限的客户支持选项"
+    - en: "No mobile app available"
+      zh: "没有移动应用程序"
+
 competitorGaps:
-  - en: "Incumbents (remove.bg, adobe.com) hide key features behind paid plans"
-    zh: "头部产品（remove.bg、adobe.com）把关键功能放在付费墙后"
-  - en: "Big tools require account creation — most users abandon before converting"
-    zh: "大站要求先注册账号，很多用户在转化前就流失了"
-  - en: "Output watermarked or resolution-capped on free tier"
-    zh: "免费层要么加水印，要么限制分辨率"
+  - en: "Limited to 0.25 megapixels for free tier, which may not be suitable for high-resolution images."
+    zh: "免费套餐仅支持0.25兆像素，对于高分辨率图片可能不适用。"
+  - en: "Limited to 22 MB file size, which may not be sufficient for larger images."
+    zh: "文件大小限制为22MB，对于较大的图片可能不够。"
+  - en: "Limited customer support options"
+    zh: "有限的客户支持选项"
+  - en: "No mobile app available"
+    zh: "没有移动应用程序"
 
 evidenceLinks:
   - url: "https://github.com/thevoxer/ai-background-remover"
