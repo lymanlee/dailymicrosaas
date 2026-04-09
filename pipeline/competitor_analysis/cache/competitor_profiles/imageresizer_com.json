@@ -1,0 +1,60 @@
+{
+  "domain": "imageresizer.com",
+  "name": "ImageResizer",
+  "keyFeatures": [
+    {
+      "en": "Resize images to any dimensions",
+      "zh": "将图片调整为任何尺寸"
+    },
+    {
+      "en": "Compress images for faster loading",
+      "zh": "压缩图片以加快加载速度"
+    },
+    {
+      "en": "Batch process multiple images at once",
+      "zh": "一次批量处理多个图片"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Up to 50 credits/month, no commercial use allowed",
+        "zh": "每月最多50积分，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 50 credits/month, which may not be sufficient for businesses with higher image processing needs",
+      "zh": "每月仅限50积分，对于有较高图片处理需求的企业可能不够用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses who need to resize and compress images for personal or small business use",
+    "zh": "需要调整和压缩图片进行个人或小型企业使用的个人和小企业"
+  },
+  "positioning": {
+    "en": "A simple and cost-effective solution for basic image resizing and compression needs",
+    "zh": "一个简单且经济实惠的基本图片调整和压缩需求解决方案"
+  },
+  "analyzedAt": "2026-04-09T18:29:47.220551"
+}

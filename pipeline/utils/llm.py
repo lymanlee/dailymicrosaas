@@ -10,7 +10,7 @@ from typing import Optional, Dict, Any
 
 import requests
 
-DEFAULT_MODEL = "Qwen/Qwen2.5-32B-Instruct"
+DEFAULT_MODEL = "Qwen/Qwen2.5-7B-Instruct"
 DEFAULT_BASE_URL = "https://api.siliconflow.com/v1"
 DEFAULT_TIMEOUT = 60
 

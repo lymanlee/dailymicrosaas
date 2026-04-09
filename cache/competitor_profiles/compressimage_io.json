@@ -1,0 +1,56 @@
+{
+  "domain": "compressimage.io",
+  "name": "CompressImage",
+  "keyFeatures": [
+    {
+      "en": "Image compression for various file formats",
+      "zh": "支持多种文件格式的图像压缩"
+    },
+    {
+      "en": "High compression ratio without significant loss of quality",
+      "zh": "无明显质量损失的高压缩比"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No ads, limited to 100MB per month",
+        "zh": "无广告，每月最多100MB"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100MB/month",
+          "zh": "每月100MB"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size and monthly credit limit",
+      "zh": "文件大小和每月积分限制较小"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A simple and effective tool for compressing images",
+    "zh": "一个简单有效的图像压缩工具"
+  },
+  "analyzedAt": "2026-04-09T18:30:46.600354"
+}

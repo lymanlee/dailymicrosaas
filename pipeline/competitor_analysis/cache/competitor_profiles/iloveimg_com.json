@@ -1,0 +1,60 @@
+{
+  "domain": "iloveimg.com",
+  "name": "iLoveImage",
+  "keyFeatures": [
+    {
+      "en": "Image compression and optimization",
+      "zh": "图像压缩和优化"
+    },
+    {
+      "en": "Batch processing of images",
+      "zh": "批量处理图像"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on image size, unlimited usage for personal and non-commercial projects.",
+        "zh": "无图像大小限制，个人和非商业项目无限使用。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to free tier features, no premium options available.",
+      "zh": "仅限免费套餐功能，无高级选项。"
+    },
+    {
+      "en": "No detailed pricing information for potential upgrades.",
+      "zh": "无详细升级定价信息。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses for personal and non-commercial projects.",
+    "zh": "个人和小型企业，用于个人和非商业项目。"
+  },
+  "positioning": {
+    "en": "A simple and easy-to-use online tool for image compression and optimization.",
+    "zh": "一个简单易用的在线工具，用于图像压缩和优化。"
+  },
+  "analyzedAt": "2026-04-09T18:28:29.274671"
+}

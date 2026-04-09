@@ -1,0 +1,60 @@
+{
+  "domain": "imagecompressor.com",
+  "name": "ImageCompressor",
+  "keyFeatures": [
+    {
+      "en": "Compress images to reduce file size without losing quality",
+      "zh": "压缩图片以减少文件大小而不丢失质量"
+    },
+    {
+      "en": "Supports a wide range of image formats",
+      "zh": "支持多种图片格式"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No ads, unlimited compressions, up to 5MB file size",
+        "zh": "无广告，无限压缩次数，最大5MB文件大小"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size for free tier",
+      "zh": "免费套餐文件大小有限制"
+    },
+    {
+      "en": "No premium features without subscription",
+      "zh": "没有订阅无法使用高级功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A simple and effective tool for compressing images",
+    "zh": "一个简单有效的图片压缩工具"
+  },
+  "analyzedAt": "2026-04-09T18:29:27.229550"
+}

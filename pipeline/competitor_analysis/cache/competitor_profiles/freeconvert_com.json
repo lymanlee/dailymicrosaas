@@ -1,0 +1,60 @@
+{
+  "domain": "freeconvert.com",
+  "name": "FreeConvert",
+  "keyFeatures": [
+    {
+      "en": "Convert various file formats online",
+      "zh": "在线转换多种文件格式"
+    },
+    {
+      "en": "Supports a wide range of file types",
+      "zh": "支持多种文件类型"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic file conversion with no limitations",
+        "zh": "基本文件转换，无任何限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited support for large files",
+      "zh": "不支持大型文件"
+    },
+    {
+      "en": "No advanced features for professional users",
+      "zh": "没有针对专业用户的高级功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "General users who need to convert files online",
+    "zh": "需要在线转换文件的一般用户"
+  },
+  "positioning": {
+    "en": "A simple and free online file conversion tool",
+    "zh": "一个简单且免费的在线文件转换工具"
+  },
+  "analyzedAt": "2026-04-09T18:30:07.827221"
+}

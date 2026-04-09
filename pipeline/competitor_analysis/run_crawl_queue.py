@@ -44,7 +44,9 @@ def analyze_domain(domain: str, force_refresh: bool = False) -> bool:
     """
     fetcher = CompetitorFetcher()
     analyzer = SiliconFlowAnalyzer()
-    cache = CompetitorCache()
+    # 与 generate_idea.py 保持一致，使用 pipeline/competitor_analysis/cache/
+    cache_dir = Path(__file__).parent / "cache" / "competitor_profiles"
+    cache = CompetitorCache(cache_dir=str(cache_dir))
 
     # 检查缓存（无 force_refresh 时跳过）
     if not force_refresh:

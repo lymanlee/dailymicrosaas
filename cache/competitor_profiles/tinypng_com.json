@@ -1,0 +1,56 @@
+{
+  "domain": "tinypng.com",
+  "name": "TinyPNG",
+  "keyFeatures": [
+    {
+      "en": "Lossless compression for PNG images",
+      "zh": "无损压缩PNG图片"
+    },
+    {
+      "en": "Lossy compression for PNG and JPEG images",
+      "zh": "有损压缩PNG和JPEG图片"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Compress up to 50 PNG and JPEG images per month",
+        "zh": "每月最多压缩50张PNG和JPEG图片"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 50 images per month in the free tier",
+      "zh": "免费套餐每月只能处理50张图片"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses who need to compress images without losing quality",
+    "zh": "需要无损压缩图片的个人和小型企业"
+  },
+  "positioning": {
+    "en": "TinyPNG is a simple and effective tool for image compression, ideal for web developers and designers who need to optimize their images for faster loading times.",
+    "zh": "TinyPNG 是一个简单有效的图片压缩工具，适合需要优化图片以加快加载速度的网页开发人员和设计师"
+  },
+  "analyzedAt": "2026-04-09T18:30:29.598591"
+}

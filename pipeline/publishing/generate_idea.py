@@ -1252,8 +1252,18 @@ def yaml_localized_list_block(field_name: str, items: list[dict[str, str]]) -> s
 
     lines = [f"{field_name}:"]
     for item in items:
-        lines.append(f'  - en: "{quote_yaml(item.get("en", ""))}"')
-        lines.append(f'    zh: "{quote_yaml(item.get("zh", ""))}"')
+        # 兼容两种格式：
+        # 1. 扁平: {"en": "...", "zh": "..."}
+        # 2. 嵌套: {"text": {"en": "...", "zh": "..."}}
+        if "en" in item and "zh" in item:
+            en_val = item.get("en", "")
+            zh_val = item.get("zh", "")
+        else:
+            text_obj = item.get("text", {})
+            en_val = text_obj.get("en", "") if isinstance(text_obj, dict) else ""
+            zh_val = text_obj.get("zh", "") if isinstance(text_obj, dict) else ""
+        lines.append(f'  - en: "{quote_yaml(en_val)}"')
+        lines.append(f'    zh: "{quote_yaml(zh_val)}"')
     return "\n".join(lines)
 
 
@@ -1469,7 +1479,7 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
             try:
                 extracted_pains = extract_community_pains_impl(keyword, community_items)
                 if extracted_pains and len(extracted_pains) > 0:
-                    # 转换格式，只保留有效双语数据（过滤空值）
+                    # 转换格式为扁平 {en, zh}，过滤空值
                     clusters = []
                     for pain in extracted_pains[:4]:
                         en_text = (pain.get("text_en") or "").strip()
@@ -1477,15 +1487,8 @@ def derive_pain_clusters(idea: dict) -> list[dict[str, str]]:
                         if not en_text or not zh_text:
                             continue  # 跳过空值，继续尝试 fallback
                         clusters.append({
-                            "text": {"en": en_text, "zh": zh_text},
-                            "source": "community",
-                            "sourceUrl": pain.get("source_url", ""),
-                            "sourceName": pain.get("source_name", ""),
-                            "quote": {
-                                "en": (pain.get("quote_en") or "").strip(),
-                                "zh": (pain.get("quote_zh") or "").strip()
-                            },
-                            "severity": pain.get("severity", "medium")
+                            "en": en_text,
+                            "zh": zh_text,
                         })
                     if clusters:
                         return clusters
@@ -1580,14 +1583,14 @@ def derive_competitor_gaps(idea: dict, category: str) -> list[dict[str, str]]:
             if profiles:
                 extracted_gaps = extract_competitor_gaps_impl(profiles)
                 if extracted_gaps:
-                    # 转换格式以兼容现有逻辑
+                    # 转换为扁平 {en, zh} 格式，与 schema 对齐
                     result = []
                     for gap in extracted_gaps[:3]:
-                        result.append({
-                            "domain": gap.get("domain", ""),
-                            "text": gap.get("text", {"en": "", "zh": ""})
-                        })
-                    return result
+                        text_obj = gap.get("text", {})
+                        if isinstance(text_obj, dict) and (text_obj.get("en") or text_obj.get("zh")):
+                            result.append({"en": text_obj.get("en", ""), "zh": text_obj.get("zh", "")})
+                    if result:
+                        return result
 
     # 回退到竞品分析的传统弱点
     competitor_data = get_competitor_data_cached(idea, category)
