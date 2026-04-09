@@ -215,7 +215,7 @@ def trigger_competitor_crawl(profiles: list[dict], min_score: int = 20) -> dict:
     3. 计算优先级并加入队列
     """
     try:
-        from pipeline.competitor_analysis.queue import CompetitorCrawlQueue, calculate_competitor_priority
+        from pipeline.competitor_analysis.task_queue import CompetitorCrawlQueue, calculate_competitor_priority
         import json
         from pathlib import Path
 

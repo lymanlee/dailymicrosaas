@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from pipeline.competitor_analysis.queue import CompetitorCrawlQueue, calculate_competitor_priority
+from pipeline.competitor_analysis.task_queue import CompetitorCrawlQueue, calculate_competitor_priority
 from pipeline.competitor_analysis.run_analysis import run_analysis_for_domain
 
 

@@ -32,7 +32,7 @@ from competitor_analysis import (
     SiliconFlowAnalyzer,
     CompetitorCache,
 )
-from queue import CompetitorCrawlQueue
+from task_queue import CompetitorCrawlQueue
 
 
 def analyze_domain(domain: str, force_refresh: bool = False) -> bool:
