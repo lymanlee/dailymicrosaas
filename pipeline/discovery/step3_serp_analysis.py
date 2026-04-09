@@ -150,27 +150,35 @@ def _parse_ddg_results(html: str, max_results: int = 10) -> list[dict]:
     return results
 
 
-def fetch_serp_for_keyword(keyword: str, max_retries: int = 2) -> list[dict]:
-    """为单个关键词采集 SERP 数据，带重试。"""
-    last_error = None
+def fetch_serp_for_keyword(keyword: str, max_retries: int = 3) -> list[dict]:
+    """为单个关键词采集 SERP 数据，带重试与被封检测。"""
+    last_error: Exception | None = None
     for attempt in range(max_retries):
         try:
             html = _fetch_ddg_html(keyword)
             results = _parse_ddg_results(html)
             if results:
                 return results
-            # 结果为空可能是被封，稍作等待
-            if attempt < max_retries - 1:
-                wait = _random.uniform(5, 10)
-                print(f"    ⚠️ SERP 结果为空（第 {attempt + 1} 次），等待 {wait:.0f}s...")
+            # 结果为空：可能是被封或真的无数据；最终尝试后仍为空则记录
+            is_final_attempt = attempt == max_retries - 1
+            if is_final_attempt:
+                # 最终尝试仍为空，不当作错误（可能真的无 SERP），但仍打印提示
+                print(f"    ⚠️ SERP 结果为空（{max_retries} 次尝试后），关键词可能无搜索结果或被封: {keyword}")
+            else:
+                wait = _random.uniform(5, 12)
+                print(f"    ⚠️ SERP 结果为空（第 {attempt + 1}/{max_retries} 次），等待 {wait:.0f}s 后重试...")
                 time.sleep(wait)
         except Exception as error:
             last_error = error
-            if attempt < max_retries - 1:
-                wait = _random.uniform(3, 6)
-                print(f"    ⚠️ SERP 采集失败（第 {attempt + 1} 次）: {error}，等待 {wait:.0f}s...")
+            is_final_attempt = attempt == max_retries - 1
+            if is_final_attempt:
+                print(f"    ❌ SERP 采集最终失败 ({max_retries} 次尝试): {error}")
+            else:
+                wait = _random.uniform(5, 12)
+                print(f"    ⚠️ SERP 采集失败（第 {attempt + 1}/{max_retries} 次）: {error}，等待 {wait:.0f}s...")
                 time.sleep(wait)
 
+    # max_retries=1 时走到这里（永不进入循环体）
     if last_error:
         print(f"    ❌ SERP 采集最终失败: {last_error}")
     return []
