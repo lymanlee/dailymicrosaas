@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "domain": "remove.bg",
+    "priority": 10,
+    "status": "pending",
+    "source_keyword": "ai background remover",
+    "created_at": "2026-04-09T12:06:40Z",
+    "retry_count": 0
+  },
+  {
+    "domain": "photoroom.com",
+    "priority": 10,
+    "status": "pending",
+    "source_keyword": "ai background remover",
+    "created_at": "2026-04-09T12:06:40Z",
+    "retry_count": 0
+  },
+  {
+    "domain": "clipdrop.co",
+    "priority": 10,
+    "status": "pending",
+    "source_keyword": "ai background remover",
+    "created_at": "2026-04-09T12:06:40Z",
+    "retry_count": 0
+  },
+  {
+    "domain": "cleanup.pictures",
+    "priority": 10,
+    "status": "pending",
+    "source_keyword": "ai background remover",
+    "created_at": "2026-04-09T12:06:40Z",
+    "retry_count": 0
+  },
+  {
+    "domain": "inpixio.com",
+    "priority": 10,
+    "status": "pending",
+    "source_keyword": "ai background remover",
+    "created_at": "2026-04-09T12:06:40Z",
+    "retry_count": 0
+  },
+  {
+    "domain": "photopea.com",
+    "priority": 10,
+    "status": "pending",
+    "source_keyword": "ai background remover",
+    "created_at": "2026-04-09T12:06:40Z",
+    "retry_count": 0
+  }
+]
