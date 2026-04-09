@@ -1,0 +1,89 @@
+{
+  "domain": "photoroom.com",
+  "name": "PhotoRoom",
+  "keyFeatures": [
+    {
+      "en": "Upload and store unlimited photos",
+      "zh": "上传和无限存储照片"
+    },
+    {
+      "en": "Advanced photo editing tools",
+      "zh": "高级照片编辑工具"
+    },
+    {
+      "en": "Collaboration and sharing features",
+      "zh": "协作和分享功能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited photo storage, basic editing tools, and sharing options.",
+        "zh": "无限照片存储，基本编辑工具和分享选项。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Unlimited photo storage, advanced editing tools, and additional sharing options.",
+        "zh": "无限照片存储，高级编辑工具和额外的分享选项。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customer support options",
+      "zh": "有限的客户支持选项"
+    },
+    {
+      "en": "No mobile app available",
+      "zh": "没有移动应用程序"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual photographers and amateur users",
+    "zh": "个人摄影师和业余用户"
+  },
+  "positioning": {
+    "en": "PhotoRoom positions itself as a user-friendly platform for storing and editing photos with a focus on simplicity and ease of use.",
+    "zh": "PhotoRoom 将自己定位为一个易于存储和编辑照片的平台，重点在于简洁和易用性。"
+  },
+  "analyzedAt": "2026-04-09T12:23:36.048200"
+}

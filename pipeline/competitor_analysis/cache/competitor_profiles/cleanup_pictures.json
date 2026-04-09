@@ -1,0 +1,110 @@
+{
+  "domain": "cleanup.pictures",
+  "name": "cleanup.pictures",
+  "keyFeatures": [
+    {
+      "en": "Image cleanup and restoration",
+      "zh": "图像清理和修复"
+    },
+    {
+      "en": "AI-powered image enhancement",
+      "zh": "AI驱动的图像增强"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited features, up to 10 images per month",
+        "zh": "有限的功能，每月最多10张图片"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "10 credits/month",
+          "zh": "每月10积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 10,
+      "description": {
+        "en": "Unlimited features, up to 100 images per month",
+        "zh": "无限功能，每月最多100张图片"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits/month",
+          "zh": "无限积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 20MB",
+          "zh": "最大20MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 50,
+      "description": {
+        "en": "Unlimited features, up to 1000 images per month",
+        "zh": "无限功能，每月最多1000张图片"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits/month",
+          "zh": "无限积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features in the free tier",
+      "zh": "免费版功能有限"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "A user-friendly platform for image cleanup and restoration",
+    "zh": "一个易于使用的图像清理和修复平台"
+  },
+  "analyzedAt": "2026-04-09T12:24:20.506966"
+}

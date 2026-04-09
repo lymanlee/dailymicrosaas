@@ -1,0 +1,60 @@
+{
+  "domain": "remove.bg",
+  "name": "remove.bg",
+  "keyFeatures": [
+    {
+      "en": "Automatically remove image backgrounds in 5 seconds with one click.",
+      "zh": "一键自动移除图片背景，5秒内完成。"
+    },
+    {
+      "en": "Supports JPG, PNG, and WebP image formats.",
+      "zh": "支持JPG、PNG和WebP格式的图片。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Remove image backgrounds for free with up to 0.25 megapixels and 22 MB file size limit.",
+        "zh": "免费移除图片背景，支持0.25兆像素以下的图片，文件大小限制为22MB。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Up to 22 MB",
+          "zh": "最大22MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 0.25 megapixels for free tier, which may not be suitable for high-resolution images.",
+      "zh": "免费套餐仅支持0.25兆像素，对于高分辨率图片可能不适用。"
+    },
+    {
+      "en": "Limited to 22 MB file size, which may not be sufficient for larger images.",
+      "zh": "文件大小限制为22MB，对于较大的图片可能不够。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses who need to remove backgrounds from images quickly and easily.",
+    "zh": "需要快速轻松移除图片背景的个人用户和小型企业。"
+  },
+  "positioning": {
+    "en": "remove.bg positions itself as a user-friendly and efficient tool for automatically removing image backgrounds.",
+    "zh": "remove.bg将自己定位为一个用户友好且高效的自动移除图片背景的工具。"
+  },
+  "analyzedAt": "2026-04-09T12:23:15.282407"
+}

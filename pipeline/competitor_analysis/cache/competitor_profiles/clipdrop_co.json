@@ -1,0 +1,81 @@
+{
+  "domain": "clipdrop.co",
+  "name": "Clipdrop",
+  "keyFeatures": [
+    {
+      "en": "Generate images from text descriptions",
+      "zh": "从文本描述生成图像"
+    },
+    {
+      "en": "Collaboration tools for teams",
+      "zh": "团队协作工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features, no limitations on usage",
+        "zh": "基本功能，无使用限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Advanced features, higher file size limits",
+        "zh": "高级功能，更高的文件大小限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier with no commercial use allowed",
+      "zh": "免费版有限制，不允许商业使用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams",
+    "zh": "个人和小型团队"
+  },
+  "positioning": {
+    "en": "Clipdrop positions itself as a tool for quick image creation and collaboration",
+    "zh": "Clipdrop 定位为一个快速生成图像和协作的工具"
+  },
+  "analyzedAt": "2026-04-09T12:24:00.285235"
+}

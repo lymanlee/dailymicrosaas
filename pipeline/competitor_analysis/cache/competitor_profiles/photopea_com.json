@@ -1,0 +1,56 @@
+{
+  "domain": "photopea.com",
+  "name": "Photopea",
+  "keyFeatures": [
+    {
+      "en": "Free online photo and vector editor",
+      "zh": "免费在线图片和矢量编辑器"
+    },
+    {
+      "en": "Support for various file formats",
+      "zh": "支持多种文件格式"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic editing tools, limited features",
+        "zh": "基本编辑工具，功能有限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features and tools compared to paid plans",
+      "zh": "与付费计划相比功能和工具有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams looking for a free photo editor",
+    "zh": "寻找免费图片编辑器的个人和小团队"
+  },
+  "positioning": {
+    "en": "A free alternative to paid photo editing software",
+    "zh": "付费图片编辑软件的免费替代品"
+  },
+  "analyzedAt": "2026-04-09T12:25:25.351952"
+}
