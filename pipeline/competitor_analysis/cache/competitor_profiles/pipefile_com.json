@@ -1,0 +1,56 @@
+{
+  "domain": "pipefile.com",
+  "name": "Pipefile",
+  "keyFeatures": [
+    {
+      "en": "Streamlines the collection of personal, financial, and sensitive documents.",
+      "zh": "简化个人、财务及其他敏感文件的收集过程。"
+    },
+    {
+      "en": "Keeps your business moving by streamlining document collection.",
+      "zh": "通过简化文件收集流程，使您的业务保持顺畅。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for small businesses and individuals.",
+        "zh": "适用于小型企业和个人的基本功能。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features and no commercial use options.",
+      "zh": "功能有限且没有商业使用选项。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and individuals",
+    "zh": "小型企业和个人用户"
+  },
+  "positioning": {
+    "en": "A tool for streamlining document collection for businesses and individuals.",
+    "zh": "为企业和个人简化文件收集流程的工具。"
+  },
+  "analyzedAt": "2026-04-10T09:39:27.558959"
+}

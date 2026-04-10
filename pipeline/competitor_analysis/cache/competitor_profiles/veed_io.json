@@ -1,0 +1,85 @@
+{
+  "domain": "veed.io",
+  "name": "Veed.io",
+  "keyFeatures": [
+    {
+      "en": "Video editing and sharing",
+      "zh": "视频编辑和分享"
+    },
+    {
+      "en": "Collaboration tools for teams",
+      "zh": "团队协作工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal or small team use",
+        "zh": "个人或小型团队使用的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 15,
+      "description": {
+        "en": "Advanced features for professional use",
+        "zh": "专业用途的高级功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options",
+      "zh": "免费选项有限"
+    },
+    {
+      "en": "No detailed information on pricing tiers",
+      "zh": "定价层级信息不详细"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams",
+    "zh": "个人和小型团队"
+  },
+  "positioning": {
+    "en": "Veed.io positions itself as a user-friendly video editing platform with collaboration features for individuals and small teams.",
+    "zh": "Veed.io 将自己定位为一个针对个人和小型团队的用户友好型视频编辑平台，具有协作功能"
+  },
+  "analyzedAt": "2026-04-10T09:42:04.140938"
+}

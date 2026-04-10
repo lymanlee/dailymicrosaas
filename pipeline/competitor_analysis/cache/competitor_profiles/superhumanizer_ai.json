@@ -1,0 +1,85 @@
+{
+  "domain": "superhumanizer.ai",
+  "name": "Superhumanizer",
+  "keyFeatures": [
+    {
+      "en": "AI-driven productivity tools for email and calendar management",
+      "zh": "AI驱动的生产力工具，用于邮件和日历管理"
+    },
+    {
+      "en": "Automated task creation and prioritization",
+      "zh": "自动化任务创建和优先级排序"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as email filtering and task creation",
+        "zh": "基础功能，如邮件过滤和任务创建"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Advanced features such as AI-driven task prioritization, calendar integration, and unlimited email filtering",
+        "zh": "高级功能，如AI驱动的任务优先级排序、日历集成和无限邮件过滤"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier functionality",
+      "zh": "免费版功能有限"
+    },
+    {
+      "en": "No explicit mention of customer support",
+      "zh": "未明确提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses looking to enhance their productivity",
+    "zh": "寻求提高生产力的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Superhumanizer positions itself as a premium productivity tool for busy professionals and small businesses",
+    "zh": "Superhumanizer 定位为面向忙碌的专业人士和小型企业的高端生产力工具"
+  },
+  "analyzedAt": "2026-04-10T09:40:13.761787"
+}

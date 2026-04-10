@@ -1,0 +1,81 @@
+{
+  "domain": "humanizeai.com",
+  "name": "HumanizeAI",
+  "keyFeatures": [
+    {
+      "en": "AI-driven insights for businesses",
+      "zh": "为企业提供基于AI的洞察"
+    },
+    {
+      "en": "Personalized customer engagement",
+      "zh": "个性化的客户互动"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic features",
+        "zh": "有限的基本功能访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 99,
+      "description": {
+        "en": "Access to advanced features and unlimited usage",
+        "zh": "高级功能访问权限和无限使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options",
+      "zh": "免费选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Businesses of all sizes",
+    "zh": "所有规模的企业"
+  },
+  "positioning": {
+    "en": "AI-driven customer engagement solutions for businesses",
+    "zh": "为企业提供基于AI的客户互动解决方案"
+  },
+  "analyzedAt": "2026-04-10T09:40:36.466996"
+}

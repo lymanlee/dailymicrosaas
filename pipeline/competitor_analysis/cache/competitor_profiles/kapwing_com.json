@@ -1,0 +1,85 @@
+{
+  "domain": "kapwing.com",
+  "name": "Kapwing",
+  "keyFeatures": [
+    {
+      "en": "Generate full video projects from a single prompt using AI.",
+      "zh": "通过单个提示使用AI生成完整的视频项目"
+    },
+    {
+      "en": "Suite of image and video editing tools.",
+      "zh": "一系列图像和视频编辑工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No credit limit, no file size limit, no commercial use allowed.",
+        "zh": "无积分限制，无文件大小限制，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 12,
+      "description": {
+        "en": "Unlimited credits, up to 100MB file size, commercial use allowed.",
+        "zh": "无积分限制，最大100MB文件大小，允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to free tier without credits for commercial use.",
+      "zh": "免费套餐不支持商业使用，需要付费"
+    },
+    {
+      "en": "No specific mention of customer support or community resources.",
+      "zh": "未明确提及客户支持或社区资源"
+    }
+  ],
+  "targetAudience": {
+    "en": "Modern creators who need to create, edit, and grow their content on every channel.",
+    "zh": "需要在每个渠道上创建、编辑和增长内容的现代创作者"
+  },
+  "positioning": {
+    "en": "Kapwing positions itself as a modern video platform for creative teams, offering AI-driven video generation and a suite of editing tools.",
+    "zh": "Kapwing 定位为创意团队的现代视频平台，提供基于AI的视频生成和一系列编辑工具"
+  },
+  "analyzedAt": "2026-04-10T09:41:05.468790"
+}

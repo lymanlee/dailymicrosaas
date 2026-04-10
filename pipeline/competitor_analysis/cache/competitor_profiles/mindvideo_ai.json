@@ -1,0 +1,110 @@
+{
+  "domain": "mindvideo.ai",
+  "name": "mindvideo.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-powered video generation",
+      "zh": "基于AI的视频生成"
+    },
+    {
+      "en": "Customizable templates for various content types",
+      "zh": "多种内容类型的可定制模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on usage, but ads are added to generated videos",
+        "zh": "无使用限制，但生成的视频中会添加广告"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "No ads in generated videos, higher quality output",
+        "zh": "生成的视频中无广告，输出质量更高"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Advanced features, dedicated support, and custom branding",
+        "zh": "高级功能，专属支持和自定义品牌"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "500 credits/month",
+          "zh": "每月500积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "Dependent on AI accuracy for content generation",
+      "zh": "内容生成依赖于AI的准确性"
+    }
+  ],
+  "targetAudience": {
+    "en": "Marketers, content creators, and businesses looking to automate video production",
+    "zh": "营销人员、内容创作者和希望自动化视频生产的业务"
+  },
+  "positioning": {
+    "en": "A cost-effective solution for businesses to create high-quality videos without the need for manual editing",
+    "zh": "为企业提供一种成本效益高的解决方案，无需手动编辑即可创建高质量的视频"
+  },
+  "analyzedAt": "2026-04-10T09:41:31.824376"
+}
