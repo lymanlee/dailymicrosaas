@@ -1,0 +1,56 @@
+{
+  "domain": "ai-tattoogenerator.org",
+  "name": "AI Tattoo Generator",
+  "keyFeatures": [
+    {
+      "en": "Generates custom tattoo designs based on user input",
+      "zh": "根据用户输入生成定制纹身设计"
+    },
+    {
+      "en": "AI-driven design suggestions",
+      "zh": "AI驱动的设计建议"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited design suggestions, but limited to personal use only",
+        "zh": "无限的设计建议，但仅限个人使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use only, no commercial use allowed",
+      "zh": "仅限个人使用，不允许商业使用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals looking to design their own tattoos",
+    "zh": "寻找设计自己纹身的个人"
+  },
+  "positioning": {
+    "en": "AI-driven tattoo design tool for personal use",
+    "zh": "个人使用的AI驱动纹身设计工具"
+  },
+  "analyzedAt": "2026-04-10T20:57:12.276041"
+}

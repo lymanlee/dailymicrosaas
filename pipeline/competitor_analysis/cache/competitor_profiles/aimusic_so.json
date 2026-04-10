@@ -1,0 +1,85 @@
+{
+  "domain": "aimusic.so",
+  "name": "Aimusic.so",
+  "keyFeatures": [
+    {
+      "en": "AI-driven music generation",
+      "zh": "基于AI的音乐生成"
+    },
+    {
+      "en": "Customizable music styles",
+      "zh": "可定制的音乐风格"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic features",
+        "zh": "有限的基本功能访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Access to all features, including advanced customization and unlimited file size",
+        "zh": "访问所有功能，包括高级定制和无限文件大小"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options",
+      "zh": "免费选项有限"
+    },
+    {
+      "en": "No clear pricing for enterprise users",
+      "zh": "企业用户没有明确的价格"
+    }
+  ],
+  "targetAudience": {
+    "en": "Independent musicians and music producers",
+    "zh": "独立音乐人和音乐制作人"
+  },
+  "positioning": {
+    "en": "Aimed at providing accessible and customizable music creation tools for artists",
+    "zh": "旨在为艺术家提供易于访问和可定制的音乐创作工具"
+  },
+  "analyzedAt": "2026-04-10T21:00:16.485170"
+}

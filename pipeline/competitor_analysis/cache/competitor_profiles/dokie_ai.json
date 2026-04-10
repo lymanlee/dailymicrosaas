@@ -1,0 +1,114 @@
+{
+  "domain": "dokie.ai",
+  "name": "Dokie AI",
+  "keyFeatures": [
+    {
+      "en": "Creates professional, brand-aligned slides with clean layouts in minutes.",
+      "zh": "几分钟内创建专业、品牌对齐的简洁布局幻灯片。"
+    },
+    {
+      "en": "Automatically generates slides, organizes content, and applies design styles.",
+      "zh": "自动生成幻灯片，组织内容并应用设计样式。"
+    },
+    {
+      "en": "Allows customization of design styles and layouts.",
+      "zh": "允许自定义设计样式和布局。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Generate and edit PPTs for free with limited features.",
+        "zh": "免费生成和编辑PPT，但功能有限。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Unlimited features with no limits on file size or commercial use.",
+        "zh": "无限制的文件大小和商业用途。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 99.99,
+      "description": {
+        "en": "Customizable features with dedicated support and advanced analytics.",
+        "zh": "可定制的功能，专属支持和高级分析。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features in the free tier, which may not be sufficient for all users.",
+      "zh": "免费版功能有限，可能无法满足所有用户的需求。"
+    },
+    {
+      "en": "No specific mention of customer support, which could be a concern for some users.",
+      "zh": "未明确提及客户支持，这可能让一些用户担心。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and teams looking to create professional presentations quickly and easily.",
+    "zh": "希望快速轻松地创建专业演示文稿的个人和团队。"
+  },
+  "positioning": {
+    "en": "Dokie AI positions itself as an AI-driven presentation tool that simplifies the creation and editing process for users.",
+    "zh": "Dokie AI 定位为一种以AI驱动的演示工具，简化了用户的创建和编辑过程。"
+  },
+  "analyzedAt": "2026-04-10T20:59:56.935609"
+}

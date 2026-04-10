@@ -1,0 +1,114 @@
+{
+  "domain": "presentations.ai",
+  "name": "Presentations.AI",
+  "keyFeatures": [
+    {
+      "en": "AI-powered slide generation",
+      "zh": "基于AI的幻灯片生成"
+    },
+    {
+      "en": "Automatic data refresh",
+      "zh": "自动数据刷新"
+    },
+    {
+      "en": "Real-time collaboration",
+      "zh": "实时协作"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Basic Plan",
+        "zh": "基础计划"
+      },
+      "price": 96,
+      "description": {
+        "en": "Limited features for casual or one-time users",
+        "zh": "适用于休闲或一次性用户的有限功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Standard Plan",
+        "zh": "标准计划"
+      },
+      "price": 198,
+      "description": {
+        "en": "Full access for individual professionals with collaboration and analytics",
+        "zh": "为个人专业人士提供全面访问权限，包括协作和分析"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Gold Plan",
+        "zh": "黄金计划"
+      },
+      "price": 999,
+      "description": {
+        "en": "Built for teams with priority AI, advanced design tools, and reporting",
+        "zh": "专为团队设计，具有优先AI、高级设计工具和报告功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier (only 0 for a limited period)",
+      "zh": "免费试用期有限，仅提供0美元的免费计划"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未提及具体客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Businesses, educators, and hobbyists",
+    "zh": "企业、教育工作者和业余爱好者"
+  },
+  "positioning": {
+    "en": "AI-powered presentation creation platform that helps users build professional presentations with automatic data updates and smart design assistance",
+    "zh": "基于AI的演示文稿创建平台，帮助用户构建具有自动数据更新和智能设计辅助的专业演示文稿"
+  },
+  "analyzedAt": "2026-04-10T20:59:10.506470"
+}

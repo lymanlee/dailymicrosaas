@@ -1,0 +1,60 @@
+{
+  "domain": "facewow.ai",
+  "name": "Facewow: Your All-In-One AI Portrait Creator",
+  "keyFeatures": [
+    {
+      "en": "AI-powered toolkit for portraits, face swaps, headshot generation, and image enhancement",
+      "zh": "基于AI的工具包，用于肖像、面部交换、头像生成和图像增强"
+    },
+    {
+      "en": "AI portrait generator, AI headshot generator, AI image generator, AI filter",
+      "zh": "AI肖像生成器、AI头像生成器、AI图像生成器、AI滤镜"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic features",
+        "zh": "有限的基本功能访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited access to features in the free tier",
+      "zh": "免费套餐的功能有限"
+    },
+    {
+      "en": "No specific pricing tiers or detailed pricing information available",
+      "zh": "没有具体的定价套餐或详细的定价信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Photographers, social media users, and anyone looking to enhance their photos",
+    "zh": "摄影师、社交媒体用户以及任何希望增强照片的人"
+  },
+  "positioning": {
+    "en": "Facewow positions itself as a comprehensive AI solution for portrait and image enhancement",
+    "zh": "Facewow将其定位为一个全面的AI解决方案，用于肖像和图像增强"
+  },
+  "analyzedAt": "2026-04-10T20:57:41.336732"
+}

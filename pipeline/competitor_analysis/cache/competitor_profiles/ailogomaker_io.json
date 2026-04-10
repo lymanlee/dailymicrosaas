@@ -1,0 +1,85 @@
+{
+  "domain": "ailogomaker.io",
+  "name": "AI Logo Maker",
+  "keyFeatures": [
+    {
+      "en": "Create custom logos with AI",
+      "zh": "使用AI创建自定义Logo"
+    },
+    {
+      "en": "Drag-and-drop interface for easy use",
+      "zh": "简单易用的拖放界面"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create up to 5 logos per month with limited features",
+        "zh": "每月最多创建5个Logo，功能有限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "5 credits/month",
+          "zh": "每月5积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 10,
+      "description": {
+        "en": "Unlimited logos with advanced features",
+        "zh": "无限创建Logo，包含高级功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits",
+          "zh": "无限制积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options in the free tier",
+      "zh": "免费版的自定义选项有限"
+    },
+    {
+      "en": "No mobile app available",
+      "zh": "没有移动应用程序"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and individuals looking to create professional logos",
+    "zh": "需要创建专业Logo的小企业和个人"
+  },
+  "positioning": {
+    "en": "AI-driven logo creation tool for non-designers",
+    "zh": "面向非设计师的AI驱动Logo创建工具"
+  },
+  "analyzedAt": "2026-04-10T20:58:07.684345"
+}

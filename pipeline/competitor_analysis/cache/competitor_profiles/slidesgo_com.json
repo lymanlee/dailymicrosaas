@@ -1,0 +1,89 @@
+{
+  "domain": "slidesgo.com",
+  "name": "Slidesgo",
+  "keyFeatures": [
+    {
+      "en": "Create and share presentations",
+      "zh": "创建和分享演示文稿"
+    },
+    {
+      "en": "Collaboration tools for teams",
+      "zh": "团队协作工具"
+    },
+    {
+      "en": "Customizable templates",
+      "zh": "可定制的模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create and share unlimited presentations with basic features",
+        "zh": "使用基本功能创建和分享无限演示文稿"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 12,
+      "description": {
+        "en": "Access to advanced features, unlimited team members, and priority support",
+        "zh": "访问高级功能，无限团队成员和优先技术支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "No detailed pricing information for enterprise plans",
+      "zh": "企业计划定价信息不详细"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams",
+    "zh": "个人和小型团队"
+  },
+  "positioning": {
+    "en": "A user-friendly platform for creating and sharing presentations",
+    "zh": "一个易于使用的创建和分享演示文稿的平台"
+  },
+  "analyzedAt": "2026-04-10T20:58:28.065064"
+}

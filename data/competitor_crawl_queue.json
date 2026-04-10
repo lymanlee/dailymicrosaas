@@ -84,160 +84,32 @@
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 1,
-    "status": "pending"
-  },
-  {
-    "domain": "ai-tattoogenerator.org",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "facewow.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "ailogomaker.io",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "slidesgo.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 2,
+    "status": "running"
   },
   {
     "domain": "gamma.app",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "presentations.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "genspark.ai",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "dokie.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "aimusic.so",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "cloudconvert.com",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "convertio.co",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "freepdfconvert.com",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "jsoneditoronline.org",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "jsonformatter.curiousconcept.com",
     "priority": 100,
     "source_keyword": "critical_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "jsonformatter.gg",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "jsonformatter.org",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "jsonlint.com",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "makesong.com",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "musiccreator.ai",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "online2pdf.com",

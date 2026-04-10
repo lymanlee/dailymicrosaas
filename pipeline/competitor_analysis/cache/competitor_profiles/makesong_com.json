@@ -1,0 +1,64 @@
+{
+  "domain": "makesong.com",
+  "name": "makesong.com",
+  "keyFeatures": [
+    {
+      "en": "Collaborative songwriting platform",
+      "zh": "协作式作曲平台"
+    },
+    {
+      "en": "Real-time collaboration with multiple users",
+      "zh": "多用户实时协作"
+    },
+    {
+      "en": "Built-in music theory and chord progression tools",
+      "zh": "内置音乐理论和和弦进行工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features including real-time collaboration, built-in music theory tools, and unlimited song saves.",
+        "zh": "基本功能包括实时协作、内置音乐理论工具和无限歌曲保存。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features without subscription",
+      "zh": "订阅前功能有限"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未具体提及客户服务"
+    }
+  ],
+  "targetAudience": {
+    "en": "Musicians, songwriters, and music producers",
+    "zh": "音乐人、作曲家和音乐制作人"
+  },
+  "positioning": {
+    "en": "A collaborative platform for musicians to create and share music",
+    "zh": "一个供音乐人协作创作和分享音乐的平台"
+  },
+  "analyzedAt": "2026-04-10T21:01:17.831289"
+}
