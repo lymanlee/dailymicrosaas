@@ -1,0 +1,56 @@
+{
+  "domain": "paperbleach.ai",
+  "name": "PaperBleach",
+  "keyFeatures": [
+    {
+      "en": "AI-driven document cleaning and formatting",
+      "zh": "AI驱动的文档清洁和格式化"
+    },
+    {
+      "en": "Collaboration tools for team projects",
+      "zh": "团队项目协作工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Up to 50 documents per month, no commercial use allowed",
+        "zh": "每月最多50份文档，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 50 documents per month and no commercial use",
+      "zh": "每月最多50份文档，不允许商业使用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams",
+    "zh": "个人和小型团队"
+  },
+  "positioning": {
+    "en": "PaperBleach positions itself as a user-friendly tool for document cleaning and collaboration",
+    "zh": "PaperBleach将其定位为易于使用的文档清洁和协作工具"
+  },
+  "analyzedAt": "2026-04-10T17:08:03.297642"
+}

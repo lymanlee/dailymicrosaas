@@ -1,0 +1,81 @@
+{
+  "domain": "aicharalab.com",
+  "name": "Aicharalab",
+  "keyFeatures": [
+    {
+      "en": "AI-driven chatbot for customer service",
+      "zh": "基于AI的聊天机器人用于客户服务"
+    },
+    {
+      "en": "Customizable templates for different industries",
+      "zh": "不同行业的可定制模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Up to 500 monthly interactions, basic templates",
+        "zh": "每月最多500次互动，基本模板"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "500 credits/month",
+          "zh": "每月500积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Unlimited monthly interactions, advanced templates, priority support",
+        "zh": "无限次每月互动，高级模板，优先支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits",
+          "zh": "无限积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and startups",
+    "zh": "小型企业和初创公司"
+  },
+  "positioning": {
+    "en": "A cost-effective solution for small businesses to enhance customer service",
+    "zh": "为小型企业提供成本效益高的客户服务解决方案"
+  },
+  "analyzedAt": "2026-04-10T17:14:05.327327"
+}

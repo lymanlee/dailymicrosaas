@@ -1,0 +1,89 @@
+{
+  "domain": "deepl.com",
+  "name": "DeepL",
+  "keyFeatures": [
+    {
+      "en": "High-quality machine translation",
+      "zh": "高质量机器翻译"
+    },
+    {
+      "en": "Supports over 100 languages",
+      "zh": "支持超过100种语言"
+    },
+    {
+      "en": "User-friendly interface",
+      "zh": "用户友好的界面"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Up to 1000 characters/month",
+        "zh": "每月最多1000字符"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 characters/month",
+          "zh": "每月1000字符"
+        },
+        "maxFileSize": {
+          "en": "Up to 500 characters",
+          "zh": "最多500字符"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Unlimited translations, up to 10000 characters/month",
+        "zh": "无限翻译，每月最多10000字符"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Up to 10000 characters",
+          "zh": "最多10000字符"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to text-based translations, no image or document support",
+      "zh": "仅限于文本翻译，不支持图片或文档"
+    },
+    {
+      "en": "No free tier for businesses or organizations",
+      "zh": "没有面向企业和组织的免费套餐"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses needing translation services",
+    "zh": "需要翻译服务的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Leader in neural machine translation technology",
+    "zh": "神经机器翻译技术的领导者"
+  },
+  "analyzedAt": "2026-04-10T17:08:50.803370"
+}

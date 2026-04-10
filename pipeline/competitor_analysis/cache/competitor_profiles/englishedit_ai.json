@@ -1,0 +1,52 @@
+{
+  "domain": "englishedit.ai",
+  "name": "Not clearly stated",
+  "keyFeatures": [
+    {
+      "en": "Not clearly stated",
+      "zh": "未明确说明"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "The website content is heavily obfuscated and does not provide clear information about features, pricing, or limitations.",
+      "zh": "网站内容被严重混淆，未提供关于功能、定价或限制的清晰信息。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Not clearly stated",
+    "zh": "未明确说明"
+  },
+  "positioning": {
+    "en": "Not clearly stated",
+    "zh": "未明确说明"
+  },
+  "analyzedAt": "2026-04-10T17:07:48.104717"
+}

@@ -56,132 +56,20 @@
     "status": "done"
   },
   {
-    "domain": "englishedit.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "paperbleach.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "writeowl.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "deepl.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "microsoft.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "design.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "logoai.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
     "domain": "looka.com",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "logo.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "thelogocreator.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "humanize.ai",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "clipchamp.com",
-    "priority": 100,
-    "source_keyword": "critical_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "myperfectresume.com",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "aicharalab.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "magichour.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "remaker.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "photoroom.com",
@@ -192,35 +80,11 @@
     "status": "done"
   },
   {
-    "domain": "audio.galaxy.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "tattoogen.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "tattfly.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
     "domain": "picsman.ai",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
+    "retry_count": 1,
     "status": "pending"
   },
   {

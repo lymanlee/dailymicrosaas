@@ -1,0 +1,56 @@
+{
+  "domain": "thelogocreator.ai",
+  "name": "The Logo Creator",
+  "keyFeatures": [
+    {
+      "en": "AI-driven logo design",
+      "zh": "AI驱动的标志设计"
+    },
+    {
+      "en": "Customizable templates",
+      "zh": "可定制的模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create up to 3 logos per month with limited customization options",
+        "zh": "每月最多创建3个标志，具有有限的自定义选项"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "3 credits/month",
+          "zh": "每月3积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options in the free tier",
+      "zh": "免费套餐具有有限的自定义选项"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses looking for a simple logo design solution",
+    "zh": "寻找简单标志设计解决方案的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Affordable and user-friendly logo creation tool for beginners and small businesses",
+    "zh": "为初学者和小型企业提供经济实惠且易于使用的标志创建工具"
+  },
+  "analyzedAt": "2026-04-10T17:11:18.306427"
+}

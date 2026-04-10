@@ -1,0 +1,135 @@
+{
+  "domain": "magichour.ai",
+  "name": "Magic Hour",
+  "keyFeatures": [
+    {
+      "en": "100+ AI tools for video and images in one place: face swap, lip sync, talking photos, templates, generation, and editing.",
+      "zh": "一个地方提供100多个AI工具：面部替换、唇形同步、会说话的照片、模板、生成和编辑。"
+    },
+    {
+      "en": "Watermark-free exports, commercial use, and API access.",
+      "zh": "无水印导出、商业使用和API访问。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Start free - no card required. Plans from $10/mo (annual).",
+        "zh": "免费开始 - 无需信用卡。月费从$10起（年费）。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Creator",
+        "zh": "创作者"
+      },
+      "price": 10,
+      "description": {
+        "en": "Compare Creator, Pro &amp; Business. Watermark-free exports, commercial use, API access.",
+        "zh": "比较创作者、专业版和企业版。无水印导出、商业使用和API访问。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 20,
+      "description": {
+        "en": "Compare Creator, Pro &amp; Business. Watermark-free exports, commercial use, API access.",
+        "zh": "比较创作者、专业版和企业版。无水印导出、商业使用和API访问。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Business",
+        "zh": "企业版"
+      },
+      "price": 50,
+      "description": {
+        "en": "Compare Creator, Pro &amp; Business. Watermark-free exports, commercial use, API access.",
+        "zh": "比较创作者、专业版和企业版。无水印导出、商业使用和API访问。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited information on specific feature limitations and pricing tiers.",
+      "zh": "关于特定功能限制和价格层级的信息有限。"
+    },
+    {
+      "en": "No specific mention of file size limits or monthly credit allowances.",
+      "zh": "未具体提及文件大小限制或每月积分额度。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Start free - no card required. Plans from $10/mo (annual). Compare Creator, Pro &amp; Business.",
+    "zh": "免费开始 - 无需信用卡。月费从$10起（年费）。比较创作者、专业版和企业版。"
+  },
+  "positioning": {
+    "en": "Magic Hour positions itself as a comprehensive platform for AI-generated video and image tools, offering a wide range of features and plans for creators and teams.",
+    "zh": "Magic Hour将其定位为一个全面的AI生成视频和图像工具平台，为创作者和团队提供广泛的功能和计划。"
+  },
+  "analyzedAt": "2026-04-10T17:14:27.526124"
+}

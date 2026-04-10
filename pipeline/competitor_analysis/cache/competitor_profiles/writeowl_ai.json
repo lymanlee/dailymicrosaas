@@ -1,0 +1,85 @@
+{
+  "domain": "writeowl.ai",
+  "name": "WriteOwl",
+  "keyFeatures": [
+    {
+      "en": "AI-driven writing assistant",
+      "zh": "AI驱动的写作助手"
+    },
+    {
+      "en": "Collaboration tools for teams",
+      "zh": "团队协作工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to features",
+        "zh": "有限的功能访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "More advanced features and support",
+        "zh": "更多高级功能和支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier features",
+      "zh": "免费版功能有限"
+    },
+    {
+      "en": "No specific mention of commercial use limitations",
+      "zh": "未明确说明商业使用限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual writers and small teams",
+    "zh": "个人作家和小型团队"
+  },
+  "positioning": {
+    "en": "WriteOwl positions itself as a versatile AI writing tool for content creation and collaboration.",
+    "zh": "WriteOwl 自定位为一个多功能 AI 写作工具，用于内容创作和协作"
+  },
+  "analyzedAt": "2026-04-10T17:08:15.551694"
+}

@@ -1,0 +1,64 @@
+{
+  "domain": "tattfly.com",
+  "name": "Tattfly",
+  "keyFeatures": [
+    {
+      "en": "Customizable designs",
+      "zh": "可定制的设计"
+    },
+    {
+      "en": "Integration with social media",
+      "zh": "与社交媒体的集成"
+    },
+    {
+      "en": "Responsive design for mobile devices",
+      "zh": "针对移动设备的响应式设计"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to templates and basic features",
+        "zh": "有限的模板和基本功能访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features and templates in the free tier",
+      "zh": "免费套餐的功能和模板有限"
+    },
+    {
+      "en": "No specific mention of pricing tiers for paid plans",
+      "zh": "未明确说明付费计划的价格层级"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and individuals looking for basic design tools",
+    "zh": "需要基本设计工具的小企业和个人"
+  },
+  "positioning": {
+    "en": "Tattfly positions itself as a user-friendly platform for creating custom designs with ease.",
+    "zh": "Tattfly 将自己定位为一个易于使用的平台，用于轻松创建自定义设计"
+  },
+  "analyzedAt": "2026-04-10T17:16:13.924072"
+}

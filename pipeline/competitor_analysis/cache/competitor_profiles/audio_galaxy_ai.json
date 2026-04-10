@@ -1,0 +1,110 @@
+{
+  "domain": "audio.galaxy.ai",
+  "name": "Galaxy Audio",
+  "keyFeatures": [
+    {
+      "en": "Advanced audio processing technology",
+      "zh": "高级音频处理技术"
+    },
+    {
+      "en": "Customizable audio settings",
+      "zh": "可定制的音频设置"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic audio editing with limited features",
+        "zh": "基本的音频编辑功能，但有限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Advanced audio editing with no restrictions",
+        "zh": "高级音频编辑功能，无限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 99.99,
+      "description": {
+        "en": "Enterprise-level audio editing with advanced features and support",
+        "zh": "企业级高级音频编辑功能和专业支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier features",
+      "zh": "免费版功能有限"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Audio professionals, content creators, and businesses",
+    "zh": "音频专业人士、内容创作者和企业用户"
+  },
+  "positioning": {
+    "en": "Galaxy Audio positions itself as a comprehensive audio editing solution with a focus on advanced features and support for professionals and businesses.",
+    "zh": "Galaxy Audio 定位为全面的音频编辑解决方案，专注于为专业人士和企业提供高级功能和支持。"
+  },
+  "analyzedAt": "2026-04-10T17:15:15.561574"
+}

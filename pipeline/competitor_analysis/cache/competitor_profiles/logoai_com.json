@@ -1,0 +1,85 @@
+{
+  "domain": "logoai.com",
+  "name": "LogoAI",
+  "keyFeatures": [
+    {
+      "en": "AI-driven logo generation",
+      "zh": "AI驱动的标志生成"
+    },
+    {
+      "en": "Customizable logo styles",
+      "zh": "可定制的标志风格"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Up to 5 logos per month, no commercial use",
+        "zh": "每月最多生成5个标志，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "5 logos/month",
+          "zh": "每月5个标志"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Unlimited logos per month, commercial use allowed",
+        "zh": "每月无限生成标志，允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for free tier",
+      "zh": "免费版的自定义选项有限"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and individuals looking for quick and easy logo creation",
+    "zh": "寻求快速简便标志创建的小企业和个人"
+  },
+  "positioning": {
+    "en": "LogoAI positions itself as a user-friendly and efficient tool for creating professional logos with AI technology",
+    "zh": "LogoAI将自己定位为一种使用AI技术创建专业标志的用户友好且高效的工具"
+  },
+  "analyzedAt": "2026-04-10T17:09:56.030877"
+}

@@ -1,0 +1,85 @@
+{
+  "domain": "remaker.ai",
+  "name": "remaker.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-based image and video editing",
+      "zh": "基于AI的图像和视频编辑"
+    },
+    {
+      "en": "Real-time collaboration",
+      "zh": "实时协作"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited basic features with no ads",
+        "zh": "包含基本功能，无广告"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Unlimited features with no ads, advanced editing tools",
+        "zh": "包含所有功能，无广告，高级编辑工具"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size and credits for free tier",
+      "zh": "免费版文件大小和积分有限制"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未明确提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "remaker.ai positions itself as a user-friendly AI-driven platform for image and video editing with real-time collaboration capabilities.",
+    "zh": "remaker.ai 将自己定位为一个易于使用的基于AI的图像和视频编辑平台，具有实时协作功能"
+  },
+  "analyzedAt": "2026-04-10T17:14:47.906150"
+}

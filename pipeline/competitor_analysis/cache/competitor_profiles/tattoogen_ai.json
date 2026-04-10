@@ -1,0 +1,56 @@
+{
+  "domain": "tattoogen.ai",
+  "name": "tattoogen.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-driven tattoo design assistance",
+      "zh": "基于AI的纹身设计辅助"
+    },
+    {
+      "en": "Customizable design templates",
+      "zh": "可定制的设计模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic design tools and templates",
+        "zh": "基本的设计工具和模板"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "People interested in creating custom tattoos",
+    "zh": "对创建个性化纹身感兴趣的人群"
+  },
+  "positioning": {
+    "en": "tattoogen.ai is a user-friendly platform for those who want to design their own tattoos with the help of AI.",
+    "zh": "tattoogen.ai 是一个用户友好的平台，通过AI的帮助，让用户能够设计自己的纹身。"
+  },
+  "analyzedAt": "2026-04-10T17:15:39.973998"
+}

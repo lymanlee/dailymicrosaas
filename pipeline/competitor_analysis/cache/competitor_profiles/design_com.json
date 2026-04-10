@@ -1,0 +1,64 @@
+{
+  "domain": "design.com",
+  "name": "Design.com",
+  "keyFeatures": [
+    {
+      "en": "Generate logo, business cards, website and social designs in seconds with AI.",
+      "zh": "使用AI在几秒钟内生成标志、名片、网站和社交媒体设计。"
+    },
+    {
+      "en": "Easy to use with no design experience needed.",
+      "zh": "无需设计经验即可轻松使用。"
+    },
+    {
+      "en": "Free to try with no credit card required.",
+      "zh": "免费试用，无需信用卡。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited access to logo, business card, website and social design templates. No credit card required.",
+        "zh": "无限访问标志、名片、网站和社交媒体设计模板。无需信用卡。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options compared to paid plans.",
+      "zh": "与付费计划相比，自定义选项有限。"
+    },
+    {
+      "en": "No customer support available for free users.",
+      "zh": "免费用户无法获得客户支持。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and entrepreneurs who need quick and easy design solutions.",
+    "zh": "需要快速简便设计解决方案的小企业和创业者。"
+  },
+  "positioning": {
+    "en": "Design.com positions itself as a user-friendly AI-driven design platform for small businesses and individuals.",
+    "zh": "Design.com 将自己定位为面向小企业和个人的用户友好型 AI 驱动设计平台。"
+  },
+  "analyzedAt": "2026-04-10T17:09:33.348886"
+}

@@ -1,0 +1,81 @@
+{
+  "domain": "logo.com",
+  "name": "Logo",
+  "keyFeatures": [
+    {
+      "en": "Branding and logo design services",
+      "zh": "品牌和标志设计服务"
+    },
+    {
+      "en": "Custom logo creation with multiple revisions",
+      "zh": "提供多次修改的自定义标志创建"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Basic",
+        "zh": "基础套餐"
+      },
+      "price": 0,
+      "description": {
+        "en": "Includes one logo design with up to 3 revisions",
+        "zh": "包含一次设计和最多三次修改"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业套餐"
+      },
+      "price": 99,
+      "description": {
+        "en": "Includes one logo design with up to 10 revisions, priority support",
+        "zh": "包含一次设计和最多十次修改，优先支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited revisions and no specific file size limits",
+      "zh": "修改次数有限且没有具体文件大小限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and startups",
+    "zh": "小型企业和初创企业"
+  },
+  "positioning": {
+    "en": "Affordable logo design for small businesses",
+    "zh": "为小型企业提供经济实惠的标志设计服务"
+  },
+  "analyzedAt": "2026-04-10T17:10:45.521349"
+}
