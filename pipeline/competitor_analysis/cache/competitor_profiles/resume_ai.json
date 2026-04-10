@@ -1,0 +1,114 @@
+{
+  "domain": "resume.ai",
+  "name": "resume.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-driven resume builder",
+      "zh": "AI驱动的简历构建器"
+    },
+    {
+      "en": "Customizable templates",
+      "zh": "可定制的简历模板"
+    },
+    {
+      "en": "Automated resume optimization",
+      "zh": "自动简历优化"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create up to 1 resume with limited features",
+        "zh": "创建最多1份简历，功能有限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Create unlimited resumes with all features",
+        "zh": "创建无限份简历，包含所有功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Customizable features for large organizations",
+        "zh": "大型组织的可定制功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization for free tier",
+      "zh": "免费版的定制选项有限"
+    },
+    {
+      "en": "No free trial available",
+      "zh": "没有免费试用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual job seekers and small businesses",
+    "zh": "个人求职者和小型企业"
+  },
+  "positioning": {
+    "en": "resume.ai positions itself as a user-friendly and efficient tool for creating professional resumes.",
+    "zh": "resume.ai将自己定位为一个易于使用且高效的简历创建工具。"
+  },
+  "analyzedAt": "2026-04-10T13:54:42.059778"
+}

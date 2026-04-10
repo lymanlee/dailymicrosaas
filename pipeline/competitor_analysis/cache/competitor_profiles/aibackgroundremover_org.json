@@ -1,0 +1,52 @@
+{
+  "domain": "aibackgroundremover.org",
+  "name": "AI Background Remover",
+  "keyFeatures": [
+    {
+      "en": "Advanced AI for removing backgrounds",
+      "zh": "先进的AI去除背景功能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal use",
+        "zh": "基本功能，适用于个人使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use and no pricing information available",
+      "zh": "仅限个人使用且未提供价格信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "A basic tool for quick background removal",
+    "zh": "一个用于快速去除背景的基本工具"
+  },
+  "analyzedAt": "2026-04-10T13:58:49.779042"
+}

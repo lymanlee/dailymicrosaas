@@ -1,0 +1,114 @@
+{
+  "domain": "fotor.com",
+  "name": "Fotor",
+  "keyFeatures": [
+    {
+      "en": "Free online photo editor with basic editing tools",
+      "zh": "免费在线照片编辑器，提供基本编辑工具"
+    },
+    {
+      "en": "AI-powered background removal and editing",
+      "zh": "AI驱动的背景去除和编辑"
+    },
+    {
+      "en": "Advanced photo effects and filters",
+      "zh": "高级照片效果和滤镜"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited photo editing with no watermarks, basic features only",
+        "zh": "无水印的无限照片编辑，仅包含基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Fotor Pro",
+        "zh": "Fotor Pro"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Advanced features, no watermarks, and additional tools",
+        "zh": "高级功能，无水印和额外工具"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Fotor Pro+",
+        "zh": "Fotor Pro+"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "All features, no watermarks, and advanced tools",
+        "zh": "所有功能，无水印和高级工具"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Up to 1GB",
+          "zh": "最大1GB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited advanced features compared to paid tiers",
+      "zh": "与付费套餐相比，高级功能有限"
+    },
+    {
+      "en": "No specific mention of customer support hours",
+      "zh": "未明确说明客服支持时间"
+    }
+  ],
+  "targetAudience": {
+    "en": "Amateurs and professionals who want a user-friendly photo editor",
+    "zh": "寻求用户友好照片编辑器的业余爱好者和专业人士"
+  },
+  "positioning": {
+    "en": "Fotor positions itself as a user-friendly and powerful photo editing tool for both amateurs and professionals",
+    "zh": "Fotor 定位自己为适合业余爱好者和专业人士的用户友好且强大的照片编辑工具"
+  },
+  "analyzedAt": "2026-04-10T14:00:55.119117"
+}

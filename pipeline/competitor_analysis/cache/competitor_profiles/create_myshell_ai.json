@@ -1,0 +1,85 @@
+{
+  "domain": "create.myshell.ai",
+  "name": "MyShell",
+  "keyFeatures": [
+    {
+      "en": "AI-Powered Shell Access",
+      "zh": "AI驱动的Shell访问"
+    },
+    {
+      "en": "Customizable Shell Commands",
+      "zh": "可定制的Shell命令"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited basic shell access, limited to 50 commands per month",
+        "zh": "无限的基本Shell访问，每月最多50个命令"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 10,
+      "description": {
+        "en": "Unlimited shell access, 500 commands per month, up to 50MB file size",
+        "zh": "无限的Shell访问，每月最多500个命令，最大50MB文件大小"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "500 credits/month",
+          "zh": "每月500积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 50 commands per month in the free tier",
+      "zh": "免费版每月最多50个命令的限制"
+    },
+    {
+      "en": "No mention of customer support",
+      "zh": "未提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers and IT professionals who need shell access for personal or small projects",
+    "zh": "需要为个人或小型项目访问Shell的开发人员和IT专业人士"
+  },
+  "positioning": {
+    "en": "MyShell is a user-friendly platform for developers to access and manage their shell environments with AI assistance",
+    "zh": "MyShell是一个为开发人员提供友好界面并借助AI协助管理其Shell环境的平台"
+  },
+  "analyzedAt": "2026-04-10T13:59:38.679774"
+}

@@ -1,0 +1,106 @@
+{
+  "domain": "removal.ai",
+  "name": "Removal.AI",
+  "keyFeatures": [
+    {
+      "en": "Remove image backgrounds in seconds",
+      "zh": "秒速去除图片背景"
+    },
+    {
+      "en": "Free for low-resolution images and personal use",
+      "zh": "免费提供低分辨率图片和个人使用"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "100% FREE to use for low-resolution images and personal uses. No sign-up required.",
+        "zh": "免费提供低分辨率图片和个人使用，无需注册。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Lifetime",
+        "zh": "终身"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited use for a one-time payment. No monthly fees.",
+        "zh": "一次性支付，终身使用，无月费。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "High-Volume",
+        "zh": "高流量"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "High-volume usage for businesses. Custom pricing available.",
+        "zh": "面向企业的高流量使用，提供定制价格。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 credits/month",
+          "zh": "每月1000积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to low-resolution images and personal use in the free tier, which may not meet the needs of businesses or high-volume users.",
+      "zh": "免费套餐仅限低分辨率图片和个人使用，可能无法满足企业和高流量用户的需求。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses who need to remove image backgrounds for personal or low-volume commercial use.",
+    "zh": "需要去除图片背景的个人和小型企业，用于个人或低流量商业用途。"
+  },
+  "positioning": {
+    "en": "Removal.AI positions itself as a free and easy-to-use tool for removing image backgrounds, with paid plans for businesses and high-volume users.",
+    "zh": "Removal.AI 定位为一个免费且易于使用的去除图片背景工具，提供付费计划供企业和高流量用户使用。"
+  },
+  "analyzedAt": "2026-04-10T13:58:20.419230"
+}

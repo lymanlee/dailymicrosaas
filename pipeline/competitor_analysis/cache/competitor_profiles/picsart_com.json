@@ -1,0 +1,89 @@
+{
+  "domain": "picsart.com",
+  "name": "PicsArt",
+  "keyFeatures": [
+    {
+      "en": "Photo and video editing tools",
+      "zh": "照片和视频编辑工具"
+    },
+    {
+      "en": "Collaboration and sharing features",
+      "zh": "协作和分享功能"
+    },
+    {
+      "en": "AI-powered filters and effects",
+      "zh": "AI驱动的滤镜和效果"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic editing tools, sharing on social media",
+        "zh": "基本编辑工具，可在社交媒体上分享"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Advanced editing tools, unlimited storage, commercial use allowed",
+        "zh": "高级编辑工具，无限存储，允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "Some features require in-app purchases",
+      "zh": "部分功能需要内购"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses looking for creative tools",
+    "zh": "寻找创意工具的个人和小型企业"
+  },
+  "positioning": {
+    "en": "PicsArt positions itself as a versatile platform for creative expression and content creation",
+    "zh": "PicsArt将其定位为一个多功能的创意表达和内容创作平台"
+  },
+  "analyzedAt": "2026-04-10T14:00:23.290947"
+}

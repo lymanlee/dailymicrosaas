@@ -20,104 +20,32 @@
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 1,
-    "status": "pending"
-  },
-  {
-    "domain": "resume.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "wobo.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 2,
+    "status": "running"
   },
   {
     "domain": "perchance.org",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "musely.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "raugen.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "media.io",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "cyberlink.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "removal.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "aibackgroundremover.org",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "pixa.com",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "create.myshell.ai",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "arting.ai",
     "priority": 100,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "remove.bg",
@@ -126,62 +54,6 @@
     "created_at": "2026-04-09T17:17:42.401755+00:00",
     "retry_count": 0,
     "status": "done"
-  },
-  {
-    "domain": "picsart.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "fotor.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "airvoz.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "voicegenerator.io",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "elevenlabs.io",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "speechify.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "hyperwriteai.com",
-    "priority": 100,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
   },
   {
     "domain": "englishedit.ai",

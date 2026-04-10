@@ -1,0 +1,60 @@
+{
+  "domain": "voicegenerator.io",
+  "name": "Voice Generator",
+  "keyFeatures": [
+    {
+      "en": "Generate high-quality voiceovers for videos and podcasts",
+      "zh": "生成高质量的视频和播客配音"
+    },
+    {
+      "en": "Customize voice styles and emotions",
+      "zh": "自定义声音风格和情感"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal use",
+        "zh": "个人使用的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use and basic features",
+      "zh": "仅限个人使用和基本功能"
+    },
+    {
+      "en": "No commercial use allowed",
+      "zh": "不允许商业使用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual creators and hobbyists",
+    "zh": "个人创作者和爱好者"
+  },
+  "positioning": {
+    "en": "A cost-effective solution for personal voiceover needs",
+    "zh": "为个人配音需求提供经济实惠的解决方案"
+  },
+  "analyzedAt": "2026-04-10T14:02:12.103203"
+}

@@ -1,0 +1,85 @@
+{
+  "domain": "musely.ai",
+  "name": "Musely",
+  "keyFeatures": [
+    {
+      "en": "AI-driven music generation and composition",
+      "zh": "基于AI的音乐生成和创作"
+    },
+    {
+      "en": "Customizable music styles and genres",
+      "zh": "可定制的音乐风格和流派"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features with limited monthly credits",
+        "zh": "基本功能，包含有限的每月积分"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "10 credits/month",
+          "zh": "每月10积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 2MB",
+          "zh": "最大2MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Advanced features with more monthly credits",
+        "zh": "高级功能，包含更多的每月积分"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size and credits for free tier",
+      "zh": "免费版文件大小和积分有限制"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未明确说明客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Independent artists, music producers, and hobbyists",
+    "zh": "独立艺术家、音乐制作人和爱好者"
+  },
+  "positioning": {
+    "en": "Musely positions itself as a tool for creating high-quality music with AI, catering to both beginners and professionals.",
+    "zh": "Musely 将自己定位为一个使用 AI 创作高质量音乐的工具，面向初学者和专业人士"
+  },
+  "analyzedAt": "2026-04-10T13:55:58.890146"
+}

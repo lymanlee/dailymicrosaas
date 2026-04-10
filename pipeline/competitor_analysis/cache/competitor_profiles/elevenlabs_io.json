@@ -1,0 +1,89 @@
+{
+  "domain": "elevenlabs.io",
+  "name": "Eleven Labs",
+  "keyFeatures": [
+    {
+      "en": "Advanced Text-to-Speech Technology",
+      "zh": "先进的文本转语音技术"
+    },
+    {
+      "en": "Customizable Voice Models",
+      "zh": "可定制的声音模型"
+    },
+    {
+      "en": "High-Quality Audio Output",
+      "zh": "高质量的音频输出"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited to 500 monthly credits, no commercial use allowed",
+        "zh": "每月500积分限制，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "500 credits/month",
+          "zh": "每月500积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 1MB",
+          "zh": "最大1MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 49.99,
+      "description": {
+        "en": "Unlimited monthly credits, commercial use allowed",
+        "zh": "无限制每月积分，允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits/month",
+          "zh": "无限制积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 10MB file size for Pro tier",
+      "zh": "专业版文件大小限制为10MB"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未明确说明客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers, content creators, and businesses looking for high-quality voice solutions",
+    "zh": "寻找高质量语音解决方案的开发者、内容创作者和企业"
+  },
+  "positioning": {
+    "en": "Leader in advanced text-to-speech technology with customizable voice models",
+    "zh": "在先进的文本转语音技术领域处于领先地位，提供可定制的声音模型"
+  },
+  "analyzedAt": "2026-04-10T14:02:29.998158"
+}

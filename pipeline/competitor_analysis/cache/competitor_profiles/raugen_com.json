@@ -1,0 +1,81 @@
+{
+  "domain": "raugen.com",
+  "name": "Raugen",
+  "keyFeatures": [
+    {
+      "en": "Advanced data analysis tools",
+      "zh": "高级数据分析工具"
+    },
+    {
+      "en": "Real-time collaboration features",
+      "zh": "实时协作功能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic features",
+        "zh": "仅限访问基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 29.99,
+      "description": {
+        "en": "Access to all features with no limits",
+        "zh": "访问所有功能，无限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customer support options",
+      "zh": "有限的客户支持选项"
+    }
+  ],
+  "targetAudience": {
+    "en": "Data analysts and professionals",
+    "zh": "数据分析师和专业人士"
+  },
+  "positioning": {
+    "en": "Leader in data analysis and collaboration tools",
+    "zh": "数据分析和协作工具的领导者"
+  },
+  "analyzedAt": "2026-04-10T13:56:17.301349"
+}

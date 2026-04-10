@@ -1,0 +1,110 @@
+{
+  "domain": "wobo.ai",
+  "name": "Wobo.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-driven chatbot for businesses",
+      "zh": "为企业提供的人工智能驱动聊天机器人"
+    },
+    {
+      "en": "Customizable templates for various industries",
+      "zh": "多种行业的可定制模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for small businesses",
+        "zh": "为小型企业提供基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 650,
+      "description": {
+        "en": "Advanced features for medium-sized businesses",
+        "zh": "为中型企业提供高级功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 credits/month",
+          "zh": "每月1000积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 1200,
+      "description": {
+        "en": "Custom features for large enterprises",
+        "zh": "为大型企业提供定制功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for free tier",
+      "zh": "免费版的自定义选项有限"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未明确说明客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small to large businesses",
+    "zh": "从小型企业到大型企业"
+  },
+  "positioning": {
+    "en": "Wobo.ai is a comprehensive AI chatbot solution for businesses of all sizes, offering customizable templates and advanced features.",
+    "zh": "Wobo.ai 是面向所有规模企业的全面人工智能聊天机器人解决方案，提供可定制模板和高级功能"
+  },
+  "analyzedAt": "2026-04-10T13:55:12.096256"
+}

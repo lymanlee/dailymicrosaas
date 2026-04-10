@@ -1,0 +1,60 @@
+{
+  "domain": "cyberlink.com",
+  "name": "CyberLink",
+  "keyFeatures": [
+    {
+      "en": "Easy to learn and use video and photo editing software",
+      "zh": "易于学习和使用的视频和照片编辑软件"
+    },
+    {
+      "en": "Play video and connect with friends and co-workers",
+      "zh": "播放视频并与朋友和同事联系"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Pricing information is not clearly stated",
+      "zh": "价格信息未明确说明"
+    },
+    {
+      "en": "Limited information about file size and credits",
+      "zh": "关于文件大小和积分的信息有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Easy to learn and use for beginners and professionals",
+    "zh": "适用于初学者和专业人士，易于学习和使用"
+  },
+  "positioning": {
+    "en": "Leader in video and photo editing software with a user-friendly interface",
+    "zh": "视频和照片编辑软件的领导者，具有用户友好的界面"
+  },
+  "analyzedAt": "2026-04-10T13:57:23.298486"
+}

@@ -1,0 +1,85 @@
+{
+  "domain": "speechify.com",
+  "name": "Speechify",
+  "keyFeatures": [
+    {
+      "en": "Converts text to speech with various voices and speeds",
+      "zh": "将文本转换为多种声音和速度的语音"
+    },
+    {
+      "en": "Supports multiple languages and formats",
+      "zh": "支持多种语言和格式"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited text conversion, 100MB storage, 1000 monthly credits",
+        "zh": "无限文本转换，100MB存储空间，每月1000积分"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 credits/month",
+          "zh": "每月1000积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Unlimited text conversion, 1GB storage, 10,000 monthly credits, commercial use allowed",
+        "zh": "无限文本转换，1GB存储空间，每月10,000积分，允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "10,000 credits/month",
+          "zh": "每月10,000积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 1GB",
+          "zh": "最大1GB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for voice and speed",
+      "zh": "声音和速度的自定义选项有限"
+    },
+    {
+      "en": "No mobile app available",
+      "zh": "没有移动应用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses looking for text-to-speech conversion",
+    "zh": "寻求文本转语音转换的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Speechify is a versatile text-to-speech tool with multiple language and format support, ideal for individuals and small businesses.",
+    "zh": "Speechify 是一款多功能的文本转语音工具，支持多种语言和格式，适合个人和小型企业使用"
+  },
+  "analyzedAt": "2026-04-10T14:02:49.751948"
+}

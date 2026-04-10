@@ -1,0 +1,114 @@
+{
+  "domain": "hyperwriteai.com",
+  "name": "HyperWrite",
+  "keyFeatures": [
+    {
+      "en": "AI Writing Assistant for content generation, research, speeches, and rewriting.",
+      "zh": "AI写作助手，用于内容生成、研究、演讲和重写."
+    },
+    {
+      "en": "Hundreds of AI tools to transform your writing, communication, and research.",
+      "zh": "数百种AI工具，帮助您改进写作、沟通和研究."
+    },
+    {
+      "en": "Chrome Extension for using AI on any website.",
+      "zh": "Chrome扩展程序，可在任何网站上使用AI."
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Get started for free. No credit limit.",
+        "zh": "免费开始。无积分限制."
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Premium",
+        "zh": "高级"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "More AI-generated content with features tailored to your needs.",
+        "zh": "更多AI生成的内容，提供符合您需求的功能."
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 credits/month",
+          "zh": "每月1000积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Ultra",
+        "zh": "超凡"
+      },
+      "price": 49.99,
+      "description": {
+        "en": "High-quality AI writing and content generation with advanced features.",
+        "zh": "高质量的AI写作和内容生成，配备高级功能."
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits",
+          "zh": "无限制积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier with no credit limit, which might not be sufficient for some users.",
+      "zh": "免费套餐有限制，没有积分限制，可能不足以满足一些用户的需求."
+    },
+    {
+      "en": "No detailed information on specific features or limitations for each tier.",
+      "zh": "未详细说明每个套餐的具体功能或限制信息."
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual writers, small businesses, and researchers.",
+    "zh": "个人作家、小型企业和研究人员."
+  },
+  "positioning": {
+    "en": "HyperWrite positions itself as a powerful AI writing assistant with a range of flexible pricing options.",
+    "zh": "HyperWrite定位为一款强大的AI写作助手，提供多种灵活的定价选项."
+  },
+  "analyzedAt": "2026-04-10T14:03:08.075364"
+}
