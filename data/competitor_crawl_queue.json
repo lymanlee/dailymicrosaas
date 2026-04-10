@@ -1,1 +1,1146 @@
-[]
+[
+  {
+    "domain": "combinepdf.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "running"
+  },
+  {
+    "domain": "tools.pdf24.org",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "running"
+  },
+  {
+    "domain": "sejda.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pdfmerge.org",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pipefile.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "ilovepdf.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "smallpdf.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "adobe.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "humanizeai.pro",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "quillbot.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "notegpt.io",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "superhumanizer.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "humanizeai.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "grammarly.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "flixier.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "aivideoeditor.art",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "kapwing.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "mindvideo.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "veed.io",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "canva.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "rezi.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "resume-now.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "resume.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "wobo.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "perchance.org",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "musely.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "raugen.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "media.io",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "cyberlink.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "removal.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "aibackgroundremover.org",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pixa.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "create.myshell.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "arting.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "remove.bg",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "picsart.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "fotor.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "airvoz.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "voicegenerator.io",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "elevenlabs.io",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "speechify.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "hyperwriteai.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "englishedit.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "paperbleach.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "writeowl.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "deepl.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "microsoft.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "design.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "logoai.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "looka.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "logo.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "thelogocreator.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "humanize.ai",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "clipchamp.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "myperfectresume.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "aicharalab.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "magichour.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "remaker.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "photoroom.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "audio.galaxy.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "tattoogen.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "tattfly.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "picsman.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "ai-tattoogenerator.org",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "facewow.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "ailogomaker.io",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "slidesgo.com",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "gamma.app",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "presentations.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "genspark.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "dokie.ai",
+    "priority": 100,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "aimusic.so",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "cloudconvert.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "convertio.co",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "freepdfconvert.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "jsoneditoronline.org",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "jsonformatter.curiousconcept.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "jsonformatter.gg",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "jsonformatter.org",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "jsonlint.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "makesong.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "musiccreator.ai",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "online2pdf.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "openmusic.ai",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pdf2doc.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pdfcandy.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pdfcompressor.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "tinypdf.net",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "toolsbox.io",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "xodo.com",
+    "priority": 100,
+    "source_keyword": "critical_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "123timer.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "airbrush.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "boomy.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "caseconvert.net",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "caseconverter.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "clockanddate.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "color.adobe.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "colorffy.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "colorkit.co",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "colorpalettegenerator.co",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "colorpalettegenerator.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "convert-case.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "convertcase.net",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "coolors.co",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "documentgenius.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "freeconvert.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "ilovejpeg.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "imagecompressor.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "imageresizer.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "imgconverters.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "invoice-generator.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "invoicehome.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "invoicemaker.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "invoicesimple.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "jsonformatonline.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "lastpass.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "online-stopwatch.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "passwords-generator.org",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "passwordsgenerator.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pomodoro-focus-timer.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pomodorotimer.ai",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pomodorotimer.online",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "pomofocus.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "prezi.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "qr-code-generator.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "qr.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "qrcode-monkey.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "random.org",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "soundraw.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "suno.ai",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "done"
+  },
+  {
+    "domain": "suno.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "the-qrcode-generator.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "thewordcounter.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "timeanddate.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "tomatotimers.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "unitconverters.net",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "us.norton.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "vclock.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "vistaprint.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "waveapps.com",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "wordchecker.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "wordcounter.io",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  },
+  {
+    "domain": "wordcounter.net",
+    "priority": 80,
+    "source_keyword": "serp_patch",
+    "created_at": "2026-04-09T17:17:42.401755+00:00",
+    "retry_count": 0,
+    "status": "pending"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "pdf converter": {
+    "niche": [
+      "freeconvert.com",
+      "freepdfconvert.com",
+      "online2pdf.com",
+      "cloudconvert.com",
+      "convertio.co"
+    ],
+    "big": [
+      "ilovepdf.com",
+      "smallpdf.com",
+      "adobe.com"
+    ]
+  },
+  "pdf to word": {
+    "niche": [
+      "pdf2doc.com",
+      "tools.pdf24.org",
+      "pdfcandy.com",
+      "xodo.com",
+      "toolsbox.io"
+    ],
+    "big": [
+      "ilovepdf.com",
+      "adobe.com",
+      "smallpdf.com",
+      "microsoft.com"
+    ]
+  },
+  "compress pdf": {
+    "niche": [
+      "pdfcompressor.com",
+      "tinypdf.net",
+      "xodo.com",
+      "sejda.com",
+      "cloudconvert.com"
+    ],
+    "big": [
+      "ilovepdf.com",
+      "smallpdf.com",
+      "adobe.com"
+    ]
+  },
+  "ai music generator": {
+    "niche": [
+      "suno.com",
+      "aimusic.so",
+      "musiccreator.ai",
+      "openmusic.ai",
+      "makesong.com"
+    ],
+    "big": []
+  },
+  "json formatter": {
+    "niche": [
+      "jsonformatter.org",
+      "jsonformatter.curiousconcept.com",
+      "jsoneditoronline.org",
+      "jsonformatter.gg",
+      "jsonlint.com"
+    ],
+    "big": []
+  }
+}
