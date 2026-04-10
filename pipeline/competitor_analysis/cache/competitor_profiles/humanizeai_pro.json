@@ -1,0 +1,60 @@
+{
+  "domain": "humanizeai.pro",
+  "name": "Humanize AI",
+  "keyFeatures": [
+    {
+      "en": "AI-driven content generation",
+      "zh": "AI驱动的内容生成"
+    },
+    {
+      "en": "Customizable templates for various industries",
+      "zh": "多种行业的可定制模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Access to basic features and templates",
+        "zh": "基本功能和模板的访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features without subscription",
+      "zh": "订阅前功能有限"
+    },
+    {
+      "en": "No customer support mentioned",
+      "zh": "未提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators, marketers, and businesses",
+    "zh": "内容创作者、营销人员和企业"
+  },
+  "positioning": {
+    "en": "Humanize AI is positioned as a tool for businesses and content creators to streamline content creation and marketing efforts.",
+    "zh": "Humanize AI 定位为企业和内容创作者提供一种工具，以简化内容创作和营销工作"
+  },
+  "analyzedAt": "2026-04-10T09:44:47.189644"
+}

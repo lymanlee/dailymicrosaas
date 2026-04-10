@@ -1,0 +1,89 @@
+{
+  "domain": "adobe.com",
+  "name": "Adobe Creative Cloud",
+  "keyFeatures": [
+    {
+      "en": "Access to a suite of creative applications including Photoshop, Illustrator, and InDesign.",
+      "zh": "访问包括Photoshop、Illustrator和InDesign在内的创意应用程序套件。"
+    },
+    {
+      "en": "Collaboration and project management tools.",
+      "zh": "协作和项目管理工具。"
+    },
+    {
+      "en": "Regular updates and new features.",
+      "zh": "定期更新和新功能。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Starter",
+        "zh": "入门版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to some features and tools.",
+        "zh": "有限的功能和工具访问权限。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Premiere Elements",
+        "zh": "Premiere Elements"
+      },
+      "price": 29.99,
+      "description": {
+        "en": "Basic video editing tools for home users.",
+        "zh": "适用于家庭用户的基本视频编辑工具。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed for personal use only",
+          "zh": "仅限个人使用"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "High cost for individual users compared to competitors.",
+      "zh": "与竞争对手相比，个人用户成本较高。"
+    },
+    {
+      "en": "Limited free tier features.",
+      "zh": "免费版功能有限。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Professional designers, photographers, and video editors.",
+    "zh": "专业设计师、摄影师和视频编辑人员。"
+  },
+  "positioning": {
+    "en": "Leader in creative software with a wide range of tools and features.",
+    "zh": "创意软件领域的领导者，拥有广泛的功能和工具。"
+  },
+  "analyzedAt": "2026-04-10T09:43:46.561441"
+}

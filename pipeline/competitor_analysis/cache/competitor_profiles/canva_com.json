@@ -1,0 +1,114 @@
+{
+  "domain": "canva.com",
+  "name": "Canva",
+  "keyFeatures": [
+    {
+      "en": "Drag-and-drop design tool",
+      "zh": "拖放式设计工具"
+    },
+    {
+      "en": "Over 10 million templates",
+      "zh": "超过1000万种模板"
+    },
+    {
+      "en": "Collaboration features",
+      "zh": "协作功能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic design tools and templates. No watermarks on designs.",
+        "zh": "基本设计工具和模板。设计中无水印。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Plus",
+        "zh": "Plus版"
+      },
+      "price": 12.95,
+      "description": {
+        "en": "More templates, collaboration features, and advanced design tools.",
+        "zh": "更多模板、协作功能和高级设计工具。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 credits/month",
+          "zh": "每月1000积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 1GB",
+          "zh": "最大1GB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "Pro版"
+      },
+      "price": 25,
+      "description": {
+        "en": "All features of Plus plus advanced design tools and priority customer support.",
+        "zh": "Plus的所有功能，高级设计工具和优先客户服务支持。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits",
+          "zh": "无限制积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 2GB",
+          "zh": "最大2GB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "Some advanced features require a paid plan",
+      "zh": "一些高级功能需要付费计划"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals, small businesses, and creatives",
+    "zh": "个人、小型企业和创意人士"
+  },
+  "positioning": {
+    "en": "Canva positions itself as a user-friendly, accessible design tool for everyone.",
+    "zh": "Canva将自己定位为一个易于使用、对所有人开放的设计工具。"
+  },
+  "analyzedAt": "2026-04-10T10:15:29.079305"
+}

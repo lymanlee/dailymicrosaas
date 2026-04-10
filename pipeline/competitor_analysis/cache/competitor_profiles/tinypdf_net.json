@@ -1,0 +1,60 @@
+{
+  "domain": "tinypdf.net",
+  "name": "TinyPDF",
+  "keyFeatures": [
+    {
+      "en": "Convert documents to PDF",
+      "zh": "将文档转换为PDF"
+    },
+    {
+      "en": "Split and merge PDF files",
+      "zh": "分割和合并PDF文件"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Convert up to 10 documents per month. No watermarks.",
+        "zh": "每月最多转换10份文档。无水印。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "10 credits/month",
+          "zh": "每月10积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 2MB",
+          "zh": "最大2MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size and number of documents per month.",
+      "zh": "文件大小和每月文档数量有限。"
+    },
+    {
+      "en": "No premium features available.",
+      "zh": "没有高级功能可供选择。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses who need basic PDF conversion and management tools.",
+    "zh": "需要基本PDF转换和管理工具的个人和小型企业。"
+  },
+  "positioning": {
+    "en": "TinyPDF positions itself as a simple and free tool for basic PDF needs.",
+    "zh": "TinyPDF将其定位为一个简单且免费的基本PDF需求工具。"
+  },
+  "analyzedAt": "2026-04-10T09:49:00.190864"
+}

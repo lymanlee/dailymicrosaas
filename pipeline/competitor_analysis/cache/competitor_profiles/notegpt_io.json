@@ -1,0 +1,60 @@
+{
+  "domain": "notegpt.io",
+  "name": "NoteGPT",
+  "keyFeatures": [
+    {
+      "en": "AI-driven note-taking and organization",
+      "zh": "AI驱动的笔记整理"
+    },
+    {
+      "en": "Real-time collaboration with team members",
+      "zh": "与团队成员实时协作"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited notes, basic organization, and real-time collaboration with up to 5 team members.",
+        "zh": "无限笔记，基本整理功能，最多与5名团队成员进行实时协作。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "No explicit mention of data privacy and security measures",
+      "zh": "未明确说明数据隐私和安全措施"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams looking for a simple and efficient way to organize and share notes.",
+    "zh": "寻找简单高效方式整理和分享笔记的个人和小型团队"
+  },
+  "positioning": {
+    "en": "NoteGPT positions itself as a user-friendly tool for note-taking and collaboration.",
+    "zh": "NoteGPT将其定位为易于使用的笔记和协作工具"
+  },
+  "analyzedAt": "2026-04-10T09:45:30.707780"
+}

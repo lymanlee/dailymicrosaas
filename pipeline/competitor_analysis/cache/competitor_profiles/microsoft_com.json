@@ -1,0 +1,89 @@
+{
+  "domain": "microsoft.com",
+  "name": "Microsoft",
+  "keyFeatures": [
+    {
+      "en": "Cloud computing and software solutions",
+      "zh": "云计算和软件解决方案"
+    },
+    {
+      "en": "AI and machine learning capabilities",
+      "zh": "人工智能和机器学习能力"
+    },
+    {
+      "en": "Security and compliance tools",
+      "zh": "安全性和合规性工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Access to basic tools and services",
+        "zh": "基本工具和服务的访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Standard",
+        "zh": "标准版"
+      },
+      "price": 15,
+      "description": {
+        "en": "Includes advanced tools and services for small businesses",
+        "zh": "包括为小型企业提供的高级工具和服务"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Complex setup and configuration for new users",
+      "zh": "对于新用户来说，设置和配置较为复杂"
+    },
+    {
+      "en": "High cost for enterprise-level solutions",
+      "zh": "企业级解决方案成本较高"
+    }
+  ],
+  "targetAudience": {
+    "en": "Businesses of all sizes, developers, and enterprises",
+    "zh": "所有规模的企业、开发人员和企业"
+  },
+  "positioning": {
+    "en": "Leader in enterprise software and cloud services",
+    "zh": "企业软件和云服务的领导者"
+  },
+  "analyzedAt": "2026-04-10T09:49:45.685494"
+}

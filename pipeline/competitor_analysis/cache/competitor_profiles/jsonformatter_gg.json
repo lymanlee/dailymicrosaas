@@ -1,0 +1,52 @@
+{
+  "domain": "jsonformatter.gg",
+  "name": "JsonFormatter.gg",
+  "keyFeatures": [
+    {
+      "en": "Online JSON formatter and validator",
+      "zh": "在线JSON格式化和验证工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on usage, but no support provided.",
+        "zh": "无使用限制，但不提供技术支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited support and no premium features.",
+      "zh": "支持有限且无高级功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers and data analysts who need to format and validate JSON data.",
+    "zh": "需要格式化和验证JSON数据的开发人员和数据分析师"
+  },
+  "positioning": {
+    "en": "A simple and free tool for basic JSON formatting and validation.",
+    "zh": "一个简单且免费的基本JSON格式化和验证工具"
+  },
+  "analyzedAt": "2026-04-10T10:16:46.081983"
+}

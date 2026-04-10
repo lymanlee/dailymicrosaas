@@ -208,15 +208,233 @@ trendSeries:
   - date: "2026-04-06"
     value: 48
 painClusters:
-  - en: "Manual & time-consuming workflow"
-    zh: "操作繁琐，效率低"
-  - en: "Speed & performance issues"
-    zh: "速度和性能问题反复出现"
-  - en: "Output quality inconsistency"
-    zh: "AI 生成结果质量不稳定"
+  - en: "【Humanize AI】Limited features without subscription"
+    zh: "【Humanize AI】订阅前功能有限"
+  - en: "【Humanize AI】No customer support mentioned"
+    zh: "【Humanize AI】未提及客户支持"
+  - en: "【Humanize】Limited free tier options"
+    zh: "【Humanize】免费选项有限"
+  - en: "【QuillBot】Limited features in the free tier"
+    zh: "【QuillBot】免费套餐功能有限"
 competitorGaps:
-  - en: "Generalist AI tools are overpriced for single-use-case needs"
-    zh: "通用型 AI 工具对单一需求来说定价过高"
+  - en: "Limited features without subscription"
+    zh: "订阅前功能有限"
+  - en: "No customer support mentioned"
+    zh: "未提及客户支持"
+  - en: "Limited free tier options"
+    zh: "免费选项有限"
+competitorAnalysis:
+  topCompetitors:
+    - domain: "humanizeai.pro"
+      name:
+        en: "Humanize AI"
+        zh: "Humanize AI"
+      keyFeatures:
+        - en: "AI-driven content generation"
+          zh: "AI驱动的内容生成"
+        - en: "Customizable templates for various industries"
+          zh: "多种行业的可定制模板"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Access to basic features and templates"
+            zh: "基本功能和模板的访问权限"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+      weaknesses:
+        - en: "Limited features without subscription"
+          zh: "订阅前功能有限"
+        - en: "No customer support mentioned"
+          zh: "未提及客户支持"
+    - domain: "humanize.ai"
+      name:
+        en: "Humanize"
+        zh: "Humanize"
+      keyFeatures:
+        - en: "AI-driven content generation"
+          zh: "基于AI的内容生成"
+        - en: "Personalized user experience"
+          zh: "个性化的用户体验"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Limited access to basic features"
+            zh: "有限的基本功能访问权限"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+        - name:
+            en: "Pro"
+            zh: "专业版"
+          price: 0
+          description:
+            en: "Access to advanced features and priority support"
+            zh: "高级功能访问和优先技术支持"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+      weaknesses:
+        - en: "Limited free tier options"
+          zh: "免费选项有限"
+    - domain: "quillbot.com"
+      name:
+        en: "QuillBot"
+        zh: "QuillBot"
+      keyFeatures:
+        - en: "AI-powered writing assistant"
+          zh: "AI驱动的写作助手"
+        - en: "Grammar and style correction"
+          zh: "语法和风格校正"
+        - en: "Plagiarism detection"
+          zh: "抄袭检测"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Basic features for personal use"
+            zh: "个人使用的基本功能"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+      weaknesses:
+        - en: "Limited features in the free tier"
+          zh: "免费套餐功能有限"
+        - en: "No detailed pricing for premium tiers"
+          zh: "高级套餐定价不明确"
+    - domain: "grammarly.com"
+      name:
+        en: "Grammarly"
+        zh: "Grammarly"
+      keyFeatures:
+        - en: "Real-time grammar and spelling checker"
+          zh: "实时语法和拼写检查"
+        - en: "Plagiarism detection"
+          zh: "抄袭检测"
+        - en: "Writing suggestions and improvements"
+          zh: "写作建议和改进"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费版"
+          price: 0
+          description:
+            en: "Basic features such as grammar and spelling check, plagiarism detection, and writing suggestions."
+            zh: "基本功能，如语法和拼写检查、抄袭检测和写作建议。"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+        - name:
+            en: "Premium"
+            zh: "高级版"
+          price: 12.95
+          description:
+            en: "All features of the free version plus advanced grammar and writing suggestions, and priority support."
+            zh: "免费版的所有功能，加上高级语法和写作建议，以及优先支持。"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+      weaknesses:
+        - en: "Limited to web and mobile apps, no standalone desktop application."
+          zh: "仅限于网页和移动应用程序，没有独立的桌面应用程序。"
+        - en: "Premium features are not available for all languages."
+          zh: "高级功能并非所有语言都可用。"
+    - domain: "notegpt.io"
+      name:
+        en: "NoteGPT"
+        zh: "NoteGPT"
+      keyFeatures:
+        - en: "AI-driven note-taking and organization"
+          zh: "AI驱动的笔记整理"
+        - en: "Real-time collaboration with team members"
+          zh: "与团队成员实时协作"
+      pricingTiers:
+        - name:
+            en: "Free"
+            zh: "免费"
+          price: 0
+          description:
+            en: "Unlimited notes, basic organization, and real-time collaboration with up to 5 team members."
+            zh: "无限笔记，基本整理功能，最多与5名团队成员进行实时协作。"
+          limits:
+            monthlyCredits:
+              en: "Limited monthly credits"
+              zh: "每月积分有限"
+            commercialUse:
+              en: "Revenue sharing applies"
+              zh: "需收入分成"
+      weaknesses:
+        - en: "Limited customization options for advanced users"
+          zh: "高级用户自定义选项有限"
+        - en: "No explicit mention of data privacy and security measures"
+          zh: "未明确说明数据隐私和安全措施"
+  marketGaps:
+    - en: "Limited features without subscription"
+      zh: "订阅前功能有限"
+    - en: "No customer support mentioned"
+      zh: "未提及客户支持"
+    - en: "Limited free tier options"
+      zh: "免费选项有限"
+    - en: "Limited features in the free tier"
+      zh: "免费套餐功能有限"
+    - en: "No detailed pricing for premium tiers"
+      zh: "高级套餐定价不明确"
+risks:
+  - risk:
+      en: "Output quality inconsistency — AI results vary, user trust is fragile"
+      zh: "输出质量不稳定 — AI 结果时好时坏，用户信任脆弱"
+    mitigation:
+      en: "Show real comparison cases; be transparent about model limitations"
+      zh: "展示真实对比案例，透明说明模型局限"
+  - risk:
+      en: "Big players (OpenAI, Google) may enter with better models at lower cost"
+      zh: "大厂（OpenAI、Google）可能携更优模型更低成本入场"
+    mitigation:
+      en: "Build community and brand loyalty early; focus on underserved niches"
+      zh: "早期建立社区和品牌认知，聚焦大厂不认真做的细分"
+  - risk:
+      en: "Users compare results to the best they've seen, not the average"
+      zh: "用户对标的是最好的产品，不是平均水平"
+    mitigation:
+      en: "A/B test against competitors; offer free trials so users can judge directly"
+      zh: "与竞品对比 A/B 测试，提供免费试用让用户直接判断"
+unsuitableFor:
+  - en: "Users with strict accuracy requirements (legal, medical)"
+    zh: "对准确性有严格要求的场景（法律、医疗）"
+  - en: "Teams needing full data residency compliance"
+    zh: "需要完整数据主权合规的企业"
 evidenceLinks: []
 ---
 
@@ -241,12 +459,30 @@ evidenceLinks: []
 
 ### 竞争格局
 
-这次竞争判断没有引用搜索结果页抽样，因此先用趋势和社区信号做一版保守估计。
-现有外部信号说明这个方向不是纯概念题，但要不要正面进入，还取决于你能否把场景切得足够窄。
+SERP 前 10 大概是这样的格局：**0 个大站**（grammarly.com 等）占据头部，同时有 **0 个 niche 工具**（humanizeai.pro、humanize.ai、quillbot.com 等）在生存。
+
+### 竞品分析
+
+| 竞品 | 定价 | 核心功能 | 弱点 |
+|------|------|----------|------|
+| [Humanize AI](https://humanizeai.pro) | 免费: 免费 | AI驱动的内容生成<br>多种行业的可定制模板 | 订阅前功能有限<br>未提及客户支持 |
+| [Humanize](https://humanize.ai) | 免费: 免费<br>专业版: 免费 | 基于AI的内容生成<br>个性化的用户体验 | 免费选项有限 |
+| [QuillBot](https://quillbot.com) | 免费: 免费 | AI驱动的写作助手<br>语法和风格校正 | 免费套餐功能有限<br>高级套餐定价不明确 |
+| [Grammarly](https://grammarly.com) | 免费版: 免费<br>高级版: $12.95 | 实时语法和拼写检查<br>抄袭检测 | 仅限于网页和移动应用程序，没有独立的桌面应用程序。<br>高级功能并非所有语言都可用。 |
+| [NoteGPT](https://notegpt.io) | 免费: 免费 | AI驱动的笔记整理<br>与团队成员实时协作 | 高级用户自定义选项有限<br>未明确说明数据隐私和安全措施 |
+
+### 市场空白
+
+从竞品弱点可以直接推导当前市场的未满足需求：
+
+1. 订阅前功能有限
+2. 未提及客户支持
+3. 免费选项有限
+
 
 ### 可切入性
 
-🤔 **先把问题定义得更窄。** 当前外部信号偏弱，直接开做容易落进“有点需求但不够强”的灰区；先把目标人群和核心场景压到一个更小切口。
+⚠️ **先缩窄场景再进。** 现有样本已经能说明这个市场存在竞争，但还没有强到必须立刻做通用版；先用单功能 MVP 拿到一批真实用户更稳。
 
 ### 差异化方向
 
@@ -258,9 +494,9 @@ AI 工具方向的差异化难在模型本身不是壁垒，重点要看：
 | 维度 | 评估 |
 |------|------|
 | 难度 | Easy |
-| SERP 头部大站 | 本轮未抽样搜索结果，头部格局待下一轮确认 |
-| Niche 样本 | 先验证 1 个细分场景，再决定是否扩展 |
-| 竞争可切入度 | 🤔 先收窄问题定义 |
+| SERP 头部大站 | grammarly.com |
+| Niche 样本 | 0 个：humanizeai.pro、humanize.ai、quillbot.com |
+| 竞争可切入度 | ⚠️ 先缩窄场景再进 |
 
 ## 技术难度
 
@@ -290,14 +526,21 @@ AI 工具方向的差异化难在模型本身不是壁垒，重点要看：
 - **点数包**: 一次性购买调用包，适合不想订阅的用户
 - **注意**: 定价要把 API 成本算进去，确保每个付费用户都是正毛利
 
+> 💡 建议参考现有 niche 工具（humanizeai.pro 等）的定价页，了解这个市场的用户付费预期，再调整自己的价格带。
 
 ## 参考案例
 
-当前批次暂无外部样本数据。建议手动搜索以下内容补充：
+**SERP 中的 Niche 工具**（直接竞品，建议逐一研究）
 
-- 在 Google 搜索关键词，记录 SERP 前 10 的工具名和功能特点
-- 在 Reddit / HN 搜索相关讨论，找用户抱怨现有工具的帖子
-- 在 Product Hunt 搜索相关产品的 upvote 数和评论质量
+- `humanizeai.pro` — 研究重点：定价、核心功能差异、用户评论
+- `humanize.ai` — 研究重点：定价、核心功能差异、用户评论
+- `quillbot.com` — 研究重点：定价、核心功能差异、用户评论
+- `notegpt.io` — 研究重点：定价、核心功能差异、用户评论
+
+**头部大站**（参考，不要正面竞争）
+
+- `grammarly.com` — 研究重点：他们定价最高但体验最差的功能
+
 > ⚠️ 以上参考案例来自自动采集，建议在动手之前人工验证一遍，避免竞争判断偏差。
 
 ## 最快实现路径
@@ -340,6 +583,6 @@ AI 工具方向的差异化难在模型本身不是壁垒，重点要看：
 
 **核心机会**
 
-- 这个方向适合小成本验证——先做一个最小版本，在真实用户那里测试付费意愿，再决定是否继续。
+- 现有 niche 工具（humanizeai.pro 等）已经验证了用户付费意愿，但这些工具通常在体验和性能上有明显短板，有机会靠更好的产品质量切走流量。
 
 > 最终是否值得做，还是要看你自己的资源和执行力。数据只是说「这个方向不算差」，真正的决定因素是你能不能在 2-3 周内做出一个能让用户看到价值的版本。

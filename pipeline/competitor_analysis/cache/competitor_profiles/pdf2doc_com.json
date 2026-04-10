@@ -1,0 +1,60 @@
+{
+  "domain": "pdf2doc.com",
+  "name": "pdf2doc.com",
+  "keyFeatures": [
+    {
+      "en": "Convert PDF to DOC online",
+      "zh": "在线将PDF转换为DOC"
+    },
+    {
+      "en": "Support for large file sizes",
+      "zh": "支持大文件大小"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Convert up to 2 PDFs per day with no file size limit.",
+        "zh": "每天最多转换2个PDF，无文件大小限制。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features in the free tier",
+      "zh": "免费套餐功能有限"
+    },
+    {
+      "en": "No mention of customer support",
+      "zh": "未提及客服支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A simple online tool for converting PDF to DOC",
+    "zh": "一个简单的在线工具，用于将PDF转换为DOC"
+  },
+  "analyzedAt": "2026-04-10T09:48:01.260680"
+}

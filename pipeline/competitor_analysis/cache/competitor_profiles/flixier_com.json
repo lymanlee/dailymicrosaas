@@ -1,0 +1,85 @@
+{
+  "domain": "flixier.com",
+  "name": "Flixier",
+  "keyFeatures": [
+    {
+      "en": "Video editing tools for creators",
+      "zh": "创作者的视频编辑工具"
+    },
+    {
+      "en": "Collaboration features for teams",
+      "zh": "团队协作功能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic editing tools, limited storage, no watermarks",
+        "zh": "基础编辑工具，有限的存储空间，无水印"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Advanced editing tools, unlimited storage, watermarks",
+        "zh": "高级编辑工具，无限存储空间，有水印"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "No clear pricing for premium features",
+      "zh": "高级功能的定价不明确"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators, small businesses",
+    "zh": "内容创作者，小型企业"
+  },
+  "positioning": {
+    "en": "Flixier positions itself as a user-friendly video editing platform for creators and small businesses.",
+    "zh": "Flixier 定位为面向创作者和小型企业的用户友好型视频编辑平台"
+  },
+  "analyzedAt": "2026-04-10T09:50:13.787033"
+}

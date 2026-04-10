@@ -1,0 +1,89 @@
+{
+  "domain": "smallpdf.com",
+  "name": "Smallpdf",
+  "keyFeatures": [
+    {
+      "en": "Convert, edit, and compress PDF files",
+      "zh": "转换、编辑和压缩PDF文件"
+    },
+    {
+      "en": "Generate PDFs from various document types",
+      "zh": "从各种文档类型生成PDF"
+    },
+    {
+      "en": "Secure file sharing and download options",
+      "zh": "安全的文件共享和下载选项"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as PDF conversion, editing, and compression. No file size limit for PDFs up to 50MB.",
+        "zh": "基本功能如PDF转换、编辑和压缩。PDF文件大小上限为50MB，无文件大小限制。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 10,
+      "description": {
+        "en": "All features of the Free plan plus advanced editing tools, unlimited file size for PDFs, and secure file sharing options.",
+        "zh": "免费计划的所有功能，加上高级编辑工具，不限PDF文件大小，以及安全的文件共享选项。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "不限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "No mobile app available",
+      "zh": "没有移动应用程序"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses needing basic PDF editing and conversion tools",
+    "zh": "需要基本PDF编辑和转换工具的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Smallpdf positions itself as a user-friendly and versatile tool for handling PDF files, suitable for both personal and professional use.",
+    "zh": "Smallpdf将自己定位为一个易于使用且功能多样的PDF处理工具，适用于个人和专业用途。"
+  },
+  "analyzedAt": "2026-04-10T09:43:29.006867"
+}

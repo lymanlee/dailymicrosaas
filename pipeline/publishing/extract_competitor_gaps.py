@@ -40,6 +40,9 @@ def extract_competitor_gaps(
     gaps = []
 
     for profile in competitor_profiles:
+        # 兼容 CompetitorProfile dataclass 对象和 dict 两种格式
+        if hasattr(profile, "to_dict"):
+            profile = profile.to_dict()
         domain = profile.get("domain", "")
         weaknesses = profile.get("weaknesses", [])
 

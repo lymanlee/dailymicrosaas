@@ -1,0 +1,64 @@
+{
+  "domain": "xodo.com",
+  "name": "Xodo PDF Reader & Editor",
+  "keyFeatures": [
+    {
+      "en": "Convert, edit, and annotate PDFs",
+      "zh": "转换、编辑和注释PDF文件"
+    },
+    {
+      "en": "Supports over 50 file formats",
+      "zh": "支持超过50种文件格式"
+    },
+    {
+      "en": "Sync documents across devices",
+      "zh": "跨设备同步文档"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal use",
+        "zh": "个人使用的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use without a paid plan",
+      "zh": "没有付费计划仅限个人使用"
+    },
+    {
+      "en": "No specific mention of file size limits",
+      "zh": "未明确说明文件大小限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams",
+    "zh": "个人和小型团队"
+  },
+  "positioning": {
+    "en": "A versatile tool for managing PDFs on mobile devices",
+    "zh": "一款适用于移动设备管理PDF文件的多功能工具"
+  },
+  "analyzedAt": "2026-04-10T09:49:21.315149"
+}

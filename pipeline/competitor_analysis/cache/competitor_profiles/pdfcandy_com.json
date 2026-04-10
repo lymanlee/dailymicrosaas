@@ -1,0 +1,114 @@
+{
+  "domain": "pdfcandy.com",
+  "name": "PDF Candy",
+  "keyFeatures": [
+    {
+      "en": "Convert various file formats to PDF",
+      "zh": "将各种文件格式转换为PDF"
+    },
+    {
+      "en": "Edit and manipulate PDF files",
+      "zh": "编辑和操作PDF文件"
+    },
+    {
+      "en": "Compress PDF files to reduce size",
+      "zh": "压缩PDF文件以减少文件大小"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Convert up to 10 files per month, edit and compress up to 5 files",
+        "zh": "每月最多转换10个文件，最多编辑和压缩5个文件"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "10 credits/month",
+          "zh": "每月10积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 5MB",
+          "zh": "最大5MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Convert up to 50 files per month, edit and compress up to 25 files",
+        "zh": "每月最多转换50个文件，最多编辑和压缩25个文件"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 25MB",
+          "zh": "最大25MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 99.99,
+      "description": {
+        "en": "Unlimited file conversions, edits, and compressions",
+        "zh": "不限文件转换、编辑和压缩"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits/month",
+          "zh": "不限积分"
+        },
+        "maxFileSize": {
+          "en": "No limit",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options",
+      "zh": "免费版选项有限"
+    },
+    {
+      "en": "No detailed pricing for enterprise users",
+      "zh": "未提供企业用户的详细定价"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "PDF conversion and manipulation tool for individuals and small businesses",
+    "zh": "面向个人和小型企业的PDF转换和操作工具"
+  },
+  "analyzedAt": "2026-04-10T09:48:22.406436"
+}

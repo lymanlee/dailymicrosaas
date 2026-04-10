@@ -1,0 +1,60 @@
+{
+  "domain": "aivideoeditor.art",
+  "name": "AI Video Editor",
+  "keyFeatures": [
+    {
+      "en": "AI-driven video editing tools",
+      "zh": "基于AI的视频编辑工具"
+    },
+    {
+      "en": "Real-time video effects and filters",
+      "zh": "实时视频效果和滤镜"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic editing tools, limited to 50 monthly credits",
+        "zh": "基本编辑工具，每月50积分限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features and credits in the free tier",
+      "zh": "免费版功能和积分有限"
+    },
+    {
+      "en": "No pricing information for premium tiers",
+      "zh": "未明确说明高级套餐价格"
+    }
+  ],
+  "targetAudience": {
+    "en": "Beginner video editors and hobbyists",
+    "zh": "初学者视频编辑者和爱好者"
+  },
+  "positioning": {
+    "en": "Focuses on user-friendly AI tools for non-professional users",
+    "zh": "专注于为非专业人士提供易于使用的AI工具"
+  },
+  "analyzedAt": "2026-04-10T10:15:46.865129"
+}

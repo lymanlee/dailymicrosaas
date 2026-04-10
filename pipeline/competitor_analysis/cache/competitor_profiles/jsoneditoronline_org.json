@@ -1,0 +1,56 @@
+{
+  "domain": "jsoneditoronline.org",
+  "name": "JSON Editor Online",
+  "keyFeatures": [
+    {
+      "en": "Online JSON editor with syntax highlighting",
+      "zh": "带有语法高亮的在线JSON编辑器"
+    },
+    {
+      "en": "Support for various JSON features and data types",
+      "zh": "支持各种JSON特性和数据类型"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on usage",
+        "zh": "无使用限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to online use, no offline support",
+      "zh": "仅限在线使用，无离线支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers, data scientists, and anyone working with JSON data",
+    "zh": "开发人员、数据科学家以及任何处理JSON数据的人"
+  },
+  "positioning": {
+    "en": "A user-friendly online tool for editing and validating JSON data",
+    "zh": "一个易于使用的在线工具，用于编辑和验证JSON数据"
+  },
+  "analyzedAt": "2026-04-10T10:16:24.685156"
+}

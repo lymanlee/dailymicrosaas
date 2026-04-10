@@ -1,0 +1,64 @@
+{
+  "domain": "combinepdf.com",
+  "name": "CombinePDF",
+  "keyFeatures": [
+    {
+      "en": "Combine multiple PDF files into one",
+      "zh": "将多个PDF文件合并为一个"
+    },
+    {
+      "en": "Split a PDF file into multiple pages",
+      "zh": "将PDF文件拆分成多页"
+    },
+    {
+      "en": "Convert PDF to other file formats",
+      "zh": "将PDF转换为其他文件格式"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "No restrictions on file size or number of files. Limited to 50 monthly credits.",
+        "zh": "无文件大小或数量限制。每月限制50积分。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 50 monthly credits, which may be insufficient for heavy users.",
+      "zh": "每月限制50积分，对于重度用户可能不够用。"
+    },
+    {
+      "en": "No commercial use allowed, which may limit its use in business scenarios.",
+      "zh": "不允许商业使用，可能限制其在商业场景中的应用。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses who need basic PDF file management tools.",
+    "zh": "需要基本PDF文件管理工具的个人和小型企业。"
+  },
+  "positioning": {
+    "en": "A simple and free tool for basic PDF file management.",
+    "zh": "一个简单且免费的基本PDF文件管理工具。"
+  },
+  "analyzedAt": "2026-04-10T09:45:57.993917"
+}

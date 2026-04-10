@@ -1,0 +1,60 @@
+{
+  "domain": "musiccreator.ai",
+  "name": "musiccreator.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-driven music composition",
+      "zh": "基于AI的音乐创作"
+    },
+    {
+      "en": "Customizable music styles",
+      "zh": "可定制的音乐风格"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal use",
+        "zh": "个人使用的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use only, no commercial options available",
+      "zh": "仅限个人使用，没有商业选项"
+    },
+    {
+      "en": "No clear pricing for premium features",
+      "zh": "高级功能的定价不明确"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual musicians and hobbyists",
+    "zh": "个人音乐人和爱好者"
+  },
+  "positioning": {
+    "en": "musiccreator.ai positions itself as an accessible AI tool for creating music without extensive technical knowledge.",
+    "zh": "musiccreator.ai 定位为一个易于使用的AI工具，无需深厚的技术知识即可创作音乐"
+  },
+  "analyzedAt": "2026-04-10T11:35:01.077398"
+}

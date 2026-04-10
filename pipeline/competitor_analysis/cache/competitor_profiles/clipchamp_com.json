@@ -1,0 +1,85 @@
+{
+  "domain": "clipchamp.com",
+  "name": "ClipChamp",
+  "keyFeatures": [
+    {
+      "en": "Create and edit videos with advanced tools",
+      "zh": "使用高级工具创建和编辑视频"
+    },
+    {
+      "en": "Collaborate with team members in real-time",
+      "zh": "实时与团队成员协作"
+    },
+    {
+      "en": "Export videos in various formats",
+      "zh": "以多种格式导出视频"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal and small business use",
+        "zh": "适用于个人和小型企业的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 19.99,
+      "description": {
+        "en": "Advanced features for professional use",
+        "zh": "适用于专业人士的高级功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options for businesses",
+      "zh": "免费套餐选项有限，不适合企业用户"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual creators, small businesses, and professionals",
+    "zh": "个人创作者、小型企业和专业人士"
+  },
+  "positioning": {
+    "en": "ClipChamp positions itself as a versatile video creation tool for both personal and professional use.",
+    "zh": "ClipChamp 定位为适用于个人和专业用途的多功能视频创作工具"
+  },
+  "analyzedAt": "2026-04-10T10:15:06.048507"
+}

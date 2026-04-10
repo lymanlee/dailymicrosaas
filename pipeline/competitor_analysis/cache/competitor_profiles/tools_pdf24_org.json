@@ -1,0 +1,60 @@
+{
+  "domain": "tools.pdf24.org",
+  "name": "PDF24 Tools",
+  "keyFeatures": [
+    {
+      "en": "Convert PDF to other formats",
+      "zh": "将PDF转换为其他格式"
+    },
+    {
+      "en": "Create PDFs from multiple sources",
+      "zh": "从多个来源创建PDF"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited features, no commercial use",
+        "zh": "功能有限，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features in the free tier",
+      "zh": "免费版功能有限"
+    },
+    {
+      "en": "No pricing information for paid tiers",
+      "zh": "未提供付费版本的价格信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "Free online tool for basic PDF conversion and creation",
+    "zh": "免费在线工具，用于基本的PDF转换和创建"
+  },
+  "analyzedAt": "2026-04-10T09:46:15.889672"
+}

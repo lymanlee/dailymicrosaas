@@ -1,0 +1,60 @@
+{
+  "domain": "convertio.co",
+  "name": "Convertio",
+  "keyFeatures": [
+    {
+      "en": "Convert files to different formats",
+      "zh": "将文件转换为不同格式"
+    },
+    {
+      "en": "Batch conversion",
+      "zh": "批量转换"
+    },
+    {
+      "en": "Online and desktop applications",
+      "zh": "在线和桌面应用程序"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Convert up to 5 files per day, 5MB max file size, no commercial use allowed",
+        "zh": "每天最多转换5个文件，单个文件最大5MB，不允许商业使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "5MB",
+          "zh": "5MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size and number of conversions for free tier",
+      "zh": "免费套餐文件大小和转换次数有限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses needing basic file conversion",
+    "zh": "需要基本文件转换的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Convertio positions itself as a simple and user-friendly online tool for file conversion",
+    "zh": "Convertio 自定位为一个简单易用的在线文件转换工具"
+  },
+  "analyzedAt": "2026-04-10T09:47:44.746009"
+}

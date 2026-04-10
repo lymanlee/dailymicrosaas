@@ -1,0 +1,64 @@
+{
+  "domain": "sejda.com",
+  "name": "Sejda",
+  "keyFeatures": [
+    {
+      "en": "Convert PDF to other formats",
+      "zh": "将PDF转换为其他格式"
+    },
+    {
+      "en": "Split, merge, and reorder pages in PDFs",
+      "zh": "分割、合并和重新排列PDF中的页面"
+    },
+    {
+      "en": "Extract text and images from PDFs",
+      "zh": "从PDF中提取文本和图像"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal use",
+        "zh": "个人使用的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use and lacks advanced features",
+      "zh": "仅限个人使用且缺乏高级功能"
+    },
+    {
+      "en": "No clear pricing for business or enterprise users",
+      "zh": "未明确针对企业和商业用户的定价"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams for personal projects",
+    "zh": "个人和小团队用于个人项目"
+  },
+  "positioning": {
+    "en": "A simple and free tool for basic PDF manipulation",
+    "zh": "一个简单且免费的基本PDF操作工具"
+  },
+  "analyzedAt": "2026-04-10T09:46:34.499223"
+}

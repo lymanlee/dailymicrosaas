@@ -1,0 +1,60 @@
+{
+  "domain": "jsonformatter.org",
+  "name": "JSON Formatter",
+  "keyFeatures": [
+    {
+      "en": "Online JSON editor and validator",
+      "zh": "在线JSON编辑器和验证器"
+    },
+    {
+      "en": "Pretty print JSON",
+      "zh": "美化JSON格式"
+    },
+    {
+      "en": "Convert JSON to XML and vice versa",
+      "zh": "JSON转换为XML，反之亦然"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on usage",
+        "zh": "无使用限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to JSON only, no other data formats",
+      "zh": "仅限于JSON格式，不支持其他数据格式"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers, data analysts, and anyone working with JSON data",
+    "zh": "开发人员、数据分析师及所有处理JSON数据的人员"
+  },
+  "positioning": {
+    "en": "A simple and easy-to-use online tool for JSON manipulation",
+    "zh": "一个简单易用的在线工具，用于JSON数据的处理"
+  },
+  "analyzedAt": "2026-04-10T10:16:04.910037"
+}

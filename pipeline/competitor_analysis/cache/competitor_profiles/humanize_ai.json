@@ -1,0 +1,81 @@
+{
+  "domain": "humanize.ai",
+  "name": "Humanize",
+  "keyFeatures": [
+    {
+      "en": "AI-driven content generation",
+      "zh": "基于AI的内容生成"
+    },
+    {
+      "en": "Personalized user experience",
+      "zh": "个性化的用户体验"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic features",
+        "zh": "有限的基本功能访问权限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Access to advanced features and priority support",
+        "zh": "高级功能访问和优先技术支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options",
+      "zh": "免费选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators and businesses",
+    "zh": "内容创作者和企业用户"
+  },
+  "positioning": {
+    "en": "Humanize positions itself as a tool for businesses and creators to enhance their content creation process with AI assistance.",
+    "zh": "Humanize 自定位为一种工具，帮助企业和创作者通过 AI 辅助提升内容创作过程"
+  },
+  "analyzedAt": "2026-04-10T09:45:09.739639"
+}

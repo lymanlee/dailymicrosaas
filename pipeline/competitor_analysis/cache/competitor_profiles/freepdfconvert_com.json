@@ -1,0 +1,60 @@
+{
+  "domain": "freepdfconvert.com",
+  "name": "FreePDFConvert",
+  "keyFeatures": [
+    {
+      "en": "Convert PDF files to various formats",
+      "zh": "将PDF文件转换为多种格式"
+    },
+    {
+      "en": "Upload and convert files directly from the web",
+      "zh": "直接从网页上传和转换文件"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Convert up to 5 PDFs per month with no file size limit.",
+        "zh": "每月最多转换5个PDF文件，无文件大小限制。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "5 PDFs/month",
+          "zh": "每月5个PDF"
+        },
+        "maxFileSize": {
+          "en": "No limit",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 5 PDF conversions per month",
+      "zh": "每月仅限转换5个PDF文件"
+    },
+    {
+      "en": "No additional features beyond basic conversion",
+      "zh": "除了基本转换功能外没有其他功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses with basic PDF conversion needs",
+    "zh": "有基本PDF转换需求的个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A simple and free online tool for basic PDF conversion",
+    "zh": "一个简单且免费的在线工具，用于基本的PDF转换"
+  },
+  "analyzedAt": "2026-04-10T09:47:12.414063"
+}

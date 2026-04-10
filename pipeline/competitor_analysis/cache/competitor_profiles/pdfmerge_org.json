@@ -1,0 +1,56 @@
+{
+  "domain": "pdfmerge.org",
+  "name": "PDFMerge",
+  "keyFeatures": [
+    {
+      "en": "Merge multiple PDF files into one",
+      "zh": "合并多个PDF文件为一个"
+    },
+    {
+      "en": "Split PDF files into multiple pages or sections",
+      "zh": "将PDF文件拆分成多页或部分"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal use",
+        "zh": "基本功能，适用于个人使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal use and lacks commercial options",
+      "zh": "仅限个人使用且缺乏商业选项"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses for personal projects",
+    "zh": "个人和小型企业用于个人项目"
+  },
+  "positioning": {
+    "en": "Simple and free tool for basic PDF file manipulation",
+    "zh": "一个简单且免费的基本PDF文件操作工具"
+  },
+  "analyzedAt": "2026-04-10T09:46:52.027434"
+}

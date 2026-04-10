@@ -1,0 +1,60 @@
+{
+  "domain": "pdfcompressor.com",
+  "name": "PDF Compressor",
+  "keyFeatures": [
+    {
+      "en": "Compress PDF files up to 90%",
+      "zh": "压缩PDF文件高达90%"
+    },
+    {
+      "en": "Preserve original quality and resolution",
+      "zh": "保留原始质量和分辨率"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Compress up to 50MB files, no watermarks",
+        "zh": "压缩最多50MB的文件，无水印"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited file size for free tier",
+      "zh": "免费套餐文件大小有限制"
+    },
+    {
+      "en": "No additional features for free tier",
+      "zh": "免费套餐无额外功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses who need to compress PDF files",
+    "zh": "需要压缩PDF文件的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Specializes in efficient PDF compression without compromising quality",
+    "zh": "专注于高效PDF压缩，不牺牲质量"
+  },
+  "analyzedAt": "2026-04-10T09:48:39.589985"
+}

@@ -1,0 +1,89 @@
+{
+  "domain": "grammarly.com",
+  "name": "Grammarly",
+  "keyFeatures": [
+    {
+      "en": "Real-time grammar and spelling checker",
+      "zh": "实时语法和拼写检查"
+    },
+    {
+      "en": "Plagiarism detection",
+      "zh": "抄袭检测"
+    },
+    {
+      "en": "Writing suggestions and improvements",
+      "zh": "写作建议和改进"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as grammar and spelling check, plagiarism detection, and writing suggestions.",
+        "zh": "基本功能，如语法和拼写检查、抄袭检测和写作建议。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Premium",
+        "zh": "高级版"
+      },
+      "price": 12.95,
+      "description": {
+        "en": "All features of the free version plus advanced grammar and writing suggestions, and priority support.",
+        "zh": "免费版的所有功能，加上高级语法和写作建议，以及优先支持。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to web and mobile apps, no standalone desktop application.",
+      "zh": "仅限于网页和移动应用程序，没有独立的桌面应用程序。"
+    },
+    {
+      "en": "Premium features are not available for all languages.",
+      "zh": "高级功能并非所有语言都可用。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Students, writers, and professionals who need to improve their writing and avoid errors.",
+    "zh": "需要提高写作水平和避免错误的学生、作家和专业人士。"
+  },
+  "positioning": {
+    "en": "Grammarly positions itself as a comprehensive writing assistant that helps users improve their writing skills and avoid common mistakes.",
+    "zh": "Grammarly把自己定位为一个全面的写作助手，帮助用户提高写作技能并避免常见错误。"
+  },
+  "analyzedAt": "2026-04-10T09:44:08.221901"
+}

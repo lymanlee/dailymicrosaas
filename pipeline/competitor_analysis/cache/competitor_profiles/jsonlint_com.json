@@ -1,0 +1,52 @@
+{
+  "domain": "jsonlint.com",
+  "name": "JSONLint",
+  "keyFeatures": [
+    {
+      "en": "Online JSON validator and editor",
+      "zh": "在线JSON验证器和编辑器"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on usage",
+        "zh": "无使用限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features compared to paid services",
+      "zh": "与付费服务相比功能有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers and JSON enthusiasts",
+    "zh": "开发者和JSON爱好者"
+  },
+  "positioning": {
+    "en": "A simple, free tool for basic JSON validation and editing",
+    "zh": "一个简单免费的基本JSON验证和编辑工具"
+  },
+  "analyzedAt": "2026-04-10T10:17:01.775718"
+}
