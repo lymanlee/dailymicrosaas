@@ -1,0 +1,81 @@
+{
+  "domain": "lastpass.com",
+  "name": "LastPass",
+  "keyFeatures": [
+    {
+      "en": "Generate strong passwords and store them in a secure vault",
+      "zh": "生成强密码并将其安全存储在密码库中"
+    },
+    {
+      "en": "Single-sign on (SSO) and adaptive MFA solutions",
+      "zh": "单点登录（SSO）和自适应多因素认证（MFA）解决方案"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Personal Plan",
+        "zh": "个人计划"
+      },
+      "price": 0,
+      "description": {
+        "en": "What's included: 100 GB storage, 50 monthly credits, unlimited devices, 100% offline access, SSO, MFA, and more",
+        "zh": "包含内容：100 GB 存储空间，每月50积分，不限设备数量，100% 离线访问，单点登录（SSO），多因素认证（MFA）等"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Business Plan",
+        "zh": "企业计划"
+      },
+      "price": 12,
+      "description": {
+        "en": "What's included: 1 TB storage, 1000 monthly credits, unlimited devices, 100% offline access, SSO, MFA, and more",
+        "zh": "包含内容：1 TB 存储空间，每月1000积分，不限设备数量，100% 离线访问，单点登录（SSO），多因素认证（MFA）等"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "1000 credits/month",
+          "zh": "每月1000积分"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited commercial use for the free plan",
+      "zh": "免费计划的商业用途有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "LastPass is positioned as the best password manager with strong security features and user-friendly interface.",
+    "zh": "LastPass 定位为具有强大安全功能和用户友好界面的最佳密码管理器。"
+  },
+  "analyzedAt": "2026-04-11T05:45:18.113899"
+}

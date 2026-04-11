@@ -132,16 +132,16 @@
     "priority": 80,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "documentgenius.com",
     "priority": 80,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "freeconvert.com",
@@ -150,14 +150,6 @@
     "created_at": "2026-04-09T17:17:42.401755+00:00",
     "retry_count": 0,
     "status": "done"
-  },
-  {
-    "domain": "ilovejpeg.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
   },
   {
     "domain": "imagecompressor.com",
@@ -176,140 +168,20 @@
     "status": "done"
   },
   {
-    "domain": "imgconverters.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "invoice-generator.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "invoicehome.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "invoicemaker.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
     "domain": "invoicesimple.com",
     "priority": 80,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "jsonformatonline.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "lastpass.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "online-stopwatch.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "passwords-generator.org",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "passwordsgenerator.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "pomodoro-focus-timer.io",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "pomodorotimer.ai",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "pomodorotimer.online",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "pomofocus.io",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "prezi.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "qr-code-generator.com",
     "priority": 80,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "qr.io",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "qrcode-monkey.com",

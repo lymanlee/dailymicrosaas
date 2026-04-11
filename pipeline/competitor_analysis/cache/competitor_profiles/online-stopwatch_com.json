@@ -1,0 +1,56 @@
+{
+  "domain": "online-stopwatch.com",
+  "name": "Online Stopwatch",
+  "keyFeatures": [
+    {
+      "en": "Online stopwatch with multiple timers",
+      "zh": "在线计时器，包含多个计时器"
+    },
+    {
+      "en": "Stopwatch with lap and split times",
+      "zh": "带有圈数和分段时间的计时器"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited number of timers, no ads",
+        "zh": "无限数量的计时器，无广告"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features without subscription",
+      "zh": "订阅前功能有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "General public",
+    "zh": "普通公众"
+  },
+  "positioning": {
+    "en": "Basic online stopwatch tool",
+    "zh": "基本的在线计时器工具"
+  },
+  "analyzedAt": "2026-04-11T05:45:30.967242"
+}

@@ -1,0 +1,85 @@
+{
+  "domain": "pomodoro-focus-timer.io",
+  "name": "Pomodoro Focus Timer",
+  "keyFeatures": [
+    {
+      "en": "Pomodoro Technique for time management",
+      "zh": "番茄工作法，用于时间管理"
+    },
+    {
+      "en": "Customizable themes and backgrounds",
+      "zh": "可定制的主题和背景"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on features, but no analytics or support",
+        "zh": "无功能限制，但无分析或支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 5,
+      "description": {
+        "en": "Includes all features with analytics and support",
+        "zh": "包含所有功能，附带分析和支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "No mobile app available",
+      "zh": "无移动应用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams who need time management tools",
+    "zh": "需要时间管理工具的个人和小型团队"
+  },
+  "positioning": {
+    "en": "A simple and effective Pomodoro timer with customization options",
+    "zh": "一款简单有效的番茄工作计时器，具有自定义选项"
+  },
+  "analyzedAt": "2026-04-11T05:46:54.716703"
+}

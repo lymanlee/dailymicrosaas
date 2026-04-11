@@ -1,0 +1,64 @@
+{
+  "domain": "jsonformatonline.com",
+  "name": "JSON Format Online",
+  "keyFeatures": [
+    {
+      "en": "Format, validate, and beautify JSON online",
+      "zh": "在线格式化、验证和美化JSON"
+    },
+    {
+      "en": "Syntax highlighting, error detection, and tree view",
+      "zh": "语法高亮、错误检测和树状视图"
+    },
+    {
+      "en": "No sign-up required, runs in your browser",
+      "zh": "无需注册，直接在浏览器中运行"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No sign-up required, syntax highlighting, error detection, tree view, and data stats",
+        "zh": "无需注册，提供语法高亮、错误检测、树状视图和数据统计"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to browser-based use, no offline capabilities",
+      "zh": "仅限于浏览器使用，没有离线功能"
+    },
+    {
+      "en": "No detailed pricing information for premium features",
+      "zh": "未提供高级功能的详细定价信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Developers and individuals who need to format, validate, and beautify JSON data",
+    "zh": "需要格式化、验证和美化JSON数据的开发人员和个体用户"
+  },
+  "positioning": {
+    "en": "A free online tool for JSON formatting, validation, and beautification",
+    "zh": "一个免费的在线工具，用于JSON格式化、验证和美化"
+  },
+  "analyzedAt": "2026-04-11T05:44:51.939674"
+}

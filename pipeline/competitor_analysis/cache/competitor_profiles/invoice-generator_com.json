@@ -1,0 +1,60 @@
+{
+  "domain": "invoice-generator.com",
+  "name": "Free Invoice Generator",
+  "keyFeatures": [
+    {
+      "en": "Create professional invoices in a single click",
+      "zh": "一键创建专业发票"
+    },
+    {
+      "en": "Attractive and customizable templates",
+      "zh": "吸引人且可定制的模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create and send unlimited invoices with no limitations on features or file size.",
+        "zh": "无限制创建和发送发票，无功能或文件大小限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customer support",
+      "zh": "有限的客户支持"
+    },
+    {
+      "en": "No advanced features for large businesses",
+      "zh": "大型企业无高级功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "Best for individuals and small businesses who need a simple and free solution for creating invoices.",
+    "zh": "最适合需要简单免费解决方案创建发票的个人和小型企业"
+  },
+  "analyzedAt": "2026-04-11T05:42:58.187512"
+}

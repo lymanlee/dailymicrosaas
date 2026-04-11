@@ -1,0 +1,60 @@
+{
+  "domain": "pomodorotimer.ai",
+  "name": "Pomodoro Timer",
+  "keyFeatures": [
+    {
+      "en": "25-minute focus sessions",
+      "zh": "25分钟的专注时段"
+    },
+    {
+      "en": "5-minute breaks",
+      "zh": "5分钟的休息时间"
+    },
+    {
+      "en": "Keyboard shortcuts (Space to pause/play)",
+      "zh": "键盘快捷键（空格键暂停/播放）"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No sign-up required. 25-minute focus sessions, 5-minute breaks, keyboard shortcuts, and optional background music.",
+        "zh": "无需注册。25分钟的专注时段，5分钟的休息时间，键盘快捷键以及可选的背景音乐"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for breaks",
+      "zh": "休息时间的自定义选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Anyone looking to improve focus and productivity, especially students and software developers.",
+    "zh": "希望提高专注力和生产力的人，尤其是学生和软件开发者"
+  },
+  "positioning": {
+    "en": "A simple and effective online Pomodoro timer with a clean design and powerful features for productivity.",
+    "zh": "一款简洁高效、设计精美的在线番茄时钟，具有强大的生产力功能"
+  },
+  "analyzedAt": "2026-04-11T05:47:09.329312"
+}

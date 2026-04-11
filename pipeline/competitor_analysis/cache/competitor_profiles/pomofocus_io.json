@@ -1,0 +1,60 @@
+{
+  "domain": "pomofocus.io",
+  "name": "Pomodoro Focus Timer",
+  "keyFeatures": [
+    {
+      "en": "Pomodoro Technique timer",
+      "zh": "番茄工作法计时器"
+    },
+    {
+      "en": "Customizable work and break times",
+      "zh": "可自定义工作和休息时间"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic timer with customizable work and break times",
+        "zh": "基本计时器，可自定义工作和休息时间"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features without subscription",
+      "zh": "订阅前功能有限"
+    },
+    {
+      "en": "No advanced settings or integrations",
+      "zh": "无高级设置或集成"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams looking for a simple focus tool",
+    "zh": "寻找简单专注工具的个人和小团队"
+  },
+  "positioning": {
+    "en": "A simple and effective tool for time management and focus",
+    "zh": "一个简单有效的工具，用于时间管理和专注"
+  },
+  "analyzedAt": "2026-04-11T05:48:05.263780"
+}

@@ -1,0 +1,56 @@
+{
+  "domain": "ilovejpeg.com",
+  "name": "iLoveJPEG",
+  "keyFeatures": [
+    {
+      "en": "Online JPEG compression and optimization",
+      "zh": "在线JPEG压缩和优化"
+    },
+    {
+      "en": "Free and unlimited use",
+      "zh": "免费且不限量使用"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited compression and optimization of JPEG images. No ads.",
+        "zh": "无限压缩和优化JPEG图像。无广告。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features for advanced users",
+      "zh": "高级用户的功能有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "A simple and user-friendly tool for compressing and optimizing JPEG images.",
+    "zh": "一个简单易用的工具，用于压缩和优化JPEG图像。"
+  },
+  "analyzedAt": "2026-04-11T05:41:49.520421"
+}

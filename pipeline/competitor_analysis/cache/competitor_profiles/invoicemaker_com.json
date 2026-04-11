@@ -1,0 +1,85 @@
+{
+  "domain": "invoicemaker.com",
+  "name": "Invoicemaker",
+  "keyFeatures": [
+    {
+      "en": "Create professional invoices",
+      "zh": "创建专业发票"
+    },
+    {
+      "en": "Customize invoice templates",
+      "zh": "自定义发票模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal or small business use",
+        "zh": "个人或小型企业使用的基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Advanced features for small businesses",
+        "zh": "小型企业使用的高级功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "100 credits/month",
+          "zh": "每月100积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to personal and small business use in the free tier",
+      "zh": "免费版仅限个人和小型企业使用"
+    },
+    {
+      "en": "No specific mention of customer support",
+      "zh": "未提及客户支持"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "Invoicemaker positions itself as a user-friendly invoicing tool for small businesses and individuals.",
+    "zh": "Invoicemaker 将自己定位为面向小型企业和个人的易于使用的发票工具"
+  },
+  "analyzedAt": "2026-04-11T05:43:49.804308"
+}

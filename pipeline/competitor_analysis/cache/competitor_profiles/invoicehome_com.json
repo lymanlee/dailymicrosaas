@@ -1,0 +1,85 @@
+{
+  "domain": "invoicehome.com",
+  "name": "Invoice Home",
+  "keyFeatures": [
+    {
+      "en": "Create and send invoices as a PDF attachment using over 100 professional invoice templates.",
+      "zh": "使用超过100种专业发票模板创建并发送PDF附件发票"
+    },
+    {
+      "en": "Email invoices directly to clients and get paid by card in seconds.",
+      "zh": "直接通过电子邮件发送发票给客户，并在几秒钟内通过信用卡收款"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free Plan",
+        "zh": "免费套餐"
+      },
+      "price": 0,
+      "description": {
+        "en": "Invoice up to $1,000 for the past 30 days.",
+        "zh": "过去30天内最多开票金额为1,000美元"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Unlimited Invoicing",
+        "zh": "无限开票"
+      },
+      "price": 9,
+      "description": {
+        "en": "Unlimited emails, unlimited customers, unlimited documents, and the ability to cancel anytime with no contracts.",
+        "zh": "无限电子邮件，无限客户，无限文件，并且可以随时取消订阅，无需签订合同"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to $1,000 invoicing for the free plan, which may not be sufficient for businesses with higher transaction volumes.",
+      "zh": "免费套餐仅限于1,000美元的开票金额，对于交易量较高的企业可能不够用"
+    },
+    {
+      "en": "No specific mention of customer support hours or response times, which could be a concern for some users.",
+      "zh": "未明确说明客服支持时间或响应时间，这可能让一些用户担忧"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and freelancers who need to create and send invoices quickly and efficiently.",
+    "zh": "需要快速高效地创建和发送发票的小企业和自由职业者"
+  },
+  "positioning": {
+    "en": "Invoice Home positions itself as a user-friendly invoicing solution for small businesses and freelancers, offering a wide range of templates and easy payment options.",
+    "zh": "Invoice Home将自己定位为为小企业和自由职业者提供的易于使用的发票解决方案，提供多种模板和简便的支付选项"
+  },
+  "analyzedAt": "2026-04-11T05:43:29.405550"
+}

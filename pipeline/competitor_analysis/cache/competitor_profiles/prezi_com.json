@@ -1,0 +1,85 @@
+{
+  "domain": "prezi.com",
+  "name": "Prezi",
+  "keyFeatures": [
+    {
+      "en": "Interactive and engaging presentations",
+      "zh": "互动且引人入胜的演示文稿"
+    },
+    {
+      "en": "Collaboration tools for team projects",
+      "zh": "团队项目的协作工具"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create and share presentations with up to 100MB file size and no watermarks.",
+        "zh": "创建并分享演示文稿，文件大小最多100MB，无水印"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Up to 100MB",
+          "zh": "最大100MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 12,
+      "description": {
+        "en": "Includes all free features plus advanced collaboration tools, unlimited file size, and no watermarks.",
+        "zh": "包含所有免费功能，以及高级协作工具，无限制文件大小，无水印"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限制"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customer support options",
+      "zh": "有限的客户支持选项"
+    },
+    {
+      "en": "Some advanced features require Pro plan",
+      "zh": "一些高级功能需要专业版"
+    }
+  ],
+  "targetAudience": {
+    "en": "Presenters, educators, and professionals who need to create and share engaging presentations.",
+    "zh": "需要创建并分享引人入胜演示文稿的演讲者、教育工作者和专业人士"
+  },
+  "positioning": {
+    "en": "Prezi is a cloud-based presentation tool that focuses on creativity and engagement, offering advanced collaboration features for team projects.",
+    "zh": "Prezi是一款基于云的演示工具，专注于创意和互动性，提供高级协作功能以支持团队项目"
+  },
+  "analyzedAt": "2026-04-11T05:48:26.880183"
+}

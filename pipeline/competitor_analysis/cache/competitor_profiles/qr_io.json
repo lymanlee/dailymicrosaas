@@ -1,0 +1,110 @@
+{
+  "domain": "qr.io",
+  "name": "QR Code Generator",
+  "keyFeatures": [
+    {
+      "en": "Generate QR codes for websites, products, etc.",
+      "zh": "生成网站、产品等的二维码"
+    },
+    {
+      "en": "Customize QR code designs and colors",
+      "zh": "自定义二维码的设计和颜色"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create unlimited QR codes with basic designs and colors.",
+        "zh": "创建带有基本设计和颜色的无限数量的二维码."
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Create unlimited QR codes with advanced designs and colors. Get access to premium templates and analytics.",
+        "zh": "创建带有高级设计和颜色的无限数量的二维码。获得高级模板和分析权限."
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 49.99,
+      "description": {
+        "en": "Create unlimited QR codes with custom branding and advanced analytics. Get dedicated support and custom features.",
+        "zh": "创建带有自定义品牌和高级分析的无限数量的二维码。获得专属支持和自定义功能."
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for free tier",
+      "zh": "免费版的自定义选项有限"
+    },
+    {
+      "en": "No specific mention of file size limitations",
+      "zh": "未明确说明文件大小限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals, small businesses, and enterprises looking to create QR codes for marketing and business purposes.",
+    "zh": "寻找用于营销和商业目的的二维码的个人、小型企业和企业."
+  },
+  "positioning": {
+    "en": "QR.io positions itself as a versatile QR code generator with customizable designs and advanced analytics, catering to both individual users and businesses of all sizes.",
+    "zh": "QR.io将自己定位为具有可自定义设计和高级分析功能的多功能二维码生成器，适用于各种规模的个人用户和企业."
+  },
+  "analyzedAt": "2026-04-11T05:49:21.105945"
+}
