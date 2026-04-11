@@ -1,0 +1,60 @@
+{
+  "domain": "123timer.com",
+  "name": "123Timer",
+  "keyFeatures": [
+    {
+      "en": "Convenient timing",
+      "zh": "便捷的计时"
+    },
+    {
+      "en": "Fullscreen mode",
+      "zh": "全屏模式"
+    },
+    {
+      "en": "Large selection of sounds",
+      "zh": "丰富的音效选择"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No restrictions on usage, dark/light mode, and a large selection of sounds.",
+        "zh": "无使用限制，提供深色/浅色模式以及丰富的音效选择。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "General users who need a simple and free online timer",
+    "zh": "需要简单免费在线计时器的一般用户"
+  },
+  "positioning": {
+    "en": "123Timer positions itself as a simple and free online timer with rich features for general users.",
+    "zh": "123Timer 定位为面向一般用户的简单免费在线计时器，具有丰富的功能。"
+  },
+  "analyzedAt": "2026-04-11T03:21:42.350395"
+}

@@ -1,0 +1,52 @@
+{
+  "domain": "caseconverter.com",
+  "name": "Case Converter",
+  "keyFeatures": [
+    {
+      "en": "Converts text between different cases (e.g., upper, lower, title case)",
+      "zh": "转换文本之间的不同格式（例如，大写、小写、标题格式）"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on conversions",
+        "zh": "无转换限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to basic text conversion without advanced features",
+      "zh": "仅限于基本文本转换，没有高级功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "General users who need to convert text cases",
+    "zh": "需要转换文本格式的一般用户"
+  },
+  "positioning": {
+    "en": "A simple tool for basic text case conversion",
+    "zh": "一个简单的工具，用于基本文本格式转换"
+  },
+  "analyzedAt": "2026-04-11T03:23:13.992092"
+}

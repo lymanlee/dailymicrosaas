@@ -1,0 +1,64 @@
+{
+  "domain": "online2pdf.com",
+  "name": "Online2PDF",
+  "keyFeatures": [
+    {
+      "en": "Convert files to PDF",
+      "zh": "将文件转换为PDF"
+    },
+    {
+      "en": "Edit, unlock, and merge PDF files",
+      "zh": "编辑、解锁和合并PDF文件"
+    },
+    {
+      "en": "Export PDF files to Word, Excel, PowerPoint, JPG",
+      "zh": "将PDF文件导出为Word、Excel、PowerPoint、JPG"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Convert, edit, unlock, merge, and export files to various formats. No monthly credits limit.",
+        "zh": "转换、编辑、解锁、合并和导出各种格式的文件。没有每月积分限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited support for large files",
+      "zh": "对大文件支持有限"
+    },
+    {
+      "en": "No specific mention of commercial use limitations",
+      "zh": "未明确说明商业使用限制"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses",
+    "zh": "个人和小型企业"
+  },
+  "positioning": {
+    "en": "A comprehensive online PDF tool with many features",
+    "zh": "一款功能全面的在线PDF工具"
+  },
+  "analyzedAt": "2026-04-11T03:20:15.077677"
+}

@@ -1,0 +1,60 @@
+{
+  "domain": "colorffy.com",
+  "name": "Colorffy - The Easiest CSS Color Palette Generators",
+  "keyFeatures": [
+    {
+      "en": "Create dynamic gradients, curated palettes, and dark themes with ease.",
+      "zh": "轻松创建动态渐变、精心策划的调色板和暗主题。"
+    },
+    {
+      "en": "Intuitive color tools for UI/UX design.",
+      "zh": "适用于UI/UX设计的直观颜色工具。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Discover the most intuitive color tools with our powerful toolkit suite. Create dynamic gradients, curated palettes, and dark themes with ease.",
+        "zh": "使用我们强大的工具套件发现最直观的颜色工具。轻松创建动态渐变、精心策划的调色板和暗主题。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features compared to paid tiers.",
+      "zh": "与付费套餐相比，功能有限。"
+    },
+    {
+      "en": "No explicit mention of commercial use limitations.",
+      "zh": "未明确说明商业使用限制。"
+    }
+  ],
+  "targetAudience": {
+    "en": "UI/UX designers, web developers, and anyone looking for easy-to-use color tools.",
+    "zh": "UI/UX设计师、网页开发者以及任何寻找易于使用的颜色工具的人。"
+  },
+  "positioning": {
+    "en": "Colorffy is positioned as a user-friendly platform for generating CSS color palettes and gradients, catering to both beginners and experienced users.",
+    "zh": "Colorffy 定位为一个用户友好的平台，用于生成 CSS 色彩调色板和渐变，适用于初学者和经验丰富的用户。"
+  },
+  "analyzedAt": "2026-04-11T03:24:13.536470"
+}

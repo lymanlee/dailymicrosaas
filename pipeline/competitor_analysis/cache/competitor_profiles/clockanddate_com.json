@@ -1,0 +1,60 @@
+{
+  "domain": "clockanddate.com",
+  "name": "Clock and Date",
+  "keyFeatures": [
+    {
+      "en": "Date and time tracking",
+      "zh": "日期和时间跟踪"
+    },
+    {
+      "en": "Calendar and event management",
+      "zh": "日历和事件管理"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as date and time tracking, calendar, and event management.",
+        "zh": "基本功能，如日期和时间跟踪、日历和事件管理。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features without subscription",
+      "zh": "订阅前功能有限"
+    },
+    {
+      "en": "No detailed pricing information for premium tiers",
+      "zh": "高级套餐的定价信息不详细"
+    }
+  ],
+  "targetAudience": {
+    "en": "General users who need basic date and time tracking and calendar management",
+    "zh": "需要基本日期和时间跟踪及日历管理的一般用户"
+  },
+  "positioning": {
+    "en": "A simple and user-friendly tool for managing dates, times, and events",
+    "zh": "一个简单易用的工具，用于管理和跟踪日期、时间和事件"
+  },
+  "analyzedAt": "2026-04-11T03:23:32.402847"
+}

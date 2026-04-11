@@ -1,0 +1,52 @@
+{
+  "domain": "convert-case.com",
+  "name": "Convert Case",
+  "keyFeatures": [
+    {
+      "en": "Converts text to different cases (lower, upper, title, etc.)",
+      "zh": "将文本转换为不同的大小写（小写、大写、标题等）"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No cost to use the basic case conversion features",
+        "zh": "免费使用基本的大小写转换功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to basic case conversion features, no advanced text manipulation tools",
+      "zh": "仅限于基本的大小写转换功能，没有高级的文字处理工具"
+    }
+  ],
+  "targetAudience": {
+    "en": "Anyone who needs to convert text cases",
+    "zh": "需要转换文本大小写的任何人"
+  },
+  "positioning": {
+    "en": "A simple online tool for basic text case conversion",
+    "zh": "一个简单的在线工具，用于基本的文本大小写转换"
+  },
+  "analyzedAt": "2026-04-11T03:26:20.816042"
+}

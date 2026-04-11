@@ -1,0 +1,85 @@
+{
+  "domain": "airbrush.com",
+  "name": "Airbrush - The Best AI-Powered Portrait Editor for Creators",
+  "keyFeatures": [
+    {
+      "en": "Enhance, retouch, and transform your images effortlessly with advanced AI tools.",
+      "zh": "使用高级AI工具轻松增强、润饰和转换您的图像。"
+    },
+    {
+      "en": "Instant and effortless photo editing with AI.",
+      "zh": "使用AI实现即时和轻松的照片编辑。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Start free or go Pro. Compare Web, Desktop & Mobile platform features and pricing.",
+        "zh": "免费开始或升级为Pro。比较Web、桌面和移动平台的功能和价格。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "Pro"
+      },
+      "price": 0,
+      "description": {
+        "en": "More advanced features and higher limits compared to the free plan.",
+        "zh": "相比免费计划，提供更多高级功能和更高限制。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features and credits in the free plan.",
+      "zh": "免费计划中的功能和积分有限。"
+    },
+    {
+      "en": "No specific details on pricing and features for other tiers.",
+      "zh": "未明确说明其他套餐的价格和功能。"
+    }
+  ],
+  "targetAudience": {
+    "en": "From selfie editing to professional work, Airbrush is suitable for anyone looking to enhance and transform their images.",
+    "zh": "从自拍编辑到专业工作，Airbrush 适合任何希望增强和转换图像的人。"
+  },
+  "positioning": {
+    "en": "Airbrush is positioned as the best AI-powered portrait editor for creators, offering effortless and advanced photo editing tools.",
+    "zh": "Airbrush 定位为创作者的最佳AI图像编辑器，提供轻松且高级的照片编辑工具。"
+  },
+  "analyzedAt": "2026-04-11T03:22:02.883774"
+}

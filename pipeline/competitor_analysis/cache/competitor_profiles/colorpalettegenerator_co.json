@@ -1,0 +1,56 @@
+{
+  "domain": "colorpalettegenerator.co",
+  "name": "Color Palette Generator",
+  "keyFeatures": [
+    {
+      "en": "Generate color palettes from images",
+      "zh": "从图片生成配色方案"
+    },
+    {
+      "en": "Customize palettes with various tools",
+      "zh": "使用多种工具自定义配色方案"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as generating color palettes from images and using basic customization tools.",
+        "zh": "基本功能，如从图片生成配色方案和使用基本的自定义工具"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户的自定义选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Designers and artists who need to create color palettes",
+    "zh": "需要创建配色方案的设计者和艺术家"
+  },
+  "positioning": {
+    "en": "A simple and user-friendly tool for generating color palettes",
+    "zh": "一个简单易用的配色方案生成工具"
+  },
+  "analyzedAt": "2026-04-11T03:25:11.790066"
+}

@@ -1,0 +1,64 @@
+{
+  "domain": "color.adobe.com",
+  "name": "Adobe Color",
+  "keyFeatures": [
+    {
+      "en": "Color palette creation and management",
+      "zh": "颜色调色板的创建和管理"
+    },
+    {
+      "en": "Collaboration with team members",
+      "zh": "与团队成员协作"
+    },
+    {
+      "en": "Integration with other Adobe products",
+      "zh": "与其他Adobe产品集成"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create and save color palettes, share with team members",
+        "zh": "创建和保存颜色调色板，与团队成员分享"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features compared to paid tiers",
+      "zh": "与付费套餐相比功能有限"
+    },
+    {
+      "en": "No detailed analytics or insights",
+      "zh": "没有详细的分析或洞察"
+    }
+  ],
+  "targetAudience": {
+    "en": "Designers, artists, and creative professionals",
+    "zh": "设计师、艺术家和创意专业人士"
+  },
+  "positioning": {
+    "en": "A free and easy-to-use color management tool for creatives",
+    "zh": "为创意人员提供的一款免费且易于使用的颜色管理工具"
+  },
+  "analyzedAt": "2026-04-11T03:23:47.850712"
+}

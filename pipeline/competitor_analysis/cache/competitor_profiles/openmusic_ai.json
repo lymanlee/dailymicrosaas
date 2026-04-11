@@ -1,0 +1,85 @@
+{
+  "domain": "openmusic.ai",
+  "name": "openmusic.ai",
+  "keyFeatures": [
+    {
+      "en": "AI-powered music creation and production tools",
+      "zh": "AI驱动的音乐创作和制作工具"
+    },
+    {
+      "en": "Collaboration features for musicians and producers",
+      "zh": "音乐人和制作人之间的协作功能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as AI-generated music samples, basic collaboration tools",
+        "zh": "基本功能，如AI生成的音乐样本，基本的协作工具"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Advanced features such as unlimited AI-generated music samples, advanced collaboration tools, and priority support",
+        "zh": "高级功能，如无限AI生成的音乐样本，高级协作工具和优先支持"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for advanced users",
+      "zh": "高级用户自定义选项有限"
+    },
+    {
+      "en": "Collaboration features may not be as robust as those offered by competitors",
+      "zh": "协作功能可能不如竞争对手提供的功能强大"
+    }
+  ],
+  "targetAudience": {
+    "en": "Musicians, producers, and music enthusiasts",
+    "zh": "音乐人、制作人和音乐爱好者"
+  },
+  "positioning": {
+    "en": "openmusic.ai positions itself as a user-friendly AI tool for music creation and production, with a focus on accessibility and ease of use for both beginners and professionals.",
+    "zh": "openmusic.ai将自己定位为易于使用的AI工具，用于音乐创作和制作，重点关注初学者和专业人士的易用性和便捷性"
+  },
+  "analyzedAt": "2026-04-11T03:20:34.265461"
+}

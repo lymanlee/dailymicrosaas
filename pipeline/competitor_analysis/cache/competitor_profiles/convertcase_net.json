@@ -1,0 +1,60 @@
+{
+  "domain": "convertcase.net",
+  "name": "ConvertCase",
+  "keyFeatures": [
+    {
+      "en": "Converts various file formats",
+      "zh": "转换各种文件格式"
+    },
+    {
+      "en": "User-friendly interface",
+      "zh": "用户友好的界面"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited to 50 conversions per month",
+        "zh": "每月限制50次转换"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 1MB",
+          "zh": "最大1MB"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 50 conversions per month",
+      "zh": "每月限制50次转换"
+    },
+    {
+      "en": "Maximum file size is only 1MB",
+      "zh": "最大文件大小仅为1MB"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A simple and free tool for basic file conversion needs",
+    "zh": "一个简单且免费的基本文件转换工具"
+  },
+  "analyzedAt": "2026-04-11T03:26:57.095139"
+}

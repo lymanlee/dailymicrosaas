@@ -1,0 +1,64 @@
+{
+  "domain": "toolsbox.io",
+  "name": "ToolsBox",
+  "keyFeatures": [
+    {
+      "en": "Collaboration tools for project management",
+      "zh": "项目管理协作工具"
+    },
+    {
+      "en": "Integration with popular project management tools",
+      "zh": "与流行的项目管理工具集成"
+    },
+    {
+      "en": "Customizable templates for various projects",
+      "zh": "可定制的多种项目模板"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features for personal and small team use",
+        "zh": "基本功能适用于个人和小团队使用"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features in the free tier",
+      "zh": "免费版本功能有限"
+    },
+    {
+      "en": "No detailed pricing information for paid tiers",
+      "zh": "未提供付费版本的详细价格信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small teams",
+    "zh": "个人和小团队"
+  },
+  "positioning": {
+    "en": "A collaborative project management tool with basic features for free",
+    "zh": "一个具有基本功能的协作项目管理工具"
+  },
+  "analyzedAt": "2026-04-11T03:21:13.046960"
+}

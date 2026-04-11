@@ -1,0 +1,56 @@
+{
+  "domain": "colorpalettegenerator.io",
+  "name": "Color Palette Generator",
+  "keyFeatures": [
+    {
+      "en": "Generate custom color palettes",
+      "zh": "生成自定义配色方案"
+    },
+    {
+      "en": "Support for various color formats",
+      "zh": "支持多种颜色格式"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic color palette generation with limited features",
+        "zh": "基本的配色方案生成，功能有限"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features and no pricing tiers for advanced users",
+      "zh": "功能有限且没有针对高级用户的定价方案"
+    }
+  ],
+  "targetAudience": {
+    "en": "Designers and artists",
+    "zh": "设计师和艺术家"
+  },
+  "positioning": {
+    "en": "A simple tool for basic color palette generation",
+    "zh": "一个简单的工具，用于基本的配色方案生成"
+  },
+  "analyzedAt": "2026-04-11T03:25:51.896264"
+}

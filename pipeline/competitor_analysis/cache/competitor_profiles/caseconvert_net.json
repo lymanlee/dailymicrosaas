@@ -1,0 +1,60 @@
+{
+  "domain": "caseconvert.net",
+  "name": "CaseConvert",
+  "keyFeatures": [
+    {
+      "en": "Converts various file formats",
+      "zh": "转换多种文件格式"
+    },
+    {
+      "en": "Online file conversion service",
+      "zh": "在线文件转换服务"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited to 5 conversions per day",
+        "zh": "每天最多5次转换"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to 5 conversions per day",
+      "zh": "每天最多5次转换"
+    },
+    {
+      "en": "No commercial use allowed",
+      "zh": "不允许商业使用"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A basic online file conversion tool",
+    "zh": "一款基本的在线文件转换工具"
+  },
+  "analyzedAt": "2026-04-11T03:22:29.399835"
+}
