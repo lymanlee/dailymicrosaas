@@ -1,0 +1,56 @@
+{
+  "domain": "wordcounter.io",
+  "name": "Word Counter",
+  "keyFeatures": [
+    {
+      "en": "Quickly check word count and writing mistakes by pasting your text into our free online word counter.",
+      "zh": "通过将文本粘贴到我们的免费在线词数检查器中，快速检查词数和写作错误。"
+    },
+    {
+      "en": "Great for essays, papers, Google meta tags and more.",
+      "zh": "适用于论文、文章、Google元标签等。"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No limitations on usage.",
+        "zh": "无使用限制。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to free tier with no premium features.",
+      "zh": "仅限免费套餐，没有高级功能。"
+    }
+  ],
+  "targetAudience": {
+    "en": "Anyone who needs to check word count and grammar.",
+    "zh": "需要检查词数和语法的任何人。"
+  },
+  "positioning": {
+    "en": "A simple, free tool for quick word count and grammar checking.",
+    "zh": "一个简单易用的免费工具，用于快速词数检查和语法校对。"
+  },
+  "analyzedAt": "2026-04-11T09:09:57.082050"
+}

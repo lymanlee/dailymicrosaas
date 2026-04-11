@@ -1,0 +1,56 @@
+{
+  "domain": "timeanddate.com",
+  "name": "Company/Product name: Time and Date",
+  "keyFeatures": [
+    {
+      "en": "Time zone and calendar information",
+      "zh": "时区和日历信息"
+    },
+    {
+      "en": "Weather and astronomical data",
+      "zh": "天气和天文数据"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as time zone and calendar information, weather and astronomical data",
+        "zh": "基本功能，如时区和日历信息、天气和天文数据"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to basic features without any paid tiers for advanced services",
+      "zh": "仅限于基本功能，没有高级服务的付费套餐"
+    }
+  ],
+  "targetAudience": {
+    "en": "General public and businesses needing time zone and calendar information, weather and astronomical data",
+    "zh": "需要时区和日历信息、天气和天文数据的一般公众和企业"
+  },
+  "positioning": {
+    "en": "A comprehensive resource for time zone, calendar, weather, and astronomical information",
+    "zh": "提供时区、日历、天气和天文信息的综合资源"
+  },
+  "analyzedAt": "2026-04-11T09:05:44.270467"
+}

@@ -1,0 +1,56 @@
+{
+  "domain": "the-qrcode-generator.com",
+  "name": "The QR Code Generator",
+  "keyFeatures": [
+    {
+      "en": "Generate QR codes for free",
+      "zh": "免费生成二维码"
+    },
+    {
+      "en": "Customize QR codes with logos and colors",
+      "zh": "自定义二维码，添加Logo和颜色"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create unlimited QR codes with no limitations.",
+        "zh": "无限制创建二维码，没有任何限制。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options",
+      "zh": "自定义选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "A simple and free tool for generating QR codes.",
+    "zh": "一个简单且免费的二维码生成工具。"
+  },
+  "analyzedAt": "2026-04-11T09:04:45.731708"
+}

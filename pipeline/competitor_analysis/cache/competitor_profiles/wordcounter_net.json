@@ -1,0 +1,60 @@
+{
+  "domain": "wordcounter.net",
+  "name": "WordCounter",
+  "keyFeatures": [
+    {
+      "en": "Word and character count for text",
+      "zh": "文本的单词和字符计数"
+    },
+    {
+      "en": "Support for multiple file formats",
+      "zh": "支持多种文件格式"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "No ads, basic features",
+        "zh": "无广告，基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited features without subscription",
+      "zh": "订阅前功能有限"
+    },
+    {
+      "en": "No detailed pricing information for paid tiers",
+      "zh": "付费套餐的价格信息不详细"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators, writers, and students",
+    "zh": "内容创作者、写手和学生"
+  },
+  "positioning": {
+    "en": "A simple and free tool for basic word count needs",
+    "zh": "一个简单且免费的基本单词计数工具"
+  },
+  "analyzedAt": "2026-04-11T09:10:24.888013"
+}

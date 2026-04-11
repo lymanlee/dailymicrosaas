@@ -1,0 +1,114 @@
+{
+  "domain": "qrcode-monkey.com",
+  "name": "QRcode Monkey",
+  "keyFeatures": [
+    {
+      "en": "Generate and manage QR codes",
+      "zh": "生成和管理二维码"
+    },
+    {
+      "en": "Customize QR code designs",
+      "zh": "自定义二维码设计"
+    },
+    {
+      "en": "Track and analyze QR code performance",
+      "zh": "跟踪和分析二维码性能"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Create up to 10 QR codes per month",
+        "zh": "每月最多创建10个二维码"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "10 credits/month",
+          "zh": "每月10积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 1MB",
+          "zh": "最大1MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 9.99,
+      "description": {
+        "en": "Create up to 50 QR codes per month with advanced features",
+        "zh": "每月最多创建50个二维码，具有高级功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "50 credits/month",
+          "zh": "每月50积分"
+        },
+        "maxFileSize": {
+          "en": "Up to 10MB",
+          "zh": "最大10MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Enterprise",
+        "zh": "企业版"
+      },
+      "price": 49.99,
+      "description": {
+        "en": "Create unlimited QR codes with advanced features and dedicated support",
+        "zh": "具有高级功能和专属支持，无限制创建二维码"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited credits",
+          "zh": "无限制积分"
+        },
+        "maxFileSize": {
+          "en": "Unlimited file size",
+          "zh": "无限制文件大小"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for free tier",
+      "zh": "免费版的自定义选项有限"
+    },
+    {
+      "en": "No mobile app available",
+      "zh": "没有移动应用程序"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and individuals",
+    "zh": "小型企业和个人用户"
+  },
+  "positioning": {
+    "en": "QRcode Monkey is a user-friendly platform for generating and managing QR codes with various pricing tiers to suit different needs.",
+    "zh": "QRcode Monkey 是一个易于使用的生成和管理二维码的平台，具有多种定价级别，以满足不同需求。"
+  },
+  "analyzedAt": "2026-04-11T09:03:29.262870"
+}

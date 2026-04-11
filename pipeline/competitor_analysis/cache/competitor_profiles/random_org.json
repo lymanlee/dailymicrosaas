@@ -1,0 +1,56 @@
+{
+  "domain": "random.org",
+  "name": "random.org",
+  "keyFeatures": [
+    {
+      "en": "Generate true random numbers for various purposes",
+      "zh": "生成用于各种目的的真实随机数"
+    },
+    {
+      "en": "Provide secure and unpredictable random numbers",
+      "zh": "提供安全且不可预测的随机数"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Unlimited random numbers for non-commercial use",
+        "zh": "非商业用途的无限随机数"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to non-commercial use",
+      "zh": "仅限非商业用途"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and organizations needing random numbers for non-commercial purposes",
+    "zh": "需要非商业用途随机数的个人和组织"
+  },
+  "positioning": {
+    "en": "A trusted source for true random numbers",
+    "zh": "真实随机数值得信赖的来源"
+  },
+  "analyzedAt": "2026-04-11T09:04:09.837268"
+}

@@ -1,0 +1,56 @@
+{
+  "domain": "vistaprint.com",
+  "name": "VistaPrint",
+  "keyFeatures": [
+    {
+      "en": "Online printing services for custom products",
+      "zh": "在线打印服务，提供定制产品"
+    },
+    {
+      "en": "Wide range of marketing materials and promotional products",
+      "zh": "广泛的营销材料和促销产品"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "price": 0,
+      "description": {
+        "en": "Not clearly stated",
+        "zh": "未明确说明"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customization options for some products",
+      "zh": "某些产品的定制选项有限"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small businesses and individuals looking for custom printing solutions",
+    "zh": "寻求定制印刷解决方案的小企业和个人"
+  },
+  "positioning": {
+    "en": "VistaPrint positions itself as a one-stop-shop for custom printing needs",
+    "zh": "VistaPrint 自定位为满足定制印刷需求的一站式解决方案"
+  },
+  "analyzedAt": "2026-04-11T09:08:12.022840"
+}

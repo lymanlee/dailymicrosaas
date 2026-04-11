@@ -184,22 +184,6 @@
     "status": "running"
   },
   {
-    "domain": "qrcode-monkey.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "random.org",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
     "domain": "soundraw.io",
     "priority": 80,
     "source_keyword": "serp_patch",
@@ -216,107 +200,19 @@
     "status": "done"
   },
   {
-    "domain": "suno.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "the-qrcode-generator.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
     "domain": "thewordcounter.com",
     "priority": 80,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "timeanddate.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   },
   {
     "domain": "tomatotimers.com",
     "priority": 80,
     "source_keyword": "serp_patch",
     "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "unitconverters.net",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "us.norton.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "vclock.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "vistaprint.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "waveapps.com",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "wordchecker.io",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "wordcounter.io",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
-  },
-  {
-    "domain": "wordcounter.net",
-    "priority": 80,
-    "source_keyword": "serp_patch",
-    "created_at": "2026-04-09T17:17:42.401755+00:00",
-    "retry_count": 0,
-    "status": "pending"
+    "retry_count": 1,
+    "status": "running"
   }
 ]

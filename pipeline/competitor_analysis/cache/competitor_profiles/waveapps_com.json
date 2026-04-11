@@ -1,0 +1,89 @@
+{
+  "domain": "waveapps.com",
+  "name": "Wave Financial",
+  "keyFeatures": [
+    {
+      "en": "Unlimited Invoicing",
+      "zh": "无限发票"
+    },
+    {
+      "en": "Professional Double-Entry Accounting",
+      "zh": "专业复式记账"
+    },
+    {
+      "en": "Online Payments",
+      "zh": "在线支付"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Starter Plan",
+        "zh": "基础套餐"
+      },
+      "price": 0,
+      "description": {
+        "en": "Essential invoicing and accounting for a single user.",
+        "zh": "单用户的基本发票和会计功能。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro Plan",
+        "zh": "专业套餐"
+      },
+      "price": 19.0,
+      "description": {
+        "en": "Premium features for growing teams, including unlimited user seats and roles, automated bank imports, and unlimited receipt OCR.",
+        "zh": "适用于成长团队的高级功能，包括无限用户席位和角色、自动银行导入和无限收据OCR。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited customer support options",
+      "zh": "有限的客户支持选项"
+    },
+    {
+      "en": "Complex setup process for new users",
+      "zh": "新用户复杂的设置过程"
+    }
+  ],
+  "targetAudience": {
+    "en": "Small business owners, contractors, and agencies.",
+    "zh": "小型企业主、自由职业者和代理机构。"
+  },
+  "positioning": {
+    "en": "Wave is positioned as a comprehensive financial management tool for small businesses, offering essential accounting and invoicing features at a low cost.",
+    "zh": "Wave 定位为面向小型企业的全面财务管理工具，提供基本的会计和发票功能，价格低廉。"
+  },
+  "analyzedAt": "2026-04-11T09:08:38.026190"
+}

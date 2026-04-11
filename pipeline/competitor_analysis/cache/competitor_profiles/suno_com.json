@@ -1,0 +1,85 @@
+{
+  "domain": "suno.com",
+  "name": "Suno",
+  "keyFeatures": [
+    {
+      "en": "AI-driven content generation",
+      "zh": "基于AI的内容生成"
+    },
+    {
+      "en": "Real-time collaboration",
+      "zh": "实时协作"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Limited access to basic features",
+        "zh": "仅限访问基本功能"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not allowed",
+          "zh": "不允许"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Pro",
+        "zh": "专业版"
+      },
+      "price": 10,
+      "description": {
+        "en": "Access to advanced features, unlimited credits, and file size up to 50MB",
+        "zh": "访问高级功能，无限积分和最大文件大小50MB"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Unlimited",
+          "zh": "无限"
+        },
+        "maxFileSize": {
+          "en": "Up to 50MB",
+          "zh": "最大50MB"
+        },
+        "commercialUse": {
+          "en": "Allowed",
+          "zh": "允许"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited free tier options",
+      "zh": "免费选项有限"
+    },
+    {
+      "en": "No detailed information on pricing tiers",
+      "zh": "定价层级信息不详细"
+    }
+  ],
+  "targetAudience": {
+    "en": "Content creators and businesses",
+    "zh": "内容创作者和企业用户"
+  },
+  "positioning": {
+    "en": "Suno positions itself as a tool for efficient and collaborative content creation using AI technology.",
+    "zh": "Suno将自己定位为一种使用AI技术进行高效协作内容创作的工具"
+  },
+  "analyzedAt": "2026-04-11T09:04:27.507692"
+}

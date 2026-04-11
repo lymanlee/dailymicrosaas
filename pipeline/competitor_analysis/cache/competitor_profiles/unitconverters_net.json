@@ -1,0 +1,64 @@
+{
+  "domain": "unitconverters.net",
+  "name": "UnitConverters.net",
+  "keyFeatures": [
+    {
+      "en": "Quick and free online unit converter",
+      "zh": "快速免费的在线单位转换器"
+    },
+    {
+      "en": "Converts common units of measurement",
+      "zh": "转换常见的度量单位"
+    },
+    {
+      "en": "Includes 77 other converters covering various units",
+      "zh": "包括77个其他转换器，涵盖各种单位"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic unit conversion features without any limitations",
+        "zh": "基本的单位转换功能，没有任何限制"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to basic conversion features, no advanced or engineering-specific tools",
+      "zh": "仅限基本的转换功能，没有高级或工程专用工具"
+    },
+    {
+      "en": "No pricing tiers or premium features available",
+      "zh": "没有定价级别或高级功能"
+    }
+  ],
+  "targetAudience": {
+    "en": "General users, students, and professionals who need to convert units",
+    "zh": "需要转换单位的一般用户、学生和专业人士"
+  },
+  "positioning": {
+    "en": "A simple and straightforward unit converter for everyday use",
+    "zh": "一个简单明了的单位转换器，适用于日常使用"
+  },
+  "analyzedAt": "2026-04-11T09:06:40.744605"
+}

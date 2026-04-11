@@ -1,0 +1,85 @@
+{
+  "domain": "us.norton.com",
+  "name": "Norton AntiVirus, Privacy, Identity, & Advanced Scam Protection",
+  "keyFeatures": [
+    {
+      "en": "Genie AI Scam Detection",
+      "zh": "Genie AI防欺诈检测"
+    },
+    {
+      "en": "Advanced tech for advanced threats",
+      "zh": "针对高级威胁的先进技术"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Premium",
+        "zh": "高级版"
+      },
+      "price": 6.99,
+      "description": {
+        "en": "Includes all features, 100GB cloud storage, and 2 devices protection.",
+        "zh": "包含所有功能，100GB云端存储和2台设备保护"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    },
+    {
+      "name": {
+        "en": "Basic",
+        "zh": "基础版"
+      },
+      "price": 2.99,
+      "description": {
+        "en": "Includes basic features, 25GB cloud storage, and 1 device protection.",
+        "zh": "包含基本功能，25GB云端存储和1台设备保护"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited cloud storage options",
+      "zh": "云端存储选项有限"
+    },
+    {
+      "en": "No detailed information on commercial use",
+      "zh": "关于商业使用的信息不详细"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individuals and small businesses looking for comprehensive protection against viruses, identity theft, and online scams.",
+    "zh": "寻求全面防护以抵御病毒、身份盗窃和网络欺诈的个人和小型企业"
+  },
+  "positioning": {
+    "en": "Norton positions itself as a trusted brand offering robust protection against a wide range of digital threats.",
+    "zh": "诺顿定位自己为一个值得信赖的品牌，提供针对广泛数字威胁的强大保护"
+  },
+  "analyzedAt": "2026-04-11T09:07:03.487150"
+}

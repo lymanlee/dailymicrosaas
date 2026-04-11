@@ -1,0 +1,60 @@
+{
+  "domain": "wordchecker.io",
+  "name": "WordChecker",
+  "keyFeatures": [
+    {
+      "en": "Real-time spell and grammar checking",
+      "zh": "实时拼写和语法检查"
+    },
+    {
+      "en": "Cross-language support for multiple languages",
+      "zh": "支持多种语言的跨语言支持"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "name": {
+        "en": "Free",
+        "zh": "免费版"
+      },
+      "price": 0,
+      "description": {
+        "en": "Basic features such as spell checking and basic grammar suggestions are available for free.",
+        "zh": "免费提供基本功能，如拼写检查和基本的语法建议。"
+      },
+      "limits": {
+        "monthlyCredits": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "maxFileSize": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        },
+        "commercialUse": {
+          "en": "Not clearly stated",
+          "zh": "未明确说明"
+        }
+      }
+    }
+  ],
+  "weaknesses": [
+    {
+      "en": "Limited to basic features in the free tier",
+      "zh": "免费版仅限基本功能"
+    },
+    {
+      "en": "No detailed pricing information for paid tiers",
+      "zh": "未提供付费套餐的详细定价信息"
+    }
+  ],
+  "targetAudience": {
+    "en": "Individual users and small businesses",
+    "zh": "个人用户和小型企业"
+  },
+  "positioning": {
+    "en": "WordChecker positions itself as a versatile tool for anyone who needs to check their writing for errors in multiple languages.",
+    "zh": "WordChecker 定位为一款多功能工具，适用于需要检查多种语言中错误的任何人。"
+  },
+  "analyzedAt": "2026-04-11T09:09:15.461559"
+}
