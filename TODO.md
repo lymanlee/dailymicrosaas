@@ -1,10 +1,11 @@
 # Daily Micro SaaS - TODO
 
-## 当前阶段：MVP 已上线，自动发布链路已打通
+## 当前阶段：竞品分析链路已打通，内容持续积累中
 
 - 线上状态：已部署到 Cloudflare Pages，当前使用 `pages.dev` 默认域名
 - 内容生产：`discover -> generate -> validate -> build` 已可本地完整跑通
-- 当前重点：把 GitHub 定时日跑跑稳，并持续积累高质量内容
+- 竞品分析：54 个竞品 profiles 已存储，定时爬取链路已打通
+- 当前重点：内容持续积累，优化内容质量，评估竞品动态加载链路的 ROI
 
 ---
 
@@ -17,11 +18,18 @@
 
 ## P1 - 近期迭代
 
-- [ ] 累积至少 30 篇有效 idea 内容
+- [ ] 累积至少 30 篇有效 idea 内容（当前 15 篇）
 - [ ] 优化关键词评分与 SERP 竞争判断，减少低价值候选
 - [ ] 增加 RSS / 邮件订阅入口
 - [ ] 补强首页与 About 页文案，提升站点定位与 SEO 表达
 - [ ] 评估并接入正式自定义域名
+- [ ] 评估竞品动态加载链路（`src/data/competitors/`）的 ROI：竞品数据已内嵌 frontmatter，动态加载的实际价值是否足够
+
+## P2 - 竞品链路完善（可选）
+
+- [ ] 竞品 profiles 从 frontmatter 分离到 `src/data/competitors/`，前端实现动态加载
+- [ ] painClusters 新格式（`source`/`evidence`）落地，前端 `PainClusterItem` 组件适配
+- [ ] CompetitorGaps 前端组件（带 domain 标签）
 
 ## P2 - 商业化准备
 
@@ -41,6 +49,13 @@
 - [x] Cloudflare Pages Git 集成主部署链路 + GitHub Actions 手动兜底部署流程
 - [x] 本地真实数据端到端日跑验证，并修复 DDG redirect / 空 SERP 缓存锁死问题
 - [x] 中英双语基础文案与站点展示
+- [x] 竞品发现自动化（`trigger_competitor_crawl()` 入队链路）
+- [x] 竞品爬取定时 workflow（`competitor-crawl.yml`）
+- [x] 社区痛点提取模块（`extract_community_pains.py`）
+- [x] 竞品弱点独立提取模块（`extract_competitor_gaps.py`）
+- [x] 历史文章重生成（`patch_and_regenerate.py`）
+- [x] 54 个竞品 profiles 存储（`pipeline/competitor_analysis/cache/competitor_profiles/`）
+- [x] 竞品链路接入 `daily-publish.yml`（每次最多爬10个域名）
 
 ---
 

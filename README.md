@@ -77,6 +77,28 @@ python3 scripts/run_daily_publish.py --mode overwrite --commit --push
 7. 只有全部通过后才会自动 `git commit` + `git push`
 8. 由 Cloudflare Pages Git 集成自动部署上线
 
+## 竞品分析链路
+
+竞品发现与分析已升级为独立链路（方案 B）：
+
+```
+Discovery 发现新域名
+    → trigger_competitor_crawl() 入队
+    → data/competitor_crawl_queue.json
+    → competitor-crawl.yml 定时爬取（每4小时）
+    → pipeline/competitor_analysis/cache/competitor_profiles/{domain}.json
+    → daily-publish.yml 末尾追加（每次最多10个域名）
+    → generate_idea.py 读取竞品 profile 生成文章
+```
+
+**竞品 profiles 存储位置**：`pipeline/competitor_analysis/cache/competitor_profiles/`（已包含 54 个竞品）
+
+**相关文件**：
+- `.github/workflows/competitor-crawl.yml`：定时爬取 workflow（每4小时）+ 手动触发
+- `data/competitor_crawl_queue.json`：爬取任务队列
+- `pipeline/discovery/extract_community_pains.py`：社区痛点提取（LLM 分析 HN/Reddit）
+- `pipeline/publishing/extract_competitor_gaps.py`：竞品弱点独立提取
+
 ## 自动发布工作流
 
 仓库内已包含：
@@ -94,9 +116,12 @@ dailymicrosaas/
 │   ├── data/
 │   ├── discovery/
 │   ├── publishing/
+│   ├── competitor_analysis/   # 竞品分析（已实现 ✅）
+│   │   └── cache/
+│   │       └── competitor_profiles/  # 54个竞品 profiles
 │   └── README.md
 ├── public/                    # 静态资源
-├── scripts/                   # 兼容入口脚本
+├── scripts/                   # 兼容入口脚本 + 历史重生成脚本
 ├── src/
 │   ├── components/
 │   ├── content/
@@ -169,5 +194,6 @@ PUBLIC_EMAIL_SUBSCRIBE_URL=https://example.com/newsletter
 - `src/content/ideas/template.md` 仍保留为人工写作模板
 - 自动生成内容会带上 `sourceKeyword` / `sourceScore` / `sourceGrade`，方便后续去重和追踪来源
 - `pipeline/reports`、`pipeline/logs`、趋势/社区缓存默认不进入 Git
+- 竞品 profiles 存储在 `pipeline/competitor_analysis/cache/competitor_profiles/`（54个 profiles，纳入 Git），前端动态加载链路（`src/data/competitors/`）待后续实现
 
 更细的 pipeline 说明见：`pipeline/README.md`

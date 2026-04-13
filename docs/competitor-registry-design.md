@@ -1,5 +1,11 @@
 # 竞品数据独立数据源 & 增强自动化方案
 
+> **文档状态**：部分已实现（2026-04-12 更新）
+>
+> ✅ 已实现：竞品 Registry 存储（54个 profiles）、竞品爬取自动化（`competitor-crawl.yml`）、`trigger_competitor_crawl()` 入队链路、`extract_community_pains` 和 `extract_competitor_gaps` 模块。
+>
+> ⏳ 未实现：前端 `src/data/competitors/` 动态加载、painClusters 新格式（`source`/`evidence`）落地、`PainClusterItem` 前端组件。
+
 ## 目标
 
 1. **竞品数据独立存储**：从 Markdown frontmatter 分离，支持独立更新
@@ -21,9 +27,9 @@
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                      Competitor Registry                                │
-│  src/data/competitors/                                                  │
-│    └── {domain}.json          ← 竞品数据唯一真实来源                     │
+│                    Competitor Profiles (已实现 ✅)                        │
+│  pipeline/competitor_analysis/cache/competitor_profiles/                  │
+│    └── {domain}.json          ← 竞品数据存储（54个 profiles）             │
 │                                                                         
 │  字段：                                                                 │
 │    - domain: 域名                                                         │
@@ -37,10 +43,11 @@
                                     │
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                      Publishing Pipeline                                 │
+│              Publishing Pipeline (已实现 ✅)                              │
 │  generate_idea.py                                                        │
-│    ├── 读取 src/data/competitors/*.json                                  │
-│    └── frontmatter 只引用域名列表，不存储完整数据                         │
+│    ├── 调用 extract_community_pains.py 提取社区痛点                       │
+│    ├── 调用 extract_competitor_gaps.py 提取竞品弱点                       │
+│    └── frontmatter 仍内嵌 topCompetitors（待分离为引用）                  │
 │                                                                         
 │  改动：competitorAnalysis 变为引用而非嵌入                               │
 │    competitorAnalysis:                                                  │
@@ -64,7 +71,9 @@
 
 ## 二、核心改动
 
-### 2.0 痛点聚类与市场空白区分优化 ⚠️ 新增
+### 2.0 痛点聚类与市场空白区分优化
+
+> **状态**：模块已实现（`extract_community_pains.py`、`extract_competitor_gaps.py`），但前端渲染尚未切换为新格式。painClusters 仍输出 `{en, zh}` 结构，新格式（`source`/`evidence`）待前端组件适配后落地。
 
 **现状问题**：
 ```
@@ -879,18 +888,20 @@ echo "Found $(ls src/data/competitors/*.json | wc -l) competitors"
 
 ### Phase 3: 痛点来源区分（1天）⚠️ 新增
 
-- [ ] 创建 `extract_community_pains.py` 社区痛点提取模块
-- [ ] 创建 `derive_pain_clusters_enhanced()` 增强函数
-- [ ] 创建 `extract_competitor_gaps()` 纯粹弱点提取函数
-- [ ] 修改 `generate_idea.py` 中的 `derive_pain_clusters()` 和 `derive_competitor_gaps()`
+- [x] 创建 `extract_community_pains.py` 社区痛点提取模块
+- [x] 创建 `derive_pain_clusters_enhanced()` 增强函数
+- [x] 创建 `extract_competitor_gaps()` 纯粹弱点提取函数
+- [x] 修改 `generate_idea.py` 中的 `derive_pain_clusters()` 和 `derive_competitor_gaps()`
 - [ ] 更新 frontmatter schema 支持新格式
+- [ ] 前端组件适配新格式（`PainClusterItem`）
 
-### Phase 4: 自动化增强（1天）
+### Phase 4: 自动化增强（1天）✅ 已实现
 
-- [ ] 创建 `pipeline/competitor_analysis/queue.py`
-- [ ] 修改 `run_pipeline.py` 添加竞品触发逻辑
-- [ ] 创建竞品爬取 worker 脚本
-- [ ] 添加失败告警机制
+- [x] 创建竞品爬取队列（`data/competitor_crawl_queue.json`）
+- [x] 创建竞品爬取 workflow（`competitor-crawl.yml`）
+- [x] 修改 `run_pipeline.py` 添加 `trigger_competitor_crawl()` 入队逻辑
+- [x] `daily-publish.yml` 末尾追加竞品爬取 step
+- [ ] 添加失败告警机制（已接入 webhook，UI 展示待做）
 
 ### Phase 5: 收尾（0.5天）
 
@@ -919,25 +930,26 @@ echo "Found $(ls src/data/competitors/*.json | wc -l) competitors"
 
 ### 新增文件
 
-| 文件 | 作用 |
-|------|------|
-| `src/data/competitors/*.json` | 竞品数据独立存储 |
-| `src/lib/competitor-registry.ts` | 竞品数据加载工具（含降级逻辑） |
-| `src/components/PainClusterItem.astro` | 痛点聚类项组件（支持 evidence 展示） |
-| `pipeline/discovery/extract_community_pains.py` | 社区痛点提取模块（LLM 分析） |
-| `pipeline/publishing/extract_competitor_gaps.py` | 竞品弱点独立提取模块 |
-| `pipeline/competitor_analysis/queue.py` | 竞品爬取任务队列 |
-| `pipeline/competitor_analysis/worker.py` | 竞品爬取 Worker |
-| `scripts/migrate_competitor_data.py` | 数据迁移脚本 |
+| 文件 | 状态 | 作用 |
+|------|------|------|
+| `pipeline/competitor_analysis/cache/competitor_profiles/*.json` | ✅ 已实现 | 竞品数据存储（54个 profiles） |
+| `pipeline/discovery/extract_community_pains.py` | ✅ 已实现 | 社区痛点提取模块（LLM 分析） |
+| `pipeline/publishing/extract_competitor_gaps.py` | ✅ 已实现 | 竞品弱点独立提取模块 |
+| `.github/workflows/competitor-crawl.yml` | ✅ 已实现 | 竞品爬取定时 workflow |
+| `data/competitor_crawl_queue.json` | ✅ 已实现 | 竞品爬取任务队列 |
+| `src/data/competitors/*.json` | ⏳ 待实现 | 前端动态加载（与 pipeline 合并前需迁移） |
+| `src/lib/competitor-registry.ts` | ⏳ 待实现 | 竞品数据加载工具（含降级逻辑） |
+| `src/components/PainClusterItem.astro` | ⏳ 待实现 | 痛点聚类项组件（支持 evidence 展示） |
 
 ### 修改文件
 
-| 文件 | 改动 |
-|------|------|
-| `src/views/IdeaDetailPage.astro` | 使用动态加载 |
-| `src/components/CompetitorAnalysisSection.astro` | 适配新数据源 |
-| `src/content/config.ts` | 更新 schema（支持 painClusters 新格式） |
-| `pipeline/publishing/generate_idea.py` | 简化 frontmatter 输出，调用新函数 |
+| 文件 | 状态 | 改动 |
+|------|------|------|
+| `pipeline/publishing/generate_idea.py` | ✅ 已实现 | 调用 extract_community_pains 和 extract_competitor_gaps |
+| `.github/workflows/daily-publish.yml` | ✅ 已实现 | 追加竞品爬取 step |
+| `src/views/IdeaDetailPage.astro` | ⏳ 待实现 | 使用动态加载 |
+| `src/components/CompetitorAnalysisSection.astro` | ⏳ 待实现 | 适配新数据源 |
+| `src/content/config.ts` | ⏳ 待实现 | 更新 schema（支持 painClusters 新格式） |
 | `pipeline/publishing/competitor_integration.py` | 增强版数据提取函数 |
 | `pipeline/discovery/run_pipeline.py` | 添加竞品触发逻辑 |
 

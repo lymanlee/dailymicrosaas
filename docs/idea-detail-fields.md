@@ -2,6 +2,8 @@
 
 > 本文档维护 DailyMicrosaas 详情页展示的所有字段定义，包括字段名、数据来源、生成规则、中文描述。
 > 随着产品能力升级，持续更新此文档。
+>
+> **2026-04-12 更新**：文档已对照实际代码和文章进行了全面核查，标记了各字段的实际实现状态。
 
 ---
 
@@ -40,36 +42,42 @@
 > 描述目标用户面临的核心问题。
 >
 > **核心原则**：来源多元化、可追溯、带证据。
+>
+> ⚠️ **实际状态**：pipeline 模块（`extract_community_pains`、`derive_pain_clusters_enhanced`）已实现，但生成的文章仍使用旧格式 `{en, zh}`。新格式（`source`/`evidence`）待前端组件适配后落地。
 
 ### 3.1 字段结构
 
+> ⚠️ **目标格式**（前端适配后生效）：
+
 ```typescript
 interface PainCluster {
-  // 痛点内容
   text: {
-    en: string;  // 英文痛点
-    zh: string;  // 中文痛点
+    en: string;
+    zh: string;
   };
-
-  // 来源类型（必填，用于展示样式区分）
   source: "community" | "competitor" | "keyword";
-
-  // 来源竞品（仅 source === "competitor" 时填写）
-  sourceDomain?: string;
-
-  // 原话引用（仅 source === "community" 时填写）
-  evidence?: Array<{
-    url: string;      // 来源帖子 URL
-    source: string;   // 来源平台: "hackernews" | "reddit" | "twitter"
-    quote: {
-      en: string;      // 原文引用（英文）
-      zh: string;      // 原文引用（中文翻译）
-    };
+  sourceDomain?: string;  // 仅 source === "competitor"
+  evidence?: Array<{     // 仅 source === "community"
+    url: string;
+    source: string;
+    quote: { en: string; zh: string };
   }>;
 }
 ```
 
-### 3.2 数据来源优先级
+### 3.2 实际生成格式（当前）
+
+> 当前生成的文章使用以下简化格式：
+
+```yaml
+painClusters:
+  - en: "Manual & time-consuming workflow"
+    zh: "操作繁琐，效率低"
+  - en: "Speed & performance issues"
+    zh: "速度和性能问题反复出现"
+```
+
+### 3.3 数据来源优先级
 
 | 优先级 | 来源 | source 值 | 展示样式 | 证据 |
 |--------|------|-----------|---------|------|
@@ -217,6 +225,8 @@ competitorGaps:
 > 展示直接竞争对手的详细信息。
 >
 > **核心原则**：动态加载，数据与 frontmatter 分离。
+>
+> ⚠️ **实际状态**：竞品数据已爬取存储在 `pipeline/competitor_analysis/cache/competitor_profiles/`（54个 profiles），但前端仍读取 frontmatter 内嵌数据。`src/data/competitors/` 动态加载链路待实现。
 
 ### 5.1 frontmatter 存储结构
 
@@ -394,6 +404,8 @@ interface CommunitySignals {
 
 ## 七、数据来源全景图
 
+> ⚠️ **实际数据流**：竞品 profiles 存储在 `pipeline/competitor_analysis/cache/competitor_profiles/`，由 `generate_idea.py` 读取并内嵌到 frontmatter，再由前端直接渲染。前端动态加载链路（虚线部分）待实现。
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                            Discovery Pipeline                                │
@@ -453,6 +465,7 @@ interface CommunitySignals {
 | 2026-04-08 | v1.1 | 增加 painClusters 来源区分 (community/competitor/keyword) | - |
 | 2026-04-08 | v1.2 | 增加 competitorGaps 纯粹提取规则，与 painClusters 分离 | - |
 | 2026-04-08 | v1.3 | 增加竞品 Registry 动态加载机制说明 | - |
+| 2026-04-12 | v1.4 | 全面核查，更新各字段实际实现状态；增加竞品 profiles 存储路径说明 | - |
 
 ---
 
@@ -471,15 +484,17 @@ interface CommunitySignals {
 
 ## 十、生成脚本清单
 
-| 模块 | 文件路径 | 说明 |
-|------|---------|------|
-| 痛点聚类生成 | `pipeline/discovery/extract_community_pains.py` | 社区痛点提取 (LLM) |
-| 痛点聚类增强 | `pipeline/publishing/derive_pain_clusters_enhanced()` | 多来源聚合 |
-| 市场空白提取 | `pipeline/publishing/extract_competitor_gaps.py` | 纯粹弱点提取 |
-| 竞品数据 Registry | `src/data/competitors/*.json` | 独立数据源 |
-| 竞品动态加载 | `src/lib/competitor-registry.ts` | 加载工具函数 |
+| 模块 | 文件路径 | 状态 | 说明 |
+|------|---------|------|------|
+| 痛点聚类生成 | `pipeline/discovery/extract_community_pains.py` | ✅ 已实现 | 社区痛点提取 (LLM) |
+| 痛点聚类增强 | `pipeline/publishing/generate_idea.py` | ✅ 已实现 | 多来源聚合 |
+| 市场空白提取 | `pipeline/publishing/extract_competitor_gaps.py` | ✅ 已实现 | 纯粹弱点提取 |
+| 竞品数据存储 | `pipeline/competitor_analysis/cache/competitor_profiles/*.json` | ✅ 已实现 | 54个竞品 profiles |
+| 竞品爬取队列 | `data/competitor_crawl_queue.json` | ✅ 已实现 | 任务队列 |
+| 竞品动态加载 | `src/data/competitors/` | ⏳ 待实现 | 前端独立数据源 |
+| 动态加载工具 | `src/lib/competitor-registry.ts` | ⏳ 待实现 | 加载工具函数 |
 
 ---
 
-*文档版本：v1.3*
-*最后更新：2026-04-08*
+*文档版本：v1.4*
+*最后更新：2026-04-12*
